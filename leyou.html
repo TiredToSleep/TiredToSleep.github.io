@@ -81,30 +81,18 @@
 
 
 
-<meta name="description" content="0.学习目标 使用资料搭建后台系统 会使用nginx进行反向代理 实现商品分类查询功能 掌握cors解决跨域 实现品牌查询功能  1.搭建后台管理前端1.1.导入已有资源  我们解压缩，放到工作目录中：  然后在Intellij idea中导入新的工程：  选中我们的工程：   这正是一个用vue-cli构建的webpack工程，是不是与昨天的一样：   1.2.安装依赖你应该注意到，这里并没有n">
 <meta name="keywords" content="springmvc,spring,mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue前端">
 <meta property="og:url" content="http://yoursite.com/leyou.html">
 <meta property="og:site_name" content="Tired to Sleep博客">
-<meta property="og:description" content="0.学习目标 使用资料搭建后台系统 会使用nginx进行反向代理 实现商品分类查询功能 掌握cors解决跨域 实现品牌查询功能  1.搭建后台管理前端1.1.导入已有资源  我们解压缩，放到工作目录中：  然后在Intellij idea中导入新的工程：  选中我们的工程：   这正是一个用vue-cli构建的webpack工程，是不是与昨天的一样：   1.2.安装依赖你应该注意到，这里并没有n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://sleep401.lofter.com/post/1ffd847b_12c876869">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530555871804.png">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530367369490.png">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530367589197.png">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530367781173.png">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530368191250.png">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530368695265.png">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530374769782.png">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530374827792.png">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530374954209.png">
-<meta property="og:image" content="http://yoursite.com/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530375152204.png">
-<meta property="og:updated_time" content="2018-11-20T09:57:34.754Z">
+<meta property="og:image" content="https://i.postimg.cc/7xjNcs7h/12345.jpg">
+<meta property="og:image" content="https://i.postimg.cc/7xjNcs7h/12345.jpg">
+<meta property="og:updated_time" content="2018-11-20T14:11:48.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue前端">
-<meta name="twitter:description" content="0.学习目标 使用资料搭建后台系统 会使用nginx进行反向代理 实现商品分类查询功能 掌握cors解决跨域 实现品牌查询功能  1.搭建后台管理前端1.1.导入已有资源  我们解压缩，放到工作目录中：  然后在Intellij idea中导入新的工程：  选中我们的工程：   这正是一个用vue-cli构建的webpack工程，是不是与昨天的一样：   1.2.安装依赖你应该注意到，这里并没有n">
-<meta name="twitter:image" content="http://sleep401.lofter.com/post/1ffd847b_12c876869">
+<meta name="twitter:image" content="https://i.postimg.cc/7xjNcs7h/12345.jpg">
 
 
 
@@ -161,7 +149,6 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
-    <a href="https://github.com/tiredtosleep" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -199,7 +186,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home //首页"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -209,7 +196,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user  // 关于"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -219,7 +206,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags  // 标签"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -229,7 +216,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th  // 分类"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -239,7 +226,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive  // 归档"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -249,7 +236,7 @@
         <li class="menu-item menu-item-schedule">
           <a href="/schedule/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-calendar  // 日程表"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
             
             日程表
           </a>
@@ -259,7 +246,7 @@
         <li class="menu-item menu-item-sitemap">
           <a href="/sitemap.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap  //站点地图"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             站点地图
           </a>
@@ -269,7 +256,7 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-heartbeat   //"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
             
             公益404
           </a>
@@ -337,8 +324,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T00:38:36+08:00">
-                2018-06-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-09T00:38:36+08:00">
+                2018-06-09
               </time>
             
 
@@ -397,36 +384,10 @@
       
 
       
-        <h1 id="0-学习目标"><a href="#0-学习目标" class="headerlink" title="0.学习目标"></a>0.学习目标</h1><ul>
-<li>使用资料搭建后台系统</li>
-<li>会使用nginx进行反向代理</li>
-<li>实现商品分类查询功能</li>
-<li>掌握cors解决跨域</li>
-<li>实现品牌查询功能</li>
-</ul>
-<h1 id="1-搭建后台管理前端"><a href="#1-搭建后台管理前端" class="headerlink" title="1.搭建后台管理前端"></a>1.搭建后台管理前端</h1><h2 id="1-1-导入已有资源"><a href="#1-1-导入已有资源" class="headerlink" title="1.1.导入已有资源"></a>1.1.导入已有资源</h2><p><img src="http://sleep401.lofter.com/post/1ffd847b_12c876869" alt="http://sleep401.lofter.com/post/1ffd847b_12c876869"></p>
-<p><img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530555871804.png" alt="1530555871804"></p>
-<p>我们解压缩，放到工作目录中：</p>
-<p><img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530367369490.png" alt="1530367369490"></p>
-<p>然后在Intellij idea中导入新的工程：</p>
-<p><img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530367589197.png" alt="1530367589197"></p>
-<p>选中我们的工程：</p>
-<p> <img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530367781173.png" alt="1530367781173"></p>
-<p>这正是一个用vue-cli构建的webpack工程，是不是与昨天的一样：</p>
-<p> <img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530368191250.png" alt="1530368191250"></p>
-<h2 id="1-2-安装依赖"><a href="#1-2-安装依赖" class="headerlink" title="1.2.安装依赖"></a>1.2.安装依赖</h2><p>你应该注意到，这里并没有node_modules文件夹，方便给大家下发，已经把依赖都删除了。不过package.json中依然定义了我们所需的一切依赖：</p>
-<p><img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530368695265.png" alt="1530368695265"></p>
-<p>我们只需要打开终端，进入项目目录，输入：<code>npm install</code>命令，即可安装这些依赖。</p>
-<p><img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530374769782.png" alt="1530374769782"></p>
-<p>大概需要几分钟。</p>
-<p><strong>如果安装过程出现以下问题</strong>：</p>
-<p><img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530374827792.png" alt="1530374827792"></p>
-<p>建议删除node_modules目录，重新安装。</p>
-<h2 id="1-3-运行一下看看"><a href="#1-3-运行一下看看" class="headerlink" title="1.3.运行一下看看"></a>1.3.运行一下看看</h2><p>输入命令：<code>npm run dev</code></p>
-<p><img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530374954209.png" alt="1530374954209"></p>
-<p>发现默认的端口是9001。访问：<a href="http://localhost:9001" target="_blank" rel="noopener">http://localhost:9001</a></p>
-<p>会自动进行跳转：</p>
-<p><img src="../../../%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E3%80%8A%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0%E3%80%8B/day06%E7%AC%94%E8%AE%B0/assets/1530375152204.png" alt="1525958950616"></p>
+        <p><img src="https://i.postimg.cc/7xjNcs7h/12345.jpg" alt=""><br><img src="https://i.postimg.cc/7xjNcs7h/12345.jpg" width="60%" height="60%"></p>
+<iframe width="100%" height="415" src="//player.bilibili.com/player.html?aid=23207325&cid=38634561&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
 
       
     </div>
@@ -461,15 +422,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/hello-world.html" rel="next" title="写给小白的express学习笔记1： express-static文件静态管理">
+                <i class="fa fa-chevron-left"></i> 写给小白的express学习笔记1： express-static文件静态管理
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/hello-world.html" rel="prev" title="写给小白的express学习笔记1： express-static文件静态管理">
-                写给小白的express学习笔记1： express-static文件静态管理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -521,17 +482,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -598,22 +550,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-学习目标"><span class="nav-number">1.</span> <span class="nav-text">0.学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-搭建后台管理前端"><span class="nav-number">2.</span> <span class="nav-text">1.搭建后台管理前端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-导入已有资源"><span class="nav-number">2.1.</span> <span class="nav-text">1.1.导入已有资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-安装依赖"><span class="nav-number">2.2.</span> <span class="nav-text">1.2.安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-运行一下看看"><span class="nav-number">2.3.</span> <span class="nav-text">1.3.运行一下看看</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -693,8 +629,6 @@
   
 
 
-  
-
 
 
 
@@ -733,11 +667,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
