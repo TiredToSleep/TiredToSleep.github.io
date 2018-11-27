@@ -38,7 +38,7 @@
   </entry>
   <entry>
     <title><![CDATA[hexo]]></title>
-    <url>%2Fhello-world%20-%205%20.html</url>
+    <url>%2Fhello-world%20-%20%E5%89%AF%E6%9C%AC%20(2).html</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
       <categories>
         <category>学习笔记看看</category>
@@ -61,7 +61,7 @@
   </entry>
   <entry>
     <title><![CDATA[hexo]]></title>
-    <url>%2Fhello-world%20-%20%E5%89%AF%E6%9C%AC%20(2).html</url>
+    <url>%2Fhello-world%20-%205%20.html</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
       <categories>
         <category>学习笔记看看</category>
@@ -129,26 +129,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[hexo]]></title>
-    <url>%2Fhello-world.html</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <title><![CDATA[Nginx安装]]></title>
+    <url>%2FNginx%E7%9A%84%E5%AE%89%E8%A3%85.html</url>
+    <content type="text"><![CDATA[###1.nginx的介绍 Nginx是一款高性能的http 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器。由俄罗斯的程序设计师Igor Sysoev所开发，官方测试nginx能够支支撑5万并发链接，并且cpu、内存等资源消耗却非常低，运行非常稳定。 ###2.安装准备 虚拟机VM Linux CentOs6.8系统 电脑 ###3.安装依赖 ####3.1.需要安装gcc的环境 12[root@localhost ~]# yum install gcc-c++ ####3.2.第三方的开发包 PCRE ​ PCRE，(Perl Compatible Regular Expressions)是一个Perl库，包括 perl 兼容的正则表达式库。nginx的http模块使用pcre来解析正则表达式 12[root@localhost ~]# yum install -y pcre pcre-devel zlib ​ zlib库提供了很多种压缩和解压缩的方式，nginx使用zlib对http包的内容进行gzip，所以需要在linux上安装zlib库。 12[root@localhost ~]# yum install -y zlib zlib-devel openssl ​ OpenSSL 是一个强大的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及SSL协议，并提供丰富的应用程序供测试或其它目的使用。 nginx不仅支持http协议，还支持https（即在ssl协议上传输http），所以需要在linux安装openssl库。 12[root@localhost ~]# yum install -y openssl openssl-devel 4.下载nginxhttp://nginx.org/download/为nginx下载地址 12[root@localhost ~]# wget http://nginx.org/download/nginx-1.10.0.tar.gz ###5.安装nginx 创建一个work文件 12[root@localhost home]# mkdir work 将nginx-1.10.0.tar.gz 复制到/home/work目录下 12[root@localhost ~]# cp nginx-1.10.0.tar.gz /home/work 解压nginx： 12[root@localhost work]# tar -xvf nginx-1.10.0.tar.gz 改名字： 12[root@localhost work]# mv nginx-1.10.0 nginx 配置nginx 安装目录是/opt/nginx 12345678//进入解压好的nginx[root@localhost work]#cd nginx//安装[root@localhost nginx]# ./configure --prefix=/opt/nginx --sbin-path=/usr/bin/nginx 编译安装 12[root@localhost nginx]# make &amp;&amp; make install 启动： 12[root@localhost nginx]# nginx 6.测试输入linux的ip地址 ###7.停止和重新加载 在存放nginx的目录下/home/leyou/nginx操作 停止 ：[root@localhost nginx]# nginx -s stop 重新加载：[root@localhost nginx]# nginx -s reload]]></content>
       <categories>
-        <category>学习笔记看看</category>
+        <category>Nginx</category>
       </categories>
       <tags>
-        <tag>node.js</tag>
-        <tag>express</tag>
-        <tag>ssm</tag>
-        <tag>vue</tag>
-        <tag>js</tag>
-        <tag>springboot</tag>
-        <tag>springcloud</tag>
-        <tag>看过</tag>
-        <tag>走过</tag>
         <tag>nginx</tag>
-        <tag>java</tag>
-        <tag>go</tag>
-        <tag>python</tag>
+        <tag>nginx安装</tag>
       </tags>
   </entry>
 </search>
