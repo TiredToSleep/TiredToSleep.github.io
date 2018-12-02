@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tiredtosleep.github.io/linux%E4%B8%8B%E5%AE%89%E8%A3%85FastDFS.html</loc>
+    <lastmod>2018-12-02T13:47:14.191Z</lastmod>
+  </url>  <url>
     <loc>https://tiredtosleep.github.io/%E6%A0%87%E9%A2%98.html</loc>
     <lastmod>2018-11-27T12:57:43.439Z</lastmod>
   </url>  <url>
@@ -18,8 +21,5 @@
   </url>  <url>
     <loc>https://tiredtosleep.github.io/hello-world%20-%204.html</loc>
     <lastmod>2018-11-26T13:03:19.871Z</lastmod>
-  </url>  <url>
-    <loc>https://tiredtosleep.github.io/leyou.html</loc>
-    <lastmod>2018-11-23T15:11:19.576Z</lastmod>
   </url>
 </urlset>
