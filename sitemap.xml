@@ -2,16 +2,170 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://tiredtosleep.github.io/linux%E4%B8%8B%E5%AE%89%E8%A3%85FastDFS.html</loc>
+    <loc>https://tiredtosleep.github.io/redis%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE.html</loc>
     
-    <lastmod>2018-12-02T13:47:14.191Z</lastmod>
+    <lastmod>2019-03-15T08:09:27.033Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://tiredtosleep.github.io/%E6%A0%87%E9%A2%98.html</loc>
+    <loc>https://tiredtosleep.github.io/day19-%E4%B8%8B%E5%8D%95%20.html</loc>
     
-    <lastmod>2018-11-27T12:57:43.439Z</lastmod>
+    <lastmod>2019-03-15T08:06:42.454Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day17.html</loc>
+    
+    <lastmod>2019-03-15T08:01:26.485Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day16-%E6%8E%88%E6%9D%83%E4%B8%AD%E5%BF%83.html</loc>
+    
+    <lastmod>2019-03-15T07:58:51.553Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day15-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C.html</loc>
+    
+    <lastmod>2019-03-15T07:39:50.616Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day14-%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5.html</loc>
+    
+    <lastmod>2019-03-15T07:37:51.418Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day13.%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E3%80%81%E5%95%86%E5%93%81%E9%9D%99%E6%80%81%E5%8C%96.html</loc>
+    
+    <lastmod>2019-03-15T07:27:46.125Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day13-rabbitmq.html</loc>
+    
+    <lastmod>2019-03-15T07:21:35.069Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day12-%E6%90%9C%E7%B4%A2%E8%BF%87%E6%BB%A4.html</loc>
+    
+    <lastmod>2019-03-15T07:17:02.834Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day11-elasticsearch2.html</loc>
+    
+    <lastmod>2019-03-15T07:13:41.800Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day10-elasticsearch.html</loc>
+    
+    <lastmod>2019-03-15T07:12:32.553Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day08-%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86.html</loc>
+    
+    <lastmod>2019-03-15T07:02:07.229Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day09-%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86.html</loc>
+    
+    <lastmod>2019-03-15T07:02:02.589Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day07-%E5%93%81%E7%89%8C%E7%AE%A1%E7%90%86.html</loc>
+    
+    <lastmod>2019-03-15T06:38:28.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day06-%E6%90%AD%E5%BB%BA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B5%E9%9D%A2.html</loc>
+    
+    <lastmod>2019-03-15T06:32:59.432Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day05-%E4%B9%90%E4%BC%98%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA.html</loc>
+    
+    <lastmod>2019-03-15T05:24:33.980Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/%E5%89%8D%E5%8F%B0%E6%90%AD%E5%BB%BA.html</loc>
+    
+    <lastmod>2019-03-15T05:14:50.722Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day01-springboot.html</loc>
+    
+    <lastmod>2019-03-15T04:55:17.622Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day02-%E8%AE%A4%E8%AF%86%E5%BE%AE%E6%9C%8D%E5%8A%A1.html</loc>
+    
+    <lastmod>2019-03-15T04:55:06.018Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day03-%E8%AE%A4%E8%AF%86%E5%BE%AE%E6%9C%8D%E5%8A%A12.html</loc>
+    
+    <lastmod>2019-03-15T04:54:53.903Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day04-vue%E5%85%A5%E9%97%A81.html</loc>
+    
+    <lastmod>2019-03-15T04:53:56.777Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day04-vue%E5%85%A5%E9%97%A82%EF%BC%88vue-router%EF%BC%8Cwebpck%EF%BC%8Cvue-cli%EF%BC%8Cvue-router%EF%BC%89.html</loc>
+    
+    <lastmod>2019-03-15T04:53:49.019Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/day4-ES6%E6%A0%87%E5%87%86.html</loc>
+    
+    <lastmod>2019-03-15T04:34:07.675Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://tiredtosleep.github.io/linux%E4%B8%8B%E5%AE%89%E8%A3%85FastDFS.html</loc>
+    
+    <lastmod>2019-03-15T03:51:50.423Z</lastmod>
     
   </url>
   
@@ -19,34 +173,6 @@
     <loc>https://tiredtosleep.github.io/Nginx%E7%9A%84%E5%AE%89%E8%A3%85.html</loc>
     
     <lastmod>2018-11-27T12:24:02.955Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tiredtosleep.github.io/hello-world%20-%20%E5%89%AF%E6%9C%AC%203.html</loc>
-    
-    <lastmod>2018-11-26T13:03:34.321Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tiredtosleep.github.io/hello-world%20-%20%E5%89%AF%E6%9C%AC%20(2).html</loc>
-    
-    <lastmod>2018-11-26T13:03:30.153Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tiredtosleep.github.io/hello-world%20-%205%20.html</loc>
-    
-    <lastmod>2018-11-26T13:03:25.250Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://tiredtosleep.github.io/hello-world%20-%204.html</loc>
-    
-    <lastmod>2018-11-26T13:03:19.871Z</lastmod>
     
   </url>
   

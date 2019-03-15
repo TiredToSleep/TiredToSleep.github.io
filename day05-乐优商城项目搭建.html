@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="0.学习目标 了解电商行业 了解乐优商城项目结构 能独立搭建项目基本框架 能参考使用ES6的新语法  1.了解电商行业学习电商项目，自然要先了解这个行业，所以我们首先来聊聊电商行业 1.1.项目分类主要从需求方、盈利模式、技术侧重点这三个方面来看它们的不同 1.1.1.传统项目各种企业里面用的管理系统（ERP、HR、OA、CRM、物流管理系统。。。。。。。）  需求方：公司、企业内部 盈利模式：项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务商城（七）——商城项目搭建">
+<meta property="og:url" content="https://tiredtosleep.github.io/day05-乐优商城项目搭建.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="0.学习目标 了解电商行业 了解乐优商城项目结构 能独立搭建项目基本框架 能参考使用ES6的新语法  1.了解电商行业学习电商项目，自然要先了解这个行业，所以我们首先来聊聊电商行业 1.1.项目分类主要从需求方、盈利模式、技术侧重点这三个方面来看它们的不同 1.1.1.传统项目各种企业里面用的管理系统（ERP、HR、OA、CRM、物流管理系统。。。。。。。）  需求方：公司、企业内部 盈利模式：项">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525686135308.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525686160411.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525697632643.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525697681975.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525703759035.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525704185158.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525704277126.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530168661348.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1542254989485.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1542255041628.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1542256029460.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1542256974427.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1542273185076.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1542273357774.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530209503007.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530209769323.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530210016103.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530210411076.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530210349704.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525960652724.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530555978248.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525960312939.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525961862771.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525961875288.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525706200704.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525707023009.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525707765104.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525707850047.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525707949252.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525708053551.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525708460522.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525708626562.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525708677719.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525744281610.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525744570533.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525744595793.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525744768694.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525744875078.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525744973026.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525745119573.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525745247195.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525745303365.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525745407047.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525745475108.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525747398193.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525749186008.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525749215954.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525749683060.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525749711606.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525749803191.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1526046318620.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1526046349379.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1526046432347.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1542364312449.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1542431851232.png">
+<meta property="og:updated_time" content="2019-03-15T05:24:33.980Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务商城（七）——商城项目搭建">
+<meta name="twitter:description" content="0.学习目标 了解电商行业 了解乐优商城项目结构 能独立搭建项目基本框架 能参考使用ES6的新语法  1.了解电商行业学习电商项目，自然要先了解这个行业，所以我们首先来聊聊电商行业 1.1.项目分类主要从需求方、盈利模式、技术侧重点这三个方面来看它们的不同 1.1.1.传统项目各种企业里面用的管理系统（ERP、HR、OA、CRM、物流管理系统。。。。。。。）  需求方：公司、企业内部 盈利模式：项">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1525686135308.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/day05-乐优商城项目搭建.html">
+
+
+
+
+
+  <title>微服务商城（七）——商城项目搭建 | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day05-乐优商城项目搭建.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">微服务商城（七）——商城项目搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T14:28:32+08:00">
+                2018-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-微服务商城/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实战-微服务商城</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  8.1k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  35  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="0-学习目标"><a href="#0-学习目标" class="headerlink" title="0.学习目标"></a>0.学习目标</h1><ul>
+<li>了解电商行业</li>
+<li>了解乐优商城项目结构</li>
+<li>能独立搭建项目基本框架</li>
+<li>能参考使用ES6的新语法</li>
+</ul>
+<h1 id="1-了解电商行业"><a href="#1-了解电商行业" class="headerlink" title="1.了解电商行业"></a>1.了解电商行业</h1><p>学习电商项目，自然要先了解这个行业，所以我们首先来聊聊电商行业</p>
+<h2 id="1-1-项目分类"><a href="#1-1-项目分类" class="headerlink" title="1.1.项目分类"></a>1.1.项目分类</h2><p>主要从需求方、盈利模式、技术侧重点这三个方面来看它们的不同</p>
+<h3 id="1-1-1-传统项目"><a href="#1-1-1-传统项目" class="headerlink" title="1.1.1.传统项目"></a>1.1.1.传统项目</h3><p>各种企业里面用的管理系统（ERP、HR、OA、CRM、物流管理系统。。。。。。。）</p>
+<ul>
+<li>需求方：公司、企业内部</li>
+<li>盈利模式：项目本身卖钱</li>
+<li>技术侧重点：业务功能</li>
+</ul>
+<h3 id="1-1-2-互联网项目"><a href="#1-1-2-互联网项目" class="headerlink" title="1.1.2.互联网项目"></a>1.1.2.互联网项目</h3><p>门户网站、电商网站：baidu.com、qq.com、taobao.com、jd.com  …… </p>
+<ul>
+<li>需求方：广大用户群体</li>
+<li>盈利模式：虚拟币、增值服务、广告收益……</li>
+<li>技术侧重点：网站性能、业务功能</li>
+</ul>
+<p>而我们今天要聊的就是互联网项目中的重要角色：电商</p>
+<h2 id="1-2-电商行业的发展"><a href="#1-2-电商行业的发展" class="headerlink" title="1.2.电商行业的发展"></a>1.2.电商行业的发展</h2><h3 id="1-2-1-钱景"><a href="#1-2-1-钱景" class="headerlink" title="1.2.1.钱景"></a>1.2.1.钱景</h3><p>近年来，中国的电子商务快速发展，交易额连创新高，电子商务在各领域的应用不断拓展和深化、相关服务业蓬勃发展、支撑体系不断健全完善、创新的动力和能力不断增强。电子商务正在与实体经济深度融合，进入规模性发展阶段，对经济社会生活的影响不断增大，正成为我国经济发展的新引擎。</p>
+<p>中国电子商务研究中心数据显示，截止到 2012 年底，中国电子商务市场交易规模达 7.85万亿人民币，同比增长 30.83%。其中，B2B 电子商务交易额达 6.25 万亿，同比增长 27%。而 2011 年全年，中国电子商务市场交易额达 6 万亿人民币，同比增长 33%，占 GDP 比重上升到 13%；2012 年，电子商务占 GDP 的比重已经高达 15%。</p>
+<pre><code>![1525686041466](assets/1525686041466.png)
+</code></pre><h3 id="1-2-2-数据"><a href="#1-2-2-数据" class="headerlink" title="1.2.2.数据"></a>1.2.2.数据</h3><p>来看看双十一的成交数据：</p>
+<p><img src="assets/1525686135308.png" alt="1525686135308"></p>
+<p><img src="assets/1525686160411.png" alt="1525686160411"></p>
+<p>2016双11开场30分钟，创造<strong>每秒交易峰值17.5万笔</strong>，<strong>每秒</strong>支付峰值<strong>12万笔</strong>的新纪录。菜鸟单日物流订单量超过<strong>4.67亿</strong>，创历史新高。</p>
+<h3 id="1-2-3-技术特点"><a href="#1-2-3-技术特点" class="headerlink" title="1.2.3.技术特点"></a>1.2.3.技术特点</h3><p>从上面的数据我们不仅要看到钱，更要看到背后的技术实力。正是得益于电商行业的高强度并发压力，促使了BAT等巨头们的技术进步。电商行业有些什么特点呢？</p>
+<ul>
+<li>技术范围广</li>
+<li>技术新</li>
+<li>高并发（分布式、静态化技术、缓存技术、异步并发、池化、队列）</li>
+<li>高可用（集群、负载均衡、限流、降级、熔断）</li>
+<li>数据量大</li>
+<li>业务复杂</li>
+<li>数据安全</li>
+</ul>
+<h2 id="1-3-常见电商模式"><a href="#1-3-常见电商模式" class="headerlink" title="1.3.常见电商模式"></a>1.3.常见电商模式</h2><p>电商行业的一些常见模式：</p>
+<ul>
+<li>B2C：商家对个人，如：亚马逊、当当等</li>
+<li>C2C平台：个人对个人，如：咸鱼、拍拍网、ebay</li>
+<li>B2B平台：商家对商家，如：阿里巴巴、八方资源网等</li>
+<li>O2O：线上和线下结合，如：饿了么、电影票、团购等</li>
+<li>P2P：在线金融，贷款，如：网贷之家、人人聚财等。</li>
+<li>B2C平台：天猫、京东、一号店等</li>
+</ul>
+<h2 id="1-4-一些专业术语"><a href="#1-4-一些专业术语" class="headerlink" title="1.4.一些专业术语"></a>1.4.一些专业术语</h2><ul>
+<li><p>SaaS：软件即服务</p>
+</li>
+<li><p>SOA：面向服务</p>
+</li>
+<li><p>RPC：远程过程调用</p>
+</li>
+<li><p>RMI：远程方法调用</p>
+</li>
+<li><p>PV：(page view)，即页面浏览量；</p>
+<p>用户每1次对网站中的每个网页访问均被记录1次。用户对同一页面的多次访问，访问量累计</p>
+</li>
+<li><p>UV：(unique visitor)，独立访客</p>
+<p>指访问某个站点或点击某条新闻的不同IP地址的人数。在同一天内，uv只记录第一次进入网站的具有独立IP的访问者，在同一天内再次访问该网站则不计数。</p>
+</li>
+<li><p>PV与带宽：</p>
+<ul>
+<li>计算带宽大小需要关注两个指标：峰值流量和页面的平均大小。</li>
+<li>计算公式是：网站带宽= ( PV <em> 平均页面大小（单位MB）</em> 8 )/统计时间（换算到秒）</li>
+<li>为什么要乘以8？<ul>
+<li>网站大小为单位是字节(Byte)，而计算带宽的单位是bit，1Byte=8bit</li>
+</ul>
+</li>
+<li>这个计算的是平均带宽，高峰期还需要扩大一定倍数</li>
+</ul>
+</li>
+<li><p>PV、QPS、并发</p>
+<ul>
+<li><p>QPS：每秒处理的请求数量。8000/s</p>
+</li>
+<li><p>比如你的程序处理一个请求平均需要0.1S，那么1秒就可以处理10个请求。QPS自然就是10，多线程情况下，这个数字可能就会有所增加。</p>
+</li>
+<li><p>由PV和QPS如何需要部署的服务器数量？</p>
+<ul>
+<li>根据二八原则，80%的请求集中在20%的时间来计算峰值压力：</li>
+<li>（每日PV <em> 80%） / （3600s </em> 24 <em> 20%） </em> 每个页面的请求数  = 每个页面每秒的请求数量</li>
+</ul>
+</li>
+<li>然后除以服务器的QPS值，即可计算得出需要部署的服务器数量</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-5-项目开发流程"><a href="#1-5-项目开发流程" class="headerlink" title="1.5.项目开发流程"></a>1.5.项目开发流程</h2><p>项目经理：管人</p>
+<p>产品经理：设计需求原型</p>
+<p>测试：</p>
+<p>前端：大前端。node</p>
+<p>后端：</p>
+<p>移动端：</p>
+<p>项目开发流程图：</p>
+<p>​    <img src="assets/1525697632643.png" alt="1525697632643">    </p>
+<p>公司现状：</p>
+<p>​    <img src="assets/1525697681975.png" alt="1525697681975"></p>
+<h1 id="2-乐优商城介绍"><a href="#2-乐优商城介绍" class="headerlink" title="2.乐优商城介绍"></a>2.乐优商城介绍</h1><h2 id="2-1-项目介绍"><a href="#2-1-项目介绍" class="headerlink" title="2.1.项目介绍"></a>2.1.项目介绍</h2><ul>
+<li>乐优商城是一个全品类的电商购物网站（B2C）。</li>
+<li>用户可以在线购买商品、加入购物车、下单、秒杀商品</li>
+<li>可以品论已购买商品</li>
+<li>管理员可以在后台管理商品的上下架、促销活动</li>
+<li>管理员可以监控商品销售状况</li>
+<li>客服可以在后台处理退款操作</li>
+<li>希望未来3到5年可以支持千万用户的使用</li>
+</ul>
+<h2 id="2-2-系统架构"><a href="#2-2-系统架构" class="headerlink" title="2.2.系统架构"></a>2.2.系统架构</h2><h3 id="2-2-1-架构图"><a href="#2-2-1-架构图" class="headerlink" title="2.2.1.架构图"></a>2.2.1.架构图</h3><p>乐优商城架构缩略图，大图请参考课前资料：</p>
+<p><img src="assets/1525703759035.png" alt="1525703759035"></p>
+<h3 id="2-2-2-系统架构解读"><a href="#2-2-2-系统架构解读" class="headerlink" title="2.2.2.系统架构解读"></a>2.2.2.系统架构解读</h3><p>整个乐优商城可以分为两部分：后台管理系统、前台门户系统。</p>
+<ul>
+<li><p>后台管理：</p>
+<ul>
+<li>后台系统主要包含以下功能：<ul>
+<li>商品管理，包括商品分类、品牌、商品规格等信息的管理</li>
+<li>销售管理，包括订单统计、订单退款处理、促销活动生成等</li>
+<li>用户管理，包括用户控制、冻结、解锁等</li>
+<li>权限管理，整个网站的权限控制，采用JWT鉴权方案，对用户及API进行权限控制</li>
+<li>统计，各种数据的统计分析展示</li>
+</ul>
+</li>
+<li>后台系统会采用前后端分离开发，而且整个后台管理系统会使用Vue.js框架搭建出单页应用（SPA）。</li>
+<li>预览图：</li>
+</ul>
+<p><img src="assets/1525704185158.png" alt="1525704185158"></p>
+</li>
+<li><p>前台门户</p>
+<ul>
+<li>前台门户面向的是客户，包含与客户交互的一切功能。例如：<ul>
+<li>搜索商品</li>
+<li>加入购物车</li>
+<li>下单</li>
+<li>评价商品等等</li>
+</ul>
+</li>
+<li>前台系统我们会使用Thymeleaf模板引擎技术来完成页面开发。出于SEO优化的考虑，我们将不采用单页应用。</li>
+</ul>
+<p><img src="assets/1525704277126.png" alt="1525704277126"></p>
+</li>
+</ul>
+<p>无论是前台还是后台系统，都共享相同的微服务集群，包括：</p>
+<ul>
+<li>商品微服务：商品及商品分类、品牌、库存等的服务</li>
+<li>搜索微服务：实现搜索功能</li>
+<li>订单微服务：实现订单相关</li>
+<li>购物车微服务：实现购物车相关功能</li>
+<li>用户中心：用户的登录注册等功能</li>
+<li>短信服务：完成各种短息的发送任务</li>
+<li>授权服务：完成对用户的授权、鉴权等功能</li>
+<li>Eureka注册中心</li>
+<li>Zuul网关服务</li>
+<li>Spring Cloud Config配置中心</li>
+<li>…</li>
+</ul>
+<h1 id="3-商城管理系统前端页面"><a href="#3-商城管理系统前端页面" class="headerlink" title="3.商城管理系统前端页面"></a>3.商城管理系统前端页面</h1><p>我们的后台管理系统采用前后端分离开发，而且整个后台管理系统会使用Vue.js框架搭建出单页应用SPA</p>
+<h3 id="3-1-什么事SPA"><a href="#3-1-什么事SPA" class="headerlink" title="3.1.什么事SPA"></a>3.1.什么事SPA</h3><p>  SPA，Single Page Application，即单页应用。整个后台管理系统只会出现一个HTML页面，剩下的一切页面的内容都是通过Vue组件来实现的。</p>
+<p>  这些Vue组件其实就是许多的JS文件。不过前端除了js，还有css、image、font等，甚至前端还开发出各种不同类型的扩展语言，这么多东西在打包、构建的过程中，人工来操作非常麻烦，因此就会有一些工具来帮助搭建前端项目，如：webpack、vue-cli</p>
+<h3 id="3-2-webpack"><a href="#3-2-webpack" class="headerlink" title="3.2.webpack"></a>3.2.webpack</h3><p>####3.2.1.介绍</p>
+<p>Webpack 是一个前端资源的打包工具，它可以将js、image、css等资源当成一个模块进行打包。</p>
+<p>中文官方网站：<a href="https://www.webpackjs.com/" target="_blank" rel="noopener">https://www.webpackjs.com/</a></p>
+<p><img src="assets/1530168661348.png" alt="1530168661348"></p>
+<p>官网给出的解释：</p>
+<blockquote>
+<p>本质上，<em>webpack</em> 是一个现代 JavaScript 应用程序的<em>静态模块打包器(module bundler)</em>。当 webpack 处理应用程序时，它会递归地构建一个<em>依赖关系图(dependency graph)</em>，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 <em>bundle</em>。 </p>
+</blockquote>
+<p>为什么需要打包？</p>
+<ul>
+<li><p>将许多碎小文件打包成一个整体，减少单页面内的衍生请求次数，提高网站效率。</p>
+</li>
+<li><p>将ES6的高级语法进行转换编译，以兼容老版本的浏览器。</p>
+</li>
+<li><p>将代码打包的同时进行混淆，提高代码的安全性。</p>
+</li>
+</ul>
+<p>####3.2.2.四个核心概念</p>
+<p>学习Webpack，你需要先理解四个<strong>核心概念</strong>：</p>
+<ul>
+<li><p>入口(entry)</p>
+<p>webpack打包的起点，可以有一个或多个，一般是js文件。webpack会从启点文件开始，寻找启点直接或间接依赖的其它所有的依赖，包括JS、CSS、图片资源等，作为将来打包的原始数据</p>
+</li>
+<li><p>输出(output)</p>
+<p>出口一般包含两个属性：path和filename。用来告诉webpack打包的目标文件夹，以及文件的名称。目的地也可以有多个。</p>
+</li>
+<li><p>加载器（loader）</p>
+<p>webpack本身只识别Js文件，如果要加载非JS文件，必须指定一些额外的加载器（loader），例如css-loader。然后将这些文件转为webpack能处理的有效模块，最后利用webpack的打包能力去处理。</p>
+</li>
+<li><p>插件(plugins)</p>
+<p>插件可以扩展webpack的功能，让webpack不仅仅是完成打包，甚至各种更复杂的功能，或者是对打包功能进行优化、压缩，提高效率。</p>
+</li>
+</ul>
+<h3 id="3-3-vue-cli"><a href="#3-3-vue-cli" class="headerlink" title="3.3.vue-cli"></a>3.3.vue-cli</h3><h4 id="3-3-1-介绍和安装"><a href="#3-3-1-介绍和安装" class="headerlink" title="3.3.1.介绍和安装"></a>3.3.1.介绍和安装</h4><p>在开发中，需要打包的东西不止是js、css、html。还有更多的东西要处理，这些插件和加载器如果我们一一去添加就会比较麻烦。</p>
+<p>幸好，vue官方提供了一个快速搭建vue项目的脚手架：vue-cli</p>
+<p>使用它能快速的构建一个web工程模板。</p>
+<p>官网：<a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">https://github.com/vuejs/vue-cli</a></p>
+<p>cmd安装命令：<code>npm install -g vue-cli</code></p>
+<h4 id="3-3-2-快速上手"><a href="#3-3-2-快速上手" class="headerlink" title="3.3.2.快速上手"></a>3.3.2.快速上手</h4><p>新建一个model</p>
+<p><img src="assets/1542254989485.png" alt="1542254989485"></p>
+<p>idea中切换Terminal</p>
+<p><img src="assets/1542255041628.png" alt="1542255041628"></p>
+<p>用vue-cli命令，快速搭建一个webpack的项目：<code>vue init webpack</code></p>
+<p><img src="assets/1542256029460.png" alt="1542256029460"></p>
+<p><img src="assets/1542256974427.png" alt="1542256974427"></p>
+<p><img src="assets/1542273185076.png" alt="1542273185076"></p>
+<h4 id="3-3-3项目结构"><a href="#3-3-3项目结构" class="headerlink" title="3.3.3项目结构"></a>3.3.3项目结构</h4><p>安装好的项目结构：</p>
+<p><img src="assets/1542273357774.png" alt="1542273357774"></p>
+<p>入口文件：main.js</p>
+<p><img src="assets/1530209503007.png" alt="1525913687860"></p>
+<p>####3.3.4单文件组件</p>
+<p>需要注意的是，我们看到有一类后缀名为.vue的文件，我们称为单文件组件</p>
+<p><img src="assets/1530209769323.png" alt="1530209769323"></p>
+<p>每一个.vue文件，就是一个独立的vue组件。类似于我们刚才写的login.js和register.js</p>
+<p>只不过，我们在js中编写 html模板和样式非常的不友好，而且没有语法提示和高亮。</p>
+<p>而单文件组件中包含三部分内容：</p>
+<ul>
+<li>template：模板，支持html语法高亮和提示</li>
+<li>script：js脚本，这里编写的就是vue的组件对象，还可以有data(){}等</li>
+<li>style：样式，支持CSS语法高亮和提示</li>
+</ul>
+<p>每个组件都有自己独立的html、JS、CSS，互不干扰，真正做到可独立复用。</p>
+<p>####3.3.5.运行</p>
+<p>看看生成的package.json：</p>
+<p><img src="assets/1530210016103.png" alt="1530210016103"></p>
+<ul>
+<li>可以看到这引入了非常多的依赖，绝大多数都是开发期依赖，比如大量的加载器。</li>
+<li>运行时依赖只有vue和vue-router</li>
+<li>脚本有三个：<ul>
+<li>dev：使用了webpack-dev-server命令，开发时热部署使用</li>
+<li>start：使用了npm run dev命令，与上面的dev效果完全一样，当脚本名为“start”时，可以省略“run”。 </li>
+<li>build：等同于webpack的打包功能，会打包到dist目录下。</li>
+</ul>
+</li>
+</ul>
+<p>我们执行<code>npm run dev</code> 或者 <code>npm start</code> 都可以启动项目：</p>
+<p><img src="assets/1530210411076.png" alt="1530210411076"></p>
+<p>页面：</p>
+<p><img src="assets/1530210349704.png" alt="1530210349704"></p>
+<p>###3.4.Vuetify框架</p>
+<h4 id="3-4-1-为什么要学习UI框架"><a href="#3-4-1-为什么要学习UI框架" class="headerlink" title="3.4.1.为什么要学习UI框架"></a>3.4.1.为什么要学习UI框架</h4><p>Vue虽然会帮我们进行视图的渲染，但样式还是由我们自己来完成。这显然不是我们的强项，因此后端开发人员一般都喜欢使用一些现成的UI组件，拿来即用，常见的例如：</p>
+<ul>
+<li>BootStrap</li>
+<li>LayUI</li>
+<li>EasyUI</li>
+<li>ZUI</li>
+</ul>
+<p>然而这些UI组件的基因天生与Vue不合，因为他们更多的是利用DOM操作，借助于jQuery实现，而不是MVVM的思想。</p>
+<p>而目前与Vue吻合的UI框架也非常的多，国内比较知名的如：</p>
+<ul>
+<li>element-ui：饿了么出品</li>
+<li>i-view：某公司出品</li>
+</ul>
+<p>然而我们都不用，我们今天推荐的是一款国外的框架：Vuetify</p>
+<p>官方网站：<a href="https://vuetifyjs.com/zh-Hans/" target="_blank" rel="noopener">https://vuetifyjs.com/zh-Hans/</a></p>
+<p><img src="assets/1525960652724.png" alt="1525960652724"></p>
+<h4 id="3-4-2-为什么是Vuetify"><a href="#3-4-2-为什么是Vuetify" class="headerlink" title="3.4.2.为什么是Vuetify"></a>3.4.2.为什么是Vuetify</h4><p>有中国的为什么还要用外国的？原因如下：</p>
+<ul>
+<li>Vuetify几乎不需要任何CSS代码，而element-ui许多布局样式需要我们来编写</li>
+<li>Vuetify从底层构建起来的语义化组件。简单易学，容易记住。</li>
+<li>Vuetify基于Material Design（谷歌推出的多平台设计规范），更加美观，动画效果酷炫，且风格统一</li>
+</ul>
+<p>这是官网的说明：</p>
+<p><img src="assets/1530555978248.png" alt="1530555978248"></p>
+<p>缺陷：</p>
+<ul>
+<li>目前官网虽然有中文文档，但因为翻译问题，几乎不太能看。</li>
+</ul>
+<h4 id="3-4-3-怎么用？"><a href="#3-4-3-怎么用？" class="headerlink" title="3.4.3.怎么用？"></a>3.4.3.怎么用？</h4><p>基于官方网站的文档进行学习：</p>
+<p><img src="assets/1525960312939.png" alt="1525960312939"></p>
+<p>我们重点关注<code>UI components</code>即可，里面有大量的UI组件，我们要用的时候再查看，不用现在学习，先看下有什么：</p>
+<p> <img src="assets/1525961862771.png" alt="1525961862771"></p>
+<p> <img src="assets/1525961875288.png" alt="1525961875288"></p>
+<p>以后用到什么组件，就来查询即可。</p>
+<h1 id="4-搭建基础服务"><a href="#4-搭建基础服务" class="headerlink" title="4.搭建基础服务"></a>4.搭建基础服务</h1><h2 id="4-1-技术选型"><a href="#4-1-技术选型" class="headerlink" title="4.1.技术选型"></a>4.1.技术选型</h2><p>前端技术：</p>
+<ul>
+<li>基础的HTML、CSS、JavaScript（基于ES6标准）</li>
+<li>JQuery</li>
+<li>Vue.js 2.0以及基于Vue的框架：Vuetify</li>
+<li>前端构建工具：WebPack</li>
+<li>前端安装包工具：NPM</li>
+<li>Vue脚手架：Vue-cli</li>
+<li>Vue路由：vue-router</li>
+<li>ajax框架：axios</li>
+<li>基于Vue的富文本框架：quill-editor</li>
+</ul>
+<p>后端技术：</p>
+<ul>
+<li>基础的SpringMVC、Spring 5.0和MyBatis3</li>
+<li>Spring Boot 2.0.4版本</li>
+<li>Spring Cloud 最新版 Finchley.RC1</li>
+<li>Redis-4.0</li>
+<li>RabbitMQ-3.4</li>
+<li>Elasticsearch-5.6.8</li>
+<li>nginx-1.10.2：</li>
+<li>FastDFS - 5.0.8</li>
+<li>MyCat</li>
+<li>Thymeleaf</li>
+<li>JWT</li>
+</ul>
+<h2 id="4-2-开发环境"><a href="#4-2-开发环境" class="headerlink" title="4.2.开发环境"></a>4.2.开发环境</h2><p>为了保证开发环境的统一，希望每个人都按照我的环境来配置：</p>
+<ul>
+<li>IDE：我们使用Idea 2017.3 版本</li>
+<li>JDK：统一使用JDK1.8</li>
+<li>项目构建：maven3.3.9以上版本即可</li>
+<li>版本控制工具：git</li>
+</ul>
+<p>idea大家可以在我的课前资料中找到。另外，使用帮助大家可以参考课前资料的《idea使用指南.md》</p>
+<h2 id="4-3-域名"><a href="#4-3-域名" class="headerlink" title="4.3.域名"></a>4.3.域名</h2><p>我们在开发的过程中，为了保证以后的生产、测试环境统一。尽量都采用域名来访问项目。</p>
+<p>一级域名：<a href="http://www.leyou.com" target="_blank" rel="noopener">www.leyou.com</a></p>
+<p>二级域名：manage.leyou.com , api.leyou.com</p>
+<p>我们可以通过switchhost工具来修改自己的host对应的地址，只要把这些域名指向127.0.0.1，那么跟你用localhost的效果是完全一样的。</p>
+<p>switchhost可以去课前资料寻找。</p>
+<h2 id="4-4-创建父工程"><a href="#4-4-创建父工程" class="headerlink" title="4.4.创建父工程"></a>4.4.创建父工程</h2><p>创建统一的父工程：leyou，用来管理依赖及其版本，注意是创建project，而不是moudle</p>
+<p><img src="assets/1525706200704.png" alt="1525706200704"></p>
+<p>填写项目信息：</p>
+<p><img src="assets/1525707023009.png" alt="1525707023009"></p>
+<p>注意：</p>
+<p>父工程不需要代码，只是管理依赖，因此我们不选择任何SpringCloud的依赖</p>
+<p>跳过依赖选择。</p>
+<p>然后将pom文件修改成我这个样子：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">		 <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.parent<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">description</span>&gt;</span>Demo project for Spring Boot<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">spring-cloud.version</span>&gt;</span>Finchley.RC1<span class="tag">&lt;/<span class="name">spring-cloud.version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">mapper.starter.version</span>&gt;</span>2.0.2<span class="tag">&lt;/<span class="name">mapper.starter.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">mysql.version</span>&gt;</span>5.1.32<span class="tag">&lt;/<span class="name">mysql.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pageHelper.starter.version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">pageHelper.starter.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">leyou.latest.version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">leyou.latest.version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">fastDFS.client.version</span>&gt;</span>1.26.1-RELEASE<span class="tag">&lt;/<span class="name">fastDFS.client.version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- springCloud --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring-cloud.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 通用Mapper启动器 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;mapper.starter.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 分页助手启动器 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;pageHelper.starter.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">			<span class="comment">&lt;!-- mysql驱动 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;mysql.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!--FastDFS客户端--&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.tobato<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastdfs-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;fastDFS.client.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.16.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang3<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>spring-milestones<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Spring Milestones<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>https://repo.spring.io/milestone<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以发现，我们在父工程中引入了SpringCloud等很多以后需要用到的依赖，以后创建的子工程就不需要自己引入了。</p>
+<p>最后，删除自动生成的LeyouApplication启动类、测试类以及application.properties文件，我们不需要。</p>
+<h2 id="4-5-创建EurekaServer"><a href="#4-5-创建EurekaServer" class="headerlink" title="4.5.创建EurekaServer"></a>4.5.创建EurekaServer</h2><h3 id="4-5-1-创建工程"><a href="#4-5-1-创建工程" class="headerlink" title="4.5.1.创建工程"></a>4.5.1.创建工程</h3><p>这个大家应该比较熟悉了。</p>
+<p>我们的注册中心，起名为：ly-registry</p>
+<p>这次我们就不Spring使用提供的脚手架了。直接创建maven项目，自然会继承父类的依赖：</p>
+<p>选择新建module：</p>
+<p>​    <img src="assets/1525707765104.png" alt="1525707765104"></p>
+<p>选择maven安装，但是不要选择骨架：</p>
+<p><img src="assets/1525707850047.png" alt="1525707850047"></p>
+<p>然后填写项目坐标，我们的项目名称为ly-registry:</p>
+<p><img src="assets/1525707949252.png" alt="1525707949252"></p>
+<p>选择安装目录，因为是聚合项目，目录应该是在父工程leyou的下面：</p>
+<p><img src="assets/1525708053551.png" alt="1525708053551"></p>
+<h3 id="4-5-2-添加依赖"><a href="#4-5-2-添加依赖" class="headerlink" title="4.5.2.添加依赖"></a>4.5.2.添加依赖</h3><p>添加EurekaServer的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.parent<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../leyou/pom.xml<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.common<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ly-registry<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-5-3-编写启动类"><a href="#4-5-3-编写启动类" class="headerlink" title="4.5.3.编写启动类"></a>4.5.3.编写启动类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableEurekaServer</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LyRegistry</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(LyRegistry.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-5-4-配置文件"><a href="#4-5-4-配置文件" class="headerlink" title="4.5.4.配置文件"></a>4.5.4.配置文件</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">10086</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">ly-registry</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    fetch-registry:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:$&#123;server.port&#125;/eureka</span></span><br><span class="line"><span class="attr">  server:</span></span><br><span class="line"><span class="attr">    enable-self-preservation:</span> <span class="literal">false</span> <span class="comment"># 关闭自我保护</span></span><br><span class="line"><span class="attr">    eviction-interval-timer-in-ms:</span> <span class="number">5000</span> <span class="comment"># 每隔5秒进行一次服务列表清理</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-5-5-项目的结构："><a href="#4-5-5-项目的结构：" class="headerlink" title="4.5.5.项目的结构："></a>4.5.5.项目的结构：</h3><p>目前，整个项目的结构如图：</p>
+<p> <img src="assets/1525708460522.png" alt="1525708460522"></p>
+<h2 id="4-6-创建Zuul网关"><a href="#4-6-创建Zuul网关" class="headerlink" title="4.6.创建Zuul网关"></a>4.6.创建Zuul网关</h2><h3 id="4-6-1-创建工程"><a href="#4-6-1-创建工程" class="headerlink" title="4.6.1.创建工程"></a>4.6.1.创建工程</h3><p>与上面类似，选择maven方式创建Module，然后填写项目名称，我们命名为：ly-api-gateway</p>
+<p><img src="assets/1525708626562.png" alt="1525708626562"></p>
+<p>填写保存的目录：</p>
+<p><img src="assets/1525708677719.png" alt="1525708677719"></p>
+<h3 id="4-6-2-添加依赖"><a href="#4-6-2-添加依赖" class="headerlink" title="4.6.2.添加依赖"></a>4.6.2.添加依赖</h3><p>这里我们需要添加Zuul和EurekaClient的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.parent<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.common<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ly-gateway<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-zuul<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-6-3-编写启动类"><a href="#4-6-3-编写启动类" class="headerlink" title="4.6.3.编写启动类"></a>4.6.3.编写启动类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@EnableZuulProxy</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LyApiGateway</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(LyApiGateway.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-6-4-配置文件"><a href="#4-6-4-配置文件" class="headerlink" title="4.6.4.配置文件"></a>4.6.4.配置文件</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">10010</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">api-gateway</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:10086/eureka</span></span><br><span class="line">  </span><br><span class="line"><span class="attr">zuul:</span></span><br><span class="line"><span class="attr">  prefix:</span> <span class="string">/api</span> <span class="comment"># 添加路由前缀</span></span><br><span class="line"><span class="attr">ribbon:</span></span><br><span class="line"><span class="attr">  ConnectTimeout:</span> <span class="number">1000</span> <span class="comment"># 连接超时时间(ms)</span></span><br><span class="line"><span class="attr">  ReadTimeout:</span> <span class="number">3500</span> <span class="comment"># 通信超时时间(ms)</span></span><br><span class="line"><span class="attr">  MaxAutoRetriesNextServer:</span> <span class="number">0</span> <span class="comment"># 同一服务不同实例的重试次数</span></span><br><span class="line"><span class="attr">  MaxAutoRetries:</span> <span class="number">0</span> <span class="comment"># 同一实例的重试次数</span></span><br><span class="line"><span class="attr">hystrix:</span></span><br><span class="line"><span class="attr">  command:</span></span><br><span class="line"><span class="attr">    default:</span></span><br><span class="line"><span class="attr">      execution:</span></span><br><span class="line"><span class="attr">        isolation:</span></span><br><span class="line"><span class="attr">          thread:</span></span><br><span class="line"><span class="attr">            timeoutInMillisecond:</span> <span class="number">5000</span> <span class="comment"># 熔断超时时长：5000ms</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-6-5-项目结构"><a href="#4-6-5-项目结构" class="headerlink" title="4.6.5.项目结构"></a>4.6.5.项目结构</h3><p>目前，leyou下有两个子模块：</p>
+<ul>
+<li>ly-registry：服务的注册中心（EurekaServer）</li>
+<li>ly-gateway：服务网关（Zuul）</li>
+</ul>
+<p>目前，服务的结构如图所示：</p>
+<pre><code>![1525709241440](assets/1525709241440.png)
+</code></pre><p>截止到这里，我们已经把基础服务搭建完毕，为了便于开发，统一配置中心（ConfigServer）我们留待以后添加。</p>
+<h2 id="4-7-创建商品微服务"><a href="#4-7-创建商品微服务" class="headerlink" title="4.7.创建商品微服务"></a>4.7.创建商品微服务</h2><p>既然是一个全品类的电商购物平台，那么核心自然就是商品。因此我们要搭建的第一个服务，就是商品微服务。其中会包含对于商品相关的一系列内容的管理，包括：</p>
+<ul>
+<li>商品分类管理</li>
+<li>品牌管理</li>
+<li>商品规格参数管理</li>
+<li>商品管理</li>
+<li>库存管理</li>
+</ul>
+<p>我们先完成项目的搭建：</p>
+<h3 id="4-7-1-微服务的结构"><a href="#4-7-1-微服务的结构" class="headerlink" title="4.7.1.微服务的结构"></a>4.7.1.微服务的结构</h3><p>因为与商品的品类相关，我们的工程命名为<code>ly-item</code>.</p>
+<p>需要注意的是，我们的ly-item是一个微服务，那么将来肯定会有其它系统需要来调用服务中提供的接口，因此肯定也会使用到接口中关联的实体类。</p>
+<p>因此这里我们需要使用聚合工程，将要提供的接口及相关实体类放到独立子工程中，以后别人引用的时候，只需要知道坐标即可。</p>
+<p>我们会在ly-item中创建两个子工程：</p>
+<ul>
+<li>ly-item-interface：主要是对外暴露的接口及相关实体类</li>
+<li>ly-item-service：所有业务逻辑及内部使用接口</li>
+</ul>
+<p>调用关系如图所示：</p>
+<p><img src="assets/1525744281610.png" alt="1525744281610"></p>
+<h3 id="4-7-2-创建父工程ly-item"><a href="#4-7-2-创建父工程ly-item" class="headerlink" title="4.7.2.创建父工程ly-item"></a>4.7.2.创建父工程ly-item</h3><p>依然是使用maven构建：</p>
+<p><img src="assets/1525744570533.png" alt="1525744570533"></p>
+<p>保存的位置：</p>
+<p><img src="assets/1525744595793.png" alt="1525744595793"></p>
+<p>不需要任何依赖，我们可以把项目打包方式设置为pom</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.parent<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.service<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ly-item<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 打包方式为pom --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-7-3-创建ly-item-interface"><a href="#4-7-3-创建ly-item-interface" class="headerlink" title="4.7.3.创建ly-item-interface"></a>4.7.3.创建ly-item-interface</h3><p>在ly-item工程上点击右键，选择new &gt; module:</p>
+<p> <img src="assets/1525744768694.png" alt="1525744768694"></p>
+<p>依然是使用maven构建，注意父工程是ly-item：</p>
+<p><img src="assets/1525744875078.png" alt="1525744875078"></p>
+<p><strong>注意</strong>：接下来填写的目录结构需要自己手动完成，保存到<code>ly-item</code>下的<code>ly-item-interface</code>目录中：</p>
+<p><img src="assets/1525744973026.png" alt="1525744973026"></p>
+<p>点击Finish完成。</p>
+<p>此时的项目结构：</p>
+<p>​    <img src="assets/1525745119573.png" alt="1525745119573"></p>
+<h3 id="4-7-4-创建ly-item-service"><a href="#4-7-4-创建ly-item-service" class="headerlink" title="4.7.4.创建ly-item-service"></a>4.7.4.创建ly-item-service</h3><p>与<code>ly-item-interface</code>类似，我们选择在<code>ly-item</code>上右键，新建module，然后填写项目信息：</p>
+<p><img src="assets/1525745247195.png" alt="1525745247195"></p>
+<p>填写存储位置，是在<code>/ly-item/ly-item-service</code>目录</p>
+<p><img src="assets/1525745303365.png" alt="1525745303365"></p>
+<p>点击Finish完成。</p>
+<h3 id="4-7-5-整个微服务结构"><a href="#4-7-5-整个微服务结构" class="headerlink" title="4.7.5.整个微服务结构"></a>4.7.5.整个微服务结构</h3><p>如图所示：</p>
+<p>​    <img src="assets/1525745407047.png" alt="1525745407047"></p>
+<p>我们打开ly-item的pom查看，会发现ly-item-interface和ly-item-service都已经称为module了：</p>
+<p>​    <img src="assets/1525745475108.png" alt="1525745475108"></p>
+<h3 id="4-7-6-添加依赖"><a href="#4-7-6-添加依赖" class="headerlink" title="4.7.6.添加依赖"></a>4.7.6.添加依赖</h3><p>接下来我们给<code>ly-item-service</code>中添加依赖：</p>
+<p>思考一下我们需要什么？</p>
+<ul>
+<li>Eureka客户端</li>
+<li>web启动器</li>
+<li>mybatis启动器</li>
+<li>通用mapper启动器</li>
+<li>分页助手启动器</li>
+<li>连接池，我们用默认的Hykira</li>
+<li>mysql驱动</li>
+<li>千万不能忘了，我们自己也需要<code>ly-item-interface</code>中的实体类</li>
+</ul>
+<p>这些依赖，我们在顶级父工程：leyou中已经添加好了。所以直接引入即可：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ly-item<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.service<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.service<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ly-item-service<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--web启动器--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--Eureka客户端--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--分页助手--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--mysql驱动--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--通用mapper--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.service<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ly-item-interface<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>整个结构：</p>
+<p> <img src="assets/1525747398193.png" alt="1525747398193"></p>
+<h3 id="4-7-7-编写启动和配置"><a href="#4-7-7-编写启动和配置" class="headerlink" title="4.7.7.编写启动和配置"></a>4.7.7.编写启动和配置</h3><p>在整个<code>ly-item工程</code>中，只有<code>ly-item-service</code>是需要启动的。因此在其中编写启动类即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LyItemApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(LyItemApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后是全局属性文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8081</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">item-service</span></span><br><span class="line"><span class="attr">  datasource:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">jdbc:mysql://localhost:3306/heima</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">cxg200888</span></span><br><span class="line"><span class="attr">    hikari:</span></span><br><span class="line"><span class="attr">      maximum-pool-size:</span> <span class="number">30</span></span><br><span class="line"><span class="attr">      minimum-idle:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:10086/eureka</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    prefer-ip-address:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    ip-address:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-8-添加商品微服务的路由规则"><a href="#4-8-添加商品微服务的路由规则" class="headerlink" title="4.8.添加商品微服务的路由规则"></a>4.8.添加商品微服务的路由规则</h2><p>既然商品微服务已经创建，接下来肯定要添加路由规则到Zuul中，我们不使用默认的路由规则。</p>
+<p>在ly-gateway中修改配置文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">zuul:</span></span><br><span class="line"><span class="attr">  prefix:</span> <span class="string">/api</span> <span class="comment"># 添加路由前缀</span></span><br><span class="line"><span class="attr">  retryable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  routes:</span></span><br><span class="line"><span class="attr">    item-service:</span> <span class="string">/item/**</span> <span class="comment"># 将商品微服务映射到/item/**</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-9-启动测试"><a href="#4-9-启动测试" class="headerlink" title="4.9.启动测试"></a>4.9.启动测试</h2><p>我们分别启动：ly-registry，ly-api-gateway，ly-item-service</p>
+<p> <img src="assets/1525749186008.png" alt="1525749186008"></p>
+<p>查看Eureka面板：</p>
+<p><img src="assets/1525749215954.png" alt="1525749215954"></p>
+<h2 id="4-10-测试路由规则"><a href="#4-10-测试路由规则" class="headerlink" title="4.10.测试路由规则"></a>4.10.测试路由规则</h2><p>为了测试路由规则是否畅通，我们是不是需要在item-service中编写一个controller接口呢？</p>
+<p>其实不需要，Spring提供了一个依赖：actuator</p>
+<p>只要我们添加了actuator的依赖，它就会为我们生成一系列的访问接口：</p>
+<ul>
+<li>/info</li>
+<li>/health</li>
+<li>/refresh</li>
+<li>…</li>
+</ul>
+<p>添加依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>重启后访问Eureka控制台：</p>
+<p>鼠标悬停在item-service上，会显示一个地址：</p>
+<p><img src="assets/1525749683060.png" alt="1525749683060"></p>
+<p>这就是actuator提供的接口，我们点击访问：</p>
+<p> <img src="assets/1525749711606.png" alt="1525749711606"></p>
+<p>因为我们没有添加信息，所以是一个空的json，但是可以肯定的是：我们能够访问到item-service了。</p>
+<p>接下来我们通过路由访问试试，根据路由规则，我们需要访问的地址是：</p>
+<p><a href="http://127.0.0.1:10010/api/item/actuator/info" target="_blank" rel="noopener">http://127.0.0.1:10010/api/item/actuator/info</a></p>
+<p> <img src="assets/1525749803191.png" alt="1525749803191"></p>
+<h2 id="4-11-通用工具模块"><a href="#4-11-通用工具模块" class="headerlink" title="4.11.通用工具模块"></a>4.11.通用工具模块</h2><p>有些工具或通用的约定内容，我们希望各个服务共享，因此需要创建一个工具模块：<code>ly-common</code></p>
+<p>使用maven来构建module：</p>
+<p><img src="assets/1526046318620.png" alt="1526046318620"></p>
+<p>位置信息：</p>
+<p><img src="assets/1526046349379.png" alt="1526046349379"></p>
+<p>结构：</p>
+<p> <img src="assets/1526046432347.png" alt="1526046432347"></p>
+<p>目前还不需要编码。</p>
+<h3 id="4-11-1导入工具类"><a href="#4-11-1导入工具类" class="headerlink" title="4.11.1导入工具类"></a>4.11.1导入工具类</h3><p><img src="assets/1542364312449.png" alt="1542364312449"></p>
+<p>JsonUtils.java</p>
+<p>包括四个方法：</p>
+<ul>
+<li><p>toString：把一个对象序列化为string类型，包含一个参数</p>
+<ul>
+<li>Object obj：原始java对象</li>
+</ul>
+</li>
+<li><p>toList：把一个json反序列化为List类型，需要指定一个集合中的元素，包含两个参数</p>
+<ul>
+<li>String  json：要反序列化的json字符串</li>
+<li>Class  eClass：集合中元素类型</li>
+</ul>
+</li>
+<li><p>toMap：把一个json反序列化为Map类型，需要指定集合中key和value类型，包含三个参数：</p>
+<ul>
+<li>String  json：要反序列化的json字符串</li>
+<li>Class  kClass：集合中key的类型</li>
+<li>Class vClass：集合中value的类型</li>
+</ul>
+</li>
+<li><p>nativeRead：把json字符串反序列化，当反序列化的结果比较复杂时。通过这个方法转换，参数：</p>
+<ul>
+<li><p>String json：要反序列化的json字符串</p>
+</li>
+<li><p>TypeReference<t> type：在传递时，需要传递TypeReference的匿名内部类，把要返回的类型写在TypeReference中的泛型，则返回的就是泛型中类型</t></p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; users=JsonUtils.nativeRead(json, new TypeReference&lt;List&lt;User&gt;&gt;()&#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-11-2添加依赖"><a href="#4-11-2添加依赖" class="headerlink" title="4.11.2添加依赖"></a>4.11.2添加依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>leyou<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.parent<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.leyou.common<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ly-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.embed<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat-embed-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--日志--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--引入json--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="5-通用异常处理"><a href="#5-通用异常处理" class="headerlink" title="5.通用异常处理"></a>5.通用异常处理</h1><h2 id="5-1-场景预设"><a href="#5-1-场景预设" class="headerlink" title="5.1.场景预设"></a>5.1.场景预设</h2><p>###5.1.1场景</p>
+<p>我们预设这样一个场景，加入我们做新增商品，需要接受下面的参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">price:价格</span><br><span class="line">name:名称</span><br></pre></td></tr></table></figure>
+<p>然后对数据做简单的校验：</p>
+<ul>
+<li>价格不能为空</li>
+</ul>
+<p>新增时，自动形成id，然后随商品对象一起返回</p>
+<h3 id="5-1-2代码"><a href="#5-1-2代码" class="headerlink" title="5.1.2代码"></a>5.1.2代码</h3><p>在ly-item-interface</p>
+<p>pojo：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Long price;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在ly-item-service中</p>
+<p>service：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItemService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Item <span class="title">saveItem</span><span class="params">(Item item)</span></span>&#123;</span><br><span class="line">        <span class="comment">//随机生成id</span></span><br><span class="line">        <span class="keyword">int</span> id=<span class="keyword">new</span> Random().nextInt(<span class="number">100</span>);</span><br><span class="line">        item.setId(id);</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在ly-item-service中</p>
+<p>controller：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"item"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItemController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ItemService itemService;</span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Item&gt; <span class="title">saveItem</span><span class="params">(Item item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (item.getPrice()==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"价格不能为空"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.status(HttpStatus.CREATED).body(itemService.saveItem(item));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在ly-common中定义异常处理工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//扫描启动类</span></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonExceptionHander</span> </span>&#123;</span><br><span class="line">    <span class="comment">//拦截ly-item-service的ItemController的RuntimeException()方法</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(RuntimeException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title">handleException</span><span class="params">(RuntimeException e)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###5.1.3测试如下</p>
+<p><img src="assets/1542431851232.png" alt="1542431851232"></p>
+<h3 id="5-1-4自定义异常"><a href="#5-1-4自定义异常" class="headerlink" title="5.1.4自定义异常"></a>5.1.4自定义异常</h3><p>将上述代码优化</p>
+<p>在ly-common中定义通用异常拦截</p>
+<p>CommonExceptionHander</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonExceptionHander</span> </span>&#123;</span><br><span class="line">    <span class="comment">//拦截ly-item-service的ItemController的RuntimeException()方法</span></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(RuntimeException.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseEntity&lt;ExceptionResult&gt; <span class="title">handleException</span><span class="params">(LyException e)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.status(e.getExceptionEnums().getCode())</span><br><span class="line">                .body(<span class="keyword">new</span> ExceptionResult(e.getExceptionEnums()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>异常对象：ExceptionEnums</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ExceptionEnums &#123;</span><br><span class="line">    PRICE_CANNOT_BE_NULL(<span class="number">400</span>,<span class="string">"价格不能为空"</span>);</span><br><span class="line">    ;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> code;</span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自定义异常方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LyException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ExceptionEnums exceptionEnums;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通用异常结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionResult</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> status;</span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line">    <span class="keyword">private</span> Long timestamp;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExceptionResult</span><span class="params">(ExceptionEnums em)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.status=em.getCode();</span><br><span class="line">        <span class="keyword">this</span>.message=em.getMsg();</span><br><span class="line">        <span class="keyword">this</span>.timestamp=System.currentTimeMillis();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改ly-item-service</p>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="meta">@Controller</span></span><br><span class="line">&gt; <span class="meta">@RequestMapping</span>(<span class="string">"item"</span>)</span><br><span class="line">&gt; <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItemController</span> </span>&#123;</span><br><span class="line">&gt;     <span class="meta">@Autowired</span></span><br><span class="line">&gt;     <span class="keyword">private</span> ItemService itemService;</span><br><span class="line">&gt;     <span class="meta">@PostMapping</span></span><br><span class="line">&gt;     <span class="meta">@ResponseBody</span></span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Item&gt; <span class="title">saveItem</span><span class="params">(Item item)</span> </span>&#123;</span><br><span class="line">&gt;         <span class="keyword">if</span> (item.getPrice()==<span class="keyword">null</span>)&#123;</span><br><span class="line">&gt;             <span class="comment">//修改地方：调用ExceptionEnums.PRICE_CANNOT_BE_NULL</span></span><br><span class="line">&gt;             <span class="keyword">throw</span> <span class="keyword">new</span> LyException(ExceptionEnums.PRICE_CANNOT_BE_NULL);</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;         <span class="keyword">return</span> ResponseEntity.status(HttpStatus.CREATED).body(itemService.saveItem(item));</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/day05-乐优商城项目搭建.html" title="微服务商城（七）——商城项目搭建">https://tiredtosleep.github.io/day05-乐优商城项目搭建.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/前台搭建.html" rel="next" title="微服务商城（六）——商城前台搭建">
+                <i class="fa fa-chevron-left"></i> 微服务商城（六）——商城前台搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day06-搭建管理系统页面.html" rel="prev" title="微服务商城（八）——搭建管理系统页面">
+                微服务商城（八）——搭建管理系统页面 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-学习目标"><span class="nav-text">0.学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-了解电商行业"><span class="nav-text">1.了解电商行业</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-项目分类"><span class="nav-text">1.1.项目分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-传统项目"><span class="nav-text">1.1.1.传统项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-互联网项目"><span class="nav-text">1.1.2.互联网项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-电商行业的发展"><span class="nav-text">1.2.电商行业的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-钱景"><span class="nav-text">1.2.1.钱景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-数据"><span class="nav-text">1.2.2.数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-技术特点"><span class="nav-text">1.2.3.技术特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-常见电商模式"><span class="nav-text">1.3.常见电商模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-一些专业术语"><span class="nav-text">1.4.一些专业术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-项目开发流程"><span class="nav-text">1.5.项目开发流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-乐优商城介绍"><span class="nav-text">2.乐优商城介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-项目介绍"><span class="nav-text">2.1.项目介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-系统架构"><span class="nav-text">2.2.系统架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-架构图"><span class="nav-text">2.2.1.架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-系统架构解读"><span class="nav-text">2.2.2.系统架构解读</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-商城管理系统前端页面"><span class="nav-text">3.商城管理系统前端页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-什么事SPA"><span class="nav-text">3.1.什么事SPA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-webpack"><span class="nav-text">3.2.webpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-vue-cli"><span class="nav-text">3.3.vue-cli</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-介绍和安装"><span class="nav-text">3.3.1.介绍和安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-快速上手"><span class="nav-text">3.3.2.快速上手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3项目结构"><span class="nav-text">3.3.3项目结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-1-为什么要学习UI框架"><span class="nav-text">3.4.1.为什么要学习UI框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-2-为什么是Vuetify"><span class="nav-text">3.4.2.为什么是Vuetify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-3-怎么用？"><span class="nav-text">3.4.3.怎么用？</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#4-搭建基础服务"><span class="nav-text">4.搭建基础服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-技术选型"><span class="nav-text">4.1.技术选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-开发环境"><span class="nav-text">4.2.开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-域名"><span class="nav-text">4.3.域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-创建父工程"><span class="nav-text">4.4.创建父工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-创建EurekaServer"><span class="nav-text">4.5.创建EurekaServer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-1-创建工程"><span class="nav-text">4.5.1.创建工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-2-添加依赖"><span class="nav-text">4.5.2.添加依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-3-编写启动类"><span class="nav-text">4.5.3.编写启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-4-配置文件"><span class="nav-text">4.5.4.配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-5-项目的结构："><span class="nav-text">4.5.5.项目的结构：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-创建Zuul网关"><span class="nav-text">4.6.创建Zuul网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-1-创建工程"><span class="nav-text">4.6.1.创建工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-2-添加依赖"><span class="nav-text">4.6.2.添加依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-3-编写启动类"><span class="nav-text">4.6.3.编写启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-4-配置文件"><span class="nav-text">4.6.4.配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-5-项目结构"><span class="nav-text">4.6.5.项目结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-创建商品微服务"><span class="nav-text">4.7.创建商品微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-1-微服务的结构"><span class="nav-text">4.7.1.微服务的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-2-创建父工程ly-item"><span class="nav-text">4.7.2.创建父工程ly-item</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-3-创建ly-item-interface"><span class="nav-text">4.7.3.创建ly-item-interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-4-创建ly-item-service"><span class="nav-text">4.7.4.创建ly-item-service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-5-整个微服务结构"><span class="nav-text">4.7.5.整个微服务结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-6-添加依赖"><span class="nav-text">4.7.6.添加依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-7-编写启动和配置"><span class="nav-text">4.7.7.编写启动和配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-添加商品微服务的路由规则"><span class="nav-text">4.8.添加商品微服务的路由规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-9-启动测试"><span class="nav-text">4.9.启动测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-10-测试路由规则"><span class="nav-text">4.10.测试路由规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-11-通用工具模块"><span class="nav-text">4.11.通用工具模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-11-1导入工具类"><span class="nav-text">4.11.1导入工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-11-2添加依赖"><span class="nav-text">4.11.2添加依赖</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-通用异常处理"><span class="nav-text">5.通用异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-场景预设"><span class="nav-text">5.1.场景预设</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2代码"><span class="nav-text">5.1.2代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-4自定义异常"><span class="nav-text">5.1.4自定义异常</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">165.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>
