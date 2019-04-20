@@ -242,6 +242,9 @@
       <categories>
         <category>RabbitMQ</category>
       </categories>
+      <tags>
+        <tag>RabbitMQ</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[微服务商城（一）——SpringBoot学习笔记]]></title>
