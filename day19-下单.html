@@ -85,7 +85,7 @@
 <meta name="keywords" content="微信支付">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微服务商城（十九）—— 下单、微信支付">
-<meta property="og:url" content="https://tiredtosleep.github.io/day19-下单 .html">
+<meta property="og:url" content="https://tiredtosleep.github.io/day19-下单.html">
 <meta property="og:site_name" content="Tired to Sleep博客">
 <meta property="og:description" content="0.学习目标 搭建订单微服务 创建订单 微信支付下单 生成二维码  1.创建订单微服务1.1.搭建服务创建Model ly-order 依赖pom.xml 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960&amp;lt;?xml ve">
 <meta property="og:locale" content="zh-Hans">
@@ -149,7 +149,7 @@
 <meta property="og:image" content="https://tiredtosleep.github.io/assets/1552545687225.png">
 <meta property="og:image" content="https://tiredtosleep.github.io/assets/1552545743097.png">
 <meta property="og:image" content="https://tiredtosleep.github.io/assets/1552546156140.png">
-<meta property="og:updated_time" content="2019-03-15T08:06:42.454Z">
+<meta property="og:updated_time" content="2019-03-20T07:18:15.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微服务商城（十九）—— 下单、微信支付">
 <meta name="twitter:description" content="0.学习目标 搭建订单微服务 创建订单 微信支付下单 生成二维码  1.创建订单微服务1.1.搭建服务创建Model ly-order 依赖pom.xml 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960&amp;lt;?xml ve">
@@ -183,7 +183,7 @@
 
 
 
-  <link rel="canonical" href="https://tiredtosleep.github.io/day19-下单 .html">
+  <link rel="canonical" href="https://tiredtosleep.github.io/day19-下单.html">
 
 
 
@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day19-下单 .html">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day19-下单.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tired to Sleep">
@@ -913,7 +913,6 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查询订单状态</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> orderId</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"state/&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity&lt;Integer&gt; <span class="title">queryStatusById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Long orderId)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ResponseEntity.ok(orderService.queryStatusById(orderId).getValue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在ly-order的service中编写</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> PayState <span class="title">queryStatusById</span><span class="params">(Long orderId)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//查询订单状态</span></span><br><span class="line">    OrderStatus orderStatus = orderStatusMapper.selectByPrimaryKey(orderId);</span><br><span class="line">    Integer status = orderStatus.getStatus();</span><br><span class="line">    <span class="comment">//判断是否支付</span></span><br><span class="line">    <span class="keyword">if</span> (!status.equals(OrderStatusEnum.UN_PAY.value())) &#123;</span><br><span class="line">        <span class="comment">//如果已支付，真的是已支付</span></span><br><span class="line">        <span class="keyword">return</span> PayState.SUCCESS;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果未支付，但是其实不一定未支付，必须去微信查询状态</span></span><br><span class="line">    <span class="keyword">return</span> payHelper.queryPayStatus(orderId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
       
     </div>
     
@@ -962,7 +961,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://tiredtosleep.github.io/day19-下单 .html" title="微服务商城（十九）—— 下单、微信支付">https://tiredtosleep.github.io/day19-下单 .html</a>
+    <a href="https://tiredtosleep.github.io/day19-下单.html" title="微服务商城（十九）—— 下单、微信支付">https://tiredtosleep.github.io/day19-下单.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -999,6 +998,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Centos6安装rabbitmq.html" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -1110,7 +1113,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1236,7 +1239,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">博客全站共&#58;</span> 
     
-    <span title="博客全站共">165.2k</span>  字
+    <span title="博客全站共">166.1k</span>  字
   
 </div>
 <!-- 
