@@ -676,7 +676,7 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day03-CMS页面管理开发.html">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day04-页面静态化.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tired to Sleep">
@@ -698,7 +698,7 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
         
 
                 
-                <a class="post-title-link" href="/day03-CMS页面管理开发.html" itemprop="url">在线学习视频（三）—— CMS页面管理开发</a></h1>
+                <a class="post-title-link" href="/day04-页面静态化.html" itemprop="url">在线学习视频（四）—— 页面静态化 页面预览</a></h1>
         
 
         <div class="post-meta">
@@ -764,7 +764,7 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  7.4k  字
+                  5.3k  字
                 </span>
               
 
@@ -780,7 +780,7 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  34  分钟
+                  24  分钟
                 </span>
               
             </div>
@@ -803,18 +803,15 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
       
         
           
-          CMS页面管理开发1 自定义条件查询1.1 需求分析在页面输入查询条件，查询符合条件的页面信息。
-查询条件如下：
-站点Id：精确匹配
-模板Id：精确匹配
-页面别名：模糊匹配
-…
-1.2 服务端1.2.1 Dao1使用 CmsPageRepository中的findAll(Example&lt;S&gt; var1, Pageable var2)方法实现，无需定义。
-下边测试findAll方法实现自
+          页面静态化 页面预览1 页面静态化需求1、为什么要进行页面管理？
+​    本项目cms系统的功能就是根据运营需要，对门户等子系统的部分页面进行管理，从而实现快速根据用户需求修改页面内容并上线的需求。
+2、如何修改页面的内容？
+​    在开发中修改页面内容是需要人工编写html及JS文件，CMS系统是通过程序自动化的对页面内容进行修改，通过页面静态化技术生成html页面。
+3、如何对页面进行静态
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/day03-CMS页面管理开发.html#more" rel="contents">
+            <a class="btn" href="/day04-页面静态化.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -865,7 +862,7 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day05-消息中间件RabbitMQ.html">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day01 搭建环境 CMS服务端开发.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tired to Sleep">
@@ -887,7 +884,7 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
         
 
                 
-                <a class="post-title-link" href="/day05-消息中间件RabbitMQ.html" itemprop="url">在线学习视频（五）—— 消息队列 GridFS</a></h1>
+                <a class="post-title-link" href="/day01 搭建环境 CMS服务端开发.html" itemprop="url">在线学习视频（一）—— CMS服务端开发</a></h1>
         
 
         <div class="post-meta">
@@ -933,8 +930,8 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目实战-在线学习视频网站/RabbitMQ/" itemprop="url" rel="index">
-                    <span itemprop="name">RabbitMQ</span>
+                  <a href="/categories/项目实战-在线学习视频网站/在线视频网站介绍/" itemprop="url" rel="index">
+                    <span itemprop="name">在线视频网站介绍</span>
                   </a>
                 </span>
 
@@ -964,7 +961,7 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  7.8k  字
+                  8.1k  字
                 </span>
               
 
@@ -980,7 +977,7 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  35  分钟
+                  32  分钟
                 </span>
               
             </div>
@@ -1003,18 +1000,16 @@ QueryResponseResult&lt;自定义类型&gt;在api工程创建cours
       
         
           
-          消息队列 GridFS1 页面发布1.1 需求分析
-业务流程如下：
-1、管理员进入管理界面点击“页面发布”，前端请求cms页面发布接口。
-2、cms页面发布接口执行页面静态化，并将静态化页面(html文件)存储至GridFS中。
-3、静态化成功后，向消息队列发送页面发布的消息。
-页面发布的最终目标是将页面发布到服务器。
-通过消息队列将页面发布的消息发送给各各服务器。
-3、消息队列负责将消息发送给各
+          搭建环境 CMS服务端开发1.项目的功能架构1.1.项目背景学成在线借鉴了MOOC（大型开放式网络课程，即MOOC（massive open online courses））的设计思想，是一个提供IT职业课程在线学习的平台，它为即将和已经加入IT领域的技术人才提供在线学习服务，用户通过在线学习、在线练习、在线考试等学习内容，最终掌握所学的IT技能，并能在工作中熟练应用。
+1.2.功能模块
+
+
+
+功
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/day05-消息中间件RabbitMQ.html#more" rel="contents">
+            <a class="btn" href="/day01 搭建环境 CMS服务端开发.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
