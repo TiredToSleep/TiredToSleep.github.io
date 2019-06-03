@@ -447,7 +447,7 @@
 </li>
 </ul>
 <h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><p>修改安装目录下的redis.conf文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure></p>
-<p>修改以下配置：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>bind 127.0.0.1 # 将这行代码注释，监听所有的ip地址，外网可以访问</span><br><span class="line">protected-mode no # 把yes改成no，允许外网访问</span><br><span class="line">daemonize yes # 把no改成yes，后台运行</span><br></pre></td></tr></table></figure></p>
+<p>修改以下配置：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">bind</span> 127.0.0.1 <span class="comment"># 将这行代码注释，监听所有的ip地址，外网可以访问</span></span></span><br><span class="line">protected-mode no # 把yes改成no，允许外网访问</span><br><span class="line">daemonize yes # 把no改成yes，后台运行</span><br></pre></td></tr></table></figure></p>
 <h2 id="3-启动或停止"><a href="#3-启动或停止" class="headerlink" title="3.启动或停止"></a>3.启动或停止</h2><p>redis提供了服务端命令和客户端命令：</p>
 <ul>
 <li>redis-server 服务端命令，可以包含以下参数：<br>start 启动<br>stop 停止</li>
@@ -566,8 +566,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/day01-springboot.html" rel="prev" title="微服务商城（一）——SpringBoot学习笔记">
-                微服务商城（一）——SpringBoot学习笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/mongodb安装及入门.html" rel="prev" title="window下安装mongodb">
+                window下安装mongodb <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -680,7 +680,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -692,7 +692,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -703,7 +703,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -806,7 +806,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">博客全站共&#58;</span> 
     
-    <span title="博客全站共">166.1k</span>  字
+    <span title="博客全站共">301.2k</span>  字
   
 </div>
 <!-- 

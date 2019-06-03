@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Logstash,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="媒资管理系统集成1 学习页面查询课程计划1.1 需求分析​    到目前为止，我们已可以编辑课程计划信息并上传课程视频，下一步我们要实现在线学习页面动态读取章节对应的视频并进行播放。在线学习页面所需要的信息有两类：一类是课程计划信息、一类是课程学习信息（视频地址、学习进度等），如下图：  在线学习集成媒资管理的需求如下： 1、在线学习页面显示课程计划 2、点击课程计划播放该课程计划对应的视频 本章">
+<meta name="keywords" content="Logstash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线学习视频（十六）—— 媒资管理系统集成">
+<meta property="og:url" content="https://tiredtosleep.github.io/day15 媒资管理系统集成.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="媒资管理系统集成1 学习页面查询课程计划1.1 需求分析​    到目前为止，我们已可以编辑课程计划信息并上传课程视频，下一步我们要实现在线学习页面动态读取章节对应的视频并进行播放。在线学习页面所需要的信息有两类：一类是课程计划信息、一类是课程学习信息（视频地址、学习进度等），如下图：  在线学习集成媒资管理的需求如下： 1、在线学习页面显示课程计划 2、点击课程计划播放该课程计划对应的视频 本章">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1526291618627.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/images/1525926052776.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525925482949.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530973048627.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/images/1530973048627.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1538023831949.png">
+<meta property="og:updated_time" content="2019-06-02T15:24:10.393Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在线学习视频（十六）—— 媒资管理系统集成">
+<meta name="twitter:description" content="媒资管理系统集成1 学习页面查询课程计划1.1 需求分析​    到目前为止，我们已可以编辑课程计划信息并上传课程视频，下一步我们要实现在线学习页面动态读取章节对应的视频并进行播放。在线学习页面所需要的信息有两类：一类是课程计划信息、一类是课程学习信息（视频地址、学习进度等），如下图：  在线学习集成媒资管理的需求如下： 1、在线学习页面显示课程计划 2、点击课程计划播放该课程计划对应的视频 本章">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1526291618627.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/day15 媒资管理系统集成.html">
+
+
+
+
+
+  <title>在线学习视频（十六）—— 媒资管理系统集成 | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day15 媒资管理系统集成.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在线学习视频（十六）—— 媒资管理系统集成</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T12:28:32+08:00">
+                2018-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-在线学习视频网站/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实战-在线学习视频网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6.6k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  31  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="媒资管理系统集成"><a href="#媒资管理系统集成" class="headerlink" title="媒资管理系统集成"></a>媒资管理系统集成</h1><h1 id="1-学习页面查询课程计划"><a href="#1-学习页面查询课程计划" class="headerlink" title="1 学习页面查询课程计划"></a>1 学习页面查询课程计划</h1><h2 id="1-1-需求分析"><a href="#1-1-需求分析" class="headerlink" title="1.1 需求分析"></a>1.1 需求分析</h2><p>​    到目前为止，我们已可以编辑课程计划信息并上传课程视频，下一步我们要实现在线学习页面动态读取章节对应的视频并进行播放。在线学习页面所需要的信息有两类：一类是课程计划信息、一类是课程学习信息（视频地址、学习进度等），如下图：</p>
+<p><img src="assets/1526291618627.png" alt="1526291618627"></p>
+<p>在线学习集成媒资管理的需求如下：</p>
+<p>1、在线学习页面显示课程计划</p>
+<p>2、点击课程计划播放该课程计划对应的视频</p>
+<p>本章节实现学习页面动态显示课程计划，进入不同课程的学习页面右侧动态显示当前课程的课程计划。</p>
+<h2 id="1-2-Api接口"><a href="#1-2-Api接口" class="headerlink" title="1.2 Api接口"></a>1.2 Api接口</h2><p>课程计划信息从哪里获取？</p>
+<p>目前课程计划信息在课程管理数据库和ES索引库中存在，考虑性能要求，课程发布后对课程的查询统一从ES索引库中查询。</p>
+<p>前端通过请求搜索服务获取课程信息，需要单独在搜索服务中定义课程信息查询接口。</p>
+<p>本接口接收课程id，查询课程所有信息返回给前端。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(&quot;根据id查询课程信息&quot;)</span><br><span class="line">public Map&lt;String,CoursePub&gt; getall(String id);</span><br></pre></td></tr></table></figure>
+<p>返回的课程信息为json结构：key为课程id，value为课程内容。</p>
+<h2 id="1-3-服务端开发"><a href="#1-3-服务端开发" class="headerlink" title="1.3 服务端开发"></a>1.3 服务端开发</h2><p>在搜索服务中开发查询课程信息接口。</p>
+<h3 id="1-3-1-Service"><a href="#1-3-1-Service" class="headerlink" title="1.3.1 Service"></a>1.3.1 Service</h3><p>在搜索服务中增加查询课程信息接口的service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public Map&lt;String, CoursePub&gt; getall(String id) &#123;</span><br><span class="line">        //设置索引库</span><br><span class="line">        SearchRequest searchRequest = new SearchRequest(es_index);</span><br><span class="line">        //设置类型</span><br><span class="line">        searchRequest.types(es_type);</span><br><span class="line">        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();</span><br><span class="line">        //查询条件，根据课程id查询</span><br><span class="line">        searchSourceBuilder.query(QueryBuilders.termsQuery(&quot;id&quot;, id));</span><br><span class="line">        //取消source源字段过虑，查询所有字段</span><br><span class="line">//        searchSourceBuilder.fetchSource(new String[]&#123;&quot;name&quot;, &quot;grade&quot;, &quot;charge&quot;,&quot;pic&quot;&#125;, new String[]&#123;&#125;);</span><br><span class="line">        searchRequest.source(searchSourceBuilder);</span><br><span class="line">        SearchResponse searchResponse = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            //执行搜索</span><br><span class="line">            searchResponse = restHighLevelClient.search(searchRequest);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        //获取搜索结果</span><br><span class="line">        SearchHits hits = searchResponse.getHits();</span><br><span class="line">        SearchHit[] searchHits = hits.getHits();</span><br><span class="line">        Map&lt;String,CoursePub&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (SearchHit hit : searchHits) &#123;</span><br><span class="line">            String courseId = hit.getId();</span><br><span class="line">            Map&lt;String, Object&gt; sourceAsMap = hit.getSourceAsMap();</span><br><span class="line">            String courseId = (String) sourceAsMap.get(&quot;id&quot;);</span><br><span class="line">            String name = (String) sourceAsMap.get(&quot;name&quot;);</span><br><span class="line">            String grade = (String) sourceAsMap.get(&quot;grade&quot;);</span><br><span class="line">            String charge = (String) sourceAsMap.get(&quot;charge&quot;);</span><br><span class="line">            String pic = (String) sourceAsMap.get(&quot;pic&quot;);</span><br><span class="line">            String description = (String) sourceAsMap.get(&quot;description&quot;);</span><br><span class="line">            String teachplan = (String) sourceAsMap.get(&quot;teachplan&quot;);</span><br><span class="line">            CoursePub coursePub = new CoursePub();</span><br><span class="line">            coursePub.setId(courseId);</span><br><span class="line">            coursePub.setName(name);</span><br><span class="line">            coursePub.setPic(pic);</span><br><span class="line">            coursePub.setGrade(grade);</span><br><span class="line">            coursePub.setTeachplan(teachplan);</span><br><span class="line">            coursePub.setDescription(description);</span><br><span class="line">            map.put(courseId,coursePub);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return map;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-2-Controller"><a href="#1-3-2-Controller" class="headerlink" title="1.3.2 Controller"></a>1.3.2 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@GetMapping(&quot;/getall/&#123;id&#125;&quot;)</span><br><span class="line">public Map&lt;String, CoursePub&gt; getall(@PathVariable(&quot;id&quot;) String id)  &#123;</span><br><span class="line">    return esCourseService.getall(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-3-测试"><a href="#1-3-3-测试" class="headerlink" title="1.3.3 测试"></a>1.3.3 测试</h3><p>使用swagger-ui或postman测试查询课程信息接口。</p>
+<h2 id="1-4前端开发"><a href="#1-4前端开发" class="headerlink" title="1.4前端开发"></a>1.4前端开发</h2><h3 id="1-4-1-配置虚拟主机"><a href="#1-4-1-配置虚拟主机" class="headerlink" title="1.4.1 配置虚拟主机"></a>1.4.1 配置虚拟主机</h3><p>学习中心的二级域名为ucenter.xuecheng.com，我们在nginx中配置ucenter虚拟主机。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#学成网用户中心</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name ucenter.xuecheng.com;</span><br><span class="line">    </span><br><span class="line">    #个人中心</span><br><span class="line">    location / &#123;  </span><br><span class="line">        proxy_pass http://ucenter_server_pool;  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">#前端ucenter</span><br><span class="line">upstream ucenter_server_pool&#123;</span><br><span class="line">  #server 127.0.0.1:7081 weight=10;</span><br><span class="line">  server 127.0.0.1:13000 weight=10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在学习中心要调用搜索的API，使用Nginx解决代理，如下图：</p>
+<p><img src="images/1525926052776.png" alt="1525926052776"></p>
+<p>配置搜索Api代理路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#后台搜索（公开api）</span><br><span class="line">upstream search_server_pool&#123;</span><br><span class="line">    server 127.0.0.1:40100 weight=10;</span><br><span class="line">&#125;</span><br><span class="line">#后端搜索服务</span><br><span class="line">location /openapi/search/ &#123;  </span><br><span class="line">    proxy_pass http://search_server_pool/search/;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-2-API方法"><a href="#1-4-2-API方法" class="headerlink" title="1.4.2 API方法"></a>1.4.2 API方法</h3><p>在学习中心对课程信息的查询属于基础常用功能，所以我们将课程查询的api方法定义在base模块下，如下图：</p>
+<p><img src="assets/1525925482949.png" alt="1525925482949"></p>
+<p>在system.js中定义课程查询方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import http from &apos;./public&apos;</span><br><span class="line">export const course_view = id =&gt; &#123;</span><br><span class="line">  return http.requestGet(&apos;/openapi/search/course/getall/&apos;+id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-3-API调用"><a href="#1-4-3-API调用" class="headerlink" title="1.4.3 API调用"></a>1.4.3 API调用</h3><p>在learning_video.vue页面中调用课程信息查询接口，得到课程计划，将课程计划json串转成对象。</p>
+<p>1、定义视图</p>
+<p>a、课程计划</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;nav nav-stacked&quot; v-for=&quot;(teachplan_first, index) in teachplanList&quot;&gt;</span><br><span class="line">                 &lt;div class=&quot;tit nav-justified text-center&quot;&gt;&lt;i class=&quot;pull-left glyphicon glyphicon-th-list&quot;&gt;&lt;/i&gt;&#123;&#123;teachplan_first.pname&#125;&#125;&lt;i class=&quot;pull-right&quot;&gt;&lt;/i&gt;&lt;/div&gt;</span><br><span class="line">                 &lt;li   v-if=&quot;teachplan_first.children!=null&quot; v-for=&quot;(teachplan_second, index) in teachplan_first.children&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-check&quot;&gt;&lt;/i&gt;</span><br><span class="line">                   &lt;a :href=&quot;url&quot; @click=&quot;study(teachplan_second.id)&quot;&gt;</span><br><span class="line">                     &#123;&#123;teachplan_second.pname&#125;&#125;</span><br><span class="line">                   &lt;/a&gt;</span><br><span class="line">                 &lt;/li&gt;</span><br></pre></td></tr></table></figure>
+<p>b、课程名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;top text-center&quot;&gt;</span><br><span class="line">            &#123;&#123;coursename&#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>2、定义数据对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        url:&apos;&apos;,//当前url</span><br><span class="line">        courseId:&apos;&apos;,//课程id</span><br><span class="line">        chapter:&apos;&apos;,//章节Id</span><br><span class="line">        coursename:&apos;&apos;,//课程名称</span><br><span class="line">        coursepic:&apos;&apos;,//课程图片</span><br><span class="line">        teachplanList:[],//课程计划</span><br><span class="line">        playerOptions: &#123;//播放参数</span><br><span class="line">          autoplay: false,</span><br><span class="line">          controls: true,</span><br><span class="line">          sources: [&#123;</span><br><span class="line">            type: &quot;application/x-mpegURL&quot;,</span><br><span class="line">            src: &apos;&apos;</span><br><span class="line">          &#125;]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>3、在created钩子方法中获取课程信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">created()&#123;</span><br><span class="line">     //当前请求的url</span><br><span class="line">   this.url = window.location</span><br><span class="line">   //课程id</span><br><span class="line">   this.courseId = this.$route.params.courseId</span><br><span class="line">   //章节id</span><br><span class="line">   this.chapter = this.$route.params.chapter</span><br><span class="line">   //查询课程信息</span><br><span class="line">   systemApi.course_view(this.courseId).then((view_course)=&gt;&#123;</span><br><span class="line"></span><br><span class="line">       if(!view_course || !view_course[this.courseId])&#123;</span><br><span class="line">         this.$message.error(&quot;获取课程信息失败，请重新进入此页面！&quot;)</span><br><span class="line">         return ;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       let courseInfo = view_course[this.courseId]</span><br><span class="line">       console.log(courseInfo)</span><br><span class="line">       this.coursename = courseInfo.name</span><br><span class="line">       if(courseInfo.teachplan)&#123;</span><br><span class="line">         let teachplan = JSON.parse(courseInfo.teachplan);</span><br><span class="line">         this.teachplanList = teachplan.children;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-4-测试"><a href="#1-4-4-测试" class="headerlink" title="1.4.4 测试"></a>1.4.4 测试</h3><p>在浏览器请求：<a href="http://ucenter.xuecheng.com/#/learning/4028e581617f945f01617f9dabc40000/0" target="_blank" rel="noopener">http://ucenter.xuecheng.com/#/learning/4028e581617f945f01617f9dabc40000/0</a></p>
+<p>4028e581617f945f01617f9dabc40000：第一个参数为课程id，测试时从ES索引库找一个课程id</p>
+<p>0：第二个参数为课程计划id，此参数用于点击课程计划播放视频。</p>
+<h1 id="2-学习页面获取视频播放地址"><a href="#2-学习页面获取视频播放地址" class="headerlink" title="2 学习页面获取视频播放地址"></a>2 学习页面获取视频播放地址</h1><h2 id="2-1-需求分析"><a href="#2-1-需求分析" class="headerlink" title="2.1 需求分析"></a>2.1 需求分析</h2><p>用户进入在线学习页面，点击课程计划将播放该课程计划对应的教学视频。</p>
+<p>业务流程如下：</p>
+<p><img src="assets/1530973048627.png" alt="1530973048627"></p>
+<p>业务流程说明：</p>
+<p>1、用户进入在线学习页面，页面请求搜索服务获取课程信息（包括课程计划信息）并且在页面展示。</p>
+<p>2、在线学习页面请求学习服务获取视频播放地址。</p>
+<p>3、学习服务校验当前用户是否有权限学习，如果没有权限学习则提示用户。</p>
+<p>4、学习服务校验通过，请求搜索服务获取课程媒资信息。</p>
+<p>5、搜索服务请求ElasticSearch获取课程媒资信息。</p>
+<p>为什么要请求ElasticSearch查询课程媒资信息？</p>
+<p>出于性能的考虑，公开查询课程信息从搜索服务查询。</p>
+<p>什么时候将课程媒资信息存储到ElasticSearch中？</p>
+<p>课程媒资信息是在课程发布的时候存入ElasticSearch，因为课程发布后课程信息将基本不再修改。</p>
+<h2 id="2-2-课程发布存储媒资信息"><a href="#2-2-课程发布存储媒资信息" class="headerlink" title="2.2 课程发布存储媒资信息"></a>2.2 课程发布存储媒资信息</h2><h3 id="2-2-1-需求分析"><a href="#2-2-1-需求分析" class="headerlink" title="2.2.1 需求分析"></a>2.2.1 需求分析</h3><p>​    课程媒资信息是在课程发布的时候存入ElasticSearch索引库，因为课程发布后课程信息将基本不再修改，具体的业务流程如下。</p>
+<p>业务流程如下：</p>
+<p>1、课程发布，向课程媒资信息表写入数据。</p>
+<p>1）根据课程id删除teachplanMediaPub中的数据</p>
+<p>2）根据课程id查询teachplanMedia数据</p>
+<p>3）将查询到的teachplanMedia数据插入到teachplanMediaPub中</p>
+<p>2、Logstash定时扫描课程媒资信息表，并将课程媒资信息写入索引库。</p>
+<h3 id="2-2-2-数据模型"><a href="#2-2-2-数据模型" class="headerlink" title="2.2.2 数据模型"></a>2.2.2 数据模型</h3><p>在xc_course数据库创建课程计划媒资发布表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `teachplan_media_pub` (</span><br><span class="line">  `teachplan_id` varchar(32) NOT NULL COMMENT &apos;课程计划id&apos;,</span><br><span class="line">  `media_id` varchar(32) NOT NULL COMMENT &apos;媒资文件id&apos;,</span><br><span class="line">  `media_fileoriginalname` varchar(128) NOT NULL COMMENT &apos;媒资文件的原始名称&apos;,</span><br><span class="line">  `media_url` varchar(256) NOT NULL COMMENT &apos;媒资文件访问地址&apos;,</span><br><span class="line">  `courseid` varchar(32) NOT NULL COMMENT &apos;课程Id&apos;,</span><br><span class="line">  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT &apos;logstash使用&apos;,</span><br><span class="line">  PRIMARY KEY (`teachplan_id`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8</span><br></pre></td></tr></table></figure>
+<p>数据模型类如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">@Entity</span><br><span class="line">@Table(name=&quot;teachplan_media_pub&quot;)</span><br><span class="line">@GenericGenerator(name = &quot;jpa-assigned&quot;, strategy = &quot;assigned&quot;)</span><br><span class="line">public class TeachplanMediaPub implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = -916357110051689485L;</span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue(generator = &quot;jpa-assigned&quot;)</span><br><span class="line">    @Column(name=&quot;teachplan_id&quot;)</span><br><span class="line">    private String teachplanId;</span><br><span class="line"></span><br><span class="line">    @Column(name=&quot;media_id&quot;)</span><br><span class="line">    private String mediaId;</span><br><span class="line"></span><br><span class="line">    @Column(name=&quot;media_fileoriginalname&quot;)</span><br><span class="line">    private String mediaFileOriginalName;</span><br><span class="line"></span><br><span class="line">    @Column(name=&quot;media_url&quot;)</span><br><span class="line">    private String mediaUrl;</span><br><span class="line"></span><br><span class="line">    @Column(name=&quot;courseid&quot;)</span><br><span class="line">    private String courseId;</span><br><span class="line"></span><br><span class="line">    @Column(name=&quot;timestamp&quot;)</span><br><span class="line">    private Date timestamp;//时间戳</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-3-Dao"><a href="#2-2-3-Dao" class="headerlink" title="2.2.3 Dao"></a>2.2.3 Dao</h3><p>创建TeachplanMediaPub表的Dao，向TeachplanMediaPub存储信息采用先删除该课程的媒资信息，再添加该课程的媒资信息，所以这里定义根据课程id删除课程计划媒资方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface TeachplanMediaPubRepository extends JpaRepository&lt;TeachplanMediaPub, String&gt; &#123;</span><br><span class="line">    //根据课程id删除课程计划媒资信息</span><br><span class="line">    long deleteByCourseId(String courseId);</span><br><span class="line">&#125;</span><br><span class="line">//从TeachplanMedia查询课程计划媒资信息</span><br><span class="line">public interface TeachplanMediaRepository extends JpaRepository&lt;TeachplanMedia, String&gt; &#123;</span><br><span class="line">    List&lt;TeachplanMedia&gt; findByCourseId(String courseId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-4-Service"><a href="#2-2-4-Service" class="headerlink" title="2.2.4 Service"></a>2.2.4 Service</h3><p>编写保存课程计划媒资信息方法，并在课程发布时调用此方法。</p>
+<p>1、保存课程计划媒资信息方法</p>
+<p>本方法采用先删除该课程的媒资信息，再添加该课程的媒资信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//保存课程计划媒资信息</span><br><span class="line">private void saveTeachplanMediaPub(String courseId)&#123;</span><br><span class="line">    //查询课程媒资信息</span><br><span class="line">    List&lt;TeachplanMedia&gt; teachplanMediaList = teachplanMediaRepository.findByCourseId(courseId);</span><br><span class="line">    //将课程计划媒资信息存储待索引表</span><br><span class="line">    teachplanMediaPubRepository.deleteByCourseId(courseId);</span><br><span class="line">    List&lt;TeachplanMediaPub&gt; teachplanMediaPubList = new ArrayList&lt;&gt;();</span><br><span class="line">    for(TeachplanMedia teachplanMedia:teachplanMediaList)&#123;</span><br><span class="line">        TeachplanMediaPub teachplanMediaPub =new TeachplanMediaPub();</span><br><span class="line">        BeanUtils.copyProperties(teachplanMedia,teachplanMediaPub);</span><br><span class="line">        teachplanMediaPubList.add(teachplanMediaPub);</span><br><span class="line">    &#125;</span><br><span class="line">    teachplanMediaPubRepository.saveAll(teachplanMediaPubList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、课程发布时调用此方法</p>
+<p>修改课程发布的service方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//保存课程计划媒资信息到待索引表</span><br><span class="line">saveTeachplanMediaPub(courseId);</span><br><span class="line">//页面url</span><br><span class="line">String pageUrl = cmsPostPageResult.getPageUrl();</span><br><span class="line">return new CoursePublishResult(CommonCode.SUCCESS,pageUrl);</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-5-测试"><a href="#3-2-5-测试" class="headerlink" title="3.2.5 测试"></a>3.2.5 测试</h3><p>测试课程发布后是否成功将课程媒资信息存储到teachplan_media_pub中，测试流程如下：</p>
+<p>1、指定一个课程</p>
+<p>2、为课程计划添加课程媒资</p>
+<p>3、执行课程发布</p>
+<p>4、观察课程计划媒资信息是否存储至teachplan_media_pub中</p>
+<p>注意：由于此测试仅用于测试发布课程计划媒资信息的功能，可暂时将cms页面发布的功能暂时屏蔽，提高测试效率。</p>
+<h2 id="2-3-Logstash扫描课程计划媒资"><a href="#2-3-Logstash扫描课程计划媒资" class="headerlink" title="2.3 Logstash扫描课程计划媒资"></a>2.3 Logstash扫描课程计划媒资</h2><p>Logstash定时扫描课程媒资信息表，并将课程媒资信息写入索引库。‘</p>
+<h3 id="2-3-1-创建索引"><a href="#2-3-1-创建索引" class="headerlink" title="2.3.1 创建索引"></a>2.3.1 创建索引</h3><p>1、创建xc_course_media索引</p>
+<p>2、并向此索引创建如下映射</p>
+<p>Post <a href="http://localhost:9200/xc_course_media/doc/_mapping" target="_blank" rel="noopener">http://localhost:9200/xc_course_media/doc/_mapping</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;properties&quot; : &#123;</span><br><span class="line">           &quot;courseid&quot; : &#123;</span><br><span class="line">               &quot;type&quot; : &quot;keyword&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;teachplan_id&quot; : &#123;</span><br><span class="line">               &quot;type&quot; : &quot;keyword&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;media_id&quot; : &#123;</span><br><span class="line">               &quot;type&quot; : &quot;keyword&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;media_url&quot; : &#123;</span><br><span class="line">               &quot;index&quot; : false,</span><br><span class="line">               &quot;type&quot; : &quot;text&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;media_fileoriginalname&quot; : &#123;</span><br><span class="line">               &quot;index&quot; : false,</span><br><span class="line">               &quot;type&quot; : &quot;text&quot;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-2-创建Logstash模板文件"><a href="#2-3-2-创建Logstash模板文件" class="headerlink" title="2.3.2  创建Logstash模板文件"></a>2.3.2  创建Logstash模板文件</h3><p>在logstach的config目录创建xc_course_media_template.json，内容如下：</p>
+<p>本教程的xc_course_media_template.json目录是：D:/ElasticSearch/logstash-6.2.1/config/xc_course_media_template.json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;mappings&quot; : &#123;</span><br><span class="line">      &quot;doc&quot; : &#123;</span><br><span class="line">         &quot;properties&quot; : &#123;</span><br><span class="line">           &quot;courseid&quot; : &#123;</span><br><span class="line">               &quot;type&quot; : &quot;keyword&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;teachplan_id&quot; : &#123;</span><br><span class="line">               &quot;type&quot; : &quot;keyword&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;media_id&quot; : &#123;</span><br><span class="line">               &quot;type&quot; : &quot;keyword&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;media_url&quot; : &#123;</span><br><span class="line">               &quot;index&quot; : false,</span><br><span class="line">               &quot;type&quot; : &quot;text&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;media_fileoriginalname&quot; : &#123;</span><br><span class="line">               &quot;index&quot; : false,</span><br><span class="line">               &quot;type&quot; : &quot;text&quot;</span><br><span class="line">            &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">   &quot;template&quot; : &quot;xc_course_media&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-3-配置mysql-conf"><a href="#2-3-3-配置mysql-conf" class="headerlink" title="2.3.3 配置mysql.conf"></a>2.3.3 配置mysql.conf</h3><p>在logstash的config目录下配置mysql_course_media.conf文件供logstash使用，logstash会根据mysql_course_media.conf文件的配置的地址从MySQL中读取数据向ES中写入索引。</p>
+<p>参考<a href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-jdbc.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/logstash/current/plugins-inputs-jdbc.html</a></p>
+<p>配置输入数据源和输出数据源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">  stdin &#123;</span><br><span class="line">  &#125;</span><br><span class="line">  jdbc &#123;</span><br><span class="line">  jdbc_connection_string =&gt; &quot;jdbc:mysql://localhost:3306/xc_course?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true&amp;serverTimezone=UTC&quot;</span><br><span class="line">  # the user we wish to excute our statement as</span><br><span class="line">  jdbc_user =&gt; &quot;root&quot;</span><br><span class="line">  jdbc_password =&gt; mysql</span><br><span class="line">  # the path to our downloaded jdbc driver  </span><br><span class="line">  jdbc_driver_library =&gt; &quot;F:/develop/maven/repository3/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar&quot;</span><br><span class="line">  # the name of the driver class for mysql</span><br><span class="line">  jdbc_driver_class =&gt; &quot;com.mysql.jdbc.Driver&quot;</span><br><span class="line">  jdbc_paging_enabled =&gt; &quot;true&quot;</span><br><span class="line">  jdbc_page_size =&gt; &quot;50000&quot;</span><br><span class="line">  #要执行的sql文件</span><br><span class="line">  #statement_filepath =&gt; &quot;/conf/course.sql&quot;</span><br><span class="line">  statement =&gt; &quot;select * from teachplan_media_pub where timestamp &gt; date_add(:sql_last_value,INTERVAL 8 HOUR)&quot;</span><br><span class="line">  #定时配置</span><br><span class="line">  schedule =&gt; &quot;* * * * *&quot;</span><br><span class="line">  record_last_run =&gt; true</span><br><span class="line">  last_run_metadata_path =&gt; &quot;D:/ElasticSearch/logstash-6.2.1/config/xc_course_media_metadata&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">  #ES的ip地址和端口</span><br><span class="line">  hosts =&gt; &quot;localhost:9200&quot;</span><br><span class="line">  #hosts =&gt; [&quot;localhost:9200&quot;,&quot;localhost:9202&quot;,&quot;localhost:9203&quot;]</span><br><span class="line">  #ES索引库名称</span><br><span class="line">  index =&gt; &quot;xc_course_media&quot;</span><br><span class="line">  document_id =&gt; &quot;%&#123;id&#125;&quot;</span><br><span class="line">  document_type =&gt; &quot;doc&quot;</span><br><span class="line">  template =&gt;&quot;D:/ElasticSearch/logstash-6.2.1/config/xc_course_media_template.json&quot;</span><br><span class="line">  template_name =&gt;&quot;xc_course_media&quot;</span><br><span class="line">  template_overwrite =&gt;&quot;true&quot;</span><br><span class="line">  &#125;</span><br><span class="line">  stdout &#123;</span><br><span class="line"> #日志输出</span><br><span class="line">  codec =&gt; json_lines</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-4-启动logstash-bat"><a href="#2-3-4-启动logstash-bat" class="headerlink" title="2.3.4 启动logstash.bat"></a>2.3.4 启动logstash.bat</h3><p>启动logstash.bat采集teachplan_media_pub中的数据，向ES写入索引。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logstash.bat -f ../config/mysql_course_media.conf</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-搜索服务查询课程媒资接口"><a href="#2-4-搜索服务查询课程媒资接口" class="headerlink" title="2.4 搜索服务查询课程媒资接口"></a>2.4 搜索服务查询课程媒资接口</h2><h3 id="2-4-1-需求分析"><a href="#2-4-1-需求分析" class="headerlink" title="2.4.1 需求分析"></a>2.4.1 需求分析</h3><p>搜索服务提供查询课程媒资接口，此接口供学习服务调用。</p>
+<h3 id="2-4-2-Api"><a href="#2-4-2-Api" class="headerlink" title="2.4.2 Api"></a>2.4.2 Api</h3><p>在课程搜索包下定义Api</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(&quot;根据课程计划查询媒资信息&quot;)</span><br><span class="line">public TeachplanMediaPub getmedia(String teachplanId);</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-3-Service"><a href="#2-4-3-Service" class="headerlink" title="2.4.3 Service"></a>2.4.3 Service</h3><p>1、配置课程计划媒资索引库等信息</p>
+<p>在application.yml中配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xuecheng:</span><br><span class="line">  elasticsearch:</span><br><span class="line">    media:</span><br><span class="line">      index: xc_course_media</span><br><span class="line">      type: doc</span><br><span class="line">      source_field: courseid,media_id,media_url,teachplan_id,media_fileoriginalname</span><br></pre></td></tr></table></figure>
+<p>2、service方法开发</p>
+<p>在课程搜索服务中定义课程媒资查询接口，为了适应后续需求，service参数定义为数组，可一次查询多个课程计划的媒资信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">//根据课程计划查询媒资信息</span><br><span class="line">public QueryResponseResult&lt;TeachplanMediaPub&gt; getmedia(String[] teachplanIds)&#123;</span><br><span class="line">    //设置索引</span><br><span class="line">    SearchRequest searchRequest = new SearchRequest(media_index);</span><br><span class="line">    //设置类型</span><br><span class="line">    searchRequest.types(media_type);</span><br><span class="line">    SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();</span><br><span class="line">    //source源字段过虑</span><br><span class="line">    String[] source_fields = media_source_field.split(&quot;,&quot;);</span><br><span class="line">    searchSourceBuilder.fetchSource(source_fields, new String[]&#123;&#125;);</span><br><span class="line">    //查询条件，根据课程计划id查询(可传入多个id)</span><br><span class="line">    searchSourceBuilder.query(QueryBuilders.termsQuery(&quot;teachplan_id&quot;, teachplanIds));</span><br><span class="line">    searchRequest.source(searchSourceBuilder);</span><br><span class="line">    SearchResponse searchResponse = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        //执行搜索</span><br><span class="line">        searchResponse = restHighLevelClient.search(searchRequest);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    //获取搜索结果</span><br><span class="line">    SearchHits hits = searchResponse.getHits();</span><br><span class="line">    SearchHit[] searchHits = hits.getHits();</span><br><span class="line">    Map&lt;String,CoursePub&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">    //数据列表</span><br><span class="line">    List&lt;TeachplanMediaPub&gt; teachplanMediaPubList = new ArrayList&lt;&gt;();</span><br><span class="line">    for (SearchHit hit : searchHits) &#123;</span><br><span class="line">        TeachplanMediaPub teachplanMediaPub  =new TeachplanMediaPub();</span><br><span class="line">        Map&lt;String, Object&gt; sourceAsMap = hit.getSourceAsMap();</span><br><span class="line">        //取出课程计划媒资信息</span><br><span class="line">        String courseid = (String) sourceAsMap.get(&quot;courseid&quot;);</span><br><span class="line">        String media_id = (String) sourceAsMap.get(&quot;media_id&quot;);</span><br><span class="line">        String media_url = (String) sourceAsMap.get(&quot;media_url&quot;);</span><br><span class="line">        String teachplan_id = (String) sourceAsMap.get(&quot;teachplan_id&quot;);</span><br><span class="line">        String media_fileoriginalname = (String) sourceAsMap.get(&quot;media_fileoriginalname&quot;);</span><br><span class="line"></span><br><span class="line">        teachplanMediaPub.setCourseId(courseid);</span><br><span class="line">        teachplanMediaPub.setMediaUrl(media_url);</span><br><span class="line">        teachplanMediaPub.setMediaFileOriginalName(media_fileoriginalname);</span><br><span class="line">        teachplanMediaPub.setMediaId(media_id);</span><br><span class="line">        teachplanMediaPub.setTeachplanId(teachplan_id);</span><br><span class="line"></span><br><span class="line">        //将数据加入列表</span><br><span class="line">        teachplanMediaPubList.add(teachplanMediaPub);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //构建返回课程媒资信息对象</span><br><span class="line">    QueryResult&lt;TeachplanMediaPub&gt; queryResult = new QueryResult&lt;&gt;();</span><br><span class="line">    queryResult.setList(teachplanMediaPubList);</span><br><span class="line">    QueryResponseResult&lt;TeachplanMediaPub&gt; queryResponseResult = new QueryResponseResult&lt;TeachplanMediaPub&gt;(CommonCode.SUCCESS,queryResult);</span><br><span class="line">    return queryResponseResult;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-4-Controller"><a href="#2-4-4-Controller" class="headerlink" title="2.4.4 Controller"></a>2.4.4 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@GetMapping(value=&quot;/getmedia/&#123;teachplanId&#125;&quot;)</span><br><span class="line">public TeachplanMediaPub getmedia(@PathVariable(&quot;teachplanId&quot;) String teachplanId) &#123;</span><br><span class="line">    //将课程计划id放在数组中，为调用service作准备</span><br><span class="line">    String[] teachplanIds = new String[]&#123;teachplanId&#125;;</span><br><span class="line">    //通过service查询ES获取课程媒资信息</span><br><span class="line">    QueryResponseResult&lt;TeachplanMediaPub&gt; mediaPubQueryResponseResult = esCourseService.getmedia(teachplanIds);</span><br><span class="line">    QueryResult&lt;TeachplanMediaPub&gt; queryResult = mediaPubQueryResponseResult.getQueryResult();</span><br><span class="line">    if(queryResult!=null</span><br><span class="line">            &amp;&amp; queryResult.getList()!=null</span><br><span class="line">            &amp;&amp; queryResult.getList().size()&gt;0)&#123;</span><br><span class="line">        //返回课程计划对应课程媒资</span><br><span class="line">        return queryResult.getList().get(0);</span><br><span class="line">    &#125;</span><br><span class="line">    return new TeachplanMediaPub();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-5-测试"><a href="#2-4-5-测试" class="headerlink" title="2.4.5 测试"></a>2.4.5 测试</h3><p>使用swagger-ui和postman测试课程媒资查询接口。</p>
+<h1 id="3-在线学习接口"><a href="#3-在线学习接口" class="headerlink" title="3  在线学习接口"></a>3  在线学习接口</h1><h2 id="3-1-需求分析"><a href="#3-1-需求分析" class="headerlink" title="3.1 需求分析"></a>3.1 需求分析</h2><p>根据下边的业务流程，本章节完成前端学习页面请求学习服务获取课程视频地址，并自动播放视频。</p>
+<p><img src="images/1530973048627.png" alt="1530973048627"></p>
+<h2 id="3-2-搭建开发环境"><a href="#3-2-搭建开发环境" class="headerlink" title="3.2 搭建开发环境"></a>3.2 搭建开发环境</h2><h3 id="3-2-1-创建数据库"><a href="#3-2-1-创建数据库" class="headerlink" title="3.2.1 创建数据库"></a>3.2.1 创建数据库</h3><p>创建xc_learning数据库，学习数据库将记录学生的选课信息、学习信息。</p>
+<p>导入：资料/xc_learning.sql</p>
+<h3 id="3-2-2-创建学习服务工程"><a href="#3-2-2-创建学习服务工程" class="headerlink" title="3.2.2 创建学习服务工程"></a>3.2.2 创建学习服务工程</h3><p>参考课程管理服务工程结构，创建学习服务工程：</p>
+<p><img src="assets/1538023831949.png" alt="1538023831949"></p>
+<p>pom.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">     &lt;dependencies&gt;</span><br><span class="line">    &lt;!-- 导入Eureka服务的依赖 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;okhttp&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">     &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.netflix.feign&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;feign-okhttp&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;8.18.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.xuecheng&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;xc-service-api&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.xuecheng&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;xc-framework-model&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.xuecheng&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;xc-framework-utils&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.xuecheng&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;xc-framework-common&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.1.10&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-orm&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;$&#123;springframework.version&#125;&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;commons-io&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;commons-io&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: $&#123;PORT:40600&#125;</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: xc-service-learning</span><br><span class="line">  datasource:</span><br><span class="line">    druid:</span><br><span class="line">      url: $&#123;MYSQL_URL:jdbc:mysql://localhost:3306/xc_learning?characterEncoding=utf-8&#125;</span><br><span class="line">      username: root</span><br><span class="line">      password: mysql</span><br><span class="line">      driverClassName: com.mysql.jdbc.Driver</span><br><span class="line">      initialSize: 5  #初始建立连接数量</span><br><span class="line">      minIdle: 5  #最小连接数量</span><br><span class="line">      maxActive: 20 #最大连接数量</span><br><span class="line">      maxWait: 10000  #获取连接最大等待时间，毫秒</span><br><span class="line">      testOnBorrow: true #申请连接时检测连接是否有效</span><br><span class="line">      testOnReturn: false #归还连接时检测连接是否有效</span><br><span class="line">      timeBetweenEvictionRunsMillis: 60000 #配置间隔检测连接是否有效的时间（单位是毫秒）</span><br><span class="line">      minEvictableIdleTimeMillis: 300000  #连接在连接池的最小生存时间（毫秒）</span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    registerWithEureka: true #服务注册开关</span><br><span class="line">    fetchRegistry: true #服务发现开关</span><br><span class="line">    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔</span><br><span class="line">      defaultZone: $&#123;EUREKA_SERVER:http://localhost:50101/eureka/&#125;</span><br><span class="line">  instance:</span><br><span class="line">    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中</span><br><span class="line">    ip-address: $&#123;IP_ADDRESS:127.0.0.1&#125;</span><br><span class="line">    instance-id: $&#123;spring.application.name&#125;:$&#123;server.port&#125; #指定实例id</span><br><span class="line">ribbon:</span><br><span class="line">  MaxAutoRetries: 2 #最大重试次数，当Eureka中可以找到服务，但是服务连不上时将会重试，如果eureka中找不到服务则直接走断路器</span><br><span class="line">  MaxAutoRetriesNextServer: 3 #切换实例的重试次数</span><br><span class="line">  OkToRetryOnAllOperations: false  #对所有操作请求都进行重试，如果是get则可以，如果是post，put等操作没有实现幂等的情况下是很危险的,所以设置为false</span><br><span class="line">  ConnectTimeout: 5000  #请求连接的超时时间</span><br><span class="line">  ReadTimeout: 6000 #请求处理的超时时间</span><br></pre></td></tr></table></figure>
+<p>启动类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@EnableDiscoveryClient</span><br><span class="line">@EnableFeignClients</span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EntityScan(&quot;com.xuecheng.framework.domain.learning&quot;)//扫描实体类</span><br><span class="line">@ComponentScan(basePackages=&#123;&quot;com.xuecheng.api&quot;&#125;)//扫描接口</span><br><span class="line">@ComponentScan(basePackages=&#123;&quot;com.xuecheng.learning&quot;&#125;)//扫描接口</span><br><span class="line">@ComponentScan(basePackages=&#123;&quot;com.xuecheng.framework&quot;&#125;)//扫描common下的所有类</span><br><span class="line">public class LearningApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        SpringApplication.run(LearningApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    @LoadBalanced</span><br><span class="line">    public RestTemplate restTemplate() &#123;</span><br><span class="line">        return new RestTemplate(new OkHttp3ClientHttpRequestFactory());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-Api接口"><a href="#3-3-Api接口" class="headerlink" title="3.3  Api接口"></a>3.3  Api接口</h2><p>此api接口是课程学习页面请求学习服务获取课程学习地址。</p>
+<p>定义返回值类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">public class GetMediaResult extends ResponseResult &#123;</span><br><span class="line">    public GetMediaResult(ResultCode resultCode, String fileUrl) &#123;</span><br><span class="line">        super(resultCode);</span><br><span class="line">        this.fileUrl = fileUrl;</span><br><span class="line">    &#125;</span><br><span class="line">    //媒资文件播放地址</span><br><span class="line">    private String fileUrl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>定义接口，学习服务根据传入课程ID、章节Id(课程计划ID)来取学习地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Api(value = &quot;录播课程学习管理&quot;,description = &quot;录播课程学习管理&quot;)</span><br><span class="line">public interface CourseLearningControllerApi &#123;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(&quot;获取课程学习地址&quot;)</span><br><span class="line">    public GetMediaResult getmedia(String courseId,String teachplanId);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-服务端开发"><a href="#3-4-服务端开发" class="headerlink" title="3.4 服务端开发"></a>3.4 服务端开发</h2><h3 id="3-4-1-需求分析"><a href="#3-4-1-需求分析" class="headerlink" title="3.4.1 需求分析"></a>3.4.1 需求分析</h3><p>学习服务根据传入课程ID、章节Id(课程计划ID)请求搜索服务获取学习地址。</p>
+<h3 id="3-4-2-搜索服务注册Eureka"><a href="#3-4-2-搜索服务注册Eureka" class="headerlink" title="3.4.2 搜索服务注册Eureka"></a>3.4.2 搜索服务注册Eureka</h3><p>学习服务要调用搜索服务查询课程媒资信息，所以需要将搜索服务注册到eureka中。</p>
+<p>1、查看服务名称是否为xc-service-search</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">注意修改application.xml中的服务名称：</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: xc-service-search</span><br></pre></td></tr></table></figure>
+<p>2、配置搜索服务的配置文件application.yml，加入Eureka配置 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    registerWithEureka: true #服务注册开关</span><br><span class="line">    fetchRegistry: true #服务发现开关</span><br><span class="line">    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔</span><br><span class="line">      defaultZone: $&#123;EUREKA_SERVER:http://localhost:50101/eureka/,http://localhost:50102/eureka/&#125;</span><br><span class="line">  instance:</span><br><span class="line">    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中</span><br><span class="line">    ip-address: $&#123;IP_ADDRESS:127.0.0.1&#125;</span><br><span class="line">    instance-id: $&#123;spring.application.name&#125;:$&#123;server.port&#125; #指定实例id</span><br><span class="line">ribbon:</span><br><span class="line">  MaxAutoRetries: 2 #最大重试次数，当Eureka中可以找到服务，但是服务连不上时将会重试，如果eureka中找不到服务则直接走断路器</span><br><span class="line">  MaxAutoRetriesNextServer: 3 #切换实例的重试次数</span><br><span class="line">  OkToRetryOnAllOperations: false  #对所有操作请求都进行重试，如果是get则可以，如果是post，put等操作没有实现幂等的情况下是很危险的,所以设置为false</span><br><span class="line">  ConnectTimeout: 5000  #请求连接的超时时间</span><br><span class="line">  ReadTimeout: 6000 #请求处理的超时时间</span><br></pre></td></tr></table></figure>
+<p>3、添加eureka依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 导入Eureka客户端的依赖 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>4、修改启动类，在class上添加如下注解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableDiscoveryClient</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-3-搜索服务客户端"><a href="#3-4-3-搜索服务客户端" class="headerlink" title="3.4.3 搜索服务客户端"></a>3.4.3 搜索服务客户端</h3><p>在学习服务创建搜索服务的客户端接口，此接口会生成代理对象，调用搜索服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package com.xuecheng.learning.client;</span><br><span class="line"></span><br><span class="line">import com.xuecheng.api.search.EsCourseControllerApi;</span><br><span class="line">import com.xuecheng.framework.client.XcServiceList;</span><br><span class="line">import org.springframework.cloud.netflix.feign.FeignClient;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@FeignClient(value = &quot;xc-service-search&quot;)</span><br><span class="line">public interface CourseSearchClient &#123;</span><br><span class="line">	@GetMapping(value=&quot;/getmedia/&#123;teachplanId&#125;&quot;)</span><br><span class="line">	public TeachplanMediaPub getmedia(@PathVariable(&quot;teachplanId&quot;) String teachplanId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-4-Service"><a href="#3-4-4-Service" class="headerlink" title="3.4.4 Service"></a>3.4.4 Service</h3><p>在学习服务中定义service方法，此方法远程请求课程管理服务、媒资管理服务获取课程学习地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class LearningService &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    CourseSearchClient courseSearchClient;</span><br><span class="line"></span><br><span class="line">    //获取课程</span><br><span class="line">    public GetMediaResult getMedia(String courseId, String teachplanId) &#123;</span><br><span class="line"></span><br><span class="line">        //校验学生的学习权限。。是否资费等</span><br><span class="line">        //调用搜索服务查询</span><br><span class="line">        TeachplanMediaPub teachplanMediaPub = courseSearchClient.getmedia(teachplanId);</span><br><span class="line">        if(teachplanMediaPub == null || StringUtils.isEmpty(teachplanMediaPub.getMediaUrl()))&#123;</span><br><span class="line">            //获取视频播放地址出错</span><br><span class="line">            ExceptionCast.cast(LearningCode.LEARNING_GETMEDIA_ERROR);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return new GetMediaResult(CommonCode.SUCCESS,teachplanMediaPub.getMediaUrl());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-5-Controller"><a href="#3-4-5-Controller" class="headerlink" title="3.4.5 Controller"></a>3.4.5 Controller</h3><p>调用service根据课程计划id查询视频播放地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;/learning/course&quot;)</span><br><span class="line">public class CourseLearningController implements CourseLearningControllerApi &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    LearningService learningService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @GetMapping(&quot;/getmedia/&#123;courseId&#125;/&#123;teachplanId&#125;&quot;)</span><br><span class="line">    public GetMediaResult getmedia(@PathVariable String courseId, @PathVariable String teachplanId) &#123;</span><br><span class="line">        //获取课程学习地址</span><br><span class="line">        return learningService.getMedia(courseId, teachplanId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-6-测试"><a href="#3-4-6-测试" class="headerlink" title="3.4.6 测试"></a>3.4.6 测试</h3><p>使用swagger-ui或postman测试学习服务查询课程视频地址接口。</p>
+<h2 id="3-5-前端开发"><a href="#3-5-前端开发" class="headerlink" title="3.5  前端开发"></a>3.5  前端开发</h2><h3 id="3-5-1需求分析"><a href="#3-5-1需求分析" class="headerlink" title="3.5.1需求分析"></a>3.5.1需求分析</h3><p>需要在学习中心前端页面需要完成如下功能：</p>
+<p>1、进入课程学习页面需要带上课程Id参数及课程计划Id的参数，其中课程Id参数必带，课程计划Id可以为空。</p>
+<p>2、进入页面根据课程Id取出该课程的课程计划显示在右侧。</p>
+<p>3、进入页面后判断如果请求参数中有课程计划Id则播放该章节的视频。</p>
+<p>4、进入页面后判断如果课程计划id为0则需要取出本课程第一个课程计划的Id，并播放第一个课程计划的视频。</p>
+<h3 id="3-5-2-api方法"><a href="#3-5-2-api方法" class="headerlink" title="3.5.2 api方法"></a>3.5.2 api方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let sysConfig = require(&apos;@/../config/sysConfig&apos;)</span><br><span class="line">let apiUrl = sysConfig.xcApiUrlPre;</span><br><span class="line">/*获取播放地址*/</span><br><span class="line">export const get_media = (courseId,chapter) =&gt; &#123;</span><br><span class="line">  return http.requestGet(apiUrl+&apos;/api/learning/course/getmedia/&apos;+courseId+&apos;/&apos;+chapter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-3-配置代理"><a href="#3-3-3-配置代理" class="headerlink" title="3.3.3 配置代理"></a>3.3.3 配置代理</h3><p>在Nginx中的ucenter.xuecheng.com虚拟主机中配置/api/learning/的路径转发，此url请转发到学习服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#学习服务</span><br><span class="line">upstream learning_server_pool&#123;</span><br><span class="line">	server 127.0.0.1:40600 weight=10;</span><br><span class="line">&#125;   </span><br><span class="line">#学习服务</span><br><span class="line">location ^~ /api/learning/ &#123;  </span><br><span class="line">	proxy_pass http://learning_server_pool/learning/;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-3-视频播放页面"><a href="#3-5-3-视频播放页面" class="headerlink" title="3.5.3 视频播放页面"></a>3.5.3 视频播放页面</h3><p>1、如果传入的课程计划id为0则取出第一个课程计划id</p>
+<p>在created钩子方法中完成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">created()&#123;</span><br><span class="line">        //当前请求的url</span><br><span class="line">      this.url = window.location</span><br><span class="line">      //课程id</span><br><span class="line">      this.courseId = this.$route.params.courseId</span><br><span class="line">      //课程计划id</span><br><span class="line">      this.chapter = this.$route.params.chapter</span><br><span class="line">      //查询课程信息</span><br><span class="line">      systemApi.course_view(this.courseId).then((view_course)=&gt;&#123;</span><br><span class="line"></span><br><span class="line">          if(!view_course || !view_course[this.courseId])&#123;</span><br><span class="line">            this.$message.error(&quot;获取课程信息失败，请重新进入此页面！&quot;)</span><br><span class="line">            return ;</span><br><span class="line">          &#125;</span><br><span class="line">		</span><br><span class="line">          let courseInfo = view_course[this.courseId]</span><br><span class="line">          console.log(courseInfo)</span><br><span class="line">          this.coursename = courseInfo.name</span><br><span class="line">          if(courseInfo.teachplan)&#123;</span><br><span class="line">          	//将从服务端获取的课程计划json转成对象</span><br><span class="line">            let teachplan = JSON.parse(courseInfo.teachplan);</span><br><span class="line">            //将课程计划赋值给数据模型</span><br><span class="line">            this.teachplanList = teachplan.children;</span><br><span class="line">            console.log(this.teachplanList)</span><br><span class="line">            if(!this.chapter || this.chapter == &apos;0&apos;)&#123;</span><br><span class="line">              //取出第一个教学计划</span><br><span class="line">              this.chapter = this.getFirstTeachplan()</span><br><span class="line">              console.log(this.chapter)</span><br><span class="line"></span><br><span class="line">              //开始学习</span><br><span class="line">              this.study(this.chapter)</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<p>取出第一个章节id：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//取出第一个章节</span><br><span class="line">getFirstTeachplan()&#123;</span><br><span class="line">  for(var i=0;i&lt;this.teachplanList.length;i++)&#123;</span><br><span class="line">      let firstTeachplan = this.teachplanList[i];</span><br><span class="line">      if(firstTeachplan.children &amp;&amp; firstTeachplan.children.length&gt;0)&#123;</span><br><span class="line">        let secondTeachplan = firstTeachplan.children[0];</span><br><span class="line">        return secondTeachplan.id;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  return ;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>开始学习：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//开始学习</span><br><span class="line">    study(chapter)&#123;</span><br><span class="line">      // 获取播放地址</span><br><span class="line">      courseApi.get_media(this.courseId,chapter).then((res)=&gt;&#123;</span><br><span class="line">        if(res.success)&#123;</span><br><span class="line">          let fileUrl = sysConfig.videoUrl + res.fileUrl</span><br><span class="line">          //播放视频</span><br><span class="line">          this.playvideo(fileUrl)</span><br><span class="line">        &#125;else if(res.message)&#123;</span><br><span class="line">          this.$message.error(res.message)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">          this.$message.error(&quot;播放视频失败，请刷新页面重试&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;).catch(res=&gt;&#123;</span><br><span class="line">        this.$message.error(&quot;播放视频失败，请刷新页面重试&quot;)</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<p>2、点击右侧课程章节切换播放</p>
+<p>在原有代码基础上添加click事件，点击调用开始学习方法（study）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;li   v-if=&quot;teachplan_first.children!=null&quot; v-for=&quot;(teachplan_second, index) in teachplan_first.children&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-check&quot;&gt;&lt;/i&gt;</span><br><span class="line">  &lt;a :href=&quot;url&quot; @click=&quot;study(teachplan_second.id)&quot;&gt;</span><br><span class="line">    &#123;&#123;teachplan_second.pname&#125;&#125;</span><br><span class="line">  &lt;/a&gt;</span><br><span class="line">&lt;/li&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-4-测试"><a href="#3-5-4-测试" class="headerlink" title="3.5.4 测试"></a>3.5.4 测试</h3><p>访问在线学习页面：<a href="http://ucenter.xuecheng.com/#/learning/" target="_blank" rel="noopener">http://ucenter.xuecheng.com/#/learning/</a>课程id/课程计划id</p>
+<p>通过url传入两个参数：课程id和课程计划id</p>
+<p>如果没有课程计划则传入0</p>
+<p>测试项目如下：</p>
+<p>1、传入正确的课程id、课程计划id，自动播放本章节的视频</p>
+<p>2、传入正确的课程id、课程计划id传入0，自动播放第一个视频</p>
+<p>3、传入错误的课程id或课程计划id，提示错误信息。</p>
+<p>4、通过右侧章节目录切换章节及播放视频。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/day15 媒资管理系统集成.html" title="在线学习视频（十六）—— 媒资管理系统集成">https://tiredtosleep.github.io/day15 媒资管理系统集成.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Logstash/" rel="tag"><i class="fa fa-tag"></i> Logstash</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/day12-搜索前端 Nuxt.js.html" rel="next" title="在线学习视频（十三）—— 搜索前端 Nuxt.js">
+                <i class="fa fa-chevron-left"></i> 在线学习视频（十三）—— 搜索前端 Nuxt.js
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day13 在线学习 HLS.html" rel="prev" title="在线学习视频（十四）—— 在线学习 HLS">
+                在线学习视频（十四）—— 在线学习 HLS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#媒资管理系统集成"><span class="nav-text">媒资管理系统集成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-学习页面查询课程计划"><span class="nav-text">1 学习页面查询课程计划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-需求分析"><span class="nav-text">1.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Api接口"><span class="nav-text">1.2 Api接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-服务端开发"><span class="nav-text">1.3 服务端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-Service"><span class="nav-text">1.3.1 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-Controller"><span class="nav-text">1.3.2 Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-测试"><span class="nav-text">1.3.3 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4前端开发"><span class="nav-text">1.4前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-配置虚拟主机"><span class="nav-text">1.4.1 配置虚拟主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-API方法"><span class="nav-text">1.4.2 API方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-API调用"><span class="nav-text">1.4.3 API调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-4-测试"><span class="nav-text">1.4.4 测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-学习页面获取视频播放地址"><span class="nav-text">2 学习页面获取视频播放地址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-需求分析"><span class="nav-text">2.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-课程发布存储媒资信息"><span class="nav-text">2.2 课程发布存储媒资信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-需求分析"><span class="nav-text">2.2.1 需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-数据模型"><span class="nav-text">2.2.2 数据模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-Dao"><span class="nav-text">2.2.3 Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-Service"><span class="nav-text">2.2.4 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-5-测试"><span class="nav-text">3.2.5 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Logstash扫描课程计划媒资"><span class="nav-text">2.3 Logstash扫描课程计划媒资</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-创建索引"><span class="nav-text">2.3.1 创建索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-创建Logstash模板文件"><span class="nav-text">2.3.2  创建Logstash模板文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-配置mysql-conf"><span class="nav-text">2.3.3 配置mysql.conf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-4-启动logstash-bat"><span class="nav-text">2.3.4 启动logstash.bat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-搜索服务查询课程媒资接口"><span class="nav-text">2.4 搜索服务查询课程媒资接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-需求分析"><span class="nav-text">2.4.1 需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-Api"><span class="nav-text">2.4.2 Api</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-3-Service"><span class="nav-text">2.4.3 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-4-Controller"><span class="nav-text">2.4.4 Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-5-测试"><span class="nav-text">2.4.5 测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-在线学习接口"><span class="nav-text">3  在线学习接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-需求分析"><span class="nav-text">3.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-搭建开发环境"><span class="nav-text">3.2 搭建开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-创建数据库"><span class="nav-text">3.2.1 创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-创建学习服务工程"><span class="nav-text">3.2.2 创建学习服务工程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Api接口"><span class="nav-text">3.3  Api接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-服务端开发"><span class="nav-text">3.4 服务端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-需求分析"><span class="nav-text">3.4.1 需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-搜索服务注册Eureka"><span class="nav-text">3.4.2 搜索服务注册Eureka</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3-搜索服务客户端"><span class="nav-text">3.4.3 搜索服务客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-4-Service"><span class="nav-text">3.4.4 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-5-Controller"><span class="nav-text">3.4.5 Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-6-测试"><span class="nav-text">3.4.6 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-前端开发"><span class="nav-text">3.5  前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-1需求分析"><span class="nav-text">3.5.1需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-2-api方法"><span class="nav-text">3.5.2 api方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-配置代理"><span class="nav-text">3.3.3 配置代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-3-视频播放页面"><span class="nav-text">3.5.3 视频播放页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-4-测试"><span class="nav-text">3.5.4 测试</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">301.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>

@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Feign远程调用,RestTemplate远程调用,Eureka,Ribbon负载均衡,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="课程预览 Eureka Feign1 Eureka注册中心1.1 需求分析​    在前后端分离架构中，服务层被拆分成了很多的微服务，微服务的信息如何管理？Spring Cloud中提供服务注册中心来管理微服务信息。 为什么 要用注册中心？ 1、微服务数量众多，要进行远程调用就需要知道服务端的ip地址和端口，注册中心帮助我们管理这些服务的ip和端口。 2、微服务会实时上报自己的状态，注册中心统一管">
+<meta name="keywords" content="Feign远程调用,RestTemplate远程调用,Eureka,Ribbon负载均衡">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线学习视频（九）—— 课程预览 Eureka Feign">
+<meta property="og:url" content="https://tiredtosleep.github.io/day09-课程预览 Eureka Feign.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="课程预览 Eureka Feign1 Eureka注册中心1.1 需求分析​    在前后端分离架构中，服务层被拆分成了很多的微服务，微服务的信息如何管理？Spring Cloud中提供服务注册中心来管理微服务信息。 为什么 要用注册中心？ 1、微服务数量众多，要进行远程调用就需要知道服务端的ip地址和端口，注册中心帮助我们管理这些服务的ip和端口。 2、微服务会实时上报自己的状态，注册中心统一管">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529906349402.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529907648861.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529906711400.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1537320788755.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1537320809483.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1537321017472.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529909892396.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529906137074.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529911983041.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529912003403.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529912064580.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529913403343.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529913868296.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1559453468074.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1559454461639.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525416955328.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525419286559.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525419817614.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530743308488.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525423148437.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525517602416.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530718431250.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530162120128.png">
+<meta property="og:updated_time" content="2019-06-03T03:07:40.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在线学习视频（九）—— 课程预览 Eureka Feign">
+<meta name="twitter:description" content="课程预览 Eureka Feign1 Eureka注册中心1.1 需求分析​    在前后端分离架构中，服务层被拆分成了很多的微服务，微服务的信息如何管理？Spring Cloud中提供服务注册中心来管理微服务信息。 为什么 要用注册中心？ 1、微服务数量众多，要进行远程调用就需要知道服务端的ip地址和端口，注册中心帮助我们管理这些服务的ip和端口。 2、微服务会实时上报自己的状态，注册中心统一管">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1529906349402.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/day09-课程预览 Eureka Feign.html">
+
+
+
+
+
+  <title>在线学习视频（九）—— 课程预览 Eureka Feign | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day09-课程预览 Eureka Feign.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在线学习视频（九）—— 课程预览 Eureka Feign</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T12:28:32+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-在线学习视频网站/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实战-在线学习视频网站</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-在线学习视频网站/Eureka-Feign/" itemprop="url" rel="index">
+                    <span itemprop="name">Eureka Feign</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  9.5k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  40  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="课程预览-Eureka-Feign"><a href="#课程预览-Eureka-Feign" class="headerlink" title="课程预览 Eureka Feign"></a>课程预览 Eureka Feign</h1><h1 id="1-Eureka注册中心"><a href="#1-Eureka注册中心" class="headerlink" title="1 Eureka注册中心"></a>1 Eureka注册中心</h1><h2 id="1-1-需求分析"><a href="#1-1-需求分析" class="headerlink" title="1.1 需求分析"></a>1.1 需求分析</h2><p>​    在前后端分离架构中，服务层被拆分成了很多的微服务，微服务的信息如何管理？Spring Cloud中提供服务注册中心来管理微服务信息。</p>
+<p>为什么 要用注册中心？</p>
+<p>1、微服务数量众多，要进行远程调用就需要知道服务端的ip地址和端口，注册中心帮助我们管理这些服务的ip和端口。</p>
+<p>2、微服务会实时上报自己的状态，注册中心统一管理这些微服务的状态，将存在问题的服务踢出服务列表，客户端获取到可用的服务进行调用。</p>
+<h2 id="1-3-Eureka注册中心"><a href="#1-3-Eureka注册中心" class="headerlink" title="1.3 Eureka注册中心"></a>1.3 Eureka注册中心</h2><h3 id="1-3-1-Eureka介绍"><a href="#1-3-1-Eureka介绍" class="headerlink" title="1.3.1 Eureka介绍"></a>1.3.1 Eureka介绍</h3><p>​    Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了服务治理的功能，Spring Cloud Eureka提供服务端与客户端，服务端即是Eureka服务注册中心，客户端完成微服务向Eureka服务的注册与发现。服务端和客户端均采用Java语言编写。下图显示了Eureka Server与Eureka Client的关系：</p>
+<p><img src="assets/1529906349402.png" alt="1529906349402"></p>
+<p>1、Eureka Server是服务端，负责管理各各微服务结点的信息和状态。</p>
+<p>2、在微服务上部署Eureka Client程序，远程访问Eureka Server将自己注册在Eureka Server。</p>
+<p>3、微服务需要调用另一个微服务时从Eureka Server中获取服务调用地址，进行远程调用。</p>
+<h3 id="1-3-2-Eureka-Server搭建"><a href="#1-3-2-Eureka-Server搭建" class="headerlink" title="1.3.2 Eureka Server搭建"></a>1.3.2 Eureka Server搭建</h3><h4 id="1-3-2-1-单机环境搭建"><a href="#1-3-2-1-单机环境搭建" class="headerlink" title="1.3.2.1 单机环境搭建"></a>1.3.2.1 单机环境搭建</h4><p>1、创建xc-govern-center工程：</p>
+<p>包结构：com.xuecheng.govern.center</p>
+<p>2、添加依赖</p>
+<p>在父工程添加：（有了则不用重复添加）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;Finchley.SR1&lt;/version&gt;</span><br><span class="line">    &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">    &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>在Eureka Server工程添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;!-- 导入Eureka服务的依赖 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<p>3、启动类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@EnableEurekaServer//标识这是一个Eureka服务</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class GovernCenterApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(GovernCenterApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、@EnableEurekaServer</p>
+<p>需要在启动类上用@EnableEurekaServer标识此服务为Eureka服务</p>
+<p>5、从其它服务拷贝application.yml和logback-spring.xml。</p>
+<p>application.yml的配置内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 50101 #服务端口</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: xc-govern-center #指定服务名</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    registerWithEureka: false #服务注册，是否将自己注册到Eureka服务中</span><br><span class="line">    fetchRegistry: false #服务发现，是否从Eureka中获取注册信息</span><br><span class="line">    serviceUrl: #Eureka客户端与Eureka服务端的交互地址，高可用状态配置对方的地址，单机状态配置自己（如果不配置则默认本机8761端口）</span><br><span class="line">      defaultZone: http://localhost:50101/eureka/</span><br><span class="line">  server:</span><br><span class="line">    enable-self-preservation: false #是否开启自我保护模式</span><br><span class="line">    eviction-interval-timer-in-ms: 60000 #服务注册表清理间隔（单位毫秒，默认是60*1000）</span><br></pre></td></tr></table></figure>
+<p>registerWithEureka：被其它服务调用时需向Eureka注册</p>
+<p>fetchRegistry：需要从Eureka中查找要调用的目标服务时需要设置为true</p>
+<p>serviceUrl.defaultZone 配置上报Eureka服务地址高可用状态配置对方的地址，单机状态配置自己</p>
+<p>enable-self-preservation：自保护设置，下边有介绍。</p>
+<p>eviction-interval-timer-in-ms：清理失效结点的间隔，在这个时间段内如果没有收到该结点的上报则将结点从服务列表中剔除。</p>
+<p>5、启动Eureka Server</p>
+<p>启动Eureka Server，浏览50101端口。</p>
+<p><img src="assets/1529907648861.png" alt="1529907648861"></p>
+<p>说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">上图红色提示信息：</span><br><span class="line">THE SELF PRESERVATION MODE IS TURNED OFF.THIS MAY NOT PROTECT INSTANCE EXPIRY IN CASE OF NETWORK/OTHER PROBLEMS.</span><br><span class="line">自我保护模式被关闭。在网络或其他问题的情况下可能不会保护实例失效。</span><br></pre></td></tr></table></figure>
+<p>Eureka Server有一种自我保护模式，当微服务不再向Eureka Server上报状态，Eureka Server会从服务列表将此服务删除，如果出现网络异常情况（微服务正常），此时Eureka server进入自保护模式，不再将微服务从服务列表删除。</p>
+<p>在开发阶段建议关闭自保护模式。</p>
+<h4 id="1-3-2-2-高可用环境搭建"><a href="#1-3-2-2-高可用环境搭建" class="headerlink" title="1.3.2.2 高可用环境搭建"></a>1.3.2.2 高可用环境搭建</h4><p>​    Eureka Server 高可用环境需要部署两个Eureka server，它们互相向对方注册。如果在本机启动两个Eureka需要注意两个Eureka Server的端口要设置不一样，这里我们部署一个Eureka Server工程，将端口可配置，制作两个Eureka Server启动脚本，启动不同的端口，如下图：</p>
+<p><img src="assets/1529906711400.png" alt="1529906711400"></p>
+<p>1、在实际使用时Eureka Server至少部署两台服务器，实现高可用。</p>
+<p>2、两台Eureka Server互相注册。</p>
+<p>3、微服务需要连接两台Eureka Server注册，当其中一台Eureka死掉也不会影响服务的注册与发现。</p>
+<p>4、微服务会定时向Eureka server发送心跳，报告自己的状态。</p>
+<p>5、微服务从注册中心获取服务地址以RESTful方式发起远程调用。</p>
+<p>配置如下：</p>
+<p>1、端口可配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: $&#123;PORT:50101&#125; #服务端口</span><br></pre></td></tr></table></figure>
+<p>2、Eureka服务端的交互地址可配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    registerWithEureka: true #服务注册，是否将自己注册到Eureka服务中</span><br><span class="line">    fetchRegistry: true #服务发现，是否从Eureka中获取注册信息</span><br><span class="line">    serviceUrl: #Eureka客户端与Eureka服务端的交互地址，高可用状态配置对方的地址，单机状态配置自己（如果不配置则默认本机8761端口）</span><br><span class="line">      defaultZone: $&#123;EUREKA_SERVER:http://eureka02:50102/eureka/&#125;</span><br></pre></td></tr></table></figure>
+<p>3、配置hostname</p>
+<p>Eureka 组成高可用，两个Eureka互相向对方注册，这里需要通过域名或主机名访问，这里我们设置两个Eureka服务的主机名分别为 eureka01、eureka02。</p>
+<p>完整的eureka配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    registerWithEureka: true #服务注册，是否将自己注册到Eureka服务中</span><br><span class="line">    fetchRegistry: true #服务发现，是否从Eureka中获取注册信息</span><br><span class="line">    serviceUrl: #Eureka客户端与Eureka服务端的交互地址，高可用状态配置对方的地址，单机状态配置自己（如果不配置则默认本机8761端口）</span><br><span class="line">      defaultZone: $&#123;EUREKA_SERVER:http://eureka02:50102/eureka/&#125;</span><br><span class="line">  server:</span><br><span class="line">    enable-self-preservation: false #是否开启自我保护模式</span><br><span class="line">    eviction-interval-timer-in-ms: 60000 #服务注册表清理间隔（单位毫秒，默认是60*1000）</span><br><span class="line">  instance:</span><br><span class="line">    hostname: $&#123;EUREKA_DOMAIN:eureka01&#125;</span><br></pre></td></tr></table></figure>
+<p>4、在IDEA中制作启动脚本</p>
+<p>启动1：</p>
+<p><img src="assets/1537320788755.png" alt="1537320788755"></p>
+<p>启动2：</p>
+<p><img src="assets/1537320809483.png" alt="1537320809483"></p>
+<p>运行两个启动脚本，分别浏览：</p>
+<p><a href="http://localhost:50101/" target="_blank" rel="noopener">http://localhost:50101/</a></p>
+<p><a href="http://localhost:50102/" target="_blank" rel="noopener">http://localhost:50102/</a></p>
+<p>Eureka主画面如下：</p>
+<p><img src="assets/1537321017472.png" alt="1537321017472"></p>
+<h3 id="1-3-3-服务注册"><a href="#1-3-3-服务注册" class="headerlink" title="1.3.3 服务注册"></a>1.3.3 服务注册</h3><h4 id="1-3-3-1-将cms注册到Eureka-Server"><a href="#1-3-3-1-将cms注册到Eureka-Server" class="headerlink" title="1.3.3.1 将cms注册到Eureka Server"></a>1.3.3.1 将cms注册到Eureka Server</h4><p>下边实现cms向Eureka Server注册。</p>
+<p>1、在cms服务中添加依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 导入Eureka客户端的依赖 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>2、在application.yml配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    registerWithEureka: true #服务注册开关</span><br><span class="line">    fetchRegistry: true #服务发现开关</span><br><span class="line">    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔</span><br><span class="line">      defaultZone: $&#123;EUREKA_SERVER:http://localhost:50101/eureka/&#125;</span><br><span class="line">  instance:</span><br><span class="line">    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中</span><br><span class="line">    ip-address: $&#123;IP_ADDRESS:127.0.0.1&#125;</span><br><span class="line">    instance-id: $&#123;spring.application.name&#125;:$&#123;server.port&#125; #指定实例id</span><br></pre></td></tr></table></figure>
+<p>3、在启动类上添加注解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在启动类上添加注解 @EnableDiscoveryClient ，表示它是一个Eureka的客户端</span><br></pre></td></tr></table></figure>
+<p>4、刷新Eureka Server查看注册情况</p>
+<p><img src="assets/1529909892396.png" alt="1529909892396"></p>
+<h4 id="1-3-3-2-将manage-course注册到Eureka-Server"><a href="#1-3-3-2-将manage-course注册到Eureka-Server" class="headerlink" title="1.3.3.2 将manage-course注册到Eureka Server"></a>1.3.3.2 将manage-course注册到Eureka Server</h4><p>方法同上。</p>
+<p>1、在manage-course工程中添加spring-cloud-starter-eureka依赖：</p>
+<p>2、在application.yml配置eureka</p>
+<p>3、在启动类上添加注解 @EnableDiscoveryClient</p>
+<h1 id="2-Feign远程调用"><a href="#2-Feign远程调用" class="headerlink" title="2 Feign远程调用"></a>2 Feign远程调用</h1><p>​    在前后端分离架构中，服务层被拆分成了很多的微服务，服务与服务之间难免发生交互，比如：课程发布需要调用CMS服务生成课程静态化页面，本节研究微服务远程调用所使用的技术。</p>
+<p>下图是课程管理服务远程调用CMS服务的流程图：</p>
+<p><img src="assets/1529906137074.png" alt="1529906137074"></p>
+<p>工作流程如下：</p>
+<p>1、cms服务将自己注册到注册中心。</p>
+<p>2、课程管理服务从注册中心获取cms服务的地址。</p>
+<p>3、课程管理服务远程调用cms服务。</p>
+<h2 id="2-1-Ribbon"><a href="#2-1-Ribbon" class="headerlink" title="2.1 Ribbon"></a>2.1 Ribbon</h2><h3 id="2-1-1-Ribbon介绍"><a href="#2-1-1-Ribbon介绍" class="headerlink" title="2.1.1 Ribbon介绍"></a>2.1.1 Ribbon介绍</h3><p>​    Ribbon是Netflix公司开源的一个负载均衡的项目（<a href="https://github.com/Netflix/ribbon" target="_blank" rel="noopener">https://github.com/Netflix/ribbon</a>），它是一个基于HTTP、TCP的客户端负载均衡器。</p>
+<p>1、什么是负载均衡？</p>
+<p>负载均衡是微服务架构中必须使用的技术，通过负载均衡来实现系统的高可用、集群扩容等功能。负载均衡可通过硬件设备及软件来实现，硬件比如：F5、Array等，软件比如：LVS、Nginx等。</p>
+<p>如下图是负载均衡的架构图：</p>
+<p><img src="assets/1529911983041.png" alt="1529911983041"></p>
+<p>用户请求先到达负载均衡器（也相当于一个服务），负载均衡器根据负载均衡算法将请求转发到微服务。负载均衡算法有：轮训、随机、加权轮训、加权随机、地址哈希等方法，负载均衡器维护一份服务列表，根据负载均衡算法将请求转发到相应的微服务上，所以负载均衡可以为微服务集群分担请求，降低系统的压力。<br>2、什么是客户端负载均衡？</p>
+<p>上图是服务端负载均衡，客户端负载均衡与服务端负载均衡的区别在于客户端要维护一份服务列表，Ribbon从Eureka Server获取服务列表，Ribbon根据负载均衡算法直接请求到具体的微服务，中间省去了负载均衡服务。</p>
+<p>如下图是Ribbon负载均衡的流程图：</p>
+<p><img src="assets/1529912003403.png" alt="1529912003403"><br>1、在消费微服务中使用Ribbon实现负载均衡，Ribbon先从EurekaServer中获取服务列表。</p>
+<p>2、Ribbon根据负载均衡的算法去调用微服务。</p>
+<h3 id="2-1-2-Ribbon测试"><a href="#2-1-2-Ribbon测试" class="headerlink" title="2.1.2 Ribbon测试"></a>2.1.2 Ribbon测试</h3><p>​    Spring Cloud引入Ribbon配合 restTemplate 实现客户端负载均衡。Java中远程调用的技术有很多，如：webservice、socket、rmi、Apache HttpClient、OkHttp等，互联网项目使用基于http的客户端较多，本项目使用OkHttp。<br>1、在客户端添加Ribbon依赖：</p>
+<p>这里在课程管理服务配置ribbon依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-ribbon&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;okhttp&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>由于依赖了spring-cloud-starter-eureka，会自动添加spring-cloud-starter-ribbon依赖</p>
+<p><img src="assets/1529912064580.png" alt="1529912064580"></p>
+<p>2、配置Ribbon参数</p>
+<p>这里在课程管理服务的application.yml中配置ribbon参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ribbon:</span><br><span class="line">  MaxAutoRetries: 2 #最大重试次数，当Eureka中可以找到服务，但是服务连不上时将会重试</span><br><span class="line">  MaxAutoRetriesNextServer: 3 #切换实例的重试次数</span><br><span class="line">  OkToRetryOnAllOperations: false  #对所有操作请求都进行重试，如果是get则可以，如果是post，put等操作没有实现幂等的情况下是很危险的,所以设置为false</span><br><span class="line">  ConnectTimeout: 5000  #请求连接的超时时间</span><br><span class="line">  ReadTimeout: 6000 #请求处理的超时时</span><br></pre></td></tr></table></figure></p>
+<p>3、负载均衡测试</p>
+<p>1）启动两个cms服务，注意端口要不一致</p>
+<p>启动完成观察Eureka Server的服务列表</p>
+<p><img src="assets/1529913403343.png" alt="1529913403343"></p>
+<p>2）定义RestTemplate，使用@LoadBalanced注解</p>
+<p>在课程管理服务的启动类中定义RestTemplate<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">@LoadBalanced</span><br><span class="line">public RestTemplate restTemplate() &#123;</span><br><span class="line">    return new RestTemplate(new OkHttp3ClientHttpRequestFactory());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3）测试代码</p>
+<p>在课程管理服务工程创建单元测试代码，远程调用cms的查询页面接口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//负载均衡调用</span><br><span class="line">@Test</span><br><span class="line">public void testRibbon() &#123;</span><br><span class="line">    //服务id</span><br><span class="line">    String serviceId = &quot;XC-SERVICE-MANAGE-CMS&quot;;</span><br><span class="line">    for(int i=0;i&lt;10;i++)&#123;</span><br><span class="line">        //通过服务id调用</span><br><span class="line">        ResponseEntity&lt;CmsPage&gt; forEntity = restTemplate.getForEntity(&quot;http://&quot; + serviceId + &quot;/cms/page/get/5a754adf6abb500ad05688d9&quot;, CmsPage.class);</span><br><span class="line">        CmsPage cmsPage = forEntity.getBody();</span><br><span class="line">        System.out.println(cmsPage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4）负载均衡测试</p>
+<p>添加@LoadBalanced注解后，restTemplate会走LoadBalancerInterceptor拦截器，此拦截器中会通过RibbonLoadBalancerClient查询服务地址，可以在此类打断点观察每次调用的服务地址和端口，两个cms服务会轮流被调用。</p>
+<p><img src="assets/1529913868296.png" alt="1529913868296"></p>
+<h2 id="2-2-Feign"><a href="#2-2-Feign" class="headerlink" title="2.2 Feign"></a>2.2 Feign</h2><h3 id="2-2-1-Feign介绍"><a href="#2-2-1-Feign介绍" class="headerlink" title="2.2.1 Feign介绍"></a>2.2.1 Feign介绍</h3><p>​    Feign是Netflix公司开源的轻量级rest客户端，使用Feign可以非常方便的实现Http 客户端。Spring Cloud引入Feign并且集成了Ribbon实现客户端负载均衡调用。</p>
+<h3 id="2-2-2-Feign测试"><a href="#2-2-2-Feign测试" class="headerlink" title="2.2.2 Feign测试"></a>2.2.2 Feign测试</h3><p>例子：</p>
+<p><img src="assets/1559453468074.png" alt="1559453468074"></p>
+<p>1、在客户端添加依赖</p>
+<p>在课程管理服务xc-service-manage-cms和xc-service-manage-course中添加下边的依赖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.netflix.feign&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;feign-okhttp&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2、定义FeignClient接口</p>
+<p>参考Swagger文档定义FeignClient，注意接口的Url、请求参数类型、返回值类型与Swagger接口一致。</p>
+<p>（1）xc-service-manage-cms提供接口</p>
+<p>和<code>controller</code>写法一样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface CmsPageAPI &#123;</span><br><span class="line">    @GetMapping(&quot;/cms/page/get/&#123;id&#125;&quot;)</span><br><span class="line">    public CmsPage findById(@PathVariable(&quot;id&quot;) String id);</span><br><span class="line">  </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>（2）xc-service-manage-course调用远程接口</p>
+<p>@FeignClient(“xc-service-manage-cms”)里写的是被调用接口的项目配置名称</p>
+<p><img src="assets/1559454461639.png" alt="1559454461639"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@FeignClient(&quot;xc-service-manage-cms&quot;)</span><br><span class="line">public interface CmsPageClient  extends CmsPageAPI &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（3）启动类添加@EnableFeignClients注解</p>
+<p>在xc-service-manage-course中的启动类中添加@EnableFeignClients</p>
+<p>3、测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class FeignTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    CmsPageClient cmsPageClient;</span><br><span class="line">    @Test</span><br><span class="line">    public void testFeign() &#123;</span><br><span class="line">        //通过服务id调用cms的查询页面接口</span><br><span class="line">        CmsPage cmsPage = cmsPageClient.findById(&quot;5a754adf6abb500ad05688d9&quot;);</span><br><span class="line">        System.out.println(cmsPage);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Feign工作原理如下：</p>
+<p>1、 启动类添加@EnableFeignClients注解，Spring会扫描标记了@FeignClient注解的接口，并生成此接口的代理对象</p>
+<p>2、 @FeignClient(value = XcServiceList.XC_SERVICE_MANAGE_CMS)即指定了cms的服务名称，Feign会从注册中心获取cms服务列表，并通过负载均衡算法进行服务调用。</p>
+<p>3、在接口方法 中使用注解@GetMapping(“/cms/page/get/{id}”)，指定调用的url，Feign将根据url进行远程调用。</p>
+<h3 id="2-2-4-Feign注意点"><a href="#2-2-4-Feign注意点" class="headerlink" title="2.2.4 Feign注意点"></a>2.2.4 Feign注意点</h3><p>SpringCloud对Feign进行了增强兼容了SpringMVC的注解 ，我们在使用SpringMVC的注解时需要注意：</p>
+<p>1、feignClient接口 有参数在参数必须加@PathVariable(“XXX”)和@RequestParam(“XXX”)</p>
+<p>2、feignClient返回值为复杂对象时其类型必须有无参构造函数。</p>
+<h1 id="3-课程预览技术方案"><a href="#3-课程预览技术方案" class="headerlink" title="3 课程预览技术方案"></a>3 课程预览技术方案</h1><h2 id="3-1-需求分析"><a href="#3-1-需求分析" class="headerlink" title="3.1 需求分析"></a>3.1 需求分析</h2><p>​    课程预览是为了保证课程发布后的正确性，通过课程预览可以直观的通过课程详情页面看到课程的信息是否正确，通过课程预览看到的页面内容和课程发布后的页面内容是一致的。</p>
+<p>下图是课程详情页面的预览图：</p>
+<p><img src="assets/1525416955328.png" alt="1525416955328"></p>
+<h2 id="3-2-课程详情页面技术方案"><a href="#3-2-课程详情页面技术方案" class="headerlink" title="3.2 课程详情页面技术方案"></a>3.2 课程详情页面技术方案</h2><p>​    课程预览所浏览到的页面就是课程详情页面，需要先确定课程详情页面的技术方案后方可确定课程预览的技术方案。</p>
+<h3 id="3-2-1-技术需求"><a href="#3-2-1-技术需求" class="headerlink" title="3.2.1 技术需求"></a>3.2.1 技术需求</h3><p>​    课程详情页面是向用户展示课程信息的窗口，课程相当于网站的商品，本页面的访问量会非常大。此页面的内容设计不仅要展示出课程核心重要的内容而且用户访问页面的速度要有保证，有统计显示打开一个页面超过4秒用户就走掉了，所以本页面的性能要求是本页面的重要需求。</p>
+<p>​    本页面另一个需求就是SEO，要非常有利于爬虫抓取页面上信息，并且生成页面快照，利于用户通过搜索引擎搜索课程信息。</p>
+<h3 id="3-2-2-解决方案"><a href="#3-2-2-解决方案" class="headerlink" title="3.2.2 解决方案"></a>3.2.2 解决方案</h3><p>如何在保证SEO的前提下提高页面的访问速度 ：</p>
+<p>方案1：</p>
+<p>​    对于信息获取类的需求，要想提高页面速度就要使用缓存来减少或避免对数据库的访问，从而提高页面的访问速度。下图是使用缓存与不使用缓存的区别</p>
+<p><img src="assets/1525419286559.png" alt="1525419286559"></p>
+<p>此页面为动态页面，会根据课程的不同而不同，方案一采用传统的JavaEE Servlet/jsp的方式在Tomcat完成页面渲染，相比不加缓存速度会有提升。</p>
+<p>优点：使用redis作为缓存，速度有提升。</p>
+<p>缺点：采用Servlet/jsp动态页面渲染技术，服务器使用Tomcat，面对高并发量的访问存在性能瓶颈。<br>方案2：</p>
+<p>​    对于不会频繁改变的信息可以采用页面静态化的技术，提前让页面生成html静态页面存储在nginx服务器，用户直接访问nginx即可，对于一些动态信息可以访问服务端获取json数据在页面渲染。</p>
+<p><img src="assets/1525419817614.png" alt="1525419817614"></p>
+<p>优点：使用Nginx作为web服务器，并且直接访问html页面，性能出色。</p>
+<p>缺点：需要维护大量的静态页面，增加了维护的难度。</p>
+<p>选择方案2作为课程详情页面的技术解决方案，将课程详情页面生成Html静态化页面，并发布到Nginx上</p>
+<h2 id="3-3-课程预览技术方案"><a href="#3-3-课程预览技术方案" class="headerlink" title="3.3 课程预览技术方案"></a>3.3 课程预览技术方案</h2><p>​    根据要求：课程详情页面采用静态化技术生成Html页面，课程预览的效果要与最终静态化的Html页面内容一致。</p>
+<p>​    所以，课程预览功能也采用静态化技术生成Html页面，课程预览使用的模板与课程详情页面模板一致，这样就可以保证课程预览的效果与最终课程详情页面的效果一致。</p>
+<p>操作流程：</p>
+<p>1、制作课程详情页面模板</p>
+<p>2、开发课程详情页面数据模型的查询接口（为静态化提供数据）</p>
+<p>3、调用cms课程预览接口通过浏览器浏览静态文件</p>
+<p><img src="assets/1530743308488.png" alt="1530743308488"></p>
+<h1 id="4-课程详情页面静态化"><a href="#4-课程详情页面静态化" class="headerlink" title="4 课程详情页面静态化"></a>4 课程详情页面静态化</h1><h2 id="4-1-静态页面测试"><a href="#4-1-静态页面测试" class="headerlink" title="4.1 静态页面测试"></a>4.1 静态页面测试</h2><h3 id="4-1-1-页面内容组成"><a href="#4-1-1-页面内容组成" class="headerlink" title="4.1.1 页面内容组成"></a>4.1.1 页面内容组成</h3><p>​    我们在编写一个页面时需要知道哪些信息是静态信息，哪些信息为动态信息，下图是页面的设计图：</p>
+<p><img src="assets/1525423148437.png" alt="1525423148437"></p>
+<p>打开静态页面，观察每部分的内容。</p>
+<p>红色表示动态信息，红色以外表示静态信息。</p>
+<p>红色动态信息：表示一个按钮，根据用户的登录状态、课程的购买状态显示按钮的名称及按钮的事件。</p>
+<p>包括以下信息内容：</p>
+<p>1、课程信息</p>
+<p>​    课程标题、价格、课程等级、授课模式、课程图片、课程介绍、课程目录。</p>
+<p>2、课程统计信息</p>
+<p>​    课程时长、评分、收藏人数</p>
+<p>3、教育机构信息</p>
+<p>​    公司名称、公司简介</p>
+<p>4、教育机构统计信息</p>
+<p>​    好评数、课程数、学生人数</p>
+<p>5、教师信息</p>
+<p>​    老师名称、老师介绍</p>
+<h3 id="4-1-2-页面拆分"><a href="#4-1-2-页面拆分" class="headerlink" title="4.1.2 页面拆分"></a>4.1.2 页面拆分</h3><p>将页面拆分成如下页面：</p>
+<p>1、页头</p>
+<p>本页头文件和门户使用的页头为同一个文件。</p>
+<p>参考：代码\页面与模板\include\header.html</p>
+<p>2、页面尾</p>
+<p>本页尾文件和门户使用的页尾为同一个文件。</p>
+<p>参考：代码\页面与模板\include\footer.html</p>
+<p>3、课程详情主页面</p>
+<p>每个课程对应一个文件，命名规则为：课程id.html（课程id动态变化）</p>
+<p>模板页面参考：\代码\页面与模板\course\detail\course_main_template.html</p>
+<p>4、教育机构页面</p>
+<p>每个教育机构对应一个文件，文件的命名规则为：company_info_公司id.html（公司id动态变化）</p>
+<p>参考：代码\页面与模板\company\company_info_template.html</p>
+<p>5、老师信息页面</p>
+<p>每个教师信息对应一个文件，文件的命名规则为：teacher_info_教师id.html（教师id动态变化）</p>
+<p>参考：代码\页面与模板\teacher\teacher_info_template01.html</p>
+<p>6、课程统计页面</p>
+<p>每个课程对应一个文件，文件的命名规则为：course_stat_课程id.json（课程id动态变化）</p>
+<p>参考：\代码\页面与模板\stat\course\course_stat_template.json</p>
+<p>7、教育机构统计页面</p>
+<p>每个教育机构对应一个文件，文件的命名规则为：company_stat_公司id.json（公司id动态变化）</p>
+<p>参考：\代码\页面与模板\stat\company\company_stat_template.json</p>
+<h3 id="4-1-2-静态页面测试"><a href="#4-1-2-静态页面测试" class="headerlink" title="4.1.2 静态页面测试"></a>4.1.2 静态页面测试</h3><h4 id="4-1-2-1页面加载思路"><a href="#4-1-2-1页面加载思路" class="headerlink" title="4.1.2.1页面加载思路"></a>4.1.2.1页面加载思路</h4><p>打开课程资料中的“静态页面目录”中的课程详情模板页面，研究页面加载的思路。</p>
+<p>模板页面路径如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">静态页面目录\static\course\detail\course_main_template.html</span><br></pre></td></tr></table></figure></p>
+<p>1、主页面</p>
+<p>我们需要在主页面中通过SSI加载：页头、页尾、教育机构、教师信息</p>
+<p>2、异步加载课程统计与教育机构统计信息</p>
+<p>​    课程统计信息（json）、教育机构统计信息（json）</p>
+<p>3、马上学习按钮事件</p>
+<p> 用户点击“马上学习”会根据课程收费情况、课程购买情况执行下一步操作。</p>
+<h4 id="4-1-2-2-静态资源虚拟主机"><a href="#4-1-2-2-静态资源虚拟主机" class="headerlink" title="4.1.2.2 静态资源虚拟主机"></a>4.1.2.2 静态资源虚拟主机</h4><p>1、配置静态资源虚拟主机</p>
+<p>静态资源虚拟主机负责处理课程详情、公司信息、老师信息、统计信息等页面的请求：</p>
+<p>将课程资料中的“静态页面目录”中的目录拷贝到F:/develop/xuecheng/static下</p>
+<p>在nginx中配置静态虚拟主机如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#学成网静态资源</span><br><span class="line">server &#123;</span><br><span class="line">    listen       91;</span><br><span class="line">    server_name localhost;</span><br><span class="line">    </span><br><span class="line">    #公司信息</span><br><span class="line">    location /static/company/ &#123;  </span><br><span class="line">        alias   F:/develop/xuecheng/static/company/;</span><br><span class="line">    &#125; </span><br><span class="line">    #老师信息</span><br><span class="line">    location /static/teacher/ &#123;  </span><br><span class="line">        alias   F:/develop/xuecheng/static/teacher/;</span><br><span class="line">    &#125; </span><br><span class="line">    #统计信息</span><br><span class="line">    location /static/stat/ &#123;  </span><br><span class="line">        alias   F:/develop/xuecheng/static/stat/;</span><br><span class="line">    &#125; </span><br><span class="line">    location /course/detail/ &#123;  </span><br><span class="line">        alias  F:/develop/xuecheng/static/course/detail/;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、通过&lt;<a href="http://www.xuecheng.com&gt;虚拟主机转发到静态资源" target="_blank" rel="noopener">www.xuecheng.com&gt;虚拟主机转发到静态资源</a></p>
+<p>由于课程页面需要通过SSI加载页头和页尾所以需要通过&lt;<a href="http://www.xuecheng.com&gt;虚拟主机转发到静态资源" target="_blank" rel="noopener">www.xuecheng.com&gt;虚拟主机转发到静态资源</a></p>
+<p>在&lt;<a href="http://www.xuecheng.com&gt;虚拟主机加入如下配置：" target="_blank" rel="noopener">www.xuecheng.com&gt;虚拟主机加入如下配置：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">location /static/company/ &#123;  </span><br><span class="line">        proxy_pass http://static_server_pool;</span><br><span class="line">    &#125; </span><br><span class="line">    location /static/teacher/ &#123;  </span><br><span class="line">        proxy_pass http://static_server_pool;</span><br><span class="line">    &#125; </span><br><span class="line">    location /static/stat/ &#123;  </span><br><span class="line">        proxy_pass http://static_server_pool;</span><br><span class="line">    &#125; </span><br><span class="line">    location /course/detail/ &#123;  </span><br><span class="line">        proxy_pass http://static_server_pool;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>配置upstream实现请求转发到资源服务虚拟主机：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#静态资源服务</span><br><span class="line"> upstream static_server_pool&#123;</span><br><span class="line">server 127.0.0.1:91 weight=10;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="4-1-2-3-门户静态资源路径"><a href="#4-1-2-3-门户静态资源路径" class="headerlink" title="4.1.2.3 门户静态资源路径"></a>4.1.2.3 门户静态资源路径</h4><p>门户中的一些图片、样式等静态资源统一通过/static路径对外提供服务，在&lt;<a href="http://www.xuecheng.com&gt;虚拟主机中配置如下：" target="_blank" rel="noopener">www.xuecheng.com&gt;虚拟主机中配置如下：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#静态资源，包括系统所需要的图片，js、css等静态资源</span><br><span class="line">location /static/img/ &#123;  </span><br><span class="line">    alias   F:/develop/xc_portal_static/img/;</span><br><span class="line">&#125; </span><br><span class="line">location /static/css/ &#123;  </span><br><span class="line">    alias   F:/develop/xc_portal_static/css/;</span><br><span class="line">&#125; </span><br><span class="line">location /static/js/ &#123;  </span><br><span class="line">    alias   F:/develop/xc_portal_static/js/;</span><br><span class="line">&#125; </span><br><span class="line">location /static/plugins/ &#123;  </span><br><span class="line">    alias   F:/develop/xc_portal_static/plugins/;</span><br><span class="line">    add_header Access-Control-Allow-Origin http://ucenter.xuecheng.com;  </span><br><span class="line">    add_header Access-Control-Allow-Credentials true;  </span><br><span class="line">    add_header Access-Control-Allow-Methods GET;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>cors跨域参数：</p>
+<p>Access-Control-Allow-Origin：允许跨域访问的外域地址</p>
+<p>​    如果允许任何站点跨域访问则设置为*，通常这是不建议的。</p>
+<p>Access-Control-Allow-Credentials： 允许客户端携带证书访问</p>
+<p>Access-Control-Allow-Methods：允许客户端跨域访问的方法</p>
+<h4 id="4-1-2-4-页面测试"><a href="#4-1-2-4-页面测试" class="headerlink" title="4.1.2.4 页面测试"></a>4.1.2.4 页面测试</h4><p>请求：<a href="http://www.xuecheng.com/course/detail/course_main_template.html" target="_blank" rel="noopener">http://www.xuecheng.com/course/detail/course_main_template.html</a>测试课程详情页面模板是否可以正常浏览。</p>
+<p><img src="assets/1525517602416.png" alt="1525517602416"></p>
+<h4 id="4-1-2-5-页面动态脚本"><a href="#4-1-2-5-页面动态脚本" class="headerlink" title="4.1.2.5 页面动态脚本"></a>4.1.2.5 页面动态脚本</h4><p>​    为了方便日后的维护，我们将javascript实现的动态部分单独编写一个html 文件,在门户的include目录下定义course_detail_dynamic.html文件，此文件通过ssi包含在课程详情页面中.</p>
+<p>文件地址：资料\静态页面目录\include\course_detail_dynamic.html</p>
+<p>所有的课程公用一个 页面动态脚本。</p>
+<p>在课程详情主页面下端添加如下代码，通过SSI技术包含课程详情页面动态脚本文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;var courseId = &quot;template&quot;&lt;/script&gt;</span><br><span class="line">&lt;!--#include virtual=&quot;/include/course_detail_dynamic.html&quot;--&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>本页面使用vue.js动态获取信息，vue实例创建的代码如下：</p>
+<p>主要查看 created钩子函数的内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">var body= new Vue(&#123;   //创建一个Vue的实例</span><br><span class="line">        el: &quot;#body&quot;, //挂载点是id=&quot;app&quot;的地方</span><br><span class="line"></span><br><span class="line">        data: &#123;</span><br><span class="line">            editLoading: false,</span><br><span class="line">            title:&apos;测试&apos;,</span><br><span class="line">            courseId:&apos;&apos;,</span><br><span class="line">            charge:&apos;&apos;,//203001免费,203002收费</span><br><span class="line">            learnstatus:0,//课程状态，1：马上学习，2：立即报名、3：立即购买</span><br><span class="line">            course:&#123;&#125;,</span><br><span class="line">            companyId:&apos;template&apos;,</span><br><span class="line">            company_stat:[],</span><br><span class="line">            course_stat:&#123;&quot;s601001&quot;:&quot;&quot;,&quot;s601002&quot;:&quot;&quot;,&quot;s601003&quot;:&quot;&quot;&#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            //学习报名</span><br><span class="line">            addopencourse()&#123;</span><br><span class="line">                ...</span><br><span class="line">            &#125;,</span><br><span class="line">            //立即购买</span><br><span class="line">            buy()&#123;</span><br><span class="line">                ...</span><br><span class="line"></span><br><span class="line">            &#125;,</span><br><span class="line">            createOrder()&#123;</span><br><span class="line"></span><br><span class="line">                ...</span><br><span class="line">            &#125;,</span><br><span class="line">            getLearnstatus()&#123;//获取学习状态</span><br><span class="line">                ...</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">       created() &#123;</span><br><span class="line">//            this.charge = &apos;203002&apos;</span><br><span class="line">            this.courseId = courseId;</span><br><span class="line"></span><br><span class="line">           //获取教育机构的统计数据</span><br><span class="line">           queryCompanyStat(this.companyId).then((res)=&gt;&#123;</span><br><span class="line">               console.log(res)</span><br><span class="line">               if(res.stat)&#123;</span><br><span class="line">                   this.company_stat = res.stat</span><br><span class="line">                   console.log(this.company_stat)</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">           &#125;)</span><br><span class="line">           //获取课程的统计数据</span><br><span class="line">           queryCourseStat(this.courseId).then((res)=&gt;&#123;</span><br><span class="line">               console.log(res)</span><br><span class="line">               if(res.stat)&#123;</span><br><span class="line">                   let stat = res.stat</span><br><span class="line">                  for(var i=0;i&lt;stat.length;i++)&#123;</span><br><span class="line">                      this.course_stat[&apos;s&apos;+stat[i].id] = stat[i].value</span><br><span class="line">                  &#125;</span><br><span class="line">               &#125;</span><br><span class="line">               console.log(this.course_stat)</span><br><span class="line"></span><br><span class="line">           &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">        mounted()&#123;</span><br><span class="line">           // alert(courseId)</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-2-课程数据模型查询接口"><a href="#4-2-课程数据模型查询接口" class="headerlink" title="4.2 课程数据模型查询接口"></a>4.2 课程数据模型查询接口</h2><p>​    静态化操作需要模型数据方可进行静态化，课程数据模型由课程管理服务提供，仅供课程静态化程序调用使用。</p>
+<h3 id="4-2-1-接口定义"><a href="#4-2-1-接口定义" class="headerlink" title="4.2.1 接口定义"></a>4.2.1 接口定义</h3><p>1、响应结果类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">public class CourseView  implements Serializable  &#123;</span><br><span class="line">    CourseBase courseBase;//基础信息</span><br><span class="line">    CourseMarket courseMarket;//课程营销</span><br><span class="line">    CoursePic coursePic;//课程图片</span><br><span class="line">    TeachplanNode TeachplanNode;//教学计划</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、请求类型</p>
+<p>String：课程id<br>3、接口定义如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(&quot;课程视图查询&quot;)</span><br><span class="line">public CourseView courseview(String id);</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-2-2-Dao"><a href="#4-2-2-Dao" class="headerlink" title="4.2.2 Dao"></a>4.2.2 Dao</h3><p>需要对course_base、course_market、course_pic、teachplan等信息进行查询，</p>
+<p>新建课程营销的dao，其它dao已经存在不用再建。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface CourseMarketRepository extends JpaRepository&lt;CourseMarket,String&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-2-3-Service"><a href="#4-2-3-Service" class="headerlink" title="4.2.3 Service"></a>4.2.3 Service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//课程视图查询</span><br><span class="line">public CourseView getCoruseView(String id) &#123;</span><br><span class="line">    CourseView courseView = new CourseView();</span><br><span class="line">    //查询课程基本信息</span><br><span class="line">    Optional&lt;CourseBase&gt; optional = courseBaseRepository.findById(id);</span><br><span class="line">    if(optional.isPresent())&#123;</span><br><span class="line">        CourseBase courseBase = optional.get();</span><br><span class="line">        courseView.setCourseBase(courseBase);</span><br><span class="line">    &#125;</span><br><span class="line">    //查询课程营销信息</span><br><span class="line">    Optional&lt;CourseMarket&gt; courseMarketOptional = courseMarketRepository.findById(id);</span><br><span class="line">    if(courseMarketOptional.isPresent())&#123;</span><br><span class="line">        CourseMarket courseMarket = courseMarketOptional.get();</span><br><span class="line">        courseView.setCourseMarket(courseMarket);</span><br><span class="line">    &#125;</span><br><span class="line">    //查询课程图片信息</span><br><span class="line">    Optional&lt;CoursePic&gt; picOptional = coursePicRepository.findById(id);</span><br><span class="line">    if(picOptional.isPresent())&#123;</span><br><span class="line">        CoursePic coursePic = picOptional.get();</span><br><span class="line">        courseView.setCoursePic(picOptional.get());</span><br><span class="line">    &#125;</span><br><span class="line">    //查询课程计划信息</span><br><span class="line">    TeachplanNode teachplanNode = teachplanMapper.selectList(id);</span><br><span class="line">    courseView.setTeachplanNode(teachplanNode);</span><br><span class="line">    return courseView;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-4-Controller"><a href="#4-2-4-Controller" class="headerlink" title="4.2.4 Controller"></a>4.2.4 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@GetMapping(&quot;/courseview/&#123;id&#125;&quot;)</span><br><span class="line">public CourseView courseview(@PathVariable(&quot;id&quot;) String id) &#123;</span><br><span class="line">    return courseService.getCoruseView(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-5-测试"><a href="#4-2-5-测试" class="headerlink" title="4.2.5 测试"></a>4.2.5 测试</h3><p>使用swagger-ui或postman测试本接口。</p>
+<h2 id="4-3-课程信息模板设计"><a href="#4-3-课程信息模板设计" class="headerlink" title="4.3  课程信息模板设计"></a>4.3  课程信息模板设计</h2><p>​    在确定了静态化所需要的数据模型之后，就可以编写页面模板了，课程详情页面由多个静态化页面组成，所以我们需要创建多个页面模板，本章节创建课程详情页面的主模板，即课程信息模板。</p>
+<h3 id="4-3-1-模板内容"><a href="#4-3-1-模板内容" class="headerlink" title="4.3.1 模板内容"></a>4.3.1 模板内容</h3><p>完整的模板请参考 “资料\课程详情页面模板\course.ftl“ 文件，下边列出模板中核心的内容：</p>
+<ul>
+<li>课程基本信息：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;banner-left&quot;&gt;</span><br><span class="line">            &lt;p class=&quot;tit&quot;&gt;$&#123;courseBase.name&#125;&lt;/p&gt;</span><br><span class="line">            &lt;p class=&quot;pic&quot;&gt;&lt;span class=&quot;new-pic&quot;&gt;特惠价格￥$&#123;courseMarket.price&#125;&lt;/span&gt; &lt;span class=&quot;old-pic&quot;&gt;原价￥$&#123;courseMarket.price_old!&#125;&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">            &lt;p class=&quot;info&quot;&gt;</span><br><span class="line">                &lt;a href=&quot;http://ucenter.xuecheng.com/#/learning/$&#123;courseBase.id&#125;/0&quot;  target=&quot;_blank&quot; v-if=&quot;learnstatus == 1&quot; v-cloak&gt;马上学习&lt;/a&gt;</span><br><span class="line">                &lt;a href=&quot;#&quot;  @click=&quot;addopencourse&quot; v-if=&quot;learnstatus == 2&quot; v-cloak&gt;立即报名&lt;/a&gt;</span><br><span class="line">                &lt;a href=&quot;#&quot;  @click=&quot;buy&quot; v-if=&quot;learnstatus == 3&quot; v-cloak&gt;立即购买&lt;/a&gt;</span><br><span class="line">                &lt;span&gt;&lt;em&gt;难度等级&lt;/em&gt;</span><br><span class="line">		 &lt;#if courseBase.grade==&apos;200001&apos;&gt;</span><br><span class="line">		低级</span><br><span class="line">                &lt;#elseif courseBase.grade==&apos;200002&apos;&gt;</span><br><span class="line">		中级</span><br><span class="line">		 &lt;#elseif courseBase.grade==&apos;200003&apos;&gt;</span><br><span class="line">		高级</span><br><span class="line">		&lt;/#if&gt;</span><br><span class="line">                &lt;/span&gt;</span><br><span class="line">                &lt;span&gt;&lt;em&gt;课程时长&lt;/em&gt;&lt;stat v-text=&quot;course_stat.s601001&quot;&gt;&lt;/stat&gt;</span><br><span class="line">                &lt;/span&gt;</span><br><span class="line">                &lt;span&gt;&lt;em&gt;评分&lt;/em&gt;&lt;stat v-text=&quot;course_stat.s601002&quot;&gt;&lt;/stat&gt;&lt;/span&gt;</span><br><span class="line">                &lt;span&gt;&lt;em&gt;授课模式&lt;/em&gt;</span><br><span class="line">                  &lt;#if courseBase.studymodel==&apos;201001&apos;&gt;</span><br><span class="line">		自由学习</span><br><span class="line">                &lt;#elseif courseBase.studymodel==&apos;201002&apos;&gt;</span><br><span class="line">		任务式学习</span><br><span class="line">		&lt;/#if&gt;</span><br><span class="line">                &lt;/span&gt;</span><br><span class="line">            &lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">     &lt;div class=&quot;banner-rit&quot;&gt;</span><br><span class="line">	    &lt;#if coursePic.pic??&gt;</span><br><span class="line">	     &lt;p&gt;&lt;img src=&quot;http://img.xuecheng.com/$&#123;coursePic.pic&#125;&quot; alt=&quot;&quot; width=&quot;270&quot; height=&quot;156&quot;&gt; &lt;/p&gt;</span><br><span class="line">	     &lt;#else&gt;</span><br><span class="line">		 &lt;p&gt;&lt;img src=&quot;/static/img/widget-video.png&quot; alt=&quot;&quot; width=&quot;270&quot; height=&quot;156&quot;&gt; &lt;/p&gt;</span><br><span class="line">	    &lt;/#if&gt;</span><br><span class="line">           </span><br><span class="line">            &lt;p class=&quot;vid-act&quot;&gt;&lt;span&gt; &lt;i class=&quot;i-heart&quot;&gt;&lt;/i&gt;收藏 &lt;stat v-text=&quot;course_stat.s601003&quot;&gt;&lt;/stat&gt; &lt;/span&gt; &lt;span&gt;分享 &lt;i class=&quot;i-weixin&quot;&gt;&lt;/i&gt;&lt;i class=&quot;i-qq&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>课程计划：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;content&quot;&gt;</span><br><span class="line">			&lt;#if teachplanNode.children??&gt;</span><br><span class="line">                            &lt;#list teachplanNode.children as firstNode&gt;</span><br><span class="line">                                &lt;div class=&quot;item&quot;&gt;</span><br><span class="line">                                    &lt;div class=&quot;title act&quot;&gt;&lt;i class=&quot;i-chevron-top&quot;&gt;&lt;/i&gt;$&#123;firstNode.pname&#125;&lt;/div&gt;</span><br><span class="line">                                    &lt;div class=&quot;about&quot;&gt;$&#123;firstNode.description!&#125;&lt;/div&gt;</span><br><span class="line">                                    &lt;div class=&quot;drop-down&quot; style=&quot;height: $&#123;firstNode.children?size * 50&#125;px;&quot;&gt;</span><br><span class="line">                                        &lt;ul class=&quot;list-box&quot;&gt;</span><br><span class="line">                                            &lt;#list firstNode.children as secondNode&gt;</span><br><span class="line">                                                &lt;li&gt;$&#123;secondNode.pname&#125;&lt;/li&gt;</span><br><span class="line">                                            &lt;/#list&gt;</span><br><span class="line">                                        &lt;/ul&gt;</span><br><span class="line">                                    &lt;/div&gt;</span><br><span class="line">                                &lt;/div&gt;</span><br><span class="line">                            &lt;/#list&gt;</span><br><span class="line">               &lt;/#if&gt;</span><br><span class="line">				</span><br><span class="line"> &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>页头：</li>
+</ul>
+<p>局部代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body data-spy=&quot;scroll&quot; data-target=&quot;#articleNavbar&quot; data-offset=&quot;150&quot;&gt;</span><br><span class="line">&lt;!-- 页面头部 --&gt;</span><br><span class="line">&lt;!--#include virtual=&quot;/include/header.html&quot;--&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>页尾：</li>
+</ul>
+<p>局部代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 页面底部 --&gt;</span><br><span class="line">&lt;!--底部版权--&gt;</span><br><span class="line">&lt;!--#include virtual=&quot;/include/footer.html&quot;--&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>动态脚本文件：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    //课程id</span><br><span class="line">    var courseId = &quot;template&quot;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;!--#include virtual=&quot;/include/course_detail_dynamic.html&quot;--&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>教师信息文件：</li>
+</ul>
+<p>从课程数据中获取课程所属的教师Id，这里由于教师信息管理功能没有开发我们使用固定的教师信息文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;content-com course&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;title&quot;&gt;&lt;span&gt;课程制作&lt;/span&gt;&lt;/div&gt;</span><br><span class="line">    &lt;!--#include virtual=&quot;/teacher/teacher_info_template01.html&quot;--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>教育机构文件：</li>
+</ul>
+<p>同教师信息一样，由于教育机构功能模块没有开发，这里我们使用固定的教育机构文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;about-teach&quot;&gt;</span><br><span class="line">    &lt;!--机构信息--&gt;</span><br><span class="line">    &lt;!--#include virtual=&quot;/company/company_info_template.html&quot;--&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-2-模板测试"><a href="#4-3-2-模板测试" class="headerlink" title="4.3.2 模板测试"></a>4.3.2 模板测试</h3><p>使用test-freemarker工程测试模板</p>
+<p>编写模板过程采用test-freemarker工程测试模板。</p>
+<p>将course.ftl拷贝到test-freemarker工程的resources/templates下，并在test-freemarker工程的controller中添加测试方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//课程详情页面测试</span><br><span class="line">@RequestMapping(&quot;/course&quot;)</span><br><span class="line">public String course(Map&lt;String,Object&gt; map)&#123;</span><br><span class="line">    ResponseEntity&lt;Map&gt; forEntity = restTemplate.getForEntity(&quot;http://localhost:31200/course/courseview/4028e581617f945f01617f9dabc40000&quot;, Map.class);</span><br><span class="line">    Map body = forEntity.getBody();</span><br><span class="line">    map.put(&quot;model&quot;,body);</span><br><span class="line">    return &quot;course&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：上边的测试页面不显示样式，原因是页面通过SSI包含了页面头，而使用test-freemarker工程无法加载页头，测试模板主要查看html页面内容是否正确，待课程预览时解决样式不显示问题。</p>
+<h3 id="4-3-3-模板保存"><a href="#4-3-3-模板保存" class="headerlink" title="4.3.3 模板保存"></a>4.3.3 模板保存</h3><p>模板编写并测试通过后要在数据库保存：</p>
+<p>1、模板信息保存在xc_cms数据库(mongodb)的cms_template表</p>
+<p>2、模板文件保存在mongodb的GridFS中。</p>
+<p>第一步：将模板文件上传到GridFS中</p>
+<p>由于本教学项目中模板管理模块没有开发，所以我们使用Junit代码向GridFS中保存：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//文件存储2</span><br><span class="line">@Test</span><br><span class="line">public void testStore2() throws FileNotFoundException &#123;</span><br><span class="line">    File file = new File(&quot;C:\\Users\\admin\\Desktop\\course.ftl&quot;);</span><br><span class="line">    FileInputStream inputStream = new FileInputStream(file);</span><br><span class="line">    //保存模版文件内容</span><br><span class="line">    GridFSFile gridFSFile = gridFsTemplate.store(inputStream, &quot;课程详情模板文件&quot;,&quot;&quot;);</span><br><span class="line">    String fileId = gridFSFile.getId().toString();</span><br><span class="line">    System.out.println(fileId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存成功需要记录模板文件的id，即上边代码中的fileId。</p>
+<p>第二步：向cms_template表添加模板记录（请不要重复添加）</p>
+<p>使用Studio 3T连接mongodb，向cms_template添加记录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">｛</span><br><span class="line">  &quot;_class&quot; : &quot;com.xuecheng.framework.domain.cms.CmsTemplate&quot;, </span><br><span class="line">  &quot;siteId&quot; : &quot;5a751fab6abb5044e0d19ea1&quot;, </span><br><span class="line">  &quot;templateName&quot; : &quot;课程详情页面正式模板&quot;, </span><br><span class="line">  &quot;templateFileId&quot; : &quot;这里填写上边代码返回的模板文件id&quot;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-4-其它模板"><a href="#4-3-4-其它模板" class="headerlink" title="4.3.4 其它模板"></a>4.3.4 其它模板</h3><p>除了课程详情主页面需要设计模板所有静态化的页面都要设计模板，如下：</p>
+<p>教育机构页面模板、教师信息页面模板、课程统计信息json模板、教育机构统计信息json模板。</p>
+<p>本项目我们实现课程详情主页面模板的制作和测试，其它页面模板的开发参考课程详情页面去实现。</p>
+<h1 id="5-课程预览功能开发"><a href="#5-课程预览功能开发" class="headerlink" title="5 课程预览功能开发"></a>5 课程预览功能开发</h1><h2 id="5-1-需求分析"><a href="#5-1-需求分析" class="headerlink" title="5.1 需求分析"></a>5.1 需求分析</h2><p>课程预览功能将使用cms系统提供的页面预览功能，业务流程如下：</p>
+<p>1、用户进入课程管理页面，点击课程预览，请求到课程管理服务</p>
+<p>2、课程管理服务远程调用cms添加页面接口向cms添加课程详情页面</p>
+<p>3、课程管理服务得到cms返回课程详情页面id，并拼接生成课程预览Url</p>
+<p>4、课程管理服务将课程预览Url给前端返回</p>
+<p>5、用户在前端页面请求课程预览Url，打开新窗口显示课程详情内容</p>
+<p><img src="assets/1530718431250.png" alt="1530718431250"></p>
+<h2 id="5-2-CMS页面预览测试"><a href="#5-2-CMS页面预览测试" class="headerlink" title="5.2 CMS页面预览测试"></a>5.2 CMS页面预览测试</h2><p>​    CMS已经提供了页面预览功能，课程预览功能要使用CMS页面预览接口实现，下边通过cms页面预览接口测试课程预览的效果。</p>
+<p>1、向cms_page表插入一条页面记录或者从cms_page找一个页面进行测试。</p>
+<p>注意：页面配置一定要正确，需设置正确的模板id和dataUrl。</p>
+<p>如下，是一条页面的记录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b3469f794db44269cb2bff1&quot;), </span><br><span class="line">    &quot;_class&quot; : &quot;com.xuecheng.framework.domain.cms.CmsPage&quot;, </span><br><span class="line">    &quot;siteId&quot; : &quot;5a751fab6abb5044e0d19ea1&quot;, </span><br><span class="line">    &quot;pageName&quot; : &quot;4028e581617f945f01617f9dabc40000.html&quot;, </span><br><span class="line">    &quot;pageAliase&quot; : &quot;课程详情页面测试01&quot;, </span><br><span class="line">    &quot;pageWebPath&quot; : &quot;/course/detail/&quot;, </span><br><span class="line">    &quot;pagePhysicalPath&quot; : &quot;/course/detail/&quot;, </span><br><span class="line">    &quot;pageType&quot; : &quot;1&quot;, </span><br><span class="line">    &quot;pageCreateTime&quot; : ISODate(&quot;2018-02-25T01:37:25.974+0000&quot;), </span><br><span class="line">    &quot;templateId&quot; : &quot;5b345a6b94db44269cb2bfec&quot;, </span><br><span class="line">    &quot;dataUrl&quot; : &quot;http://localhost:31200/course/courseview/4028e581617f945f01617f9dabc40000&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、课程详细页面 使用ssi注意</p>
+<p>由于Nginx先请求cms的课程预览功能得到html页面，再解析页面中的ssi标签，这里必须保证cms页面预览返回的页面的Content-Type为text/html;charset=utf-8</p>
+<p>在cms页面预览的controller方法中添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.setHeader(&quot;Content-type&quot;,&quot;text/html;charset=utf-8&quot;);</span><br></pre></td></tr></table></figure>
+<p>3、测试</p>
+<p>请求：<a href="http://www.xuecheng.com/cms/preview/5b3469f794db44269cb2bff1" target="_blank" rel="noopener">http://www.xuecheng.com/cms/preview/5b3469f794db44269cb2bff1</a>传入页面Id，测试效果如下:</p>
+<p><img src="assets/1530162120128.png" alt="1530162120128"></p>
+<h2 id="5-3-CMS添加页面接口"><a href="#5-3-CMS添加页面接口" class="headerlink" title="5.3 CMS添加页面接口"></a>5.3 CMS添加页面接口</h2><p>cms服务对外提供添加页面接口，实现：如果不存在页面则添加，否则就更新页面信息。</p>
+<p>此接口由课程管理服务在课程预览时调用。</p>
+<h3 id="5-3-1-Api接口"><a href="#5-3-1-Api接口" class="headerlink" title="5.3.1 Api接口"></a>5.3.1 Api接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(&quot;保存页面&quot;)</span><br><span class="line">public CmsPageResult save(CmsPage cmsPage);</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-2-Service"><a href="#5-3-2-Service" class="headerlink" title="5.3.2 Service"></a>5.3.2 Service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//添加页面，如果已存在则更新页面</span><br><span class="line">public CmsPageResult save(CmsPage cmsPage)&#123;</span><br><span class="line">    //校验页面是否存在，根据页面名称、站点Id、页面webpath查询</span><br><span class="line">    CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());</span><br><span class="line">    if(cmsPage1 !=null)&#123;</span><br><span class="line">        //更新</span><br><span class="line">        return this.update(cmsPage1.getPageId(),cmsPage);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //添加</span><br><span class="line">        return this.add(cmsPage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-3-Controller"><a href="#5-3-3-Controller" class="headerlink" title="5.3.3 Controller"></a>5.3.3 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@PostMapping(&quot;/save&quot;)</span><br><span class="line">public CmsPageResult save(@RequestBody CmsPage cmsPage) &#123;</span><br><span class="line">    return pageService.save(cmsPage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-4-课程预览服务端"><a href="#5-4-课程预览服务端" class="headerlink" title="5.4 课程预览服务端"></a>5.4 课程预览服务端</h2><h3 id="5-4-1-Api定义"><a href="#5-4-1-Api定义" class="headerlink" title="5.4.1 Api定义"></a>5.4.1 Api定义</h3><p>此Api是课程管理前端请求服务端进行课程预览的Api</p>
+<p>请求：课程Id</p>
+<p>响应：课程预览Url</p>
+<p>1、定义响应类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">public class CoursePublishResult extends ResponseResult &#123;</span><br><span class="line">    String previewUrl;</span><br><span class="line">    public CoursePublishResult(ResultCode resultCode,String previewUrl) &#123;</span><br><span class="line">        super(resultCode);</span><br><span class="line">        this.previewUrl = previewUrl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、接口定义如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(&quot;预览课程&quot;)</span><br><span class="line">public CoursePublishResult preview(String id);</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-2-创建-Feign-Client"><a href="#5-4-2-创建-Feign-Client" class="headerlink" title="5.4.2 创建 Feign Client"></a>5.4.2 创建 Feign Client</h3><p>在课程管理工程创建CMS服务的Feign Client，通过此Client远程请求cms添加页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@FeignClient(value = XcServiceList.XC_SERVICE_MANAGE_CMS)</span><br><span class="line">public interface CmsPageClient&#123;</span><br><span class="line">    //保存页面</span><br><span class="line">    @PostMapping(&quot;/cms/page/save&quot;)</span><br><span class="line">    public CmsPageResult save(@RequestBody CmsPage cmsPage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-3-Service"><a href="#5-4-3-Service" class="headerlink" title="5.4.3  Service"></a>5.4.3  Service</h3><p>1、配置添加页面参数信息</p>
+<p>在application.yml中配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">course-publish:</span><br><span class="line">  siteId: 5b30cba5f58b4411fc6cb1e5</span><br><span class="line">  templateId: 5b345a6b94db44269cb2bfec</span><br><span class="line">  previewUrl: http://www.xuecheng.com/cms/preview/</span><br><span class="line">  pageWebPath: /course/detail/</span><br><span class="line">  pagePhysicalPath: /course/detail/</span><br><span class="line">  dataUrlPre: http://localhost:31200/course/courseview/</span><br></pre></td></tr></table></figure>
+<p>2、代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">@Value(&quot;$&#123;course-publish.dataUrlPre&#125;&quot;)</span><br><span class="line">private String publish_dataUrlPre;</span><br><span class="line">@Value(&quot;$&#123;course-publish.pagePhysicalPath&#125;&quot;)</span><br><span class="line">private String publish_page_physicalpath;</span><br><span class="line">@Value(&quot;$&#123;course-publish.pageWebPath&#125;&quot;)</span><br><span class="line">private String publish_page_webpath;</span><br><span class="line">@Value(&quot;$&#123;course-publish.siteId&#125;&quot;)</span><br><span class="line">private String publish_siteId;</span><br><span class="line">@Value(&quot;$&#123;course-publish.templateId&#125;&quot;)</span><br><span class="line">private String publish_templateId;</span><br><span class="line">@Value(&quot;$&#123;course-publish.previewUrl&#125;&quot;)</span><br><span class="line">private String previewUrl;</span><br><span class="line"></span><br><span class="line">//根据id查询课程基本信息</span><br><span class="line">public CourseBase findCourseBaseById(String courseId)&#123;</span><br><span class="line">    Optional&lt;CourseBase&gt; baseOptional = courseBaseRepository.findById(courseId);</span><br><span class="line">    if(baseOptional.isPresent())&#123;</span><br><span class="line">        CourseBase courseBase = baseOptional.get();</span><br><span class="line">        return courseBase;</span><br><span class="line">    &#125;</span><br><span class="line">    ExceptionCast.cast(CourseCode.COURSE_GET_NOTEXISTS);</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line">//课程预览</span><br><span class="line">public CoursePublishResult preview(String courseId)&#123;</span><br><span class="line">    CourseBase one = this.findCourseBaseById(courseId);</span><br><span class="line"></span><br><span class="line">    //发布课程预览页面</span><br><span class="line">    CmsPage cmsPage = new CmsPage();</span><br><span class="line">    //站点</span><br><span class="line">    cmsPage.setSiteId(publish_siteId);//课程预览站点</span><br><span class="line">    //模板</span><br><span class="line">    cmsPage.setTemplateId(publish_templateId);</span><br><span class="line">    //页面名称</span><br><span class="line">    cmsPage.setPageName(courseId+&quot;.html&quot;);</span><br><span class="line">    //页面别名</span><br><span class="line">    cmsPage.setPageAliase(one.getName());</span><br><span class="line">    //页面访问路径</span><br><span class="line">    cmsPage.setPageWebPath(publish_page_webpath);</span><br><span class="line">    //页面存储路径</span><br><span class="line">    cmsPage.setPagePhysicalPath(publish_page_physicalpath);</span><br><span class="line">    //数据url</span><br><span class="line">    cmsPage.setDataUrl(publish_dataUrlPre+courseId);</span><br><span class="line">    //远程请求cms保存页面信息</span><br><span class="line">    CmsPageResult cmsPageResult = cmsPageClient.save(cmsPage);</span><br><span class="line">    if(!cmsPageResult.isSuccess())&#123;</span><br><span class="line">        return new CoursePublishResult(CommonCode.FAIL,null);</span><br><span class="line">    &#125;</span><br><span class="line">    //页面id</span><br><span class="line">    String pageId = cmsPageResult.getCmsPage().getPageId();</span><br><span class="line">    //页面url</span><br><span class="line">    String pageUrl = previewUrl+pageId;</span><br><span class="line">    return new CoursePublishResult(CommonCode.SUCCESS,pageUrl);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-4-Controller"><a href="#5-4-4-Controller" class="headerlink" title="5.4.4 Controller"></a>5.4.4 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@PostMapping(&quot;/preview/&#123;id&#125;&quot;)</span><br><span class="line">public CoursePublishResult preview(@PathVariable(&quot;id&quot;) String id) &#123;</span><br><span class="line">    return courseService.preview(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-5-前端开发"><a href="#5-5-前端开发" class="headerlink" title="5.5 前端开发"></a>5.5 前端开发</h2><h3 id="5-5-1-api方法"><a href="#5-5-1-api方法" class="headerlink" title="5.5.1 api方法"></a>5.5.1 api方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*预览课程*/</span><br><span class="line">export const preview = id =&gt; &#123;</span><br><span class="line">  return http.requestPost(apiUrl+&apos;/course/preview/&apos;+id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-2-页面"><a href="#5-5-2-页面" class="headerlink" title="5.5.2 页面"></a>5.5.2 页面</h3><p>创建 course_pub.vue</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;el-card class=&quot;box-card&quot;&gt;</span><br><span class="line">      &lt;div slot=&quot;header&quot; class=&quot;clearfix&quot;&gt;</span><br><span class="line">        &lt;span&gt;课程预览&lt;/span&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div class=&quot;text item&quot;&gt;</span><br><span class="line">        &lt;el-button type=&quot;primary&quot;  @click.native=&quot;preview&quot; &gt;课程预览&lt;/el-button&gt;</span><br><span class="line">        &lt;br/&gt;&lt;br/&gt;</span><br><span class="line">        &lt;span v-if=&quot;previewurl &amp;&amp; previewurl!=&apos;&apos;&quot;&gt;&lt;a :href=&quot;previewurl&quot; target=&quot;_blank&quot;&gt;点我查看课程预览页面 &lt;/a&gt; &lt;/span&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/el-card&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<p>数据对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    dotype:&apos;&apos;,</span><br><span class="line">    courseid:&apos;&apos;,</span><br><span class="line">    course: &#123;&quot;id&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;status&quot;:&quot;&quot;&#125;,</span><br><span class="line">    previewurl:&apos;&apos;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>方法 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//预览</span><br><span class="line">preview()&#123;</span><br><span class="line">  courseApi.preview(this.courseid).then((res) =&gt; &#123;</span><br><span class="line">    if(res.success)&#123;</span><br><span class="line">      this.$message.error(&apos;预览页面生成成功，请点击下方预览链接&apos;);</span><br><span class="line">      if(res.url)&#123;</span><br><span class="line">        //预览url</span><br><span class="line">        this.previewurl = res.url</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      this.$message.error(res.message);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/day09-课程预览 Eureka Feign.html" title="在线学习视频（九）—— 课程预览 Eureka Feign">https://tiredtosleep.github.io/day09-课程预览 Eureka Feign.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Feign远程调用/" rel="tag"><i class="fa fa-tag"></i> Feign远程调用</a>
+          
+            <a href="/tags/RestTemplate远程调用/" rel="tag"><i class="fa fa-tag"></i> RestTemplate远程调用</a>
+          
+            <a href="/tags/Eureka/" rel="tag"><i class="fa fa-tag"></i> Eureka</a>
+          
+            <a href="/tags/Ribbon负载均衡/" rel="tag"><i class="fa fa-tag"></i> Ribbon负载均衡</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/day08-课程图片管理 分布式文件系统.html" rel="next" title="在线学习视频（八）—— 课程图片管理 分布式文件系统">
+                <i class="fa fa-chevron-left"></i> 在线学习视频（八）—— 课程图片管理 分布式文件系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day17 用户认证 Zuul.html" rel="prev" title="在线学习视频（十八）—— 用户认证 Zuul">
+                在线学习视频（十八）—— 用户认证 Zuul <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#课程预览-Eureka-Feign"><span class="nav-text">课程预览 Eureka Feign</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Eureka注册中心"><span class="nav-text">1 Eureka注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-需求分析"><span class="nav-text">1.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Eureka注册中心"><span class="nav-text">1.3 Eureka注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-Eureka介绍"><span class="nav-text">1.3.1 Eureka介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-Eureka-Server搭建"><span class="nav-text">1.3.2 Eureka Server搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-1-单机环境搭建"><span class="nav-text">1.3.2.1 单机环境搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-2-高可用环境搭建"><span class="nav-text">1.3.2.2 高可用环境搭建</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-服务注册"><span class="nav-text">1.3.3 服务注册</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-1-将cms注册到Eureka-Server"><span class="nav-text">1.3.3.1 将cms注册到Eureka Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-2-将manage-course注册到Eureka-Server"><span class="nav-text">1.3.3.2 将manage-course注册到Eureka Server</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Feign远程调用"><span class="nav-text">2 Feign远程调用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Ribbon"><span class="nav-text">2.1 Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-Ribbon介绍"><span class="nav-text">2.1.1 Ribbon介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-Ribbon测试"><span class="nav-text">2.1.2 Ribbon测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Feign"><span class="nav-text">2.2 Feign</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Feign介绍"><span class="nav-text">2.2.1 Feign介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Feign测试"><span class="nav-text">2.2.2 Feign测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-Feign注意点"><span class="nav-text">2.2.4 Feign注意点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-课程预览技术方案"><span class="nav-text">3 课程预览技术方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-需求分析"><span class="nav-text">3.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-课程详情页面技术方案"><span class="nav-text">3.2 课程详情页面技术方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-技术需求"><span class="nav-text">3.2.1 技术需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-解决方案"><span class="nav-text">3.2.2 解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-课程预览技术方案"><span class="nav-text">3.3 课程预览技术方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-课程详情页面静态化"><span class="nav-text">4 课程详情页面静态化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-静态页面测试"><span class="nav-text">4.1 静态页面测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-页面内容组成"><span class="nav-text">4.1.1 页面内容组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-页面拆分"><span class="nav-text">4.1.2 页面拆分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-静态页面测试"><span class="nav-text">4.1.2 静态页面测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-2-1页面加载思路"><span class="nav-text">4.1.2.1页面加载思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-2-2-静态资源虚拟主机"><span class="nav-text">4.1.2.2 静态资源虚拟主机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-2-3-门户静态资源路径"><span class="nav-text">4.1.2.3 门户静态资源路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-2-4-页面测试"><span class="nav-text">4.1.2.4 页面测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-2-5-页面动态脚本"><span class="nav-text">4.1.2.5 页面动态脚本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-课程数据模型查询接口"><span class="nav-text">4.2 课程数据模型查询接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-接口定义"><span class="nav-text">4.2.1 接口定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-Dao"><span class="nav-text">4.2.2 Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-Service"><span class="nav-text">4.2.3 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-4-Controller"><span class="nav-text">4.2.4 Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-5-测试"><span class="nav-text">4.2.5 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-课程信息模板设计"><span class="nav-text">4.3  课程信息模板设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-模板内容"><span class="nav-text">4.3.1 模板内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-模板测试"><span class="nav-text">4.3.2 模板测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-模板保存"><span class="nav-text">4.3.3 模板保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-4-其它模板"><span class="nav-text">4.3.4 其它模板</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-课程预览功能开发"><span class="nav-text">5 课程预览功能开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-需求分析"><span class="nav-text">5.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-CMS页面预览测试"><span class="nav-text">5.2 CMS页面预览测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-CMS添加页面接口"><span class="nav-text">5.3 CMS添加页面接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-Api接口"><span class="nav-text">5.3.1 Api接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-Service"><span class="nav-text">5.3.2 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-3-Controller"><span class="nav-text">5.3.3 Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-课程预览服务端"><span class="nav-text">5.4 课程预览服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-1-Api定义"><span class="nav-text">5.4.1 Api定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-2-创建-Feign-Client"><span class="nav-text">5.4.2 创建 Feign Client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-3-Service"><span class="nav-text">5.4.3  Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-4-Controller"><span class="nav-text">5.4.4 Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-前端开发"><span class="nav-text">5.5 前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-1-api方法"><span class="nav-text">5.5.1 api方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-2-页面"><span class="nav-text">5.5.2 页面</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">301.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>

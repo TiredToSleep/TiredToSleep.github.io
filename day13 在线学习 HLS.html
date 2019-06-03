@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="播放器video.js,FFmpeg解码,断点传输,文件上传,媒体处理,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="在线学习 HLS1 在线学习需求分析1.1 需求描述​    学成在线作为在线教育网站，提供多种学习形式，包括：录播、直播、图文、社群等，学生登录进入学习中心即可在线学习，本章节将开发录播课程的在线学习功能，需求如下： 1、学生可以在windows浏览器上在线观看视频。 2、播放器具有快进、快退、暂停等基本功能。 3、学生可以方便切换章节进行学习。  什么是录播课程？ 录播课程就是提供录制好课程视">
+<meta name="keywords" content="播放器video.js,FFmpeg解码,断点传输,文件上传,媒体处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线学习视频（十四）—— 在线学习 HLS">
+<meta property="og:url" content="https://tiredtosleep.github.io/day13 在线学习 HLS.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="在线学习 HLS1 在线学习需求分析1.1 需求描述​    学成在线作为在线教育网站，提供多种学习形式，包括：录播、直播、图文、社群等，学生登录进入学习中心即可在线学习，本章节将开发录播课程的在线学习功能，需求如下： 1、学生可以在windows浏览器上在线观看视频。 2、播放器具有快进、快退、暂停等基本功能。 3、学生可以方便切换章节进行学习。  什么是录播课程？ 录播课程就是提供录制好课程视">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525863766339.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525660945960.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525686415546.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525834056635.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530673060103.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525690102071.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525744294334.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525705384445.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525705397681.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525705546722.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525759910613.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525779597959.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525833450322.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525835661918.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525838022185.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525846743945.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525852215604.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525862963742.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1537843343434.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525938525751.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525943895450.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525945157823.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525945035701.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1526025335659.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1526026806589.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1526026833275.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530708060533.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1526029263953.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530710972123.png">
+<meta property="og:updated_time" content="2019-06-02T13:14:28.265Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在线学习视频（十四）—— 在线学习 HLS">
+<meta name="twitter:description" content="在线学习 HLS1 在线学习需求分析1.1 需求描述​    学成在线作为在线教育网站，提供多种学习形式，包括：录播、直播、图文、社群等，学生登录进入学习中心即可在线学习，本章节将开发录播课程的在线学习功能，需求如下： 1、学生可以在windows浏览器上在线观看视频。 2、播放器具有快进、快退、暂停等基本功能。 3、学生可以方便切换章节进行学习。  什么是录播课程？ 录播课程就是提供录制好课程视">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1525863766339.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/day13 在线学习 HLS.html">
+
+
+
+
+
+  <title>在线学习视频（十四）—— 在线学习 HLS | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day13 在线学习 HLS.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在线学习视频（十四）—— 在线学习 HLS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T16:28:32+08:00">
+                2018-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-在线学习视频网站/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实战-在线学习视频网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  8.7k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  36  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="在线学习-HLS"><a href="#在线学习-HLS" class="headerlink" title="在线学习 HLS"></a>在线学习 HLS</h1><h1 id="1-在线学习需求分析"><a href="#1-在线学习需求分析" class="headerlink" title="1 在线学习需求分析"></a>1 在线学习需求分析</h1><h2 id="1-1-需求描述"><a href="#1-1-需求描述" class="headerlink" title="1.1 需求描述"></a>1.1 需求描述</h2><p>​    学成在线作为在线教育网站，提供多种学习形式，包括：录播、直播、图文、社群等，学生登录进入学习中心即可在线学习，本章节将开发录播课程的在线学习功能，需求如下：</p>
+<p>1、学生可以在windows浏览器上在线观看视频。</p>
+<p>2、播放器具有快进、快退、暂停等基本功能。</p>
+<p>3、学生可以方便切换章节进行学习。</p>
+<p><img src="assets/1525863766339.png" alt="1525863766339"></p>
+<p>什么是录播课程？</p>
+<p>录播课程就是提供录制好课程视频，供用户在线点播，反复学习。</p>
+<p>课程视频如何管理？</p>
+<p>媒资管理系统专门来管理课程视频，用户视频文件上传到媒资系统，并对视频进行编码处理。</p>
+<h2 id="1-2-视频点播解决方案"><a href="#1-2-视频点播解决方案" class="headerlink" title="1.2 视频点播解决方案"></a>1.2 视频点播解决方案</h2><h3 id="1-2-1-流媒体"><a href="#1-2-1-流媒体" class="headerlink" title="1.2.1 流媒体"></a>1.2.1 流媒体</h3><ul>
+<li>流媒体：</li>
+</ul>
+<p><img src="assets/1525660945960.png" alt="1525660945960"></p>
+<p>详细参考：<a href="https://baike.baidu.com/item/%E6%B5%81%E5%AA%92%E4%BD%93/98740?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E6%B5%81%E5%AA%92%E4%BD%93/98740?fr=aladdin</a></p>
+<p>概括理解：流媒体就是将视频文件分成许多小块儿，将这些小块儿作为数据包通过网络发送出去，实现一边传输视频 数据 包一边观看视频。</p>
+<ul>
+<li><p>流式传输</p>
+<p>在网络上传输音、视频信息有两个方式：下载和流式传输。</p>
+<p>下载：就是把音、视频文件完全下载到本机后开始播放，它的特点是必须等到视频文件下载完成方可播放，播放等待时间较长，无法去播放还未下载的部分视频。</p>
+<p>流式传输：就是客户端通过链接视频服务器实时传输音、视频信息，实现“边下载边播放”。</p>
+<p>流式传输包括如下两种方式：</p>
+<p>1） 顺序流式传输</p>
+<p>即顺序下载音、视频文件，可以实现边下载边播放，不过，用户只能观看已下载的视频内容，无法快进到未下载的视频部分，顺序流式传输可以使用Http服务器来实现，比如Nginx、Apache等。</p>
+</li>
+</ul>
+<p>  2）实时流式传输</p>
+<p>  实时流式传输可以解决顺序流式传输无法快进的问题，它与Http流式传输不同，它必须使用流媒体服务器并且使用流媒体协议来传输视频，它比Http流式传输复杂。常见的实时流式传输协议有RTSP、RTMP、RSVP等。</p>
+<ul>
+<li><p>流媒体系统的概要结构</p>
+<p>通过流媒体系统的概要结构学习流媒体系统的基本业务流程。</p>
+<p><img src="assets/1525686415546.png" alt="1525686415546"></p>
+<p>1、将原始的视频文件通过编码器转换为适合网络传输的流格式，编码后的视频直接输送给媒体服务器。</p>
+<p> 原始的视频文件通常是事先录制好的视频，比如通过摄像机、摄像头等录像、录音设备采集到的音视频文件，体积较大，要想在网络上传输需要经过压缩处理，即通过编码器进行编码 。</p>
+<p>2、媒体服务获取到编码好的视频文件，对外提供流媒体数据传输接口，接口协议包括 ：HTTP、RTSP、RTMP等 。</p>
+<p>3、播放器通过流媒体协议与媒体服务器通信，获取视频数据，播放视频。</p>
+</li>
+</ul>
+<h3 id="1-2-2-点播方案"><a href="#1-2-2-点播方案" class="headerlink" title="1.2.2 点播方案"></a>1.2.2 点播方案</h3><p>本项目包括点播和直播两种方式，我们先调研点播的方案，如下：</p>
+<p>1、 播放器通过 http协议从http服务器上下载视频文件进行播放</p>
+<p>问题：必须等到视频下载完才可以播放，不支持快进到某个时间点进行播放</p>
+<p>2、 播放器通过rtmp协议连接媒体服务器以实时流方式播放视频</p>
+<p>使用rtmp协议需要架设媒体服务器，造价高，对于直播多采用此方案。</p>
+<p>3、 播放器使用HLS协议连接http服务器（Nginx、Apache等）实现近实时流方式播放视频</p>
+<p>HLS协议规定：基于Http协议，视频封装格式为ts，视频的编码格式为H264,音频编码格式为MP3、AAC或者AC-3。</p>
+<p>HLS是什么？<img src="assets/1525834056635.png" alt="1525834056635"></p>
+<p>​    HLS的工作方式是：将视频拆分成若干ts格式的小文件，通过m3u8格式的索引文件对这些ts小文件建立索引。一般10秒一个ts文件，播放器连接m3u8文件播放，当快进时通过m3u8即可找到对应的索引文件，并去下载对应的ts文件，从而实现快进、快退以近实时 的方式播放视频。</p>
+<p>​    IOS、Android设备、及各大浏览器都支持HLS协议。</p>
+<p><img src="assets/1530673060103.png" alt="1530673060103"></p>
+<p>详细参考：<a href="https://baike.baidu.com/item/HLS/8328931?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/HLS/8328931?fr=aladdin</a></p>
+<p>采用HLS方案即可实现边下载边播放，并可不用使用rtmp等流媒体协议，不用构建专用的媒体服务器，节省成本。</p>
+<p>本项目点播方案确定为方案3。</p>
+<h1 id="2-视频编码"><a href="#2-视频编码" class="headerlink" title="2 视频编码"></a>2 视频编码</h1><h2 id="2-1-视频编码格式"><a href="#2-1-视频编码格式" class="headerlink" title="2.1 视频编码格式"></a>2.1 视频编码格式</h2><p><img src="assets/1525690102071.png" alt="1525690102071"></p>
+<p>详情参考 ：<a href="https://baike.baidu.com/item/%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81/839038" target="_blank" rel="noopener">https://baike.baidu.com/item/%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81/839038</a></p>
+<p>首先我们要分清文件格式和编码格式：</p>
+<p>文件格式：是指.mp4、.avi、.rmvb等 这些不同扩展名的视频文件的文件格式 ，视频文件的内容主要包括视频和音频，其文件格式是按照一 定的编码格式去编码，并且按照该文件所规定的封装格式将视频、音频、字幕等信息封装在一起，播放器会根据它们的封装格式去提取出编码，然后由播放器解码，最终播放音视频。</p>
+<p>音视频编码格式：通过音视频的压缩技术，将视频格式转换成另一种视频格式，通过视频编码实现流媒体的传输。比如：一个.avi的视频文件原来的编码是a，通过编码后编码格式变为b，音频原来为c，通过编码后变为d。</p>
+<p>音视频编码格式各类繁多，主要有几下几类：</p>
+<p>MPEG系列 （由ISO[国际标准组织机构]下属的MPEG[运动图象专家组]开发 ）视频编码方面主要是Mpeg1（vcd用的就是它）、Mpeg2（DVD使用）、Mpeg4（的DVDRIP使用的都是它的变种，如：divx，xvid等）、Mpeg4 AVC（正热门）；音频编码方面主要是MPEG Audio Layer 1/2、MPEG Audio Layer 3（大名鼎鼎的mp3）、MPEG-2 AAC 、MPEG-4 AAC等等。注意：DVD音频没有采用Mpeg的。</p>
+<p>H.26X系列 （由ITU[国际电传视讯联盟]主导，侧重网络传输，注意：只是视频编码） 包括H.261、H.262、H.263、H.263+、H.263++、H.264（就是MPEG4 AVC-合作的结晶）</p>
+<p>目前最常用的编码标准是视频H.264，音频AAC。</p>
+<p>提问：</p>
+<p>H.264是编码格式还是文件格式？</p>
+<p>mp4是编码格式还是文件格式？</p>
+<h2 id="2-2-FFmpeg-的基本使用"><a href="#2-2-FFmpeg-的基本使用" class="headerlink" title="2.2 FFmpeg 的基本使用"></a>2.2 FFmpeg 的基本使用</h2><p>我们将视频录制完成后，使用视频编码软件对视频进行编码，本项目 使用FFmpeg对视频进行编码 。</p>
+<p><img src="assets/1525744294334.png" alt="1525744294334"></p>
+<p>​    FFmpeg被许多开源项目采用，QQ影音、暴风影音、VLC等。</p>
+<p>下载：FFmpeg <a href="https://www.ffmpeg.org/download.html#build-windows" target="_blank" rel="noopener">https://www.ffmpeg.org/download.html#build-windows</a></p>
+<p><img src="assets/1525705384445.png" alt="1525705384445"></p>
+<p><img src="assets/1525705397681.png" alt="1525705397681"></p>
+<p>下载 ：ffmpeg-20180227-fa0c9d6-win64-static.zip，并解压，本教程将ffmpeg解压到了F:\devenv\edusoft\ffmpeg-20180227-fa0c9d6-win64-static\ffmpeg-20180227-fa0c9d6-win64-static下。</p>
+<p>将F:\devenv\edusoft\ffmpeg-20180227-fa0c9d6-win64-static\ffmpeg-20180227-fa0c9d6-win64-static\bin目录配置在path环境变量中。</p>
+<p>检测是否安装成功：</p>
+<p><img src="assets/1525705546722.png" alt="1525705546722"></p>
+<p>简单的测试：</p>
+<p>将一个.avi文件转成mp4、mp3、gif等。</p>
+<p>比如我们将lucene.avi文件转成mp4，运行如下命令：</p>
+<p>ffmpeg -i lucene.avi lucene.mp4</p>
+<p>转成mp3：ffmpeg -i lucene.avi lucene.mp3</p>
+<p>转成gif：ffmpeg -i lucene.avi lucene.gif</p>
+<p>官方文档（英文）：<a href="http://ffmpeg.org/ffmpeg.html" target="_blank" rel="noopener">http://ffmpeg.org/ffmpeg.html</a></p>
+<h2 id="2-2-生成m3u8-ts文件"><a href="#2-2-生成m3u8-ts文件" class="headerlink" title="2.2 生成m3u8/ts文件"></a>2.2 生成m3u8/ts文件</h2><p>使用ffmpeg生成 m3u8的步骤如下：</p>
+<p>第一步：先将avi视频转成mp4</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg.exe -i  lucene.avi -c:v libx264 -s 1280x720 -pix_fmt yuv420p -b:a 63k -b:v 753k -r 18 .\lucene.mp4</span><br></pre></td></tr></table></figure>
+<p>下面把各参数意思大概讲讲，大概了解意思即可，不再此展开流媒体专业知识的讲解。</p>
+<p>-c:v 视频编码为x264 ，x264编码是H264的一种开源编码格式。</p>
+<p>-s 设置分辨率</p>
+<p>-pix_fmt yuv420p：设置像素采样方式，主流的采样方式有三种，YUV4:4:4，YUV4:2:2，YUV4:2:0，它的作用是根据采样方式来从码流中还原每个像素点的YUV（亮度信息与色彩信息）值。</p>
+<p>-b 设置码率，-b:a和-b:v分别表示音频的码率和视频的码率，-b表示音频加视频的总码率。码率对一个视频质量有很大的作用，后边会介绍。</p>
+<p>-r：帧率，表示每秒更新图像画面的次数，通常大于24肉眼就没有连贯与停顿的感觉了。</p>
+<p>第二步：将mp4生成m3u8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i  lucene.mp4   -hls_time 10 -hls_list_size 0  -hls_segment_filename ./hls/lucene_%05d.ts ./hls/lucene.m3u8</span><br></pre></td></tr></table></figure>
+<p>-hls_time 设置每片的长度，单位为秒</p>
+<p>-hls_list_size n: 保存的分片的数量，设置为0表示保存所有分片</p>
+<p>-hls_segment_filename ：段文件的名称，%05d表示5位数字</p>
+<p>生成的效果是：将lucene.mp4视频文件每10秒生成一个ts文件，最后生成一个m3u8文件，m3u8文件是ts的索引文件。</p>
+<p>​    使用VLC打开m3u8文件，测试播放效果，VLC 是一款自由、开源的跨平台多媒体播放器及框架，可播放大多数多媒体文件，以及 DVD、音频 CD、VCD 及各类流媒体协议。（<a href="http://www.videolan.org/" target="_blank" rel="noopener">http://www.videolan.org/</a>）</p>
+<p><img src="assets/1525759910613.png" alt="1525759910613"></p>
+<h3 id="2-2-1-码率的设置"><a href="#2-2-1-码率的设置" class="headerlink" title="2.2.1 码率的设置"></a>2.2.1 码率的设置</h3><p>码率又叫比特率即每秒传输的bit数，单位为bps(Bit Per Second)，码率越大传送数据的速度越快。</p>
+<p>码率的计算公式是：文件大小（转成bit）/ 时长（秒）/1024 = kbps 即每秒传输千位数</p>
+<p>例如一个1M的视频，它的时长是10s，它的码率等于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1*1024*1024*8/10/1024 = 819Kbps</span><br></pre></td></tr></table></figure>
+<p>码率设置到多少才能达到最好，通过根据个人的经验或参考一些视频网台给出的参考，下图是优酷对码率的要求：</p>
+<p><img src="assets/1525779597959.png" alt="1525779597959"></p>
+<p>​    如果要将视频上传到优酷则必须按照上面的要求，如果是自己搭建视频服务器，码率设置不易过大，最终达到的视频清晰度满足业务需求即可。</p>
+<h1 id="3-播放器"><a href="#3-播放器" class="headerlink" title="3 播放器"></a>3 播放器</h1><h2 id="3-1-技术选型"><a href="#3-1-技术选型" class="headerlink" title="3.1 技术选型"></a>3.1 技术选型</h2><p>​    视频编码后要使用播放器对其进行解码、播放视频内容。在web应用中常用的播放器有flash播放器、H5播放器或浏览器插件播放器，其中以flash和H5播放器最常见。</p>
+<p>flash播放器：缺点是需要在客户机安装Adobe Flash Player播放器，优点是flash播放器已经很成熟了，并且浏览器对flash支持也很好。</p>
+<p>H5播放器：基于h5自带video标签进行构建，优点是大部分浏览器支持H5，不用再安装第三方的flash播放器，并且随着前端技术的发展，h5技术会越来越成熟。</p>
+<p>本项目采用H5播放器，使用Video.js开源播放器。</p>
+<p>​    Video.js是一款基于HTML5世界的网络视频播放器。它支持HTML5和Flash视频，它支持在台式机和移动设备上播放视频。这个项目于2010年中开始，目前已在40万网站使用。</p>
+<p>官方地址：<a href="http://videojs.com/" target="_blank" rel="noopener">http://videojs.com/</a></p>
+<h2 id="3-2-下载video-js"><a href="#3-2-下载video-js" class="headerlink" title="3.2 下载video.js"></a>3.2 下载video.js</h2><p>Video.js： <a href="https://github.com/videojs/video.js" target="_blank" rel="noopener">https://github.com/videojs/video.js</a></p>
+<p>videojs-contrib-hls： <a href="https://github.com/videojs/videojs-contrib-hls#installation" target="_blank" rel="noopener">https://github.com/videojs/videojs-contrib-hls#installation</a></p>
+<p>（videojs-contrib-hls是播放hls的一个插件）</p>
+<p>使用文档：<a href="http://docs.videojs.com/tutorial-videojs_.html" target="_blank" rel="noopener">http://docs.videojs.com/tutorial-videojs_.html</a></p>
+<p>本教程使用 video.js 6.7.3 版本，videojs-contrib-hls 5.14.1版本。</p>
+<p>下载上边两个文件，为了测试需求将其放在门户的plugins目录中。</p>
+<p><img src="assets/1525833450322.png" alt="1525833450322"></p>
+<h2 id="3-3-搭建媒体服务器"><a href="#3-3-搭建媒体服务器" class="headerlink" title="3.3 搭建媒体服务器"></a>3.3 搭建媒体服务器</h2><p>正常使用video.js播放视频是通过一个网页，用户通过浏览器打开网页去播放视频，网页和视频都从web服务器请求，通常视频的url地址使用单独的域名。</p>
+<h3 id="3-3-1-Nginx媒体服务器"><a href="#3-3-1-Nginx媒体服务器" class="headerlink" title="3.3.1 Nginx媒体服务器"></a>3.3.1 Nginx媒体服务器</h3><p>HLS协议基于Http协议，本项目使用Nginx作为视频服务器。下图是Nginx媒体服务器的配置流程图：</p>
+<p><img src="assets/1525835661918.png" alt="1525835661918"></p>
+<p>1、用户打开&lt;<a href="http://www.xuecheng.com&gt;上边的video.html网页" target="_blank" rel="noopener">www.xuecheng.com&gt;上边的video.html网页</a></p>
+<p>在此网页中引入视频链接，视频地址指向video.xuecheng.com</p>
+<p>2、video.xuecheng.com进行负载均衡处理，将视频请求转发到媒体服务器</p>
+<p>根据上边的流程，我们在媒体服务器上安装Nginx，并配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#学成网媒体服务</span><br><span class="line">server &#123;</span><br><span class="line">    listen       90;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #视频目录</span><br><span class="line">    location /video/ &#123;</span><br><span class="line">        alias   F:/develop/video/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-2-媒体服务器代理"><a href="#3-3-2-媒体服务器代理" class="headerlink" title="3.3.2 媒体服务器代理"></a>3.3.2 媒体服务器代理</h3><p>媒体服务器不止一台，通过代理实现负载均衡功能，使用Nginx作为媒体服务器的代理，此代理服务器作为video.xuecheng.com域名服务器。</p>
+<p>配置video.xuecheng.com虚拟主机：</p>
+<p>注意：开发中代理服务器和媒体服务器在同一台服务器，使用同一个Nginx。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#学成网媒体服务代理</span><br><span class="line">map $http_origin $origin_list&#123;</span><br><span class="line">    default http://www.xuecheng.com;</span><br><span class="line">    &quot;~http://www.xuecheng.com&quot; http://www.xuecheng.com;</span><br><span class="line">    &quot;~http://ucenter.xuecheng.com&quot; http://ucenter.xuecheng.com;</span><br><span class="line">&#125;</span><br><span class="line">#学成网媒体服务代理</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name video.xuecheng.com;</span><br><span class="line">    </span><br><span class="line">    location /video &#123;  </span><br><span class="line">        proxy_pass http://video_server_pool;  </span><br><span class="line">        add_header Access-Control-Allow-Origin $origin_list;</span><br><span class="line">        #add_header Access-Control-Allow-Origin *;</span><br><span class="line">        add_header Access-Control-Allow-Credentials true;  </span><br><span class="line">        add_header Access-Control-Allow-Methods GET;</span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>cors跨域参数：</p>
+<p>Access-Control-Allow-Origin：允许跨域访问的外域地址</p>
+<p>​    通常允许跨域访问的站点不是一个，所以这里用map定义了多个站点。</p>
+<p>​    如果允许任何站点跨域访问则设置为*，通常这是不建议的。</p>
+<p>Access-Control-Allow-Credentials： 允许客户端携带证书访问</p>
+<p>Access-Control-Allow-Methods：允许客户端跨域访问的方法</p>
+<p>video_server_pool的配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#媒体服务</span><br><span class="line">upstream video_server_pool&#123;</span><br><span class="line">    server 127.0.0.1:90 weight=10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-测试video-js"><a href="#3-4-测试video-js" class="headerlink" title="3.4 测试video.js"></a>3.4 测试video.js</h2><p>参考<a href="https://github.com/videojs/videojs-contrib-hls#installation" target="_blank" rel="noopener">https://github.com/videojs/videojs-contrib-hls#installation</a></p>
+<p> <a href="http://jsbin.com/vokipos/8/edit?html" target="_blank" rel="noopener">http://jsbin.com/vokipos/8/edit?html</a>,output</p>
+<p>1、编写测试页面video.html。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</span><br><span class="line">    &lt;title&gt;视频播放&lt;/title&gt;</span><br><span class="line">    &lt;link href=&quot;/plugins/videojs/video-js.css&quot; rel=&quot;stylesheet&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;video id=example-video width=800 height=600 class=&quot;video-js vjs-default-skin vjs-big-play-centered&quot; controls poster=&quot;http://127.0.0.1:90/video/add.jpg&quot;&gt;</span><br><span class="line">    &lt;source</span><br><span class="line">            src=&quot;http://video.xuecheng.com/video/hls/lucene.m3u8&quot;</span><br><span class="line">            type=&quot;application/x-mpegURL&quot;&gt;</span><br><span class="line">&lt;/video&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; onClick=&quot;switchvideo()&quot; value=&quot;switch&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src=&quot;/plugins/videojs/video.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;/plugins/videojs/videojs-contrib-hls.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var player = videojs(&apos;example-video&apos;);</span><br><span class="line">    //player.play();</span><br><span class="line">    //切换视频</span><br><span class="line">    function switchvideo()&#123;</span><br><span class="line">        player.src(&#123;</span><br><span class="line">            src: &apos;http://video.xuecheng.com/video/hls/lucene.m3u8&apos;,</span><br><span class="line">            type: &apos;application/x-mpegURL&apos;,</span><br><span class="line">            withCredentials: true</span><br><span class="line">        &#125;);</span><br><span class="line">        player.play();</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2、测试</p>
+<p>配置hosts文件，本教程开发环境使用Window10，修改C:\Windows\System32\drivers\etc\hosts文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 video.xuecheng.com</span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><img src="assets/1525838022185.png" alt="1525838022185"></p>
+<p>点击”switch”测试切换视频功能。</p>
+<h1 id="4-搭建学习中心前端"><a href="#4-搭建学习中心前端" class="headerlink" title="4 搭建学习中心前端"></a>4 搭建学习中心前端</h1><p>​    学成网学习中心提供学生在线学习的各各模块，上一章节测试的点播学习功能也属于学习中心的一部分，本章节将实现学习中心点播学习的前端部分。之所以先实现前端部分，主要是因为要将video.js+vue.js集成，一部分精力还是要放在技术研究。</p>
+<h2 id="4-1-界面原型"><a href="#4-1-界面原型" class="headerlink" title="4.1 界面原型"></a>4.1 界面原型</h2><p>先看一下界面原型，如下图，最终的目标是在此页面使用video.js播放视频。</p>
+<p><img src="assets/1525846743945.png" alt="1525846743945"></p>
+<h2 id="4-2-创建学习中心工程"><a href="#4-2-创建学习中心工程" class="headerlink" title="4.2 创建学习中心工程"></a>4.2 创建学习中心工程</h2><p>学习中心的用户是学生，为了便于系统维护和扩展，单独创建学习中心工程：</p>
+<p>1、从资料目录拷贝xc-ui-pc-leanring.zip 并解压到xc-ui-pc-leanring目录。</p>
+<p>2、使用webstorm创建打开xc-ui-pc-leanring目录</p>
+<p>3、进入xc-ui-pc-leanring目录，执行cnpm install，将根据package.json的依赖配置远程下载依赖的js包。</p>
+<p>创建完成，xc-ui-pc-leanring工程如下：</p>
+<p><img src="assets/1525852215604.png" alt="1525852215604"></p>
+<h3 id="4-2-1-配置域名"><a href="#4-2-1-配置域名" class="headerlink" title="4.2.1 配置域名"></a>4.2.1 配置域名</h3><p>学习中心的二级域名为ucenter.xuecheng.com，我们在nginx中配置ucenter虚拟主机。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#学成网用户中心</span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name ucenter.xuecheng.com;</span><br><span class="line">    </span><br><span class="line">    #个人中心</span><br><span class="line">    location / &#123;  </span><br><span class="line">        proxy_pass http://ucenter_server_pool;  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">#前端ucenter</span><br><span class="line">upstream ucenter_server_pool&#123;</span><br><span class="line">  #server 127.0.0.1:7081 weight=10;</span><br><span class="line">  server 127.0.0.1:13000 weight=10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-2-2-访问"><a href="#4-2-2-访问" class="headerlink" title="4.2.2 访问"></a>4.2.2 访问</h3><p>启动工程，看到下边的界面说明本工程创建完成：</p>
+<p><img src="assets/1525862963742.png" alt="1525862963742"></p>
+<h2 id="4-3-调试视频播放页面"><a href="#4-3-调试视频播放页面" class="headerlink" title="4.3 调试视频播放页面"></a>4.3 调试视频播放页面</h2><p>​    使用vue-video-player组件将video.js集成到vue.js中，本项目使用vue-video-player实现video.js播放。</p>
+<p>组件地址：<a href="https://github.com/surmon-china/vue-video-player" target="_blank" rel="noopener">https://github.com/surmon-china/vue-video-player</a></p>
+<p>上面的 xc-ui-pc-learning工程已经添加vue-video-player组件，我们在vue页面直接使用即可。</p>
+<p>​    前边我们已经测试通过 video.js，下面我们直接在vue页面中使用vue-video-player完成视频播放。</p>
+<p>导入learning_video.vue页面到course 模块下。</p>
+<p>配置路由：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import learning_video from &apos;@/module/course/page/learning_video.vue&apos;;</span><br><span class="line">  &#123;</span><br><span class="line">    path: &apos;/learning/:courseId/:chapter&apos;,</span><br><span class="line">    component: learning_video,</span><br><span class="line">    name: &apos;录播视频学习&apos;,</span><br><span class="line">    hidden: false,</span><br><span class="line">    iconCls: &apos;el-icon-document&apos;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>预览效果：</p>
+<p>请求：<a href="http://ucenter.xuecheng.com/#/learning/1/2" target="_blank" rel="noopener">http://ucenter.xuecheng.com/#/learning/1/2</a></p>
+<p>第一个参数：courseId，课程id，这里是测试页面效果随便输入一个ID即可，这里输入1</p>
+<p>第二个参数：chapter，课程计划id，这里是测试页面效果随便输入一个ID即可，这里输入2</p>
+<p><img src="assets/1537843343434.png" alt="1537843343434"></p>
+<h1 id="6-媒资管理"><a href="#6-媒资管理" class="headerlink" title="6 媒资管理"></a>6 媒资管理</h1><p>前边章节完成在线视频播放，如何实现点击课程计划播放视频呢，课程视频如何管理呢？</p>
+<p>本节开始将对课程视频进行管理。</p>
+<h2 id="6-1需求分析"><a href="#6-1需求分析" class="headerlink" title="6.1需求分析"></a>6.1需求分析</h2><p>​    媒资管理系统是每个在线教育平台所必须具备的，百度百科对它的定义如下：<img src="assets/1525938525751.png" alt="1525938525751"></p>
+<p>每个教学机构都可以在媒资系统管理自己的教学资源，包括：视频、教案等文件。</p>
+<p>目前媒资管理的主要管理对象是课程录播视频，包括：媒资文件的查询、视频上传、视频删除、视频处理等。</p>
+<p>媒资查询：教学机构查询自己所拥有的媒体文件。</p>
+<p>视频上传：将用户线下录制的教学视频上传到媒资系统。</p>
+<p>视频处理：视频上传成功，系统自动对视频进行编码处理。</p>
+<p>视频删除 ：如果该视频已不再使用，可以从媒资系统删除。</p>
+<p>下边是媒资系统与其它系统的交互情况：</p>
+<p><img src="assets/1525943895450.png" alt="1525943895450"></p>
+<p>1、上传媒资文件</p>
+<p>前端/客户端请求媒资系统上传文件。</p>
+<p>文件上传成功将文件存储到媒资服务器，将文件信息存储到数据库。</p>
+<p>2、使用媒资</p>
+<p>课程管理请求媒资系统查询媒资信息，将课程计划与媒资信息对应、存储。</p>
+<p>3、视频播放</p>
+<p>用户进入学习中心请求学习服务学习在线播放视频。</p>
+<p>学习服务校验用户资格通过后请求媒资系统获取视频地址。</p>
+<h2 id="6-2-开发环境"><a href="#6-2-开发环境" class="headerlink" title="6.2 开发环境"></a>6.2 开发环境</h2><h3 id="6-2-1-创建媒资数据库"><a href="#6-2-1-创建媒资数据库" class="headerlink" title="6.2.1 创建媒资数据库"></a>6.2.1 创建媒资数据库</h3><p>1、媒资文件信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">@Document(collection = &quot;media_file&quot;)</span><br><span class="line">public class MediaFile &#123;</span><br><span class="line">    /*</span><br><span class="line">    文件id、名称、大小、文件类型、文件状态（未上传、上传完成、上传失败）、上传时间、视频处理方式、视频处理状态、hls_m3u8,hls_ts_list、课程视频信息（课程id、章节id）</span><br><span class="line">     */</span><br><span class="line">    @Id</span><br><span class="line">    //文件id</span><br><span class="line">    private String fileId;</span><br><span class="line">    //文件名称</span><br><span class="line">    private String fileName;</span><br><span class="line">    //文件原始名称</span><br><span class="line">    private String fileOriginalName;</span><br><span class="line">    //文件路径</span><br><span class="line">    private String filePath;</span><br><span class="line">     //文件url</span><br><span class="line">    private String fileUrl;</span><br><span class="line">    //文件类型</span><br><span class="line">    private String fileType;</span><br><span class="line">    //mimetype</span><br><span class="line">    private String mimeType;</span><br><span class="line">    //文件大小</span><br><span class="line">    private Long fileSize;</span><br><span class="line">    //文件状态</span><br><span class="line">    private String fileStatus;</span><br><span class="line">    //上传时间</span><br><span class="line">    private Date uploadTime;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、创建xc_media数据库</p>
+<p>媒资系统使用mongodb数据库存储媒资信息。</p>
+<p><img src="assets/1525945157823.png" alt="1525945157823"></p>
+<h3 id="6-2-2-创建媒资服务工程"><a href="#6-2-2-创建媒资服务工程" class="headerlink" title="6.2.2 创建媒资服务工程"></a>6.2.2 创建媒资服务工程</h3><p>媒资管理的相关功能单独在媒资服务中开发，下边创建媒资服务工程（xc-service-manage-media）。</p>
+<p>媒资服务的配置与cms类似，导入 “资料”–》xc-service-manage-media工程，工程结构如下：</p>
+<p><img src="assets/1525945035701.png" alt="1525945035701"></p>
+<h2 id="6-3上传文件"><a href="#6-3上传文件" class="headerlink" title="6.3上传文件"></a>6.3上传文件</h2><h3 id="6-3-1-断点续传解决方案"><a href="#6-3-1-断点续传解决方案" class="headerlink" title="6.3.1 断点续传解决方案"></a>6.3.1 断点续传解决方案</h3><p>​    通常视频文件都比较大，所以对于媒资系统上传文件的需求要满足大文件的上传要求。http协议本身对上传文件大小没有限制，但是客户的网络环境质量、电脑硬件环境等参差不齐，如果一个大文件快上传完了网断了，电断了没有上传完成，需要客户重新上传，这是致命的，所以对于大文件上传的要求最基本的是断点续传。</p>
+<p>什么是断点续传：</p>
+<p>​    引用百度百科：断点续传指的是在下载或上传时，将下载或上传任务（一个文件或一个压缩包）人为的划分为几个部分，每一个部分采用一个线程进行上传或下载，如果碰到网络故障，可以从已经上传或下载的部分开始继续上传下载未完成的部分，而没有必要从头开始上传下载，断点续传可以提高节省操作时间，提高用户体验性。</p>
+<p>如下图：</p>
+<p><img src="assets/1526025335659.png" alt="1526025335659"></p>
+<p>上传流程如下：</p>
+<p>1、上传前先把文件分成块</p>
+<p>2、一块一块的上传，上传中断后重新上传，已上传的分块则不用再上传</p>
+<p>3、各分块上传完成最后合并文件</p>
+<p>文件下载则同理。</p>
+<h3 id="6-3-2-文件分块与合并"><a href="#6-3-2-文件分块与合并" class="headerlink" title="6.3.2 文件分块与合并"></a>6.3.2 文件分块与合并</h3><p>为了更好的理解文件分块上传的原理，下边用java代码测试文件的分块与合并。</p>
+<h4 id="6-3-2-1文件分块"><a href="#6-3-2-1文件分块" class="headerlink" title="6.3.2.1文件分块"></a>6.3.2.1文件分块</h4><p>文件分块的流程如下：</p>
+<p>1、获取源文件长度</p>
+<p>2、根据设定的分块文件的大小计算出块数</p>
+<p>3、从源文件读数据依次向每一个块文件写数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//测试文件分块方法</span><br><span class="line">    @Test</span><br><span class="line">    public void testChunk() throws IOException &#123;</span><br><span class="line">        File sourceFile = new File(&quot;F:/develop/ffmpeg/lucene.mp4&quot;);</span><br><span class="line">//        File sourceFile = new File(&quot;d:/logo.png&quot;);</span><br><span class="line">        String chunkPath = &quot;F:/develop/ffmpeg/chunk/&quot;;</span><br><span class="line">        File chunkFolder = new File(chunkPath);</span><br><span class="line">        if(!chunkFolder.exists())&#123;</span><br><span class="line">            chunkFolder.mkdirs();</span><br><span class="line">        &#125;</span><br><span class="line">        //分块大小</span><br><span class="line">        long chunkSize = 1024*1024*1;</span><br><span class="line">        //分块数量</span><br><span class="line">        long chunkNum = (long) Math.ceil(sourceFile.length() * 1.0 / chunkSize );</span><br><span class="line">        if(chunkNum&lt;=0)&#123;</span><br><span class="line">            chunkNum = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        //缓冲区大小</span><br><span class="line">        byte[] b = new byte[1024];</span><br><span class="line">        //使用RandomAccessFile访问文件</span><br><span class="line">        RandomAccessFile raf_read = new RandomAccessFile(sourceFile, &quot;r&quot;);</span><br><span class="line">        //分块</span><br><span class="line">        for(int i=0;i&lt;chunkNum;i++)&#123;</span><br><span class="line">            //创建分块文件</span><br><span class="line">            File file = new File(chunkPath+i);</span><br><span class="line">            boolean newFile = file.createNewFile();</span><br><span class="line">            if(newFile)&#123;</span><br><span class="line">                //向分块文件中写数据</span><br><span class="line">                RandomAccessFile raf_write = new RandomAccessFile(file, &quot;rw&quot;);</span><br><span class="line">                int len = -1;</span><br><span class="line">                while((len = raf_read.read(b))!=-1)&#123;</span><br><span class="line">                    raf_write.write(b,0,len);</span><br><span class="line">                    if(file.length()&gt;chunkSize)&#123;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                raf_write.close();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        raf_read.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-2-2文件合并"><a href="#6-3-2-2文件合并" class="headerlink" title="6.3.2.2文件合并"></a>6.3.2.2文件合并</h4><p>文件合并流程：</p>
+<p>1、找到要合并的文件并按文件合并的先后进行排序。</p>
+<p>2、创建合并文件</p>
+<p>3、依次从合并的文件中读取数据向合并文件写入数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">//测试文件合并方法</span><br><span class="line">@Test</span><br><span class="line">public void testMerge() throws IOException &#123;</span><br><span class="line">    //块文件目录</span><br><span class="line">    File chunkFolder = new File(&quot;F:/develop/ffmpeg/chunk/&quot;);</span><br><span class="line">    //合并文件</span><br><span class="line">    File mergeFile = new File(&quot;F:/develop/ffmpeg/lucene1.mp4&quot;);</span><br><span class="line">    if(mergeFile.exists())&#123;</span><br><span class="line">        mergeFile.delete();</span><br><span class="line">    &#125;</span><br><span class="line">    //创建新的合并文件</span><br><span class="line">    mergeFile.createNewFile();</span><br><span class="line">    //用于写文件</span><br><span class="line">    RandomAccessFile raf_write = new RandomAccessFile(mergeFile, &quot;rw&quot;);</span><br><span class="line">    //指针指向文件顶端</span><br><span class="line">    raf_write.seek(0);</span><br><span class="line">    //缓冲区</span><br><span class="line">    byte[] b = new byte[1024];</span><br><span class="line">    //分块列表</span><br><span class="line">    File[] fileArray = chunkFolder.listFiles();</span><br><span class="line">    // 转成集合，便于排序</span><br><span class="line">    List&lt;File&gt; fileList = new ArrayList&lt;File&gt;(Arrays.asList(fileArray));</span><br><span class="line">    // 从小到大排序</span><br><span class="line">    Collections.sort(fileList, new Comparator&lt;File&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public int compare(File o1, File o2) &#123;</span><br><span class="line">            if (Integer.parseInt(o1.getName()) &lt; Integer.parseInt(o2.getName())) &#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    //合并文件</span><br><span class="line">    for(File chunkFile:fileList)&#123;</span><br><span class="line">        RandomAccessFile raf_read = new RandomAccessFile(chunkFile,&quot;rw&quot;);</span><br><span class="line">        int len = -1;</span><br><span class="line">        while((len=raf_read.read(b))!=-1)&#123;</span><br><span class="line">            raf_write.write(b,0,len);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        raf_read.close();</span><br><span class="line">    &#125;</span><br><span class="line">    raf_write.close();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-3-3-前端页面"><a href="#6-3-3-前端页面" class="headerlink" title="6.3.3 前端页面"></a>6.3.3 前端页面</h3><p>上传文件的页面内容参考：“资料”–》upload.vue文件</p>
+<h4 id="6-3-3-1-WebUploader介绍"><a href="#6-3-3-1-WebUploader介绍" class="headerlink" title="6.3.3.1 WebUploader介绍"></a>6.3.3.1 WebUploader介绍</h4><p>如何在web页面实现断点续传？</p>
+<p>常见的方案有：</p>
+<p>1、通过Flash上传，比如SWFupload、Uploadify。</p>
+<p>2、安装浏览器插件，变相的pc客户端，用的比较少。</p>
+<p>3、Html5</p>
+<p>随着html5的流行，本项目采用Html5完成文件分块上传。</p>
+<p>​    本项目使用WebUploader完成大文件上传功能的开发，WebUploader官网地址：<a href="http://fexteam.gz01.bdysite.com/webuploader/" target="_blank" rel="noopener">http://fexteam.gz01.bdysite.com/webuploader/</a></p>
+<p><img src="assets/1526026806589.png" alt="1526026806589"></p>
+<p>特性如下：</p>
+<p><img src="assets/1526026833275.png" alt="1526026833275"></p>
+<p>使用WebUploader上传流程如下：</p>
+<p><img src="assets/1530708060533.png" alt="1530708060533"></p>
+<h4 id="6-3-3-1-钩子方法"><a href="#6-3-3-1-钩子方法" class="headerlink" title="6.3.3.1 钩子方法"></a>6.3.3.1 钩子方法</h4><p>在webuploader中提供很多钩子方法，下边列出一些重要的：</p>
+<p><img src="assets/1526029263953.png" alt="1526029263953"></p>
+<p>本项目使用如下钩子方法：</p>
+<p>1）before-send-file</p>
+<p>在开始对文件分块儿之前调用，可以做一些上传文件前的准备工作，比如检查文件目录是否创建完成等。</p>
+<p>2）before-send</p>
+<p>在上传文件分块之前调用此方法，可以请求服务端检查分块是否存在，如果已存在则此分块儿不再上传。</p>
+<p>3）after-send-file</p>
+<p>在所有分块上传完成后触发，可以请求服务端合并分块文件。</p>
+<p>注册钩子方法源代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">WebUploader.Uploader.register(&#123;</span><br><span class="line">    &quot;before-send-file&quot;:&quot;beforeSendFile&quot;,</span><br><span class="line">    &quot;before-send&quot;:&quot;beforeSend&quot;,</span><br><span class="line">    &quot;after-send-file&quot;:&quot;afterSendFile&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-3-2-构建WebUploader"><a href="#6-3-3-2-构建WebUploader" class="headerlink" title="6.3.3.2 构建WebUploader"></a>6.3.3.2 构建WebUploader</h4><p>使用webUploader前需要创建webUploader对象。</p>
+<p>指定上传分块的地址：/api/media/upload/uploadchunk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 创建uploader对象，配置参数</span><br><span class="line">this.uploader = WebUploader.create(</span><br><span class="line">  &#123;</span><br><span class="line">    swf:&quot;/static/plugins/webuploader/dist/Uploader.swf&quot;,//上传文件的flash文件，浏览器不支持h5时启动flash</span><br><span class="line">    server:&quot;/api/media/upload/uploadchunk&quot;,//上传分块的服务端地址，注意跨域问题</span><br><span class="line">    fileVal:&quot;file&quot;,//文件上传域的name</span><br><span class="line">    pick:&quot;#picker&quot;,//指定选择文件的按钮容器</span><br><span class="line">    auto:false,//手动触发上传</span><br><span class="line">    disableGlobalDnd:true,//禁掉整个页面的拖拽功能</span><br><span class="line">    chunked:true,// 是否分块上传</span><br><span class="line">    chunkSize:1*1024*1024, // 分块大小（默认5M）</span><br><span class="line">    threads:3, // 开启多个线程（默认3个）</span><br><span class="line">    prepareNextFile:true// 允许在文件传输时提前把下一个文件准备好</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-3-3-before-send-file"><a href="#6-3-3-3-before-send-file" class="headerlink" title="6.3.3.3 before-send-file"></a>6.3.3.3 before-send-file</h4><p>文件开始上传前前端请求服务端准备上传工作。</p>
+<p>参考源代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type:&quot;POST&quot;,</span><br><span class="line">url:&quot;/api/media/upload/register&quot;,</span><br><span class="line">data:&#123;</span><br><span class="line">  // 文件唯一表示</span><br><span class="line">  fileMd5:this.fileMd5,</span><br><span class="line">  fileName: file.name,</span><br><span class="line">  fileSize:file.size,</span><br><span class="line">  mimetype:file.type,</span><br><span class="line">  fileExt:file.ext</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-3-4-before-send"><a href="#6-3-3-4-before-send" class="headerlink" title="6.3.3.4 before-send"></a>6.3.3.4 before-send</h4><p>上传分块前前端请求服务端校验分块是否存在。</p>
+<p>参考源代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type:&quot;POST&quot;,</span><br><span class="line">url:&quot;/api/media/upload/checkchunk&quot;,</span><br><span class="line">data:&#123;</span><br><span class="line">  // 文件唯一表示</span><br><span class="line">  fileMd5:this.fileMd5,</span><br><span class="line">  // 当前分块下标</span><br><span class="line">  chunk:block.chunk,</span><br><span class="line">  // 当前分块大小</span><br><span class="line">  chunkSize:block.end-block.start</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-3-5-after-send-file"><a href="#6-3-3-5-after-send-file" class="headerlink" title="6.3.3.5 after-send-file"></a>6.3.3.5 after-send-file</h4><p>在所有分块上传完成后触发，可以请求服务端合并分块文件</p>
+<p>参考代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">type:&quot;POST&quot;,</span><br><span class="line">url:&quot;/api/media/upload/mergechunks&quot;,</span><br><span class="line">data:&#123;</span><br><span class="line">  fileMd5:this.fileMd5,</span><br><span class="line">  fileName: file.name,</span><br><span class="line">  fileSize:file.size,</span><br><span class="line">  mimetype:file.type,</span><br><span class="line">  fileExt:file.ext</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-3-6-页面效果"><a href="#6-3-3-6-页面效果" class="headerlink" title="6.3.3.6 页面效果"></a>6.3.3.6 页面效果</h4><p><img src="assets/1530710972123.png" alt="1530710972123"></p>
+<h3 id="6-3-4-Api接口"><a href="#6-3-4-Api接口" class="headerlink" title="6.3.4 Api接口"></a>6.3.4 Api接口</h3><p>定义文件上传的Api接口，此接收是前端WebUploader调用服务端的接口。</p>
+<p>编写此接口需要参数前端WebUploader应用代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Api(value = &quot;媒资管理接口&quot;,description = &quot;媒资管理接口，提供文件上传，文件处理等接口&quot;)</span><br><span class="line">public interface MediaUploadControllerApi &#123;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(&quot;文件上传注册&quot;)</span><br><span class="line">    public ResponseResult register(String fileMd5,</span><br><span class="line">                                   String fileName,</span><br><span class="line">                                   Long fileSize,</span><br><span class="line">                                   String mimetype,</span><br><span class="line">                                   String fileExt);</span><br><span class="line"></span><br><span class="line">    @ApiOperation(&quot;分块检查&quot;)</span><br><span class="line">    public CheckChunkResult checkchunk(String fileMd5,</span><br><span class="line">                                       Integer chunk,</span><br><span class="line">                                       Integer chunkSize);</span><br><span class="line">    @ApiOperation(&quot;上传分块&quot;)</span><br><span class="line">    public ResponseResult uploadchunk(MultipartFile file,</span><br><span class="line">                                      Integer chunk,</span><br><span class="line">                                      String fileMd5);</span><br><span class="line">    @ApiOperation(&quot;合并文件&quot;)</span><br><span class="line">    public ResponseResult mergechunks(String fileMd5,</span><br><span class="line">                                      String fileName,</span><br><span class="line">                                      Long fileSize,</span><br><span class="line">                                      String mimetype,</span><br><span class="line">                                      String fileExt);</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-3-5媒资服务端编写"><a href="#6-3-5媒资服务端编写" class="headerlink" title="6.3.5媒资服务端编写"></a>6.3.5媒资服务端编写</h3><h4 id="6-3-5-1-业务流程"><a href="#6-3-5-1-业务流程" class="headerlink" title="6.3.5.1 业务流程"></a>6.3.5.1 业务流程</h4><p>服务端需要实现如下功能：</p>
+<p>1、上传前检查上传环境</p>
+<p>检查文件是否上传，已上传则直接返回。</p>
+<p>检查文件上传路径是否存在，不存在则创建。</p>
+<p>2、分块检查</p>
+<p>检查分块文件是否上传，已上传则返回true。</p>
+<p>未上传则检查上传路径是否存在，不存在则创建。</p>
+<p>3、分块上传</p>
+<p>将分块文件上传到指定的路径。</p>
+<p>4、合并分块</p>
+<p>将所有分块文件合并为一个文件。</p>
+<p>在数据库记录文件信息。</p>
+<h4 id="6-3-5-2-上传注册"><a href="#6-3-5-2-上传注册" class="headerlink" title="6.3.5.2 上传注册"></a>6.3.5.2 上传注册</h4><p>由于上传过程复杂，开发时按业务流程分别实现。</p>
+<p>1、配置</p>
+<p>application.yml配置上传文件的路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xc-service-manage-media:</span><br><span class="line">  upload-location: F:/develop/video/</span><br></pre></td></tr></table></figure>
+<p>2、定义Dao</p>
+<p>媒资文件管理Dao</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface MediaFileRepository extends MongoRepository&lt;MediaFile,String&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、Service</p>
+<p>功能：</p>
+<p>1）检查上传文件是否存在</p>
+<p>2）创建文件目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class MediaUploadService &#123;</span><br><span class="line">    private final static Logger LOGGER = LoggerFactory.getLogger(MediaUploadController.class);</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    MediaFileRepository mediaFileRepository;</span><br><span class="line"></span><br><span class="line">    //上传文件根目录</span><br><span class="line">    @Value(&quot;$&#123;xc-service-manage-media.upload-location&#125;&quot;)</span><br><span class="line">    String uploadPath;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 根据文件md5得到文件路径</span><br><span class="line">     * 规则：</span><br><span class="line">     * 一级目录：md5的第一个字符</span><br><span class="line">     * 二级目录：md5的第二个字符</span><br><span class="line">     * 三级目录：md5</span><br><span class="line">     * 文件名：md5+文件扩展名</span><br><span class="line">     * @param fileMd5 文件md5值</span><br><span class="line">     * @param fileExt 文件扩展名</span><br><span class="line">     * @return 文件路径</span><br><span class="line">     */</span><br><span class="line">    private String getFilePath(String fileMd5,String fileExt)&#123;</span><br><span class="line">        String filePath = uploadPath+fileMd5.substring(0, 1) + &quot;/&quot; + fileMd5.substring(1, 2) + &quot;/&quot; + fileMd5 + &quot;/&quot; + fileMd5 + &quot;.&quot; + fileExt;</span><br><span class="line">        return filePath;</span><br><span class="line">    &#125;</span><br><span class="line">    //得到文件目录相对路径，路径中去掉根目录</span><br><span class="line">    private String getFileFolderRelativePath(String fileMd5,String fileExt)&#123;</span><br><span class="line">        String filePath = fileMd5.substring(0, 1) + &quot;/&quot; + fileMd5.substring(1, 2) + &quot;/&quot; + fileMd5 + &quot;/&quot;;</span><br><span class="line">        return filePath;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //得到文件所在目录</span><br><span class="line">    private String getFileFolderPath(String fileMd5)&#123;</span><br><span class="line">        String fileFolderPath = uploadPath+ fileMd5.substring(0, 1) + &quot;/&quot; + fileMd5.substring(1, 2) + &quot;/&quot; + fileMd5 + &quot;/&quot; ;</span><br><span class="line">        return fileFolderPath;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //创建文件目录</span><br><span class="line">    private boolean createFileFold(String fileMd5)&#123;</span><br><span class="line">        //创建上传文件目录</span><br><span class="line">        String fileFolderPath = getFileFolderPath(fileMd5);</span><br><span class="line">        File fileFolder = new File(fileFolderPath);</span><br><span class="line">        if (!fileFolder.exists()) &#123;</span><br><span class="line">            //创建文件夹</span><br><span class="line">            boolean mkdirs = fileFolder.mkdirs();</span><br><span class="line">            return mkdirs;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //文件上传注册</span><br><span class="line">    public ResponseResult register(String fileMd5, String fileName, String fileSize, String mimetype, String fileExt) &#123;</span><br><span class="line">        //检查文件是否上传</span><br><span class="line">        //1、得到文件的路径</span><br><span class="line">        String filePath = getFilePath(fileMd5, fileExt);</span><br><span class="line">        File file = new File(filePath);</span><br><span class="line"></span><br><span class="line">        //2、查询数据库文件是否存在</span><br><span class="line">        Optional&lt;MediaFile&gt; optional = mediaFileRepository.findById(fileMd5);</span><br><span class="line">        //文件存在直接返回</span><br><span class="line">        if(file.exists() &amp;&amp; optional.isPresent())&#123;</span><br><span class="line">            ExceptionCast.cast(MediaCode.UPLOAD_FILE_REGISTER_EXIST);</span><br><span class="line">        &#125;</span><br><span class="line">        boolean fileFold = createFileFold(fileMd5);</span><br><span class="line">        if(!fileFold)&#123;</span><br><span class="line">            //上传文件目录创建失败</span><br><span class="line">            ExceptionCast.cast(MediaCode.UPLOAD_FILE_REGISTER_CREATEFOLDER_FAIL);</span><br><span class="line">        &#125;</span><br><span class="line">        return new ResponseResult(CommonCode.SUCCESS);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-5-3-分块检查"><a href="#6-3-5-3-分块检查" class="headerlink" title="6.3.5.3 分块检查"></a>6.3.5.3 分块检查</h4><p>在Service 中定义分块检查方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//得到块文件所在目录</span><br><span class="line">private String getChunkFileFolderPath(String fileMd5)&#123;</span><br><span class="line">    String fileChunkFolderPath = getFileFolderPath(fileMd5) +&quot;/&quot; + &quot;chunks&quot; + &quot;/&quot;;</span><br><span class="line">    return fileChunkFolderPath;</span><br><span class="line">&#125;</span><br><span class="line">//检查块文件</span><br><span class="line">public CheckChunkResult checkchunk(String fileMd5, String chunk, String chunkSize) &#123;</span><br><span class="line">    //得到块文件所在路径</span><br><span class="line">    String chunkfileFolderPath = getChunkFileFolderPath(fileMd5);</span><br><span class="line">    //块文件的文件名称以1,2,3..序号命名，没有扩展名</span><br><span class="line">    File chunkFile = new File(chunkfileFolderPath+chunk);</span><br><span class="line">    if(chunkFile.exists())&#123;</span><br><span class="line">        return new CheckChunkResult(MediaCode.CHUNK_FILE_EXIST_CHECK,true);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return new CheckChunkResult(MediaCode.CHUNK_FILE_EXIST_CHECK,false);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-5-4-上传分块"><a href="#6-3-5-4-上传分块" class="headerlink" title="6.3.5.4 上传分块"></a>6.3.5.4 上传分块</h4><p>在Service 中定义分块上传分块方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">//块文件上传</span><br><span class="line">public ResponseResult uploadchunk(MultipartFile file, String fileMd5, String chunk) &#123;</span><br><span class="line">    if(file == null)&#123;</span><br><span class="line">        ExceptionCast.cast(MediaCode.UPLOAD_FILE_REGISTER_ISNULL);</span><br><span class="line">    &#125;</span><br><span class="line">    //创建块文件目录</span><br><span class="line">    boolean fileFold = createChunkFileFolder(fileMd5);</span><br><span class="line">    //块文件</span><br><span class="line">    File chunkfile = new File(getChunkFileFolderPath(fileMd5) + chunk);</span><br><span class="line">    //上传的块文件</span><br><span class="line">    InputStream inputStream= null;</span><br><span class="line">    FileOutputStream outputStream = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        inputStream = file.getInputStream();</span><br><span class="line">        outputStream = new FileOutputStream(chunkfile);</span><br><span class="line">        IOUtils.copy(inputStream,outputStream);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        LOGGER.error(&quot;upload chunk file fail:&#123;&#125;&quot;,e.getMessage());</span><br><span class="line">        ExceptionCast.cast(MediaCode.CHUNK_FILE_UPLOAD_FAIL);</span><br><span class="line">    &#125;finally &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            inputStream.close();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        try &#123;</span><br><span class="line">            outputStream.close();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return new ResponseResult(CommonCode.SUCCESS);</span><br><span class="line">&#125;</span><br><span class="line">    //创建块文件目录</span><br><span class="line">    private boolean createChunkFileFolder(String fileMd5)&#123;</span><br><span class="line">        //创建上传文件目录</span><br><span class="line">        String chunkFileFolderPath = getChunkFileFolderPath(fileMd5);</span><br><span class="line">        File chunkFileFolder = new File(chunkFileFolderPath);</span><br><span class="line">        if (!chunkFileFolder.exists()) &#123;</span><br><span class="line">            //创建文件夹</span><br><span class="line">            boolean mkdirs = chunkFileFolder.mkdirs();</span><br><span class="line">            return mkdirs;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-5-5-合并分块"><a href="#6-3-5-5-合并分块" class="headerlink" title="6.3.5.5 合并分块"></a>6.3.5.5 合并分块</h4><p>在Service 中定义分块合并分块方法，功能如下：</p>
+<p>1）将块文件合并</p>
+<p>2）校验文件md5是否正确</p>
+<p>3）向Mongodb写入文件信息</p>
+<p>//合并块文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">public ResponseResult mergechunks(String fileMd5, String fileName, Long fileSize, String mimetype, String fileExt) &#123;</span><br><span class="line">    //获取块文件的路径</span><br><span class="line">    String chunkfileFolderPath = getChunkFileFolderPath(fileMd5);</span><br><span class="line">    File chunkfileFolder = new File(chunkfileFolderPath);</span><br><span class="line">    if(!chunkfileFolder.exists())&#123;</span><br><span class="line">        chunkfileFolder.mkdirs();</span><br><span class="line">    &#125;</span><br><span class="line">    //合并文件路径</span><br><span class="line">    File mergeFile = new File(getFilePath(fileMd5,fileExt));</span><br><span class="line">    //创建合并文件</span><br><span class="line">    //合并文件存在先删除再创建</span><br><span class="line">    if(mergeFile.exists())&#123;</span><br><span class="line">        mergeFile.delete();</span><br><span class="line">    &#125;</span><br><span class="line">    boolean newFile = false;</span><br><span class="line">    try &#123;</span><br><span class="line">        newFile = mergeFile.createNewFile();</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        LOGGER.error(&quot;mergechunks..create mergeFile fail:&#123;&#125;&quot;,e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">    if(!newFile)&#123;</span><br><span class="line">        ExceptionCast.cast(MediaCode.MERGE_FILE_CREATEFAIL);</span><br><span class="line">    &#125;</span><br><span class="line">    //获取块文件，此列表是已经排好序的列表</span><br><span class="line">    List&lt;File&gt; chunkFiles = getChunkFiles(chunkfileFolder);</span><br><span class="line">    //合并文件</span><br><span class="line">    mergeFile = mergeFile(mergeFile, chunkFiles);</span><br><span class="line">    if(mergeFile == null)&#123;</span><br><span class="line">        ExceptionCast.cast(MediaCode.MERGE_FILE_FAIL);</span><br><span class="line">    &#125;</span><br><span class="line">    //校验文件</span><br><span class="line">    boolean checkResult = this.checkFileMd5(mergeFile, fileMd5);</span><br><span class="line">    if(!checkResult)&#123;</span><br><span class="line">        ExceptionCast.cast(MediaCode.MERGE_FILE_CHECKFAIL);</span><br><span class="line">    &#125;</span><br><span class="line">    //将文件信息保存到数据库</span><br><span class="line">    MediaFile mediaFile = new MediaFile();</span><br><span class="line">    mediaFile.setFileId(fileMd5);</span><br><span class="line">    mediaFile.setFileName(fileMd5+&quot;.&quot;+fileExt);</span><br><span class="line">    mediaFile.setFileOriginalName(fileName);</span><br><span class="line">    //文件路径保存相对路径</span><br><span class="line">    mediaFile.setFilePath(getFileFolderRelativePath(fileMd5,fileExt));</span><br><span class="line">    mediaFile.setFileSize(fileSize);</span><br><span class="line">    mediaFile.setUploadTime(new Date());</span><br><span class="line">    mediaFile.setMimeType(mimetype);</span><br><span class="line">    mediaFile.setFileType(fileExt);</span><br><span class="line">    //状态为上传成功</span><br><span class="line">    mediaFile.setFileStatus(&quot;301002&quot;);</span><br><span class="line">    MediaFile save = mediaFileDao.save(mediaFile);</span><br><span class="line"></span><br><span class="line">    return new ResponseResult(CommonCode.SUCCESS);</span><br><span class="line">&#125;</span><br><span class="line"> //校验文件的md5值</span><br><span class="line">    private boolean checkFileMd5(File mergeFile,String md5)&#123;</span><br><span class="line">        if(mergeFile == null || StringUtils.isEmpty(md5))&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        //进行md5校验</span><br><span class="line">        FileInputStream mergeFileInputstream = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            mergeFileInputstream = new FileInputStream(mergeFile);</span><br><span class="line">            //得到文件的md5</span><br><span class="line">            String  mergeFileMd5 = DigestUtils.md5Hex(mergeFileInputstream);</span><br><span class="line">            //比较md5</span><br><span class="line">            if(md5.equalsIgnoreCase(mergeFileMd5))&#123;</span><br><span class="line">               return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            LOGGER.error(&quot;checkFileMd5 error,file is:&#123;&#125;,md5 is:&#123;&#125;&quot;,mergeFile.getAbsoluteFile(),md5);</span><br><span class="line">        &#125;finally&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                mergeFileInputstream.close();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return false;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//获取所有块文件</span><br><span class="line">    private List&lt;File&gt; getChunkFiles(File chunkfileFolder)&#123;</span><br><span class="line">        //获取路径下的所有块文件</span><br><span class="line">        File[] chunkFiles = chunkfileFolder.listFiles();</span><br><span class="line">        //将文件数组转成list，并排序</span><br><span class="line">        List&lt;File&gt; chunkFileList = new ArrayList&lt;File&gt;();</span><br><span class="line">        chunkFileList.addAll(Arrays.asList(chunkFiles));</span><br><span class="line">        //排序</span><br><span class="line">        Collections.sort(chunkFileList, new Comparator&lt;File&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public int compare(File o1, File o2) &#123;</span><br><span class="line">                if(Integer.parseInt(o1.getName())&gt;Integer.parseInt(o2.getName()))&#123;</span><br><span class="line">                    return 1;</span><br><span class="line">                &#125;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        return chunkFileList;</span><br><span class="line">    &#125;</span><br><span class="line">    //合并文件</span><br><span class="line">    private File mergeFile(File mergeFile,List&lt;File&gt; chunkFiles)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            //创建写文件对象</span><br><span class="line">            RandomAccessFile raf_write = new RandomAccessFile(mergeFile,&quot;rw&quot;);</span><br><span class="line">            //遍历分块文件开始合并</span><br><span class="line">            //读取文件缓冲区</span><br><span class="line">            byte[] b = new byte[1024];</span><br><span class="line">            for(File chunkFile:chunkFiles)&#123;</span><br><span class="line">                RandomAccessFile raf_read = new RandomAccessFile(chunkFile,&quot;r&quot;);</span><br><span class="line">                int len = -1;</span><br><span class="line">                //读取分块文件</span><br><span class="line">                while((len = raf_read.read(b))!=-1)&#123;</span><br><span class="line">                    //向合并文件中写数据</span><br><span class="line">                    raf_write.write(b,0,len);</span><br><span class="line">                &#125;</span><br><span class="line">                raf_read.close();</span><br><span class="line">            &#125;</span><br><span class="line">            raf_write.close();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            LOGGER.error(&quot;merge file error:&#123;&#125;&quot;,e.getMessage());</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        return mergeFile;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-3-5-6-Controller"><a href="#6-3-5-6-Controller" class="headerlink" title="6.3.5.6 Controller"></a>6.3.5.6 Controller</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;/media/upload&quot;)</span><br><span class="line">public class MediaUploadController implements MediaUploadControllerApi &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    MediaUploadService mediaUploadService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">     @PostMapping(&quot;/register&quot;)</span><br><span class="line">    public ResponseResult register(@RequestParam(&quot;fileMd5&quot;) String fileMd5, @RequestParam(&quot;fileName&quot;) String fileName, @RequestParam(&quot;fileSize&quot;) Long fileSize, @RequestParam(&quot;mimetype&quot;) String mimetype, @RequestParam(&quot;fileExt&quot;) String fileExt) &#123;</span><br><span class="line">        return mediaUploadService.register(fileMd5,fileName,fileSize,mimetype,fileExt);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @PostMapping(&quot;/checkchunk&quot;)</span><br><span class="line">    public CheckChunkResult checkchunk(@RequestParam(&quot;fileMd5&quot;) String fileMd5, @RequestParam(&quot;chunk&quot;) Integer chunk, @RequestParam(&quot;chunkSize&quot;) Integer chunkSize) &#123;</span><br><span class="line">        return mediaUploadService.checkchunk(fileMd5,chunk,chunkSize);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">     @PostMapping(&quot;/uploadchunk&quot;)</span><br><span class="line">    public ResponseResult uploadchunk(@RequestParam(&quot;file&quot;) MultipartFile file, @RequestParam(&quot;fileMd5&quot;) String fileMd5, @RequestParam(&quot;chunk&quot;) Integer chunk) &#123;</span><br><span class="line">        return mediaUploadService.uploadchunk(file,fileMd5,chunk);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @PostMapping(&quot;/mergechunks&quot;)</span><br><span class="line">    public ResponseResult mergechunks(@RequestParam(&quot;fileMd5&quot;) String fileMd5, @RequestParam(&quot;fileName&quot;) String fileName, @RequestParam(&quot;fileSize&quot;) Long fileSize, @RequestParam(&quot;mimetype&quot;) String mimetype, @RequestParam(&quot;fileExt&quot;) String fileExt) &#123;</span><br><span class="line">        return mediaUploadService.mergechunks(fileMd5,fileName,fileSize,mimetype,fileExt);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/day13 在线学习 HLS.html" title="在线学习视频（十四）—— 在线学习 HLS">https://tiredtosleep.github.io/day13 在线学习 HLS.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/播放器video-js/" rel="tag"><i class="fa fa-tag"></i> 播放器video.js</a>
+          
+            <a href="/tags/FFmpeg解码/" rel="tag"><i class="fa fa-tag"></i> FFmpeg解码</a>
+          
+            <a href="/tags/断点传输/" rel="tag"><i class="fa fa-tag"></i> 断点传输</a>
+          
+            <a href="/tags/文件上传/" rel="tag"><i class="fa fa-tag"></i> 文件上传</a>
+          
+            <a href="/tags/媒体处理/" rel="tag"><i class="fa fa-tag"></i> 媒体处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/day15 媒资管理系统集成.html" rel="next" title="在线学习视频（十六）—— 媒资管理系统集成">
+                <i class="fa fa-chevron-left"></i> 在线学习视频（十六）—— 媒资管理系统集成
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day14 媒资管理.html" rel="prev" title="在线学习视频（十五）—— 媒资管理">
+                在线学习视频（十五）—— 媒资管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在线学习-HLS"><span class="nav-text">在线学习 HLS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-在线学习需求分析"><span class="nav-text">1 在线学习需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-需求描述"><span class="nav-text">1.1 需求描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-视频点播解决方案"><span class="nav-text">1.2 视频点播解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-流媒体"><span class="nav-text">1.2.1 流媒体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-点播方案"><span class="nav-text">1.2.2 点播方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-视频编码"><span class="nav-text">2 视频编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-视频编码格式"><span class="nav-text">2.1 视频编码格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-FFmpeg-的基本使用"><span class="nav-text">2.2 FFmpeg 的基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-生成m3u8-ts文件"><span class="nav-text">2.2 生成m3u8/ts文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-码率的设置"><span class="nav-text">2.2.1 码率的设置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-播放器"><span class="nav-text">3 播放器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-技术选型"><span class="nav-text">3.1 技术选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-下载video-js"><span class="nav-text">3.2 下载video.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-搭建媒体服务器"><span class="nav-text">3.3 搭建媒体服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-Nginx媒体服务器"><span class="nav-text">3.3.1 Nginx媒体服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-媒体服务器代理"><span class="nav-text">3.3.2 媒体服务器代理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-测试video-js"><span class="nav-text">3.4 测试video.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-搭建学习中心前端"><span class="nav-text">4 搭建学习中心前端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-界面原型"><span class="nav-text">4.1 界面原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-创建学习中心工程"><span class="nav-text">4.2 创建学习中心工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-配置域名"><span class="nav-text">4.2.1 配置域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-访问"><span class="nav-text">4.2.2 访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-调试视频播放页面"><span class="nav-text">4.3 调试视频播放页面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-媒资管理"><span class="nav-text">6 媒资管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1需求分析"><span class="nav-text">6.1需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-开发环境"><span class="nav-text">6.2 开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1-创建媒资数据库"><span class="nav-text">6.2.1 创建媒资数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-2-创建媒资服务工程"><span class="nav-text">6.2.2 创建媒资服务工程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3上传文件"><span class="nav-text">6.3上传文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1-断点续传解决方案"><span class="nav-text">6.3.1 断点续传解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2-文件分块与合并"><span class="nav-text">6.3.2 文件分块与合并</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-2-1文件分块"><span class="nav-text">6.3.2.1文件分块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-2-2文件合并"><span class="nav-text">6.3.2.2文件合并</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-3-前端页面"><span class="nav-text">6.3.3 前端页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-1-WebUploader介绍"><span class="nav-text">6.3.3.1 WebUploader介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-1-钩子方法"><span class="nav-text">6.3.3.1 钩子方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-2-构建WebUploader"><span class="nav-text">6.3.3.2 构建WebUploader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-3-before-send-file"><span class="nav-text">6.3.3.3 before-send-file</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-4-before-send"><span class="nav-text">6.3.3.4 before-send</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-5-after-send-file"><span class="nav-text">6.3.3.5 after-send-file</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-6-页面效果"><span class="nav-text">6.3.3.6 页面效果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-4-Api接口"><span class="nav-text">6.3.4 Api接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-5媒资服务端编写"><span class="nav-text">6.3.5媒资服务端编写</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-5-1-业务流程"><span class="nav-text">6.3.5.1 业务流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-5-2-上传注册"><span class="nav-text">6.3.5.2 上传注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-5-3-分块检查"><span class="nav-text">6.3.5.3 分块检查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-5-4-上传分块"><span class="nav-text">6.3.5.4 上传分块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-5-5-合并分块"><span class="nav-text">6.3.5.5 合并分块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-5-6-Controller"><span class="nav-text">6.3.5.6 Controller</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">301.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>

@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Element-UI,图片管理,promise异步调用,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="课程图片管理 分布式文件系统1 FastDFS研究参考 “Linux下安装FastDFS” 2 上传图片开发2.1 需求分析​    在很多系统都有上传图片/上传文件的需求，比如：上传课程图片、上传课程资料、上传用户头像等，为了提供系统的可重用性专门设立文件系统服务承担图片/文件的管理，文件系统服务实现对文件的上传、删除、查询等功能进行管理。 ​    各各子系统不再开发上传文件的请求，各各子系统">
+<meta name="keywords" content="Element-UI,图片管理,promise异步调用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线学习视频（八）—— 课程图片管理 分布式文件系统">
+<meta property="og:url" content="https://tiredtosleep.github.io/day08-课程图片管理 分布式文件系统.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="课程图片管理 分布式文件系统1 FastDFS研究参考 “Linux下安装FastDFS” 2 上传图片开发2.1 需求分析​    在很多系统都有上传图片/上传文件的需求，比如：上传课程图片、上传课程资料、上传用户头像等，为了提供系统的可重用性专门设立文件系统服务承担图片/文件的管理，文件系统服务实现对文件的上传、删除、查询等功能进行管理。 ​    各各子系统不再开发上传文件的请求，各各子系统">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529844538657.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529845564401.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1523520996790.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1523521308656.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529852330663.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529887188381.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/images/1529887188381.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1537146297830.png">
+<meta property="og:updated_time" content="2019-06-02T04:40:29.543Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在线学习视频（八）—— 课程图片管理 分布式文件系统">
+<meta name="twitter:description" content="课程图片管理 分布式文件系统1 FastDFS研究参考 “Linux下安装FastDFS” 2 上传图片开发2.1 需求分析​    在很多系统都有上传图片/上传文件的需求，比如：上传课程图片、上传课程资料、上传用户头像等，为了提供系统的可重用性专门设立文件系统服务承担图片/文件的管理，文件系统服务实现对文件的上传、删除、查询等功能进行管理。 ​    各各子系统不再开发上传文件的请求，各各子系统">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1529844538657.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/day08-课程图片管理 分布式文件系统.html">
+
+
+
+
+
+  <title>在线学习视频（八）—— 课程图片管理 分布式文件系统 | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day08-课程图片管理 分布式文件系统.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在线学习视频（八）—— 课程图片管理 分布式文件系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T12:28:32+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-在线学习视频网站/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实战-在线学习视频网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.5k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  21  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="课程图片管理-分布式文件系统"><a href="#课程图片管理-分布式文件系统" class="headerlink" title="课程图片管理 分布式文件系统"></a>课程图片管理 分布式文件系统</h1><h1 id="1-FastDFS研究"><a href="#1-FastDFS研究" class="headerlink" title="1 FastDFS研究"></a>1 FastDFS研究</h1><p>参考 “Linux下安装FastDFS”</p>
+<h1 id="2-上传图片开发"><a href="#2-上传图片开发" class="headerlink" title="2 上传图片开发"></a>2 上传图片开发</h1><h2 id="2-1-需求分析"><a href="#2-1-需求分析" class="headerlink" title="2.1 需求分析"></a>2.1 需求分析</h2><p>​    在很多系统都有上传图片/上传文件的需求，比如：上传课程图片、上传课程资料、上传用户头像等，为了提供系统的可重用性专门设立文件系统服务承担图片/文件的管理，文件系统服务实现对文件的上传、删除、查询等功能进行管理。</p>
+<p>​    各各子系统不再开发上传文件的请求，各各子系统通过文件系统服务进行文件的上传、删除等操作。文件系统服务最终会将文件存储到fastDSF文件系统中。</p>
+<p>下图是各各子系统与文件系统服务之间的关系：</p>
+<p><img src="assets/1529844538657.png" alt="1529844538657"></p>
+<p>下图是课程管理中上传图片处理流程：</p>
+<p><img src="assets/1529845564401.png" alt="1529845564401"></p>
+<p>执行流程如下：</p>
+<p>1、管理员进入教学管理前端，点击上传图片</p>
+<p>2、图片上传至文件系统服务，文件系统请求fastDFS上传文件</p>
+<p>3、文件系统将文件入库，存储到文件系统服务数据库中。</p>
+<p>4、文件系统服务向前端返回文件上传结果，如果成功则包括文件的Url路径。</p>
+<p>5、课程管理前端请求课程管理进行保存课程图片信息到课程数据库。</p>
+<p>6、课程管理服务将课程图片保存在课程数据库。</p>
+<h2 id="2-2-创建文件系统服务工程"><a href="#2-2-创建文件系统服务工程" class="headerlink" title="2.2 创建文件系统服务工程"></a>2.2 创建文件系统服务工程</h2><p>导入xc-service-base-filesystem.zip工程。</p>
+<p>1）工程目录结构</p>
+<p><img src="assets/1523520996790.png" alt="1523520996790"></p>
+<p>pom.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;artifactId&gt;xc-framework-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;groupId&gt;com.xuecheng&lt;/groupId&gt;</span><br><span class="line">        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">        &lt;relativePath&gt;../xc-framework-parent/pom.xml&lt;/relativePath&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;artifactId&gt;xc-service-base-filesystem&lt;/artifactId&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.xuecheng&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;xc-service-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.xuecheng&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;xc-framework-model&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.xuecheng&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;xc-framework-common&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.github.tobato&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;fastdfs-client&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.26.1-RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-data-mongodb&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<p>2）配置文件</p>
+<p>原测试程序中fastdfs-client.properties的配置信息统一放在application.yml</p>
+<p>application.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 22100</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: xc-service-base-filesystem</span><br><span class="line">#mongo配置</span><br><span class="line">  data:</span><br><span class="line">    mongodb:</span><br><span class="line">      database: xc_fs</span><br><span class="line">      uri: mongodb://root:123@127.0.0.1:27017</span><br><span class="line">#SpringMVC上传文件配置</span><br><span class="line">  servlet:</span><br><span class="line">    multipart:</span><br><span class="line">      #默认支持文件上传.</span><br><span class="line">      enabled: true</span><br><span class="line">      #支持文件写入磁盘.</span><br><span class="line">      file-size-threshold: 0</span><br><span class="line">      # 上传文件的临时目录</span><br><span class="line">      location:</span><br><span class="line">      # 最大支持文件大小</span><br><span class="line">      max-file-size: 1MB</span><br><span class="line">      # 最大支持请求大小</span><br><span class="line">      max-request-size: 30MB</span><br><span class="line">xuecheng:</span><br><span class="line">  fastdfs:</span><br><span class="line">    connect_timeout_in_seconds: 5</span><br><span class="line">    network_timeout_in_seconds: 30</span><br><span class="line">    charset: UTF-8</span><br><span class="line">    tracker_servers: 192.168.101.64:22122</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-API接口"><a href="#2-3-API接口" class="headerlink" title="2.3 API接口"></a>2.3 API接口</h2><h3 id="2-3-1模型类"><a href="#2-3-1模型类" class="headerlink" title="2.3.1模型类"></a>2.3.1模型类</h3><p>系统的文件信息（图片、文档等小文件的信息）在mongodb中存储，下边是文件信息的模型类。</p>
+<p>1) 模型如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">@Document(collection = &quot;filesystem&quot;)</span><br><span class="line">public class FileSystem &#123;</span><br><span class="line"></span><br><span class="line">    @Id</span><br><span class="line">    private String fileId;</span><br><span class="line">    //文件请求路径</span><br><span class="line">    private String filePath;</span><br><span class="line">    //文件大小</span><br><span class="line">    private long fileSize;</span><br><span class="line">    //文件名称</span><br><span class="line">    private String fileName;</span><br><span class="line">    //文件类型</span><br><span class="line">    private String fileType;</span><br><span class="line">    //图片宽度</span><br><span class="line">    private int fileWidth;</span><br><span class="line">    //图片高度</span><br><span class="line">    private int fileHeight;</span><br><span class="line">    //用户id，用于授权暂时不用</span><br><span class="line">    private String userId;</span><br><span class="line">    //业务key</span><br><span class="line">    private String businesskey;</span><br><span class="line">    //业务标签</span><br><span class="line">    private String filetag;</span><br><span class="line">    //文件元信息</span><br><span class="line">    private Map metadata;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<p>fileId：fastDFS返回的文件ID。</p>
+<p>filePath：请求fastDFS浏览文件URL。</p>
+<p>filetag：文件标签，由于文件系统服务是公共服务，文件系统服务会为使用文件系统服务的子系统分配文件标签，用于标识此文件来自哪个系统。</p>
+<p>businesskey：文件系统服务为其它子系统提供的一个业务标识字段，各子系统根据自己的需求去使用，比如：课程管理会在此字段中存储课程id用于标识该图片属于哪个课程。</p>
+<p>metadata：文件相关的元信息。</p>
+<p>2) collection</p>
+<p>在mongodb创建数据库xc_fs（文件系统数据库），并创建集合 filesystem。</p>
+<p><img src="assets/1523521308656.png" alt="1523521308656"></p>
+<h3 id="2-3-2-Api接口"><a href="#2-3-2-Api接口" class="headerlink" title="2.3.2 Api接口"></a>2.3.2 Api接口</h3><p>在api工程下创建com.xuecheng.api.filesystem包，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Api(value = &quot;文件管理接口&quot;, description = &quot;文件管理接口，提供增删改查&quot;)</span><br><span class="line">public interface FileSystemControllerApi &#123;</span><br><span class="line">    @ApiOperation(&quot;图片管理&quot;)</span><br><span class="line">    public UploadFileResult upload(MultipartFile multipartFile,String filetag,String businesskey,String metadata);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-3-Dao"><a href="#2-3-3-Dao" class="headerlink" title="2.3.3 Dao"></a>2.3.3 Dao</h3><p>将文件信息存入数据库，主要存储文件系统中的文件路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface FileSystemRepository extends MongoRepository&lt;FileSystem,String&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-4-Service"><a href="#2-3-4-Service" class="headerlink" title="2.3.4 Service"></a>2.3.4 Service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">@Slf4j</span><br><span class="line">public class FileSystemService &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private FastFileStorageClient fileStorageClient;</span><br><span class="line">    @Autowired</span><br><span class="line">    private FileSystemRepository fileSystemRepository;</span><br><span class="line">    //定义文件类型</span><br><span class="line">    private static final List&lt;String&gt; ALLOW_TYPES = Arrays.asList(&quot;image/png&quot;, &quot;image/jpeg&quot;,&quot;image/bmp&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 文件上传后将信息存储在mongodb中</span><br><span class="line">     * @param file</span><br><span class="line">     * @param filetag</span><br><span class="line">     * @param businesskey</span><br><span class="line">     * @param metadata</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public UploadFileResult upload(MultipartFile file, String filetag, String businesskey, String metadata) &#123;</span><br><span class="line">        if (file==null)&#123;</span><br><span class="line">            ExceptionCast.cast(FileSystemCode.FS_UPLOADFILE_FILEISNULL );</span><br><span class="line">        &#125;</span><br><span class="line">        //上传文件,并作为文件id</span><br><span class="line">        String fileid = upload_fastDFS(file);</span><br><span class="line">        //创建file对象</span><br><span class="line">        FileSystem fileSystem = new FileSystem();</span><br><span class="line">        //文件id</span><br><span class="line">        fileSystem.setFileId(fileid);</span><br><span class="line">        //文件在fastdfs中的路径</span><br><span class="line">        fileSystem.setFilePath(fileid);</span><br><span class="line">        //业务标识</span><br><span class="line">        fileSystem.setBusinesskey(businesskey);</span><br><span class="line">        //标签</span><br><span class="line">        fileSystem.setFiletag(filetag);</span><br><span class="line">        //元数据</span><br><span class="line">        if (StringUtils.isEmpty(metadata))&#123;</span><br><span class="line">            Map map = JSON.parseObject(metadata, Map.class);</span><br><span class="line">            fileSystem.setMetadata(map);</span><br><span class="line">        &#125;</span><br><span class="line">        //文件名字</span><br><span class="line">        fileSystem.setFileName(file.getOriginalFilename());</span><br><span class="line">        //大小</span><br><span class="line">        fileSystem.setFileSize(file.getSize());</span><br><span class="line">        //类型</span><br><span class="line">        fileSystem.setFileType(file.getContentType());</span><br><span class="line">        fileSystemRepository.save(fileSystem);</span><br><span class="line"></span><br><span class="line">        return new UploadFileResult(CommonCode.SUCCESS,fileSystem);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //上传文件到FastFDFS</span><br><span class="line">    public String upload_fastDFS(MultipartFile file)&#123;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            //校验文件类型</span><br><span class="line">            String contentType = file.getContentType();</span><br><span class="line">            if (!ALLOW_TYPES.contains(contentType))&#123;</span><br><span class="line">                ExceptionCast.cast(FileSystemCode.FS_UPLOADFILE_TYPE);</span><br><span class="line">            &#125;</span><br><span class="line">            //校验文件内容</span><br><span class="line">            BufferedImage read = ImageIO.read(file.getInputStream());</span><br><span class="line">            if (read==null)&#123;</span><br><span class="line">                ExceptionCast.cast(FileSystemCode.FS_UPLOADFILE_CONTENT);</span><br><span class="line">            &#125;</span><br><span class="line">            // 2、将图片上传到FastDFS</span><br><span class="line">            // 2.1、获取文件后缀名</span><br><span class="line">            String extension = StringUtils.substringAfterLast(file.getOriginalFilename(), &quot;.&quot;);</span><br><span class="line">            // 2.2、图片上传</span><br><span class="line">            StorePath storePath = fileStorageClient.uploadFile(file.getInputStream(), file.getSize(), extension, null);</span><br><span class="line">            //返回路径</span><br><span class="line">            return  storePath.getFullPath();</span><br><span class="line">            //返回路径</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            log.error(&quot;上传文件失败&quot;,e);</span><br><span class="line">            ExceptionCast.cast(FileSystemCode.FS_UPLOADFILE_SERVERFAIL);</span><br><span class="line">            return null;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-5-Controller"><a href="#2-3-5-Controller" class="headerlink" title="2.3.5 Controller"></a>2.3.5 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;/filesystem&quot;)</span><br><span class="line">public class FileSystemController implements FileSystemControllerApi &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    FileSystemService fileSystemService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @PostMapping(&quot;/upload&quot;)</span><br><span class="line">    public UploadFileResult upload(@RequestParam(&quot;file&quot;) MultipartFile file,</span><br><span class="line">                                   @RequestParam(value = &quot;filetag&quot;, required = true) String filetag,</span><br><span class="line">                                   @RequestParam(value = &quot;businesskey&quot;, required = false) String businesskey,</span><br><span class="line">                                   @RequestParam(value = &quot;metedata&quot;, required = false) String metadata) &#123;</span><br><span class="line">        return fileSystemService.upload(file,filetag,businesskey,metadata);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-6-测试"><a href="#2-3-6-测试" class="headerlink" title="2.3.6 测试"></a>2.3.6 测试</h3><p>使用swagger-ui或postman进行测试。</p>
+<p>下图是使用swagger-ui进行测试的界面：</p>
+<p><img src="assets/1529852330663.png" alt="1529852330663"></p>
+<h2 id="2-4-上传课程图片前端"><a href="#2-4-上传课程图片前端" class="headerlink" title="2.4 上传课程图片前端"></a>2.4 上传课程图片前端</h2><h3 id="2-4-1-需求"><a href="#2-4-1-需求" class="headerlink" title="2.4.1 需求"></a>2.4.1 需求</h3><p>上传图片界面如下图：</p>
+<p><img src="assets/1529887188381.png" alt="1529887188381"></p>
+<p>点击“加号”上传图片，图片上传成功自动显示；点击“删除”将删除图片。</p>
+<h3 id="2-4-2-页面"><a href="#2-4-2-页面" class="headerlink" title="2.4.2 页面"></a>2.4.2 页面</h3><p>使用Element-UI的Upload上传组件实现上边的效果。</p>
+<p>1) template</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-upload</span><br><span class="line">  action=&quot;/filesystem/upload&quot;</span><br><span class="line">  list-type=&quot;picture-card&quot;</span><br><span class="line">  :before-upload=&quot;setbusinesskey&quot;</span><br><span class="line">  :on-success=&quot;handleSuccess&quot;</span><br><span class="line">  :file-list=&quot;fileList&quot;</span><br><span class="line">  :limit=&quot;picmax&quot;</span><br><span class="line">  :on-exceed=&quot;rejectupload&quot;</span><br><span class="line">  :data=&quot;uploadval&quot;&gt;</span><br><span class="line">  &lt;i class=&quot;el-icon-plus&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;/el-upload&gt;</span><br></pre></td></tr></table></figure>
+<p>el-upload参数说明：</p>
+<p>action：必选参数，上传的地址</p>
+<p>list-type：文件列表的类型（text/picture/picture-card）</p>
+<p>before-upload：上传前执行钩子方法 ，function(file)</p>
+<p>on-success：上传成功 执行的钩子方法 ，function(response, file, fileList)</p>
+<p>on-error：上传失败的钩子方法，function(err, file, fileList)</p>
+<p>on-remove：文件删除的钩子方法，function(file, fileList)</p>
+<p>file-list：文件列表，此列表为上传成功 的文件</p>
+<p>limit：最大允许上传个数</p>
+<p>on-exceed：文件超出个数限制时的钩子，方法为：function(files, fileList)</p>
+<p>data：提交上传的额外参数，需要封装为json对象，最终提交给服务端为key/value串</p>
+<p>2)数据模型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  import * as sysConfig from &apos;@/../config/sysConfig&apos;;</span><br><span class="line">  import * as courseApi from &apos;../../api/course&apos;;</span><br><span class="line">  import utilApi from &apos;../../../../common/utils&apos;;</span><br><span class="line">  import * as systemApi from &apos;../../../../base/api/system&apos;;</span><br><span class="line">  export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        picmax:1,</span><br><span class="line">        courseid:&apos;&apos;,</span><br><span class="line">        dialogImageUrl: &apos;&apos;,</span><br><span class="line">        dialogVisible: false,</span><br><span class="line">        fileList:[],</span><br><span class="line">        uploadval:&#123;filetag:&quot;course&quot;&#125;,</span><br><span class="line">        imgUrl:sysConfig.imgUrl</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      //超出文件上传个数提示信息</span><br><span class="line">      rejectupload()&#123;</span><br><span class="line">        this.$message.error(&quot;最多上传&quot;+this.picmax+&quot;个图片&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //在上传前设置上传请求的数据</span><br><span class="line">      setuploaddata()&#123;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      //删除图片</span><br><span class="line">      handleRemove(file, fileList) &#123;</span><br><span class="line">        console.log(file)</span><br><span class="line"></span><br><span class="line">        alert(&apos;删除&apos;)</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      //上传成功的钩子方法</span><br><span class="line">      handleSuccess(response, file, fileList)&#123;</span><br><span class="line">        console.log(response)</span><br><span class="line">        alert(&apos;上传成功&apos;)</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      //上传失败执行的钩子方法</span><br><span class="line">      handleError(err, file, fileList)&#123;</span><br><span class="line">        this.$message.error(&apos;上传失败&apos;);</span><br><span class="line">        //清空文件队列</span><br><span class="line">        this.fileList = []</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted()&#123;</span><br><span class="line">      //课程id</span><br><span class="line">      this.courseid = this.$route.params.courseid;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-3-测试"><a href="#2-4-3-测试" class="headerlink" title="2.4.3 测试"></a>2.4.3 测试</h3><p>1、点击“加号”测试上传图片。</p>
+<p><img src="images/1529887188381.png" alt="1529887188381"></p>
+<h1 id="3-保存课程图片"><a href="#3-保存课程图片" class="headerlink" title="3 保存课程图片"></a>3 保存课程图片</h1><h2 id="3-1-需求分析"><a href="#3-1-需求分析" class="headerlink" title="3.1 需求分析"></a>3.1 需求分析</h2><p>​    图片上传到文件系统后，其它子系统如果想使用图片可以引用图片的地址，课程管理模块使用图片的方式是将图片地址保存到课程数据库中。</p>
+<p>​    业务流程如下：</p>
+<p>1、上传图片到文件系统服务</p>
+<p>2、保存图片地址到课程管理服务</p>
+<p>在课程管理服务创建保存课程与图片对应关系的表 course_pic。</p>
+<p><img src="assets/1537146297830.png" alt="1537146297830"></p>
+<p>3、在course_pic保存图片成功后方可查询课程图片信息。</p>
+<p>通过查询course_pic表数据则查询到某课程的图片信息。</p>
+<h2 id="3-2-课程管理服务端开发"><a href="#3-2-课程管理服务端开发" class="headerlink" title="3.2 课程管理服务端开发"></a>3.2 课程管理服务端开发</h2><h3 id="3-2-1-API"><a href="#3-2-1-API" class="headerlink" title="3.2.1 API"></a>3.2.1 API</h3><p>课程管理需要使用图片则在课程管理服务中要提供保存课程图片的api。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@ApiOperation(&quot;添加课程图片&quot;)</span><br><span class="line">public ResponseResult addCoursePic(String courseId,String pic);</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-2-Dao"><a href="#3-2-2-Dao" class="headerlink" title="3.2.2 Dao"></a>3.2.2 Dao</h3><p>模型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">@Entity</span><br><span class="line">@Table(name=&quot;course_pic&quot;)</span><br><span class="line">@GenericGenerator(name = &quot;jpa-assigned&quot;, strategy = &quot;assigned&quot;)</span><br><span class="line">public class CoursePic implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = -916357110051689486L;</span><br><span class="line"></span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue(generator = &quot;jpa-assigned&quot;)</span><br><span class="line">    private String courseid;</span><br><span class="line">    private String pic;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>API如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface CoursePicRepository extends JpaRepository&lt;CoursePic, String&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-3-Service"><a href="#3-2-3-Service" class="headerlink" title="3.2.3 Service"></a>3.2.3 Service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//添加课程图片</span><br><span class="line">   @Transactional</span><br><span class="line">   public ResponseResult saveCoursePic(String courseId,String pic)&#123;</span><br><span class="line">       //查询课程图片</span><br><span class="line">       Optional&lt;CoursePic&gt; picOptional = coursePicRepository.findById(courseId);</span><br><span class="line">       CoursePic coursePic = null;</span><br><span class="line">       if(picOptional.isPresent())&#123;</span><br><span class="line">           coursePic = picOptional.get();</span><br><span class="line">       &#125;</span><br><span class="line">       //没有课程图片则新建对象</span><br><span class="line">       if(coursePic == null)&#123;</span><br><span class="line">           coursePic = new CoursePic();</span><br><span class="line">       &#125;</span><br><span class="line">       coursePic.setCourseid(courseId);</span><br><span class="line">       coursePic.setPic(pic);</span><br><span class="line">       //保存课程图片</span><br><span class="line">       coursePicRepository.save(coursePic);</span><br><span class="line">       return new ResponseResult(CommonCode.SUCCESS);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-4-Controller"><a href="#3-2-4-Controller" class="headerlink" title="3.2.4 Controller"></a>3.2.4 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@PostMapping(&quot;/coursepic/add&quot;)</span><br><span class="line">public ResponseResult addCoursePic(@RequestParam(&quot;courseId&quot;) String courseId, @RequestParam(&quot;pic&quot;) String pic) &#123;</span><br><span class="line">    //保存课程图片</span><br><span class="line">    return courseService.saveCoursePic(courseId,pic);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-前端开发"><a href="#3-3-前端开发" class="headerlink" title="3.3 前端开发"></a>3.3 前端开发</h2><p>前端需要在上传图片成功后保存课程图片信息。</p>
+<p>###3.3.1 Api方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//添加课程图片</span><br><span class="line">export const addCoursePic= (courseId,pic) =&gt; &#123;</span><br><span class="line">  return http.requestPost(apiUrl+&apos;/course/coursepic/add?courseId=&apos;+courseId+&quot;&amp;pic=&quot;+pic)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-2-页面"><a href="#3-3-2-页面" class="headerlink" title="3.3.2 页面"></a>3.3.2 页面</h3><p>1）添加上传成功的钩子 :on-success=”handleSuccess”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-upload</span><br><span class="line">  action=&quot;/api/filesystem/upload&quot;</span><br><span class="line">  list-type=&quot;picture-card&quot;</span><br><span class="line">  :on-success=&quot;handleSuccess&quot;&gt;</span><br><span class="line">  &lt;i class=&quot;el-icon-plus&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;/el-upload&gt;</span><br></pre></td></tr></table></figure>
+<p>2）在钩子方法 中保存课程图片信息</p>
+<p>如果保存图片失败则上传失败，清除文件列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//上传成功的钩子方法</span><br><span class="line">     handleSuccess(response, file, fileList)&#123;</span><br><span class="line">       console.log(response)</span><br><span class="line">       if(response.success)&#123;</span><br><span class="line">         //alert(&apos;上传成功&apos;)</span><br><span class="line">         //图片上传成功将课程图片地址保存到课程数据库</span><br><span class="line">         let pic = response.fileSystem.filePath</span><br><span class="line">         courseApi.addCoursePic(this.courseid,pic).then((res) =&gt; &#123;</span><br><span class="line">           if(res.success)&#123;</span><br><span class="line">             this.$message.success(&apos;上传成功&apos;);</span><br><span class="line">           &#125;else&#123;</span><br><span class="line">             this.handleError()</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;);</span><br><span class="line">       &#125;else&#123;</span><br><span class="line">         this.handleError()</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;,</span><br><span class="line">     //上传失败执行的钩子方法</span><br><span class="line">     handleError(err, file, fileList)&#123;</span><br><span class="line">       this.$message.error(&apos;上传失败&apos;);</span><br><span class="line">       //清空文件队列</span><br><span class="line">       this.fileList = []</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-图片查询"><a href="#4-图片查询" class="headerlink" title="4 图片查询"></a>4 图片查询</h1><h2 id="4-1-需求分析"><a href="#4-1-需求分析" class="headerlink" title="4.1 需求分析"></a>4.1 需求分析</h2><p>课程图片上传成功，再次进入课程上传页面应该显示出来已上传的图片。</p>
+<h2 id="4-2-API"><a href="#4-2-API" class="headerlink" title="4.2 API"></a>4.2 API</h2><p>在课程管理服务定义查询方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@ApiOperation(&quot;获取课程基础信息&quot;)</span><br><span class="line">public CoursePic findCoursePic(String courseId);</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-课程管理服务开发"><a href="#4-3-课程管理服务开发" class="headerlink" title="4.3 课程管理服务开发"></a>4.3 课程管理服务开发</h2><h3 id="4-3-1Dao"><a href="#4-3-1Dao" class="headerlink" title="4.3.1Dao"></a>4.3.1Dao</h3><p>使用CoursePicRepository即可，无需再开发。</p>
+<h3 id="4-3-2-Service"><a href="#4-3-2-Service" class="headerlink" title="4.3.2 Service"></a>4.3.2 Service</h3><p>根据课程id查询课程图片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public CoursePic findCoursepic(String courseId) &#123;</span><br><span class="line">    return coursePicRepository.findOne(courseId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-3-Controller"><a href="#4-3-3-Controller" class="headerlink" title="4.3.3 Controller"></a>4.3.3 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@GetMapping(&quot;/coursepic/list/&#123;courseId&#125;&quot;)</span><br><span class="line">public CoursePic findCoursePic(@PathVariable(&quot;courseId&quot;) String courseId) &#123;</span><br><span class="line">    return courseService.findCoursepic(courseId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-4-前端开发"><a href="#4-4-前端开发" class="headerlink" title="4.4 前端开发"></a>4.4 前端开发</h2><h3 id="4-4-1API方法"><a href="#4-4-1API方法" class="headerlink" title="4.4.1API方法"></a>4.4.1API方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//查询课程图片</span><br><span class="line">export const findCoursePicList = courseId =&gt; &#123;</span><br><span class="line">  return http.requestQuickGet(apiUrl+&apos;/course/coursepic/list/&apos;+courseId)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-2页面"><a href="#4-4-2页面" class="headerlink" title="4.4.2页面"></a>4.4.2页面</h3><p>在课程图片页面的mounted钩子方法 中查询课程图片信息，并将图片地址赋值给数据对象</p>
+<p>1、定义图片查询方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> //查询图片</span><br><span class="line">list()&#123;</span><br><span class="line">  courseApi.findCoursePicList(this.courseid).then((res) =&gt; &#123;</span><br><span class="line">    console.log(res)</span><br><span class="line">    if(res.pic)&#123;</span><br><span class="line">      let name = &apos;图片&apos;;</span><br><span class="line">      let url = this.imgUrl+res.pic;</span><br><span class="line">      let fileId = res.courseid;</span><br><span class="line">      //先清空文件列表，再将图片放入文件列表</span><br><span class="line">      this.fileList = []</span><br><span class="line">      this.fileList.push(&#123;name:name,url:url,fileId:fileId&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(this.fileList);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2）mounted钩子方法</p>
+<p>在mounted钩子方法中调用服务端查询文件列表并绑定到数据对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mounted()&#123;</span><br><span class="line">   //课程id</span><br><span class="line">   this.courseid = this.$route.params.courseid;</span><br><span class="line">   //查询图片</span><br><span class="line">   this.list()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-3测试"><a href="#4-4-3测试" class="headerlink" title="4.4.3测试"></a>4.4.3测试</h3><p>测试流程：</p>
+<p>1、上传图片成功</p>
+<p>2、进入上传图片页面，观察图片是否显示</p>
+<h1 id="5-课程图片删除"><a href="#5-课程图片删除" class="headerlink" title="5 课程图片删除"></a>5 课程图片删除</h1><h2 id="5-1-需求分析"><a href="#5-1-需求分析" class="headerlink" title="5.1 需求分析"></a>5.1 需求分析</h2><p>课程图片上传成功后，可以重新上传，方法是先删除现有图片再上传新图片。</p>
+<p>注意：此删除只删除课程数据库的课程图片信息，不去删除文件数据库的文件信息及文件系统服务器上的文件，由于课程图片来源于该用户的文件库，所以此图片可能存在多个地方共用的情况，所以要删除文件系统中的文件需要到图片库由用户确认后再删除。</p>
+<h2 id="5-2-API"><a href="#5-2-API" class="headerlink" title="5.2 API"></a>5.2 API</h2><p>在课程管理服务添加删除课程图片api：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@ApiOperation(&quot;删除课程图片&quot;)</span><br><span class="line">public ResponseResult deleteCoursePic(String courseId);</span><br></pre></td></tr></table></figure>
+<h2 id="5-3-课程管理服务端开发"><a href="#5-3-课程管理服务端开发" class="headerlink" title="5.3 课程管理服务端开发"></a>5.3 课程管理服务端开发</h2><h3 id="5-3-1-Dao"><a href="#5-3-1-Dao" class="headerlink" title="5.3.1 Dao"></a>5.3.1 Dao</h3><p>CoursePicRepository父类提供的delete方法没有返回值，无法知道是否删除成功，这里我们在CoursePicRepository下边自定义方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//删除成功返回1否则返回0</span><br><span class="line">long deleteByCourseid(String courseid);</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-2-Service"><a href="#5-3-2-Service" class="headerlink" title="5.3.2 Service"></a>5.3.2 Service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//删除课程图片</span><br><span class="line">@Transactional</span><br><span class="line">public ResponseResult deleteCoursePic(String courseId) &#123;</span><br><span class="line">    //执行删除，返回1表示删除成功，返回0表示删除失败</span><br><span class="line">    long result = coursePicRepository.deleteByCourseid(courseId);</span><br><span class="line">    if(result&gt;0)&#123;</span><br><span class="line">        return new ResponseResult(CommonCode.SUCCESS);</span><br><span class="line">    &#125;</span><br><span class="line">    return new ResponseResult(CommonCode.FAIL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-3-Controller"><a href="#5-3-3-Controller" class="headerlink" title="5.3.3 Controller"></a>5.3.3 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@DeleteMapping(&quot;/coursepic/delete&quot;)</span><br><span class="line">public ResponseResult deleteCoursePic(@RequestParam(&quot;courseId&quot;) String courseId) &#123;</span><br><span class="line">    return courseService.deleteCoursePic(courseId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-4-前端开发"><a href="#5-4-前端开发" class="headerlink" title="5.4 前端开发"></a>5.4 前端开发</h2><h3 id="5-4-1-API-调用"><a href="#5-4-1-API-调用" class="headerlink" title="5.4.1 API 调用"></a>5.4.1 API 调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//删除课程图片</span><br><span class="line">export const deleteCoursePic= courseId =&gt; &#123;</span><br><span class="line">  return http.requestDelete(apiUrl+&apos;/course/coursepic/delete?courseId=&apos;+courseId)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-2-页面测试"><a href="#5-4-2-页面测试" class="headerlink" title="5.4.2 页面测试"></a>5.4.2 页面测试</h3><p>1）before-remove钩子方法</p>
+<p>在upload组件的before-remove钩子方法 中实现删除动作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-upload</span><br><span class="line">  action=&quot;/filesystem/upload&quot;</span><br><span class="line">  list-type=&quot;picture-card&quot;</span><br><span class="line">  :before-remove=&quot;handleRemove&quot;&gt;</span><br><span class="line">  &lt;i class=&quot;el-icon-plus&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;/el-upload&gt;</span><br></pre></td></tr></table></figure>
+<p>before-remove说明：删除文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。</p>
+<p>定义handleRemove方法进行测试：</p>
+<p>handleRemove 返回true则删除页面的图片，返回false则停止删除页面的图片。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//删除图片</span><br><span class="line">handleRemove(file, fileList) &#123;</span><br><span class="line">        console.log(file)</span><br><span class="line">        alert(&apos;删除成功&apos;)</span><br><span class="line">        return true;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+<p>###5.4.3 promise异步调用</p>
+<p>在handleRemove方法调用删除图片的api方法，删除成功时return true，删除失败时return false;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">      //删除图片</span><br><span class="line">      handleRemove(file, fileList) &#123;</span><br><span class="line">        console.log(file)</span><br><span class="line">//        alert(&apos;删除&apos;)</span><br><span class="line">//        return true;</span><br><span class="line">        //删除图片</span><br><span class="line">          courseApi.deleteCoursePic(&apos;1&apos;).then((res) =&gt; &#123;</span><br><span class="line">            if(res.success)&#123;</span><br><span class="line">              this.$message.success(&apos;删除成功&apos;);</span><br><span class="line">              return true;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">              this.$message.error(res.message);</span><br><span class="line">              return false;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+<p>在上边代码中将提交的课程id故意写错，按照我们预期应该是删除失败，而测试结果却是图片在页面上删除成功。</p>
+<p>问题原因：</p>
+<p>通过查询deleteCoursePic方法的底层代码，deleteCoursePic最终返回一个promise对象。</p>
+<p>Promise是ES6提供的用于异步处理的对象，因为axios提交是异步提交，这里使用promise作为返回值。</p>
+<p>Promise的使用方法如下：</p>
+<p>Promise对象在处理过程中有三种状态：</p>
+<p>pending：进行中</p>
+<p>resolved：操作成功</p>
+<p>rejected: 操作失败</p>
+<p>Promise的构建方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const promise = new Promise(function(resolve,reject)&#123;</span><br><span class="line">     //...TODO...</span><br><span class="line">    if(操作成功)&#123;</span><br><span class="line">        resolve(value);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        reject(error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上边的构造方法function(resolve,reject)执行流程如下：</p>
+<p>1）方法执行一些业务逻辑。</p>
+<p>2）如果操作成功将Promise的状态由pending变为resolved，并将操作结果传出去</p>
+<p>3）如果操作失败会将promise的状态由pending变为rejected，并将失败结果传出去。</p>
+<p>上边说的操作成功将操作结果传给谁了呢？操作失败将失败结果传给谁了呢？</p>
+<p>通过promise的then、catch来指定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">promise.then(function (result) &#123;</span><br><span class="line">    console.log(&apos;操作成功：&apos; + result);</span><br><span class="line">&#125;);</span><br><span class="line">promise.catch(function (reason) &#123;</span><br><span class="line">    console.log(&apos;操作失败：&apos; + reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>例子如下：</p>
+<p>1、定义一个方法，返回promise对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">testpromise(i)&#123;</span><br><span class="line">  return new Promise((resolve,reject)=&gt;&#123;</span><br><span class="line">    if(i % 2==0)&#123;</span><br><span class="line">      resolve(&apos;成功了&apos;)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      reject(&apos;拒绝了&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、调用此方法</p>
+<p>向方法传入偶数、奇数进行测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">this.testpromise(3).then(res=&gt;&#123;//在then中对成功结果进行处理</span><br><span class="line">    alert(res)</span><br><span class="line">&#125;).catch(res=&gt;&#123;//在catch中对操作失败结果进行处理</span><br><span class="line">    alert(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>3、最终将handleRemove方法修改如下</p>
+<p>handleRemove方法返回promise对象，当删除成功则resolve，删除失败则reject。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//删除图片</span><br><span class="line">  handleRemove(file, fileList) &#123;</span><br><span class="line">    console.log(file)</span><br><span class="line">    return new Promise((resolve,reject)=&gt;&#123;</span><br><span class="line">    //删除图片</span><br><span class="line">      courseApi.deleteCoursePic(this.courseid).then((res) =&gt; &#123;</span><br><span class="line">        if(res.success)&#123;</span><br><span class="line">          this.$message.success(&apos;删除成功&apos;);</span><br><span class="line">          resolve()//通过</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">          this.$message.error(res.message);</span><br><span class="line">          reject()//拒绝</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/day08-课程图片管理 分布式文件系统.html" title="在线学习视频（八）—— 课程图片管理 分布式文件系统">https://tiredtosleep.github.io/day08-课程图片管理 分布式文件系统.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Element-UI/" rel="tag"><i class="fa fa-tag"></i> Element-UI</a>
+          
+            <a href="/tags/图片管理/" rel="tag"><i class="fa fa-tag"></i> 图片管理</a>
+          
+            <a href="/tags/promise异步调用/" rel="tag"><i class="fa fa-tag"></i> promise异步调用</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/day01 搭建环境 CMS服务端开发.html" rel="next" title="在线学习视频（一）—— CMS服务端开发">
+                <i class="fa fa-chevron-left"></i> 在线学习视频（一）—— CMS服务端开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day09-课程预览 Eureka Feign.html" rel="prev" title="在线学习视频（九）—— 课程预览 Eureka Feign">
+                在线学习视频（九）—— 课程预览 Eureka Feign <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#课程图片管理-分布式文件系统"><span class="nav-text">课程图片管理 分布式文件系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-FastDFS研究"><span class="nav-text">1 FastDFS研究</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-上传图片开发"><span class="nav-text">2 上传图片开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-需求分析"><span class="nav-text">2.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-创建文件系统服务工程"><span class="nav-text">2.2 创建文件系统服务工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-API接口"><span class="nav-text">2.3 API接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1模型类"><span class="nav-text">2.3.1模型类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-Api接口"><span class="nav-text">2.3.2 Api接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-Dao"><span class="nav-text">2.3.3 Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-4-Service"><span class="nav-text">2.3.4 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-5-Controller"><span class="nav-text">2.3.5 Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-6-测试"><span class="nav-text">2.3.6 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-上传课程图片前端"><span class="nav-text">2.4 上传课程图片前端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-需求"><span class="nav-text">2.4.1 需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-页面"><span class="nav-text">2.4.2 页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-3-测试"><span class="nav-text">2.4.3 测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-保存课程图片"><span class="nav-text">3 保存课程图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-需求分析"><span class="nav-text">3.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-课程管理服务端开发"><span class="nav-text">3.2 课程管理服务端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-API"><span class="nav-text">3.2.1 API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-Dao"><span class="nav-text">3.2.2 Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-Service"><span class="nav-text">3.2.3 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-Controller"><span class="nav-text">3.2.4 Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-前端开发"><span class="nav-text">3.3 前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-页面"><span class="nav-text">3.3.2 页面</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-图片查询"><span class="nav-text">4 图片查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-需求分析"><span class="nav-text">4.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-API"><span class="nav-text">4.2 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-课程管理服务开发"><span class="nav-text">4.3 课程管理服务开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1Dao"><span class="nav-text">4.3.1Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-Service"><span class="nav-text">4.3.2 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-Controller"><span class="nav-text">4.3.3 Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-前端开发"><span class="nav-text">4.4 前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-1API方法"><span class="nav-text">4.4.1API方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-2页面"><span class="nav-text">4.4.2页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-3测试"><span class="nav-text">4.4.3测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-课程图片删除"><span class="nav-text">5 课程图片删除</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-需求分析"><span class="nav-text">5.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-API"><span class="nav-text">5.2 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-课程管理服务端开发"><span class="nav-text">5.3 课程管理服务端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-Dao"><span class="nav-text">5.3.1 Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-Service"><span class="nav-text">5.3.2 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-3-Controller"><span class="nav-text">5.3.3 Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-前端开发"><span class="nav-text">5.4 前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-1-API-调用"><span class="nav-text">5.4.1 API 调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-2-页面测试"><span class="nav-text">5.4.2 页面测试</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">301.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>

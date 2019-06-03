@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FreeMarker,RestTemplate远程调用,存储模块GridFs,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="页面静态化 页面预览1 页面静态化需求1、为什么要进行页面管理？ ​    本项目cms系统的功能就是根据运营需要，对门户等子系统的部分页面进行管理，从而实现快速根据用户需求修改页面内容并上线的需求。 2、如何修改页面的内容？ ​    在开发中修改页面内容是需要人工编写html及JS文件，CMS系统是通过程序自动化的对页面内容进行修改，通过页面静态化技术生成html页面。 3、如何对页面进行静态">
+<meta name="keywords" content="FreeMarker,RestTemplate远程调用,存储模块GridFs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线学习视频（四）—— 页面静态化 页面预览">
+<meta property="og:url" content="https://tiredtosleep.github.io/day04-页面静态化.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="页面静态化 页面预览1 页面静态化需求1、为什么要进行页面管理？ ​    本项目cms系统的功能就是根据运营需要，对门户等子系统的部分页面进行管理，从而实现快速根据用户需求修改页面内容并上线的需求。 2、如何修改页面的内容？ ​    在开发中修改页面内容是需要人工编写html及JS文件，CMS系统是通过程序自动化的对页面内容进行修改，通过页面静态化技术生成html页面。 3、如何对页面进行静态">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528729492136.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1532653825880.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1532655748147.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528873162021.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1532660171174.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1536880153131.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1529143884135.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528882506969.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1532662638149.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1532665406317.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1532665550855.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/images/1532665406317.png">
+<meta property="og:updated_time" content="2019-06-03T08:48:58.800Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在线学习视频（四）—— 页面静态化 页面预览">
+<meta name="twitter:description" content="页面静态化 页面预览1 页面静态化需求1、为什么要进行页面管理？ ​    本项目cms系统的功能就是根据运营需要，对门户等子系统的部分页面进行管理，从而实现快速根据用户需求修改页面内容并上线的需求。 2、如何修改页面的内容？ ​    在开发中修改页面内容是需要人工编写html及JS文件，CMS系统是通过程序自动化的对页面内容进行修改，通过页面静态化技术生成html页面。 3、如何对页面进行静态">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1528729492136.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/day04-页面静态化.html">
+
+
+
+
+
+  <title>在线学习视频（四）—— 页面静态化 页面预览 | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day04-页面静态化.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在线学习视频（四）—— 页面静态化 页面预览</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T12:28:32+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-在线学习视频网站/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实战-在线学习视频网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5.3k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  24  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="页面静态化-页面预览"><a href="#页面静态化-页面预览" class="headerlink" title="页面静态化 页面预览"></a>页面静态化 页面预览</h1><h1 id="1-页面静态化需求"><a href="#1-页面静态化需求" class="headerlink" title="1 页面静态化需求"></a>1 页面静态化需求</h1><p>1、为什么要进行页面管理？</p>
+<p>​    本项目cms系统的功能就是根据运营需要，对门户等子系统的部分页面进行管理，从而实现快速根据用户需求修改页面内容并上线的需求。</p>
+<p>2、如何修改页面的内容？</p>
+<p>​    在开发中修改页面内容是需要人工编写html及JS文件，CMS系统是通过程序自动化的对页面内容进行修改，通过页面静态化技术生成html页面。</p>
+<p>3、如何对页面进行静态化？</p>
+<p>一个页面等于模板加数据，在添加页面的时候我们选择了页面的模板。</p>
+<p>页面静态化就是将页面模板和数据通过技术手段将二者合二为一，生成一个html网页文件。</p>
+<p>4、页面静态化及页面发布流程图如下：</p>
+<p><img src="assets/1528729492136.png" alt="1528729492136"></p>
+<p>业务流程如下：</p>
+<p>1、获取模型数据</p>
+<p>2、制作模板</p>
+<p>3、对页面进行静态化</p>
+<p>4、将静态化生成的html页面存放文件系统中</p>
+<p>5、将存放在文件系统的html文件发布到服务器</p>
+<h1 id="2-FreeMarker-研究"><a href="#2-FreeMarker-研究" class="headerlink" title="2 FreeMarker 研究"></a>2 FreeMarker 研究</h1><p>参考“学成在线-freemarker.pdf”</p>
+<h1 id="3-页面静态化"><a href="#3-页面静态化" class="headerlink" title="3 页面静态化"></a>3 页面静态化</h1><h2 id="3-1-页面静态化流程"><a href="#3-1-页面静态化流程" class="headerlink" title="3.1 页面静态化流程"></a>3.1 页面静态化流程</h2><p>​    通过上边对FreeMarker的研究我们得出：模板+数据模型=输出，页面静态化需要准备数据模型和模板，先知道数据模型的结构才可以编写模板，因为在模板中要引用数据模型中的数据，本节将系统讲解CMS页面数据模型获取、模板管理及静态化的过程。</p>
+<p>下边讨论一个问题：如何获取页面的数据模型？</p>
+<p>​    CMS管理了各种页面，CMS对页面进行静态化时需要数据模型，但是CMS并不知道每个页面的数据模型的具体内容，它只管执行静态化程序便可对页面进行静态化，所以CMS静态化程序需要通过一种通用的方法来获取数据模型。</p>
+<p>​    在编辑页面信息时指定一个DataUrl，此DataUrl便是获取数据模型的Url，它基于Http方式，CMS对页面进行静态化时会从页面信息中读取DataUrl，通过Http远程调用的方法请求DataUrl获取数据模型。</p>
+<p>管理员怎么知道DataUrl的内容呢？</p>
+<p>​    举例说明：</p>
+<p>​    此页面是轮播图页面，它的DataUrl由开发轮播图管理的程序员提供。</p>
+<p>​    此页面是精品课程推荐页面，它的DataUrl由精品课程推荐的程序员提供。</p>
+<p>​    此页面是课程详情页面，它的DataUrl由课程管理的程序员提供。</p>
+<p>页面静态化流程如下图：</p>
+<p>1、静态化程序首先读取页面获取DataUrl。</p>
+<p>2、静态化程序远程请求DataUrl得到数据模型。</p>
+<p>3、获取页面模板。</p>
+<p>4、执行页面静态化。</p>
+<p><img src="assets/1532653825880.png" alt="1532653825880"></p>
+<h2 id="3-2-数据模型"><a href="#3-2-数据模型" class="headerlink" title="3.2 数据模型"></a>3.2 数据模型</h2><h3 id="3-2-1-轮播图DataUrl接口"><a href="#3-2-1-轮播图DataUrl接口" class="headerlink" title="3.2.1 轮播图DataUrl接口"></a>3.2.1 轮播图DataUrl接口</h3><h4 id="3-2-1-1-需求分析"><a href="#3-2-1-1-需求分析" class="headerlink" title="3.2.1.1 需求分析"></a>3.2.1.1 需求分析</h4><p>​    CMS中有轮播图管理、精品课程推荐的功能，以轮播图管理为例说明：轮播图管理是通过可视化的操作界面由管理员指定轮播图图片地址，最后将轮播图图片地址保存在cms_config集合中，下边是轮播图数据模型：</p>
+<p><img src="assets/1532655748147.png" alt="1532655748147"></p>
+<p>​    针对首页的轮播图信息、精品推荐等信息的获取统一提供一个Url供静态化程序调用，这样我们就知道了轮播图页面、精品课程推荐页面的DataUrl，管理在页面配置中将此Url配置在页面信息中。</p>
+<p>本小节开发一个查询轮播图、精品推荐信息的接口，此接口供静态化程序调用获取数据模型。</p>
+<h4 id="3-2-1-2-接口定义"><a href="#3-2-1-2-接口定义" class="headerlink" title="3.2.1.2 接口定义"></a>3.2.1.2 接口定义</h4><p>轮播图信息、精品推荐等信息存储在MongoDB的cms_config集合中。</p>
+<p><img src="assets/1528873162021.png" alt="1528873162021"></p>
+<p>cms_config有固定的数据结构，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">@Document(collection = &quot;cms_config&quot;)</span><br><span class="line">public class CmsConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Id</span><br><span class="line">    private String id;//主键</span><br><span class="line">    private String name;//数据模型的名称</span><br><span class="line">    private List&lt;CmsConfigModel&gt; model;//数据模型项目</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>数据模型项目内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@ToString</span><br><span class="line">public class CmsConfigModel &#123;</span><br><span class="line">    private String key;//主键</span><br><span class="line">    private String name;//项目名称</span><br><span class="line">    private String url;//项目url</span><br><span class="line">    private Map mapValue;//项目复杂值</span><br><span class="line">    private String value;//项目简单值</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上边的模型结构可以对照cms_config中的数据进行分析。</p>
+<p>其中，在mapValue 中可以存储一些复杂的数据模型内容。</p>
+<p>根据配置信息Id查询配置信息，定义接口如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Api(value=&quot;cms配置管理接口&quot;,description = &quot;cms配置管理接口，提供数据模型的管理、查询接口&quot;)</span><br><span class="line">public interface CmsConfigControllerApi &#123;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(&quot;根据id查询CMS配置信息&quot;)</span><br><span class="line">    public CmsConfig getmodel(String id);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-1-3-Dao"><a href="#3-2-1-3-Dao" class="headerlink" title="3.2.1.3 Dao"></a>3.2.1.3 Dao</h4><p>定义CmsConfig的dao接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface CmsConfigRepository extends MongoRepository&lt;CmsConfig,String&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-1-4-Service"><a href="#3-2-1-4-Service" class="headerlink" title="3.2.1.4 Service"></a>3.2.1.4 Service</h4><p>定义CmsConfigService实现根据id查询CmsConfig信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class CmsConfigService &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    CmsConfigRepository cmsConfigRepository;</span><br><span class="line">    //根据id查询配置管理信息</span><br><span class="line">    public CmsConfig getConfigById(String id)&#123;</span><br><span class="line">        Optional&lt;CmsConfig&gt; optional = cmsConfigRepository.findById(id);</span><br><span class="line">        if(optional.isPresent())&#123;</span><br><span class="line">            CmsConfig cmsConfig = optional.get();</span><br><span class="line">            return cmsConfig;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-1-5-Controller"><a href="#3-2-1-5-Controller" class="headerlink" title="3.2.1.5 Controller"></a>3.2.1.5 Controller</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;/cms/config&quot;)</span><br><span class="line">public class CmsConfigController implements CmsConfigControllerApi &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    CmsConfigService cmsConfigService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @GetMapping(&quot;/getmodel/&#123;id&#125;&quot;)</span><br><span class="line">    public CmsConfig getmodel(@PathVariable(&quot;id&quot;) String id) &#123;</span><br><span class="line">        return cmsConfigService.getConfigById(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-1-6-测试"><a href="#3-2-1-6-测试" class="headerlink" title="3.2.1.6  测试"></a>3.2.1.6  测试</h4><p>使用postman测试接口：</p>
+<p>get请求：<a href="http://localhost:31001/cms/config/getmodel/5a791725dd573c3574ee333f" target="_blank" rel="noopener">http://localhost:31001/cms/config/getmodel/5a791725dd573c3574ee333f</a> （轮播图信息）</p>
+<h3 id="3-2-3-远程请求接口"><a href="#3-2-3-远程请求接口" class="headerlink" title="3.2.3 远程请求接口"></a>3.2.3 远程请求接口</h3><p>​    SpringMVC提供 RestTemplate请求http接口，RestTemplate的底层可以使用第三方的http客户端工具实现http 的请求，常用的http客户端工具有Apache HttpClient、OkHttpClient等，本项目使用OkHttpClient完成http请求，原因也是因为它的性能比较出众。</p>
+<p>1、添加依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;okhttp&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>2、配置RestTemplate</p>
+<p>在SpringBoot启动类中配置 RestTemplate</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class ManageCmsApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(ManageCmsApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public RestTemplate restTemplate() &#123;</span><br><span class="line">        return new RestTemplate(new OkHttp3ClientHttpRequestFactory());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、测试RestTemplate</p>
+<p>根据url获取数据，并转为map格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testRestTemplate()&#123;</span><br><span class="line">    ResponseEntity&lt;Map&gt; forEntity = restTemplate.getForEntity(&quot;http://localhost:31001/cms/config/get/5a791725dd573c3574ee333f&quot;, Map.class);</span><br><span class="line">    System.out.println(forEntity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-模板管理"><a href="#3-3-模板管理" class="headerlink" title="3.3 模板管理"></a>3.3 模板管理</h2><h3 id="3-3-1-模板管理业务流程"><a href="#3-3-1-模板管理业务流程" class="headerlink" title="3.3.1 模板管理业务流程"></a>3.3.1 模板管理业务流程</h3><p>CMS提供模板管理功能，业务流程如下：</p>
+<p><img src="assets/1532660171174.png" alt="1532660171174"></p>
+<p>1、要增加新模板首先需要制作模板，模板的内容就是Freemarker ftl模板内容。</p>
+<p>2、通过模板管理模块功能新增模板、修改模板、删除模板。</p>
+<p>3、模板信息存储在MongoDB数据库，其中模板信息存储在cms_template集合中，模板文件存储在GridFS文件系统中。</p>
+<p>cms_template集合：</p>
+<p>下边是一个模板的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5a962b52b00ffc514038faf7&quot;), </span><br><span class="line">    &quot;_class&quot; : &quot;com.xuecheng.framework.domain.cms.CmsTemplate&quot;, </span><br><span class="line">    &quot;siteId&quot; : &quot;5a751fab6abb5044e0d19ea1&quot;, </span><br><span class="line">    &quot;templateName&quot; : &quot;首页&quot;, </span><br><span class="line">    &quot;templateParameter&quot; : &quot;&quot;, </span><br><span class="line">    &quot;templateFileId&quot; : &quot;5a962b52b00ffc514038faf5&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上边模板信息中templateFileId是模板文件的ID，此ID对应GridFS文件系统中文件ID。</p>
+<h3 id="3-3-2-模板制作"><a href="#3-3-2-模板制作" class="headerlink" title="3.3.2 模板制作"></a>3.3.2 模板制作</h3><h4 id="3-3-2-1-编写模板文件"><a href="#3-3-2-1-编写模板文件" class="headerlink" title="3.3.2.1 编写模板文件"></a>3.3.2.1 编写模板文件</h4><p>1、轮播图页面原型</p>
+<p>在门户的静态工程目录有轮播图的静态页面，路径是：/include/index_banner.html。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://www.xuecheng.com/plugins/normalize-css/normalize.css&quot; /&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://www.xuecheng.com/plugins/bootstrap/dist/css/bootstrap.css&quot; /&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://www.xuecheng.com/css/page-learing-index.css&quot; /&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://www.xuecheng.com/css/page-header.css&quot; /&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;banner-roll&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;banner-item&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-bannerB.jpg);&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-bannerA.jpg);&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-banner3.png);&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-bannerB.jpg);&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-bannerA.jpg);&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-banner3.png);&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;indicators&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.xuecheng.com/plugins/jquery/dist/jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.xuecheng.com/plugins/bootstrap/dist/js/bootstrap.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    var tg = $(&apos;.banner-item .item&apos;);</span><br><span class="line">    var num = 0;</span><br><span class="line">    for (i = 0; i &lt; tg.length; i++) &#123;</span><br><span class="line">        $(&apos;.indicators&apos;).append(&apos;&lt;span&gt;&lt;/span&gt;&apos;);</span><br><span class="line">        $(&apos;.indicators&apos;).find(&apos;span&apos;).eq(num).addClass(&apos;active&apos;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function roll() &#123;</span><br><span class="line">        tg.eq(num).animate(&#123;</span><br><span class="line">            &apos;opacity&apos;: &apos;1&apos;,</span><br><span class="line">            &apos;z-index&apos;: num</span><br><span class="line">        &#125;, 1000).siblings().animate(&#123;</span><br><span class="line">            &apos;opacity&apos;: &apos;0&apos;,</span><br><span class="line">            &apos;z-index&apos;: 0</span><br><span class="line">        &#125;, 1000);</span><br><span class="line">        $(&apos;.indicators&apos;).find(&apos;span&apos;).eq(num).addClass(&apos;active&apos;).siblings().removeClass(&apos;active&apos;);</span><br><span class="line">        if (num &gt;= tg.length - 1) &#123;</span><br><span class="line">            num = 0;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    $(&apos;.indicators&apos;).find(&apos;span&apos;).click(function() &#123;</span><br><span class="line">        num = $(this).index();</span><br><span class="line">        roll();</span><br><span class="line">    &#125;);</span><br><span class="line">    var timer = setInterval(roll, 3000);</span><br><span class="line">    $(&apos;.banner-item&apos;).mouseover(function() &#123;</span><br><span class="line">        clearInterval(timer)</span><br><span class="line">    &#125;);</span><br><span class="line">    $(&apos;.banner-item&apos;).mouseout(function() &#123;</span><br><span class="line">        timer = setInterval(roll, 3000)</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>2、数据模型为：</p>
+<p>通过http 获取到数据模型如下：</p>
+<p>下图数据模型的图片路径改成可以浏览的正确路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;5a791725dd573c3574ee333f&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;轮播图&quot;,</span><br><span class="line">    &quot;model&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;key&quot;: &quot;banner1&quot;,</span><br><span class="line">        &quot;name&quot;: &quot;轮播图1地址&quot;,</span><br><span class="line">        &quot;url&quot;: null,</span><br><span class="line">        &quot;mapValue&quot;: null,</span><br><span class="line">        &quot;value&quot;: &quot;http://www.xuecheng.com/img/widget-bannerB.jpg&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;key&quot;: &quot;banner2&quot;,</span><br><span class="line">        &quot;name&quot;: &quot;轮播图2地址&quot;,</span><br><span class="line">        &quot;url&quot;: null,</span><br><span class="line">        &quot;mapValue&quot;: null,</span><br><span class="line">        &quot;value&quot;: &quot;http://www.xuecheng.com/img/widget-bannerA.jpg&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;key&quot;: &quot;banner3&quot;,</span><br><span class="line">        &quot;name&quot;: &quot;轮播图3地址&quot;,</span><br><span class="line">        &quot;url&quot;: null,</span><br><span class="line">        &quot;mapValue&quot;: null,</span><br><span class="line">        &quot;value&quot;: &quot;http://www.xuecheng.com/img/widget-banner3.jpg&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、编写模板</p>
+<p>在freemarker测试工程中新建模板index_banner.ftl。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://www.xuecheng.com/plugins/normalize-css/normalize.css&quot; /&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://www.xuecheng.com/plugins/bootstrap/dist/css/bootstrap.css&quot; /&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://www.xuecheng.com/css/page-learing-index.css&quot; /&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://www.xuecheng.com/css/page-header.css&quot; /&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;banner-roll&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;banner-item&quot;&gt;</span><br><span class="line">        &lt;#if model??&gt;</span><br><span class="line">            &lt;#list model as item&gt;</span><br><span class="line">                &lt;div class=&quot;item&quot; style=&quot;background-image: url($&#123;item.value&#125;);&quot;&gt;&lt;/div&gt;</span><br><span class="line">            &lt;/#list&gt;</span><br><span class="line">        &lt;/#if&gt;</span><br><span class="line">    &lt;#-- &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-bannerA.jpg);&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-banner3.png);&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-bannerB.jpg);&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-bannerA.jpg);&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;item&quot; style=&quot;background-image: url(../img/widget-banner3.png);&quot;&gt;&lt;/div&gt;--&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;indicators&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.xuecheng.com/plugins/jquery/dist/jquery.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.xuecheng.com/plugins/bootstrap/dist/js/bootstrap.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    var tg = $(&apos;.banner-item .item&apos;);</span><br><span class="line">    var num = 0;</span><br><span class="line">    for (i = 0; i &lt; tg.length; i++) &#123;</span><br><span class="line">        $(&apos;.indicators&apos;).append(&apos;&lt;span&gt;&lt;/span&gt;&apos;);</span><br><span class="line">        $(&apos;.indicators&apos;).find(&apos;span&apos;).eq(num).addClass(&apos;active&apos;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function roll() &#123;</span><br><span class="line">        tg.eq(num).animate(&#123;</span><br><span class="line">            &apos;opacity&apos;: &apos;1&apos;,</span><br><span class="line">            &apos;z-index&apos;: num</span><br><span class="line">        &#125;, 1000).siblings().animate(&#123;</span><br><span class="line">            &apos;opacity&apos;: &apos;0&apos;,</span><br><span class="line">            &apos;z-index&apos;: 0</span><br><span class="line">        &#125;, 1000);</span><br><span class="line">        $(&apos;.indicators&apos;).find(&apos;span&apos;).eq(num).addClass(&apos;active&apos;).siblings().removeClass(&apos;active&apos;);</span><br><span class="line">        if (num &gt;= tg.length - 1) &#123;</span><br><span class="line">            num = 0;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    $(&apos;.indicators&apos;).find(&apos;span&apos;).click(function() &#123;</span><br><span class="line">        num = $(this).index();</span><br><span class="line">        roll();</span><br><span class="line">    &#125;);</span><br><span class="line">    var timer = setInterval(roll, 3000);</span><br><span class="line">    $(&apos;.banner-item&apos;).mouseover(function() &#123;</span><br><span class="line">        clearInterval(timer)</span><br><span class="line">    &#125;);</span><br><span class="line">    $(&apos;.banner-item&apos;).mouseout(function() &#123;</span><br><span class="line">        timer = setInterval(roll, 3000)</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-2-2-模板测试"><a href="#3-3-2-2-模板测试" class="headerlink" title="3.3.2.2 模板测试"></a>3.3.2.2 模板测试</h4><p>在freemarker测试工程编写一个方法测试轮播图模板，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">@RequestMapping(&quot;/banner&quot;)</span><br><span class="line">public String index_banner(Map&lt;String, Object&gt; map)&#123;</span><br><span class="line">    String dataUrl = &quot;http://localhost:31001/cms/config/getmodel/5a791725dd573c3574ee333f&quot;;</span><br><span class="line">    ResponseEntity&lt;Map&gt; forEntity = restTemplate.getForEntity(dataUrl, Map.class);</span><br><span class="line">    Map body = forEntity.getBody();</span><br><span class="line">    map.putAll(body);</span><br><span class="line">    return &quot;index_banner&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>请求：<a href="http://localhost:8088/freemarker/banner" target="_blank" rel="noopener">http://localhost:8088/freemarker/banner</a></p>
+<p><img src="assets/1536880153131.png" alt="1536880153131"></p>
+<h3 id="3-3-3-GridFS研究"><a href="#3-3-3-GridFS研究" class="headerlink" title="3.3.3 GridFS研究"></a>3.3.3 GridFS研究</h3><h4 id="3-3-3-1-GridFS介绍"><a href="#3-3-3-1-GridFS介绍" class="headerlink" title="3.3.3.1 GridFS介绍"></a>3.3.3.1 GridFS介绍</h4><p>​    GridFS是MongoDB提供的用于持久化存储文件的模块，CMS使用MongoDB存储数据，使用GridFS可以快速集成开发。</p>
+<p>​    它的工作原理是：</p>
+<p>​    在GridFS存储文件是将文件分块存储，文件会按照256KB的大小分割成多个块进行存储，GridFS使用两个集合（collection）存储文件，一个集合是chunks, 用于存储文件的二进制数据；一个集合是files，用于存储文件的元数据信息（文件名称、块大小、上传时间等信息）。</p>
+<p>​    从GridFS中读取文件要对文件的各各块进行组装、合并。</p>
+<p>详细参考：<a href="https://docs.mongodb.com/manual/core/gridfs/" target="_blank" rel="noopener">https://docs.mongodb.com/manual/core/gridfs/</a></p>
+<h4 id="3-3-3-2-GridFS存取文件测试"><a href="#3-3-3-2-GridFS存取文件测试" class="headerlink" title="3.3.3.2 GridFS存取文件测试"></a>3.3.3.2 GridFS存取文件测试</h4><p>1、存文件</p>
+<p>使用GridFsTemplate存储文件测试代码：</p>
+<p>向测试程序注入GridFsTemplate。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testGridFs() throws FileNotFoundException &#123;</span><br><span class="line">    //要存储的文件</span><br><span class="line">    File file = new File(&quot;d:/index_banner.html&quot;);</span><br><span class="line">    //定义输入流</span><br><span class="line">    FileInputStream inputStram = new FileInputStream(file);</span><br><span class="line">    //向GridFS存储文件</span><br><span class="line">    ObjectId objectId = = gridFsTemplate.store(inputStram, &quot;轮播图测试文件01&quot;, &quot;&quot;);</span><br><span class="line">    //得到文件ID</span><br><span class="line">    String fileId = objectId.toString();</span><br><span class="line">    System.out.println(file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>存储原理说明：</p>
+<p>文件存储成功得到一个文件id</p>
+<p>此文件id是fs.files集合中的主键。</p>
+<p>可以通过文件id查询fs.chunks表中的记录，得到文件的内容。</p>
+<p>2、读取文件</p>
+<p>1）在config包中定义Mongodb的配置类，如下：</p>
+<p>GridFSBucket用于打开下载流对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class MongoConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;spring.data.mongodb.database&#125;&quot;)</span><br><span class="line">    String db;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public GridFSBucket getGridFSBucket(MongoClient mongoClient)&#123;</span><br><span class="line">        MongoDatabase database = mongoClient.getDatabase(db);</span><br><span class="line">        GridFSBucket bucket = GridFSBuckets.create(database);</span><br><span class="line">        return bucket;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2）测试代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootTest</span><br><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">public class GridFsTest &#123;</span><br><span class="line"></span><br><span class="line">  @Autowired</span><br><span class="line">  GridFsTemplate gridFsTemplate;</span><br><span class="line"></span><br><span class="line">  @Autowired</span><br><span class="line">  GridFSBucket gridFSBucket;</span><br><span class="line">  </span><br><span class="line">  @Test</span><br><span class="line">  public void queryFile() throws IOException &#123;</span><br><span class="line">      String fileId = &quot;5b9c54e264c614237c271a99&quot;;</span><br><span class="line">      //根据id查询文件</span><br><span class="line">      GridFSFile gridFSFile = gridFsTemplate.findOne(Query.query(Criteria.where(&quot;_id&quot;).is(fileId)));</span><br><span class="line">      //打开下载流对象</span><br><span class="line">      GridFSDownloadStream gridFSDownloadStream = gridFSBucket.openDownloadStream(gridFSFile.getObjectId());</span><br><span class="line">      //创建gridFsResource，用于获取流对象</span><br><span class="line">      GridFsResource gridFsResource = new GridFsResource(gridFSFile,gridFSDownloadStream);</span><br><span class="line">      //获取流中的数据</span><br><span class="line">      String s = IOUtils.toString(gridFsResource.getInputStream(), &quot;UTF-8&quot;);</span><br><span class="line">      System.out.println(s);</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+<p>3、删除文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//删除文件</span><br><span class="line">@Test</span><br><span class="line">public void testDelFile() throws IOException &#123;</span><br><span class="line">    //根据文件id删除fs.files和fs.chunks中的记录</span><br><span class="line">    gridFsTemplate.delete(Query.query(Criteria.where(&quot;_id&quot;).is(&quot;5b32480ed3a022164c4d2f92&quot;)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-4-模板存储"><a href="#3-3-4-模板存储" class="headerlink" title="3.3.4 模板存储"></a>3.3.4 模板存储</h3><p>根据模板管理的流程，最终将模板信息存储到MongoDB的cms_template中，将模板文件存储到GridFS中。</p>
+<p>模板管理功能在课堂中不再讲解，教学中手动向cms_template及GridFS中存储模板，方法如下：</p>
+<p>1、添加模板</p>
+<p>1）使用GridFS测试代码存储模板文件到GridFS，并得到文件id.</p>
+<p>2）向cms_template添加记录。</p>
+<p><img src="assets/1529143884135.png" alt="1529143884135"></p>
+<p>2、删除模板</p>
+<p>1）使用GridFS测试代码根据文件id删除模板文件。</p>
+<p>2）根据模板id删除cms_template中的记录。</p>
+<p>3、修改模板信息</p>
+<p>使用Studio 3T修改cms_template中的记录。</p>
+<p>4、修改模板文件</p>
+<p>1）通过Studio 3T修改模板文件(此方法限文件小于256K)</p>
+<p>可以通过Studio 3T修改模板文件，先找到模板文件，再导入进去：</p>
+<p><img src="assets/1528882506969.png" alt="1528882506969"></p>
+<h2 id="3-4-静态化测试"><a href="#3-4-静态化测试" class="headerlink" title="3.4 静态化测试"></a>3.4 静态化测试</h2><p>上边章节完成了数据模型和模板管理的测试，下边测试整个页面静态化的流程，流程如下：</p>
+<p>1、填写页面DataUrl</p>
+<p>在编辑cms页面信息界面填写DataUrl，将此字段保存到cms_page集合中。</p>
+<p>2、静态化程序获取页面的DataUrl</p>
+<p>3、静态化程序远程请求DataUrl获取数据模型。</p>
+<p>4、静态化程序获取页面的模板信息</p>
+<p>5、执行页面静态化</p>
+<h3 id="3-4-1-填写页面DataUrl"><a href="#3-4-1-填写页面DataUrl" class="headerlink" title="3.4.1 填写页面DataUrl"></a>3.4.1 填写页面DataUrl</h3><p>修改页面管理模板代码，实现编辑页面DataUrl。</p>
+<p>注意：此地址由程序员提供给系统管理员，由系统管理员录入到系统中。</p>
+<p>下边实现页面修改界面录入DataUrl：</p>
+<p>1、修改页面管理前端的page_edit.vue</p>
+<p>在表单中添加dataUrl输入框：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-form-item label=&quot;数据Url&quot; prop=&quot;dataUrl&quot;&gt;</span><br><span class="line">  &lt;el-input v-model=&quot;pageForm.dataUrl&quot; auto-complete=&quot;off&quot; &gt;&lt;/el-input&gt;</span><br><span class="line">&lt;/el-form-item&gt;</span><br></pre></td></tr></table></figure>
+<p>2、修改页面管理服务端PageService</p>
+<p>在更新cmsPage数据代码中添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//更新dataUrl</span><br><span class="line">one.setDataUrl(cmsPage.getDataUrl());</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-2-静态化程序"><a href="#3-4-2-静态化程序" class="headerlink" title="3.4.2 静态化程序"></a>3.4.2 静态化程序</h3><p>在PageService中定义页面静态化方法，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">//页面静态化</span><br><span class="line">public String getPageHtml(String pageId)&#123;</span><br><span class="line">    //获取页面模型数据</span><br><span class="line">    Map model = this.getModelByPageId(pageId);</span><br><span class="line">    if(model == null)&#123;</span><br><span class="line">        //获取页面模型数据为空</span><br><span class="line">        ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_DATAISNULL);</span><br><span class="line">    &#125;</span><br><span class="line">    //获取页面模板</span><br><span class="line">    String templateContent = getTemplateByPageId(pageId);</span><br><span class="line">    if(StringUtils.isEmpty(templateContent))&#123;</span><br><span class="line">        //页面模板为空</span><br><span class="line">        ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);</span><br><span class="line">    &#125;</span><br><span class="line">    //执行静态化</span><br><span class="line">    String html = generateHtml(templateContent, model);</span><br><span class="line">    if(StringUtils.isEmpty(html))&#123;</span><br><span class="line">        ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_HTMLISNULL);</span><br><span class="line">    &#125;</span><br><span class="line">    return html;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//页面静态化</span><br><span class="line">public String generateHtml(String template,Map model)&#123;</span><br><span class="line">    try &#123;</span><br><span class="line">    //生成配置类</span><br><span class="line">    Configuration configuration = new Configuration(Configuration.getVersion());</span><br><span class="line">    //模板加载器</span><br><span class="line">    StringTemplateLoader stringTemplateLoader = new StringTemplateLoader();</span><br><span class="line">    stringTemplateLoader.putTemplate(&quot;template&quot;,template);</span><br><span class="line">    //配置模板加载器</span><br><span class="line">    configuration.setTemplateLoader(stringTemplateLoader);</span><br><span class="line">    //获取模板</span><br><span class="line">    Template template1 = configuration.getTemplate(&quot;template&quot;);</span><br><span class="line">    String html = FreeMarkerTemplateUtils.processTemplateIntoString(template1, model);</span><br><span class="line">    return html;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//获取页面模板</span><br><span class="line">public String getTemplateByPageId(String pageId)&#123;</span><br><span class="line">    //查询页面信息</span><br><span class="line">    CmsPage cmsPage = this.getById(pageId);</span><br><span class="line">    if(cmsPage == null)&#123;</span><br><span class="line">        //页面不存在</span><br><span class="line">        ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);</span><br><span class="line">    &#125;</span><br><span class="line">    //页面模板</span><br><span class="line">    String templateId = cmsPage.getTemplateId();</span><br><span class="line">    if(StringUtils.isEmpty(templateId))&#123;</span><br><span class="line">        //页面模板为空</span><br><span class="line">        ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);</span><br><span class="line">    &#125;</span><br><span class="line">    Optional&lt;CmsTemplate&gt; optional = cmsTemplateRepository.findById(templateId);</span><br><span class="line">    if(optional.isPresent())&#123;</span><br><span class="line">        CmsTemplate cmsTemplate = optional.get();</span><br><span class="line">        //模板文件id</span><br><span class="line">        String templateFileId = cmsTemplate.getTemplateFileId();</span><br><span class="line">        //取出模板文件内容</span><br><span class="line">        GridFSFile gridFSFile = gridFsTemplate.findOne(Query.query(Criteria.where(&quot;_id&quot;).is(templateFileId)));</span><br><span class="line">        //打开下载流对象</span><br><span class="line">        GridFSDownloadStream gridFSDownloadStream = gridFSBucket.openDownloadStream(gridFSFile.getObjectId());</span><br><span class="line">        //创建GridFsResource</span><br><span class="line">        GridFsResource gridFsResource = new GridFsResource(gridFSFile,gridFSDownloadStream);</span><br><span class="line">        try &#123;</span><br><span class="line">            String content = IOUtils.toString(gridFsResource.getInputStream(), &quot;utf-8&quot;);</span><br><span class="line">            return content;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line">//获取页面模型数据</span><br><span class="line">public Map getModelByPageId(String pageId)&#123;</span><br><span class="line">    //查询页面信息</span><br><span class="line">    CmsPage cmsPage = this.getById(pageId);</span><br><span class="line">    if(cmsPage == null)&#123;</span><br><span class="line">        //页面不存在</span><br><span class="line">        ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);</span><br><span class="line">    &#125;</span><br><span class="line">    //取出dataUrl</span><br><span class="line">    String dataUrl = cmsPage.getDataUrl();</span><br><span class="line">    if(StringUtils.isEmpty(dataUrl))&#123;</span><br><span class="line">        ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_DATAURLISNULL);</span><br><span class="line">    &#125;</span><br><span class="line">    ResponseEntity&lt;Map&gt; forEntity = restTemplate.getForEntity(dataUrl, Map.class);</span><br><span class="line">    Map body = forEntity.getBody();</span><br><span class="line">    return body;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>单元测试getPageHtml方法，过程略。</p>
+<h1 id="4-页面预览"><a href="#4-页面预览" class="headerlink" title="4 页面预览"></a>4 页面预览</h1><h2 id="4-1-页面预览开发"><a href="#4-1-页面预览开发" class="headerlink" title="4.1 页面预览开发"></a>4.1 页面预览开发</h2><h3 id="4-1-1-需求分析"><a href="#4-1-1-需求分析" class="headerlink" title="4.1.1 需求分析"></a>4.1.1 需求分析</h3><p>页面在发布前增加页面预览的步骤，方便用户检查页面内容是否正确。页面预览的流程如下：</p>
+<p><img src="assets/1532662638149.png" alt="1532662638149"></p>
+<p>1、用户进入cms前端，点击“页面预览”在浏览器请求cms页面预览链接。</p>
+<p>2、cms根据页面id查询DataUrl并远程请求DataUrl获取数据模型。</p>
+<p>3、cms根据页面id查询页面模板内容</p>
+<p>4、cms执行页面静态化。</p>
+<p>5、cms将静态化内容响应给浏览器。</p>
+<p>6、在浏览器展示页面内容，实现页面预览的功能。</p>
+<h3 id="4-1-2-搭建环境"><a href="#4-1-2-搭建环境" class="headerlink" title="4.1.2 搭建环境"></a>4.1.2 搭建环境</h3><p>在cms服务需要集成freemarker：</p>
+<p>1、在CMS服务中加入freemarker的依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-freemarker&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>2、在application.yml配置freemarker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  freemarker:</span><br><span class="line">    cache: false  #关闭模板缓存，方便测试</span><br><span class="line">    settings:</span><br><span class="line">      template_update_delay: 0</span><br></pre></td></tr></table></figure>
+<h3 id="4-1-3-Service"><a href="#4-1-3-Service" class="headerlink" title="4.1.3 Service"></a>4.1.3 Service</h3><p>静态化方法在静态化测试章节已经实现。</p>
+<h3 id="4-1-4-Controller"><a href="#4-1-4-Controller" class="headerlink" title="4.1.4 Controller"></a>4.1.4 Controller</h3><p>调用service的静态化方法，将静态化内容通过response输出到浏览器显示</p>
+<p>创建CmsPagePreviewController类，用于页面预览：</p>
+<p>请求页面id，查询得到页面的模板信息、数据模型url，根据模板和数据生成静态化内容，并输出到浏览器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class CmsPagePreviewController extends BaseController &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    PageService pageService;</span><br><span class="line"></span><br><span class="line">    //接收到页面id</span><br><span class="line">    @RequestMapping(value=&quot;/cms/preview/&#123;pageId&#125;&quot;,method = RequestMethod.GET)</span><br><span class="line">    public void preview(@PathVariable(&quot;pageId&quot;)String pageId)&#123;</span><br><span class="line">        String pageHtml = pageService.getPageHtml(pageId);</span><br><span class="line">        if(StringUtils.isNotEmpty(pageHtml))&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                ServletOutputStream outputStream = response.getOutputStream();</span><br><span class="line">                outputStream.write(pageHtml.getBytes(&quot;utf-8&quot;));</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-页面预览测试"><a href="#4-2-页面预览测试" class="headerlink" title="4.2 页面预览测试"></a>4.2 页面预览测试</h2><h3 id="4-2-1-配置Nginx代理"><a href="#4-2-1-配置Nginx代理" class="headerlink" title="4.2.1 配置Nginx代理"></a>4.2.1 配置Nginx代理</h3><p>为了通过nginx请求静态资源（css、图片等），通过nginx代理进行页面预览。</p>
+<p>在&lt;<a href="http://www.xuecheng.com&gt;虚拟主机配置：" target="_blank" rel="noopener">www.xuecheng.com&gt;虚拟主机配置：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#页面预览</span><br><span class="line">location /cms/preview/ &#123;  </span><br><span class="line">    proxy_pass http://cms_server_pool/cms/preview/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置cms_server_pool将请求转发到cms：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#cms页面预览</span><br><span class="line"> upstream cms_server_pool&#123;</span><br><span class="line">    server 127.0.0.1:31001 weight=10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重新加载nginx 配置文件。</p>
+<p>从cms_page找一个页面进行测试。注意：页面配置一定要正确，需设置正确的模板id和dataUrl。</p>
+<p>在浏览器打开：<a href="http://www.xuecheng.com/cms/preview/5a795ac7dd573c04508f3a56" target="_blank" rel="noopener">http://www.xuecheng.com/cms/preview/5a795ac7dd573c04508f3a56</a></p>
+<p>5a795ac7dd573c04508f3a56：轮播图页面的id</p>
+<p><img src="assets/1532665406317.png" alt="1532665406317"></p>
+<h3 id="4-2-2-添加“页面预览”链接"><a href="#4-2-2-添加“页面预览”链接" class="headerlink" title="4.2.2 添加“页面预览”链接"></a>4.2.2 添加“页面预览”链接</h3><p>在页面列表添加“页面预览”链接，修改page_list.vue:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;template slot-scope=&quot;page&quot;&gt;</span><br><span class="line">  &lt;el-button @click=&quot;edit(page.row.pageId)&quot; type=&quot;text&quot; size=&quot;small&quot;&gt;修改&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button @click=&quot;del(page.row.pageId)&quot; type=&quot;text&quot; size=&quot;small&quot;&gt;删除&lt;/el-button&gt;</span><br><span class="line">  &lt;el-button @click=&quot;preview(page.row.pageId)&quot; type=&quot;text&quot; size=&quot;small&quot;&gt;页面预览&lt;/el-button&gt;</span><br></pre></td></tr></table></figure>
+<p>添加preview方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//页面预览</span><br><span class="line">preview(pageId)&#123;</span><br><span class="line">    window.open(&quot;http://www.xuecheng.com/cms/preview/&quot;+pageId)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="assets/1532665550855.png" alt="1532665550855"></p>
+<p>点击轮播图页面的“页面预览”，预览页面效果。</p>
+<p><img src="images/1532665406317.png" alt="1532665406317"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/day04-页面静态化.html" title="在线学习视频（四）—— 页面静态化 页面预览">https://tiredtosleep.github.io/day04-页面静态化.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FreeMarker/" rel="tag"><i class="fa fa-tag"></i> FreeMarker</a>
+          
+            <a href="/tags/RestTemplate远程调用/" rel="tag"><i class="fa fa-tag"></i> RestTemplate远程调用</a>
+          
+            <a href="/tags/存储模块GridFs/" rel="tag"><i class="fa fa-tag"></i> 存储模块GridFs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/day16 Spring Security Oauth2.html" rel="next" title="在线学习视频（十七）—— Spring Security Oauth2 JWT">
+                <i class="fa fa-chevron-left"></i> 在线学习视频（十七）—— Spring Security Oauth2 JWT
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day01 搭建环境 CMS服务端开发.html" rel="prev" title="在线学习视频（一）—— CMS服务端开发">
+                在线学习视频（一）—— CMS服务端开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#页面静态化-页面预览"><span class="nav-text">页面静态化 页面预览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-页面静态化需求"><span class="nav-text">1 页面静态化需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-FreeMarker-研究"><span class="nav-text">2 FreeMarker 研究</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-页面静态化"><span class="nav-text">3 页面静态化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-页面静态化流程"><span class="nav-text">3.1 页面静态化流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-数据模型"><span class="nav-text">3.2 数据模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-轮播图DataUrl接口"><span class="nav-text">3.2.1 轮播图DataUrl接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-1-需求分析"><span class="nav-text">3.2.1.1 需求分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-2-接口定义"><span class="nav-text">3.2.1.2 接口定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-3-Dao"><span class="nav-text">3.2.1.3 Dao</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-4-Service"><span class="nav-text">3.2.1.4 Service</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-5-Controller"><span class="nav-text">3.2.1.5 Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-6-测试"><span class="nav-text">3.2.1.6  测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-远程请求接口"><span class="nav-text">3.2.3 远程请求接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-模板管理"><span class="nav-text">3.3 模板管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-模板管理业务流程"><span class="nav-text">3.3.1 模板管理业务流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-模板制作"><span class="nav-text">3.3.2 模板制作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-1-编写模板文件"><span class="nav-text">3.3.2.1 编写模板文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-2-模板测试"><span class="nav-text">3.3.2.2 模板测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-GridFS研究"><span class="nav-text">3.3.3 GridFS研究</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-1-GridFS介绍"><span class="nav-text">3.3.3.1 GridFS介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-2-GridFS存取文件测试"><span class="nav-text">3.3.3.2 GridFS存取文件测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-4-模板存储"><span class="nav-text">3.3.4 模板存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-静态化测试"><span class="nav-text">3.4 静态化测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-填写页面DataUrl"><span class="nav-text">3.4.1 填写页面DataUrl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-静态化程序"><span class="nav-text">3.4.2 静态化程序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-页面预览"><span class="nav-text">4 页面预览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-页面预览开发"><span class="nav-text">4.1 页面预览开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-需求分析"><span class="nav-text">4.1.1 需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-搭建环境"><span class="nav-text">4.1.2 搭建环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-3-Service"><span class="nav-text">4.1.3 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-4-Controller"><span class="nav-text">4.1.4 Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-页面预览测试"><span class="nav-text">4.2 页面预览测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-配置Nginx代理"><span class="nav-text">4.2.1 配置Nginx代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-添加“页面预览”链接"><span class="nav-text">4.2.2 添加“页面预览”链接</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">301.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>

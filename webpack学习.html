@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack介绍,webpack-dev-server启动,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="1 webpack开发技术1.1 webpack介绍使用vue.js开发大型应用需要使用webpack打包工具，本节研究webpack的使用方法。 Webpack 是一个前端资源的打包工具，它可以将js、image、css等资源当成一个模块进行打包。  从图中我们可以看出，Webpack 可以将js、css、png等多种静态资源 进行打包，使用webpack有什么好处呢？ 1、模块化开发 程序员在">
+<meta name="keywords" content="webpack介绍,webpack-dev-server启动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMS服务端开发">
+<meta property="og:url" content="https://tiredtosleep.github.io/webpack学习.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="1 webpack开发技术1.1 webpack介绍使用vue.js开发大型应用需要使用webpack打包工具，本节研究webpack的使用方法。 Webpack 是一个前端资源的打包工具，它可以将js、image、css等资源当成一个模块进行打包。  从图中我们可以看出，Webpack 可以将js、css、png等多种静态资源 进行打包，使用webpack有什么好处呢？ 1、模块化开发 程序员在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528336994351.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528337206587.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528337264070.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528337357643.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528507336006.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528507591485.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528337397434.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528337438199.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528534139263.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528302402440.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1536616004301.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1536619143974.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528359089367.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528359776794.png">
+<meta property="og:updated_time" content="2019-06-01T13:44:03.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CMS服务端开发">
+<meta name="twitter:description" content="1 webpack开发技术1.1 webpack介绍使用vue.js开发大型应用需要使用webpack打包工具，本节研究webpack的使用方法。 Webpack 是一个前端资源的打包工具，它可以将js、image、css等资源当成一个模块进行打包。  从图中我们可以看出，Webpack 可以将js、css、png等多种静态资源 进行打包，使用webpack有什么好处呢？ 1、模块化开发 程序员在">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1528336994351.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/webpack学习.html">
+
+
+
+
+
+  <title>CMS服务端开发 | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/webpack学习.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CMS服务端开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T09:28:32+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack介绍/" itemprop="url" rel="index">
+                    <span itemprop="name">webpack介绍</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-webpack开发技术"><a href="#1-webpack开发技术" class="headerlink" title="1 webpack开发技术"></a>1 webpack开发技术</h1><h2 id="1-1-webpack介绍"><a href="#1-1-webpack介绍" class="headerlink" title="1.1 webpack介绍"></a>1.1 webpack介绍</h2><p>使用vue.js开发大型应用需要使用webpack打包工具，本节研究webpack的使用方法。</p>
+<p>Webpack 是一个前端资源的打包工具，它可以将js、image、css等资源当成一个模块进行打包。</p>
+<p><img src="assets/1528336994351.png" alt="1528336994351"></p>
+<p>从图中我们可以看出，Webpack 可以将js、css、png等多种静态资源 进行打包，使用webpack有什么好处呢？</p>
+<p>1、模块化开发</p>
+<p>程序员在开发时可以分模块创建不同的js、 css等小文件方便开发，最后使用webpack将这些小文件打包成一个文件，减少了http的请求次数。</p>
+<p>webpack可以实现按需打包，为了避免出现打包文件过大可以打包成多个文件。</p>
+<p>2、 编译typescript、ES6等高级js语法</p>
+<p>随着前端技术的强大，开发中可以使用javascript的很多高级版本，比如：typescript、ES6等，方便开发，webpack可以将打包文件转换成浏览器可识别的js语法。</p>
+<p>3、CSS预编译</p>
+<p>webpack允许在开发中使用Sass 和 Less等原生CSS的扩展技术，通过sass-loader、less-loader将Sass 和 Less的语法编译成浏览器可识别的css语法。</p>
+<p>webpack的缺点：</p>
+<p>1、配置有些繁琐</p>
+<p>2、文档不丰富</p>
+<h2 id="1-2-安装webpack"><a href="#1-2-安装webpack" class="headerlink" title="1.2 安装webpack"></a>1.2 安装webpack</h2><h3 id="1-2-1-安装Node-js"><a href="#1-2-1-安装Node-js" class="headerlink" title="1.2.1 安装Node.js"></a>1.2.1 安装Node.js</h3><p>webpack基于node.js运行，首先需要安装node.js。</p>
+<p><img src="assets/1528337206587.png" alt="1528337206587"></p>
+<p>为什么会有node.js？</p>
+<p>​    传统意义上的 JavaScript 运行在浏览器上，Chrome 使用的 JavaScript 引擎是 V8，Node.js 是一个运行在服务端的框架，它的底层就使用了 V8 引擎，这样就可以使用javascript去编写一些服务端的程序，这样也就实现了用javaScript去开发 Apache + PHP 以及 Java Servlet所开发的服务端功能，这样做的好处就是前端和后端都采用javascript，即开发一份js程序即可以运行在前端也可以运行的服务端，这样比一个应用使用多种语言在开发效率上要高，不过node.js属于新兴产品，一些公司也在尝试使用node.js完成一些业务领域，node.js基于V8引擎，基于事件驱动机制，在特定领域性能出色，比如用node.js实现消息推送、状态监控等的业务功能非常合适。</p>
+<p>下边我们去安装Node.js：</p>
+<p>1、下载对应你系统的Node.js版本:</p>
+<p><a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
+<p><img src="assets/1528337264070.png" alt="1528337264070"></p>
+<p>推荐下载LTS版本，本教程安装9.4.0。</p>
+<p>2、选安装目录进行安装</p>
+<p>默认即可</p>
+<p>安装完成检查PATH环境变量是否设置了node.js的路径。</p>
+<p>3、测试</p>
+<p>在命令提示符下输入命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<p>会显示当前node的版本</p>
+<h3 id="1-2-2-安装NPM"><a href="#1-2-2-安装NPM" class="headerlink" title="1.2.2 安装NPM"></a>1.2.2 安装NPM</h3><p>1、自动安装NPM</p>
+<p>npm全称Node Package Manager，他是node包管理和分发的工具，使用NPM可以对应用的依赖进行管理，NPM的功能和服务端项目构建工具maven差不多，我们通过npm 可以很方便地下载js库，打包js文件。</p>
+<p>node.js已经集成了npm工具，在命令提示符输入 npm -v 可查看当前npm版本</p>
+<p><img src="assets/1528337357643.png" alt="1528337357643"></p>
+<p>2、设置包路径</p>
+<p>包路径就是npm从远程下载的js包所存放的路径。</p>
+<p>使用 npm config ls 查询NPM管理包路径（NPM下载的依赖包所存放的路径）</p>
+<p><img src="assets/1528507336006.png" alt="1528507336006"></p>
+<p>NPM默认的管理包路径在C:/用户/[用户名]/AppData/Roming/npm/node_meodules，为了方便对依赖包管理，我们将管理包的路径设置在单独的地方，本教程将安装目录设置在node.js的目录下，创建npm_modules和npm_cache，执行下边的命令：</p>
+<p>本教程安装node.js在D:\Program Files\nodejs下所以执行命令如下：</p>
+<p>npm config set prefix “C:\Program Files\nodejs\npm_modules”</p>
+<p>npm config set cache “c:\Program Files\nodejs\npm_cache”</p>
+<p>此时再使用 npm config ls 查询NPM管理包路径发现路径已更改</p>
+<p><img src="assets/1528507591485.png" alt="1528507591485"></p>
+<p>3、安装cnpm</p>
+<p>npm默认会去国外的镜像去下载js包，在开发中通常我们使用国内镜像，这里我们使用淘宝镜像</p>
+<p>下边我们来安装cnpm：</p>
+<p>有时我们使用npm下载资源会很慢，所以我们可以安装一个cnmp(淘宝镜像)来加快下载速度。</p>
+<p>输入命令，进行全局安装淘宝镜像。</p>
+<p>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p>安装后，我们可以使用以下命令来查看cnpm的版本</p>
+<p>cnpm -v</p>
+<p><img src="assets/1528337397434.png" alt="1528337397434"></p>
+<p>nrm ls 查看镜像已经指向taobao</p>
+<p><img src="assets/1528337438199.png" alt="1528337438199"></p>
+<p>使nrm use XXX切换 镜像</p>
+<p>如果nrm没有安装则需要进行全局安装：cnpm install -g nrm</p>
+<p>4、非连网环境安装cnpm</p>
+<p>从本小节第3步开始就需要连网下载npm包，如果你的环境不能连网在老师的资料文件下有已经下载好的webpack相关包，下边是安装方法。</p>
+<p>1）配置环境变量</p>
+<p>NODE_HOME = D:\Program Files\nodejs (node.js安装目录)</p>
+<p>在PATH变量中添加：%NODE_HOME%;%NODE_HOME%\npm_modules;</p>
+<p>2）找到npm包路径</p>
+<p>根据上边的安装说明npm包路径被设置到了node.js安装目录下的npm_modules目录。</p>
+<p>可以使用npm config ls查看。</p>
+<p>拷贝课程资料中的 npm_modules.zip到node.js安装目录，并解压npm_modules.zip覆盖本目录下的npm_modules文件夹。</p>
+<p>3）完成上边步骤测试</p>
+<p>cnpm -v</p>
+<h3 id="1-2-3-安装webpack"><a href="#1-2-3-安装webpack" class="headerlink" title="1.2.3 安装webpack"></a>1.2.3 安装webpack</h3><p>1、连网安装</p>
+<p>webpack安装分为本地安装和全局安装：</p>
+<p>本地安装：仅将webpack安装在当前项目的node_modules目录中，仅对当前项目有效。</p>
+<p>全局安装：将webpack安装在本机，对所有项目有效，全局安装会锁定一个webpack版本，该版本可能不适用某个项目。全局安装需要添加 -g 参数。</p>
+<p>进入webpacktest测试目录目录，运行：</p>
+<p>1）本地安装：</p>
+<p>只在我的项目中使用webpack，需要进行本地安装，因为项目和项目所用的webpack的版本不一样。本地安装就会将webpack的js包下载到项目下的npm_modeuls目录下。</p>
+<p>在门户目录下创建webpack测试目录webpacktest01：</p>
+<p>npm install –save-dev webpack 或 cnpm install –save-dev webpack</p>
+<p>npm install –save-dev webpack-cli (4.0以后的版本需要安装webpack-cli)</p>
+<p>2）全局安装加-g，如下：</p>
+<p>全局安装就将webpack的js包下载到npm的包路径下。</p>
+<p>npm install webpack -g 或 cnpm install webpack -g</p>
+<p>3）安装webpack指定的版本：</p>
+<p>本教程使用webpack3.6.0，安装webpack3.6.0：</p>
+<p>进入webpacktest测试目录，运行：cnpm install –save-dev <a href="mailto:webpack@3.6.0" target="_blank" rel="noopener">webpack@3.6.0</a></p>
+<p>全局安装：npm install <a href="mailto:webpack@3.6.0" target="_blank" rel="noopener">webpack@3.6.0</a> -g或 cnpm install <a href="mailto:webpack@3.6.0" target="_blank" rel="noopener">webpack@3.6.0</a> -g</p>
+<p>2、非连网安装</p>
+<p>参考上边 “非连网环境安装cnpm”描述，将课程资料中的 npm_modules.zip到node.js安装目录，并解压npm_modules.zip覆盖本目录下的npm_modules文件夹。</p>
+<p>说明：已执行 “非连网环境安装cnpm”下的操作不用重复执行。</p>
+<p>测试：</p>
+<p>在cmd状态输入webpack，出现如下提示说明 webpack安装成功</p>
+<p><img src="assets/1528534139263.png" alt="1528534139263"></p>
+<h2 id="1-3-入门程序"><a href="#1-3-入门程序" class="headerlink" title="1.3 入门程序"></a>1.3 入门程序</h2><p>通过本入门程序体会webpack打包的过程及模块化开发的思想。</p>
+<h3 id="1-3-1-需求分析"><a href="#1-3-1-需求分析" class="headerlink" title="1.3.1 需求分析"></a>1.3.1 需求分析</h3><p>通过入门程序实现对js文件的打包，体会webpack是如何对应用进行模块化管理。</p>
+<p>对上边1+1=2的例子使用webpack进行模块化管理</p>
+<p><img src="assets/1528302402440.png" alt="1528302402440"></p>
+<h3 id="1-3-2-定义模块"><a href="#1-3-2-定义模块" class="headerlink" title="1.3.2 定义模块"></a>1.3.2 定义模块</h3><p>创建webpacktest01目录，将vue.min.js及vue_02.html拷贝到目录下。</p>
+<p>1、定义module01.js</p>
+<p>在webpacktest01目录下创建module01.js</p>
+<p>将本程序使用的加法运算的js方法抽取到一个js文件，此文件就是一个模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 定义add函数</span><br><span class="line">function add(x, y) &#123;</span><br><span class="line">    return x + y</span><br><span class="line">&#125;</span><br><span class="line">// 导出add方法</span><br><span class="line">module.exports.add = add;</span><br></pre></td></tr></table></figure>
+<p>2、定义main.js</p>
+<p>在webpacktest01目录下创建main.js，main.js是本程序的js主文件，包括如下内容：</p>
+<p>1、在此文件中会引用module01.js模块</p>
+<p>2、引用vue.min.js（它也一个模块）</p>
+<p>3、将html页面中构建vue实例的代码放在main.js中。</p>
+<p>main.js的代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var add = require(&apos;./module01.js&apos;);</span><br><span class="line">var Vue = require(&apos;./vue.min&apos;);</span><br><span class="line">var VM = new Vue(&#123;</span><br><span class="line">    el:&quot;#app&quot;,//表示当前vue对象接管app的div区域</span><br><span class="line">    data:&#123;</span><br><span class="line">        name:&apos;黑马程序员&apos;,// 相当于是MVVM中的Model这个角色</span><br><span class="line">        num1:0,</span><br><span class="line">        num2:0,</span><br><span class="line">        result:0,</span><br><span class="line">        url:&apos;http://www.itcast.cn&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        add:function()&#123;</span><br><span class="line">            //这里使用了导入的module01.js文件中的add方法</span><br><span class="line">            this.result = add(Number.parseInt(this.num1),Number.parseInt(this.num2))</span><br><span class="line">            alert(this.result)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-3-打包测试"><a href="#1-3-3-打包测试" class="headerlink" title="1.3.3  打包测试"></a>1.3.3  打包测试</h3><p>上边将mode01.js模块及main.js主文件编写完成，下边使用webpack对这些js文件进行打包</p>
+<p>1、进入程序目录，执行webpack main.js build.js ，这段指令表示将main.js打包输出为 build.js文件</p>
+<p>执行完成，观察程序目录是否出现build.js。</p>
+<p>2、在html中引用build.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot; xmlns:v-on=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;vue.js入门程序&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">&lt;a v-bind:href=&quot;url&quot;&gt;&lt;span v-text=&quot;name&quot;&gt;&lt;/span&gt;&lt;/a&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; v-model=&quot;num1&quot;&gt;+</span><br><span class="line">&lt;input type=&quot;text&quot; v-model=&quot;num2&quot;&gt;=</span><br><span class="line">&lt;span v-text=&quot;result&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;button v-on:click=&quot;add&quot;&gt;计算&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script src=&quot;build.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>3、测试</p>
+<p>测试功能：</p>
+<p>1）输入任意加数，其和会自动计算</p>
+<p>2）点击“计算”会调用module01.js中的add方法</p>
+<h3 id="1-3-4-导出多个方法"><a href="#1-3-4-导出多个方法" class="headerlink" title="1.3.4 导出多个方法"></a>1.3.4 导出多个方法</h3><p>需求分析：</p>
+<p>在上边的例子定义subtraction方法实现减法运算，效果如下：</p>
+<p><img src="assets/1536616004301.png" alt="1536616004301"></p>
+<p>1、定义subtraction方法</p>
+<p>在module01.js中定义subtraction方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function add(x,y)&#123;</span><br><span class="line">    return x+y;</span><br><span class="line">&#125;</span><br><span class="line">function subtraction(x,y)&#123;</span><br><span class="line">    return x-y;</span><br><span class="line">&#125;</span><br><span class="line">module.exports.add = add;</span><br><span class="line">module.exports.subtraction = subtraction;</span><br></pre></td></tr></table></figure>
+<p>也可以采用es6的写法，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export const add=(x,y)=&gt;&#123;</span><br><span class="line">    return x+y;</span><br><span class="line">&#125;;</span><br><span class="line">export const subtraction=(x,y)=&gt;&#123;</span><br><span class="line">    return x-y;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>2、使用subtraction方法</p>
+<p>在main.js中导入subtraction方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var &#123;add,subtraction&#125; = require(&apos;./module01&apos;)</span><br><span class="line">//es6写法</span><br><span class="line">// import &#123;add,subtraction&#125;  from &apos;./module01&apos;</span><br><span class="line">var Vue = require(&apos;./vue.min&apos;)</span><br><span class="line">var VM = new Vue(&#123;</span><br><span class="line">    el:&quot;#app&quot;,</span><br><span class="line">    data:&#123;</span><br><span class="line">        name:&quot;黑马程序员&quot;,</span><br><span class="line">        num1:0,</span><br><span class="line">        num2:0,</span><br><span class="line">        result:0,</span><br><span class="line">        url:&quot;http://www.itcast.cn/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        add:function()&#123;</span><br><span class="line">            this.result = add(Number.parseInt(this.num1),Number.parseInt(this.num2))</span><br><span class="line">            alert(this.result)</span><br><span class="line">        &#125;,</span><br><span class="line">        subtraction:function()&#123;</span><br><span class="line">            this.result = subtraction(Number.parseInt(this.num1),Number.parseInt(this.num2))</span><br><span class="line">            alert(this.result)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在vuetest_02.html中使用subtraction方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;button&quot; value=&quot;计算减&quot; v-on:click=&quot;subtraction&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-5-小结"><a href="#1-3-5-小结" class="headerlink" title="1.3.5 小结"></a>1.3.5 小结</h3><p>webpack可以将js分模块开发，开发完成对各模块代码打包成一个统一的文件。</p>
+<p>前端模块开发的思想和服务端模块开发的思想是一致的，有利于多人协助开发。</p>
+<h2 id="1-4-webpack-dev-server"><a href="#1-4-webpack-dev-server" class="headerlink" title="1.4 webpack-dev-server"></a>1.4 webpack-dev-server</h2><p>webpack-dev-server开发服务器，它的功能可以实现热加载 并且自动刷新浏览器。</p>
+<h3 id="1-4-1安装配置"><a href="#1-4-1安装配置" class="headerlink" title="1.4.1安装配置"></a>1.4.1安装配置</h3><p>1、安装webpack-dev-server</p>
+<p>1）创建一个新的程序目录</p>
+<p>这里我们创建webpacktest02目录，并在目录下创建src目录、dist目录。</p>
+<p>将main.js、module01.js、vue.min.js拷贝到src目录。</p>
+<p>2）使用 webpack-dev-server需要安装webpack、 webpack-dev-server和 html-webpack-plugin三个包。</p>
+<p>cnpm install <a href="mailto:webpack@3.6.0" target="_blank" rel="noopener">webpack@3.6.0</a> <a href="mailto:webpack-dev-server@2.9.1" target="_blank" rel="noopener">webpack-dev-server@2.9.1</a> <a href="mailto:html-webpack-plugin@2.30.1" target="_blank" rel="noopener">html-webpack-plugin@2.30.1</a> –save-dev</p>
+<p>安装完成，会发现程序目录出现一个package.json文件，此文件中记录了程序的依赖。</p>
+<p>没有联网的同学拷贝老师提供的node_modules.zip到webpacktest02目录下，解压到node_modules目录下。</p>
+<p>目录结构如下：</p>
+<p><img src="assets/1536619143974.png" alt="1536619143974"></p>
+<p>2、配置webpack-dev-server</p>
+<p>在package.json中配置script</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;dev&quot;: &quot;webpack-dev-server --inline --hot --open --port 5008&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>–inline：自动刷新</p>
+<p>–hot：热加载</p>
+<p>–port：指定端口</p>
+<p>–open：自动在默认浏览器打开</p>
+<p>–host：可以指定服务器的 ip，不指定则为127.0.0.1，如果对外发布则填写公网ip地址</p>
+<p>package.json的文件内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;webpack-dev-server --inline --hot --open --port 5008&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;html-webpack-plugin&quot;: &quot;^2.30.1&quot;,</span><br><span class="line">    &quot;webpack&quot;: &quot;^3.6.0&quot;,</span><br><span class="line">    &quot;webpack-dev-server&quot;: &quot;^2.9.1&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>devDependencies：开发人员在开发过程中所需要的依赖。</p>
+<p>scripts：可执行的命令</p>
+<h3 id="1-4-2-配置webpack-config-js"><a href="#1-4-2-配置webpack-config-js" class="headerlink" title="1.4.2 配置webpack.config.js"></a>1.4.2 配置webpack.config.js</h3><p>在webpacktest02目录下创建 webpack.config.js， webpack.config.js是webpack的配置文件。在此文件中可以配置应用的入口文件、输出配置、插件等，其中要实现热加载自动刷新功能需要配置html-webpack-plugin插件。</p>
+<p>html-webpack-plugin的作用是根据html模板在内存生成html文件，它的工作原理是根据模板文件在内存中生成一个index.html文件。</p>
+<p>1、配置模板文件</p>
+<p>将原来的vue_02.html作为模板文件，为了和内存中的index.html文件名区别，注意将vue_02.html中的script标签去掉，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot; xmlns:v-on=&quot;http://www.w3.org/1999/xhtml&quot; xmlns:v-bind=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;vue.js入门程序&lt;/title&gt;</span><br><span class="line"></span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;a v-bind:href=&quot;url&quot; target=&quot;_blank&quot;&gt;&#123;&#123;name&#125;&#125;&lt;/a&gt;</span><br><span class="line">&lt;input type=&quot;text&quot;  v-model=&quot;num1&quot;&gt;+&lt;input type=&quot;text&quot; v-model=&quot;num2&quot;&gt;=</span><br><span class="line">    &lt;span v-text=&quot;result&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;计算加&quot; v-on:click=&quot;add&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; value=&quot;计算减&quot; v-on:click=&quot;subtraction&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>2、配置 html-webpack-plugin</p>
+<p>在webpack.config.js中配置html-webpack-plugin插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var htmlwp = require(&apos;html-webpack-plugin&apos;);</span><br><span class="line">module.exports=&#123;</span><br><span class="line">    entry:&apos;./src/main.js&apos;,  //指定打包的入口文件</span><br><span class="line">    output:&#123;</span><br><span class="line">        path : __dirname+&apos;/dist&apos;,  // 注意：__dirname表示webpack.config.js所在目录的绝对路径</span><br><span class="line">        filename:&apos;build.js&apos;        //输出文件</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins:[</span><br><span class="line">        new htmlwp(&#123;</span><br><span class="line">            title: &apos;首页&apos;,  //生成的页面标题&lt;head&gt;&lt;title&gt;首页&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">            filename: &apos;index.html&apos;, //webpack-dev-server在内存中生成的文件名称，自动将build注入到这个页面底部，才能实现自动刷新功能</span><br><span class="line">            template: &apos;vue_02.html&apos; //根据index1.html这个模板来生成(这个文件请程序员自己生成)</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-3-启动"><a href="#1-4-3-启动" class="headerlink" title="1.4.3 启动"></a>1.4.3 启动</h3><p>启动文件：</p>
+<p>1、进入 webpacktest02目录，执行npm run dev</p>
+<p>2、使用webstorm，右键package.json文件，选择“Show npm Scripts”</p>
+<p>打开窗口：</p>
+<p><img src="assets/1528359089367.png" alt="1528359089367"></p>
+<p>双击 dev。</p>
+<p>注意：dev就是在package.json中配置的webpack dev server命令。</p>
+<p>发现启动成功自动打开浏览器。</p>
+<p>修改src中的任意文件内容，自动加载并刷新浏览器。</p>
+<h2 id="1-5-webpack-debug调试"><a href="#1-5-webpack-debug调试" class="headerlink" title="1.5 webpack debug调试"></a>1.5 webpack debug调试</h2><p>使用了webpack之后就不能采用传统js的调试方法在chrome中打断点。</p>
+<p>webpack将多个源文件打包成一个文件，并且文件的内容产生了很大的变化，webpack提供devtool进行调试，devtool是基于sourcemap的方式，在调试时会生成一个map文件，其内容记录生成文件和源文件的内容映射，即生成文件中的哪个位置对应源文件中的哪个位置，有了sourcemap就可以在调试时看到源代码。</p>
+<p>配置如下：</p>
+<p>1、在webpack.config.js中配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">devtool: &apos;eval-source-map&apos;,</span><br></pre></td></tr></table></figure>
+<p>webpack.config.js部分内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var htmlwp = require(&apos;html-webpack-plugin&apos;);</span><br><span class="line">module.exports=&#123;</span><br><span class="line">    entry:&apos;./src/main.js&apos;,  //指定打包的入口文件</span><br><span class="line">    output:&#123;</span><br><span class="line">        path : __dirname+&apos;/dist&apos;,  // 注意：__dirname表示webpack.config.js所在目录的绝对路径</span><br><span class="line">        filename:&apos;build.js&apos;          //输出文件</span><br><span class="line">    &#125;,</span><br><span class="line">    devtool: &apos;eval-source-map&apos;,</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
+<p>2、在js中跟踪代码的位置上添加debugger</p>
+<p>一个例子：</p>
+<p>在add方法中添加debugger</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 定义add函数</span><br><span class="line">function add(x, y) &#123;</span><br><span class="line">    debugger</span><br><span class="line">    return x + y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动应用，刷新页面跟踪代码：</p>
+<p>点击“计算” 即进入debugger代码位置，此时可以使用chrome进行调试了。</p>
+<p><img src="assets/1528359776794.png" alt="1528359776794"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/webpack学习.html" title="CMS服务端开发">https://tiredtosleep.github.io/webpack学习.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack介绍/" rel="tag"><i class="fa fa-tag"></i> webpack介绍</a>
+          
+            <a href="/tags/webpack-dev-server启动/" rel="tag"><i class="fa fa-tag"></i> webpack-dev-server启动</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/mongodb安装及入门.html" rel="next" title="window下安装mongodb">
+                <i class="fa fa-chevron-left"></i> window下安装mongodb
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day10-课程发布 课程发布.html" rel="prev" title="在线学习视频（十）—— 课程发布">
+                在线学习视频（十）—— 课程发布 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-webpack开发技术"><span class="nav-text">1 webpack开发技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-webpack介绍"><span class="nav-text">1.1 webpack介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-安装webpack"><span class="nav-text">1.2 安装webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-安装Node-js"><span class="nav-text">1.2.1 安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-安装NPM"><span class="nav-text">1.2.2 安装NPM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-安装webpack"><span class="nav-text">1.2.3 安装webpack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-入门程序"><span class="nav-text">1.3 入门程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-需求分析"><span class="nav-text">1.3.1 需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-定义模块"><span class="nav-text">1.3.2 定义模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-打包测试"><span class="nav-text">1.3.3  打包测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-4-导出多个方法"><span class="nav-text">1.3.4 导出多个方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-5-小结"><span class="nav-text">1.3.5 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-webpack-dev-server"><span class="nav-text">1.4 webpack-dev-server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1安装配置"><span class="nav-text">1.4.1安装配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-配置webpack-config-js"><span class="nav-text">1.4.2 配置webpack.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-启动"><span class="nav-text">1.4.3 启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-webpack-debug调试"><span class="nav-text">1.5 webpack debug调试</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">301.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>

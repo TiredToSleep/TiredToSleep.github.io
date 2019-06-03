@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Feign远程调用,MongoDB,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="课程发布1 课程发布1.1 需求分析课程发布后将生成正式的课程详情页面，课程发布后用户即可浏览课程详情页面，并开始课程的学习。 课程发布生成课程详情页面的流程与课程预览业务流程相同，如下： 1、用户进入教学管理中心，进入某个课程的管理界面 2、点击课程发布，前端请求到课程管理服务 3、课程管理服务远程调用CMS生成课程发布页面，CMS将课程详情页面发布到服务器 4、课程管理服务修改课程发布状态为">
+<meta name="keywords" content="Feign远程调用,MongoDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线学习视频（十）—— 课程发布">
+<meta property="og:url" content="https://tiredtosleep.github.io/day10-课程发布 课程发布.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="课程发布1 课程发布1.1 需求分析课程发布后将生成正式的课程详情页面，课程发布后用户即可浏览课程详情页面，并开始课程的学习。 课程发布生成课程详情页面的流程与课程预览业务流程相同，如下： 1、用户进入教学管理中心，进入某个课程的管理界面 2、点击课程发布，前端请求到课程管理服务 3、课程管理服务远程调用CMS生成课程发布页面，CMS将课程详情页面发布到服务器 4、课程管理服务修改课程发布状态为">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1530745728081.png">
+<meta property="og:updated_time" content="2019-06-02T09:25:01.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在线学习视频（十）—— 课程发布">
+<meta name="twitter:description" content="课程发布1 课程发布1.1 需求分析课程发布后将生成正式的课程详情页面，课程发布后用户即可浏览课程详情页面，并开始课程的学习。 课程发布生成课程详情页面的流程与课程预览业务流程相同，如下： 1、用户进入教学管理中心，进入某个课程的管理界面 2、点击课程发布，前端请求到课程管理服务 3、课程管理服务远程调用CMS生成课程发布页面，CMS将课程详情页面发布到服务器 4、课程管理服务修改课程发布状态为">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1530745728081.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/day10-课程发布 课程发布.html">
+
+
+
+
+
+  <title>在线学习视频（十）—— 课程发布 | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day10-课程发布 课程发布.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在线学习视频（十）—— 课程发布</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T12:28:32+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-在线学习视频网站/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实战-在线学习视频网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="课程发布"><a href="#课程发布" class="headerlink" title="课程发布"></a>课程发布</h1><h1 id="1-课程发布"><a href="#1-课程发布" class="headerlink" title="1 课程发布"></a>1 课程发布</h1><h2 id="1-1-需求分析"><a href="#1-1-需求分析" class="headerlink" title="1.1 需求分析"></a>1.1 需求分析</h2><p>课程发布后将生成正式的课程详情页面，课程发布后用户即可浏览课程详情页面，并开始课程的学习。</p>
+<p>课程发布生成课程详情页面的流程与课程预览业务流程相同，如下：</p>
+<p>1、用户进入教学管理中心，进入某个课程的管理界面</p>
+<p>2、点击课程发布，前端请求到课程管理服务</p>
+<p>3、课程管理服务远程调用CMS生成课程发布页面，CMS将课程详情页面发布到服务器</p>
+<p>4、课程管理服务修改课程发布状态为 “已发布”，并向前端返回发布成功</p>
+<p>5、用户在教学管理中心点击“课程详情页面”链接，查看课程详情页面内容</p>
+<p><img src="assets/1530745728081.png" alt="1530745728081"></p>
+<h2 id="1-2-CMS一键发布接口"><a href="#1-2-CMS一键发布接口" class="headerlink" title="1.2 CMS一键发布接口"></a>1.2 CMS一键发布接口</h2><h3 id="1-2-1-需求分析"><a href="#1-2-1-需求分析" class="headerlink" title="1.2.1 需求分析"></a>1.2.1 需求分析</h3><p>根据需求分析内容，需要在cms服务增加页面发布接口供课程管理服务调用，此接口的功能如下：</p>
+<p>1、接收课程管理服务发布的页面信息</p>
+<p>2、将页面信息添加到 数据库（mongodb）</p>
+<p>3、对页面信息进行静态化</p>
+<p>4、将页面信息发布到服务器</p>
+<h3 id="1-2-3-接口定义"><a href="#1-2-3-接口定义" class="headerlink" title="1.2.3 接口定义"></a>1.2.3 接口定义</h3><p>1、创建响应结果类型</p>
+<p>页面发布成功cms返回页面的url</p>
+<p>页面Url= cmsSite.siteDomain+cmsSite.siteWebPath+ cmsPage.pageWebPath + cmsPage.pageName<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@NoArgsConstructor//无参构造器注解</span><br><span class="line">public class CmsPostPageResult extends ResponseResult  &#123;</span><br><span class="line">    String pageUrl;</span><br><span class="line">    public CmsPostPageResult(ResultCode resultCode,String pageUrl) &#123;</span><br><span class="line">        super(resultCode);</span><br><span class="line">        this.pageUrl = pageUrl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、在api工程定义页面发布接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@ApiOperation(&quot;一键发布页面&quot;)</span><br><span class="line">public CmsPostPageResult postPageQuick(CmsPage cmsPage);</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-2-4-Dao"><a href="#2-2-4-Dao" class="headerlink" title="2.2.4 Dao"></a>2.2.4 Dao</h3><p>1、站点dao</p>
+<p>接口中需要获取站点的信息（站点域名、站点访问路径等）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface CmsSiteRepository extends MongoRepository&lt;CmsSite,String&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-5-Service"><a href="#2-2-5-Service" class="headerlink" title="2.2.5 Service"></a>2.2.5 Service</h3><p>1、添加页面，如果已存在则更新页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//添加页面，如果已存在则更新页面</span><br><span class="line">public CmsPageResult save(CmsPage cmsPage)&#123;</span><br><span class="line">    //校验页面是否存在，根据页面名称、站点Id、页面webpath查询</span><br><span class="line">    CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());</span><br><span class="line">    if(cmsPage1 !=null)&#123;</span><br><span class="line">        //更新</span><br><span class="line">        return this.update(cmsPage1.getPageId(),cmsPage);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //添加</span><br><span class="line">        return this.add(cmsPage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、页面发布方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">//一键发布页面</span><br><span class="line">    public CmsPostPageResult postPageQuick(CmsPage cmsPage)&#123;</span><br><span class="line">        //添加页面</span><br><span class="line">        CmsPageResult save = this.save(cmsPage);</span><br><span class="line">        if(!save.isSuccess())&#123;</span><br><span class="line">            return new CmsPostPageResult(CommonCode.FAIL,null);</span><br><span class="line">        &#125;</span><br><span class="line">        CmsPage cmsPage1 = save.getCmsPage();</span><br><span class="line">        //要布的页面id</span><br><span class="line">        String pageId = cmsPage1.getPageId();</span><br><span class="line">        //发布页面</span><br><span class="line">        ResponseResult responseResult = this.postPage(pageId);</span><br><span class="line">        if(!responseResult.isSuccess())&#123;</span><br><span class="line">            return new CmsPostPageResult(CommonCode.FAIL,null);</span><br><span class="line">        &#125;</span><br><span class="line">        //得到页面的url</span><br><span class="line">        //页面url=站点域名+站点webpath+页面webpath+页面名称</span><br><span class="line">        //站点id</span><br><span class="line">        String siteId = cmsPage1.getSiteId();</span><br><span class="line">        //查询站点信息</span><br><span class="line">        CmsSite cmsSite = findCmsSiteById(siteId);</span><br><span class="line">        //站点域名</span><br><span class="line">        String siteDomain = cmsSite.getSiteDomain();</span><br><span class="line">        //站点web路径</span><br><span class="line">        String siteWebPath = cmsSite.getSiteWebPath();</span><br><span class="line">        //页面web路径</span><br><span class="line">        String pageWebPath = cmsPage1.getPageWebPath();</span><br><span class="line">        //页面名称</span><br><span class="line">        String pageName = cmsPage1.getPageName();</span><br><span class="line">        //页面的web访问地址</span><br><span class="line">        String pageUrl = siteDomain+siteWebPath+pageWebPath+pageName;</span><br><span class="line">        return new CmsPostPageResult(CommonCode.SUCCESS,pageUrl);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //根据id查询站点信息</span><br><span class="line">    public CmsSite findCmsSiteById(String siteId)&#123;</span><br><span class="line">        Optional&lt;CmsSite&gt; optional = cmsSiteRepository.findById(siteId);</span><br><span class="line">        if(optional.isPresent())&#123;</span><br><span class="line">            return optional.get();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-2-6-Controller"><a href="#2-2-6-Controller" class="headerlink" title="2.2.6 Controller"></a>2.2.6 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@PostMapping(&quot;/postPageQuick&quot;)</span><br><span class="line">public CmsPostPageResult postPageQuick(@RequestBody CmsPage cmsPage) &#123;</span><br><span class="line">    return pageService.postPageQuick(cmsPage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-课程发布接口"><a href="#1-3-课程发布接口" class="headerlink" title="1.3 课程发布接口"></a>1.3 课程发布接口</h2><h3 id="1-3-1-Api接口"><a href="#1-3-1-Api接口" class="headerlink" title="1.3.1 Api接口"></a>1.3.1 Api接口</h3><p>此Api接口由课程管理提供，由课程管理前端调用此Api接口，实现课程发布。</p>
+<p>在api工程下课程管理包下定义接口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@ApiOperation(&quot;发布课程&quot;)</span><br><span class="line">public CoursePublishResult publish(@PathVariable String id);</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-3-2-创建Feign-Client"><a href="#1-3-2-创建Feign-Client" class="headerlink" title="1.3.2 创建Feign Client"></a>1.3.2 创建Feign Client</h3><p>在课程管理工程创建CMS服务页面发布的Feign Client<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@FeignClient(value = XcServiceList.XC_SERVICE_MANAGE_CMS)</span><br><span class="line">public interface CmsPageClient &#123;</span><br><span class="line">    //一键发布页面</span><br><span class="line">    @PostMapping(&quot;/cms/page/postPageQuick&quot;)</span><br><span class="line">    public CmsPostPageResult postPageQuick(CmsPage cmsPage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-3-3-Service"><a href="#1-3-3-Service" class="headerlink" title="1.3.3 Service"></a>1.3.3 Service</h3><p>1、配置课程发布页面参数</p>
+<p>在application.yml中配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">course-publish:</span><br><span class="line">  siteId: 5b30cba5f58b4411fc6cb1e5</span><br><span class="line">  templateId: 5ad9a24d68db5239b8fef199</span><br><span class="line">  previewUrl: http://www.xuecheng.com/cms/preview/</span><br><span class="line">  pageWebPath: /course/detail/</span><br><span class="line">  pagePhysicalPath: /course/detail/</span><br><span class="line">  dataUrlPre: http://localhost:31200/course/courseview/</span><br></pre></td></tr></table></figure></p>
+<p>siteId：站点id</p>
+<p>templateId：模板id</p>
+<p>dataurlPre：数据url的前缀</p>
+<p>pageWebPath: 页面的web访问路径</p>
+<p>pagePhysicalPath：页面的物理存储路径。</p>
+<p>2、Service方法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">@Value(&quot;$&#123;course-publish.dataUrlPre&#125;&quot;)</span><br><span class="line">private String publish_dataUrlPre;</span><br><span class="line">@Value(&quot;$&#123;course-publish.pagePhysicalPath&#125;&quot;)</span><br><span class="line">private String publish_page_physicalpath;</span><br><span class="line">@Value(&quot;$&#123;course-publish.pageWebPath&#125;&quot;)</span><br><span class="line">private String publish_page_webpath;</span><br><span class="line">@Value(&quot;$&#123;course-publish.siteId&#125;&quot;)</span><br><span class="line">private String publish_siteId;</span><br><span class="line">@Value(&quot;$&#123;course-publish.templateId&#125;&quot;)</span><br><span class="line">private String publish_templateId;</span><br><span class="line">@Value(&quot;$&#123;course-publish.previewUrl&#125;&quot;)</span><br><span class="line">private String previewUrl;</span><br><span class="line"></span><br><span class="line">@Autowired</span><br><span class="line">CmsPageClient cmsPageClient;</span><br><span class="line"></span><br><span class="line"> //课程发布</span><br><span class="line">    @Transactional</span><br><span class="line">    public CoursePublishResult publish(String courseId)&#123;</span><br><span class="line">        //课程信息</span><br><span class="line">        CourseBase one = this.findCourseBaseById(courseId);</span><br><span class="line">        //发布课程详情页面</span><br><span class="line">        CmsPostPageResult cmsPostPageResult = publish_page(courseId);</span><br><span class="line">        if(!cmsPostPageResult.isSuccess())&#123;</span><br><span class="line">            ExceptionCast.cast(CommonCode.FAIL);</span><br><span class="line">        &#125;</span><br><span class="line">        //更新课程状态</span><br><span class="line">        CourseBase courseBase = saveCoursePubState(courseId);</span><br><span class="line">        //课程索引...</span><br><span class="line">        //课程缓存...</span><br><span class="line"></span><br><span class="line">        //页面url</span><br><span class="line">        String pageUrl = cmsPostPageResult.getPageUrl();</span><br><span class="line">        return new CoursePublishResult(CommonCode.SUCCESS,pageUrl);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    //更新课程发布状态</span><br><span class="line">    private CourseBase saveCoursePubState(String courseId)&#123;</span><br><span class="line">        CourseBase courseBase = this.findCourseBaseById(courseId);</span><br><span class="line">        //更新发布状态</span><br><span class="line">        courseBase.setStatus(&quot;202002&quot;);</span><br><span class="line">        CourseBase save = courseBaseRepository.save(courseBase);</span><br><span class="line">        return save;</span><br><span class="line">    &#125;</span><br><span class="line">    //发布课程正式页面</span><br><span class="line">    public CmsPostPageResult publish_page(String courseId)&#123;</span><br><span class="line">        CourseBase one = this.findCourseBaseById(courseId);</span><br><span class="line">        //发布课程预览页面</span><br><span class="line">        CmsPage cmsPage = new CmsPage();</span><br><span class="line">        //站点</span><br><span class="line">        cmsPage.setSiteId(publish_siteId);//课程预览站点</span><br><span class="line">        //模板</span><br><span class="line">        cmsPage.setTemplateId(publish_templateId);</span><br><span class="line">        //页面名称</span><br><span class="line">        cmsPage.setPageName(courseId+&quot;.html&quot;);</span><br><span class="line">        //页面别名</span><br><span class="line">        cmsPage.setPageAliase(one.getName());</span><br><span class="line">        //页面访问路径</span><br><span class="line">        cmsPage.setPageWebPath(publish_page_webpath);</span><br><span class="line">        //页面存储路径</span><br><span class="line">        cmsPage.setPagePhysicalPath(publish_page_physicalpath);</span><br><span class="line">        //数据url</span><br><span class="line">        cmsPage.setDataUrl(publish_dataUrlPre+courseId);</span><br><span class="line">        //发布页面</span><br><span class="line">        CmsPostPageResult cmsPostPageResult = cmsPageClient.postPageQuick(cmsPage);</span><br><span class="line">        return cmsPostPageResult;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-4-Controller"><a href="#1-3-4-Controller" class="headerlink" title="1.3.4 Controller"></a>1.3.4 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@PostMapping(&quot;/publish/&#123;id&#125;&quot;)</span><br><span class="line">public CoursePublishResult publish(@PathVariable String id) &#123;</span><br><span class="line">    return courseService.publish(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-4-测试CMS一键发布接口"><a href="#1-4-测试CMS一键发布接口" class="headerlink" title="1.4 测试CMS一键发布接口"></a>1.4 测试CMS一键发布接口</h2><h3 id="1-4-1-配置虚拟主机"><a href="#1-4-1-配置虚拟主机" class="headerlink" title="1.4.1 配置虚拟主机"></a>1.4.1 配置虚拟主机</h3><p>在nginx配置课程详情页面的虚拟主机，实现访问：&lt;<a href="http://www.xuecheng.com/course/detail/.....html&gt;。" target="_blank" rel="noopener">www.xuecheng.com/course/detail/.....html&gt;。</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#静态资源服务</span><br><span class="line"> upstream static_server_pool&#123;</span><br><span class="line">   server 127.0.0.1:91 weight=10;</span><br><span class="line"> &#125; </span><br><span class="line">server &#123;</span><br><span class="line">  listen       80;</span><br><span class="line">  server_name www.xuecheng.com;</span><br><span class="line">  ssi on;</span><br><span class="line">  ssi_silent_errors on;</span><br><span class="line">  #课程预览</span><br><span class="line">  location /course/detail/ &#123;  </span><br><span class="line">        proxy_pass http://static_server_pool;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line">#学成网静态资源</span><br><span class="line">server &#123;</span><br><span class="line">    listen       91;</span><br><span class="line">    server_name localhost;</span><br><span class="line">    </span><br><span class="line">    #公司信息</span><br><span class="line">    location /static/company/ &#123;  </span><br><span class="line">        alias   F:/develop/xuecheng/static/company/;</span><br><span class="line">    &#125; </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>cms会将课程预览页面发布到服务器的F:/develop/xuecheng/static/course/detail/下，通过</p>
+<p>&lt;<a href="http://www.xuecheng.com/course/detail/&gt;来访问。" target="_blank" rel="noopener">www.xuecheng.com/course/detail/&gt;来访问。</a></p>
+<h3 id="1-4-2-新增站点和模板"><a href="#1-4-2-新增站点和模板" class="headerlink" title="1.4.2 新增站点和模板"></a>1.4.2 新增站点和模板</h3><p>1、新增课程详情页面的站点信息</p>
+<p>如果已增加课程详情页面的站点则忽略此步骤。</p>
+<p>向cms_site中新增如下信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5b30b052f58b4411fc6cb1cf&quot;), </span><br><span class="line">    &quot;_class&quot; : &quot;com.xuecheng.framework.domain.cms.CmsSite&quot;, </span><br><span class="line">    &quot;siteName&quot; : &quot;课程详情站点&quot;, </span><br><span class="line">    &quot;siteDomain&quot; : &quot;http://www.xuecheng.com&quot;, </span><br><span class="line">    &quot;sitePort&quot; : &quot;80&quot;, </span><br><span class="line">    &quot;siteWebPath&quot; : &quot;&quot;, </span><br><span class="line">    &quot;siteCreateTime&quot; : ISODate(&quot;2018-02-03T02:34:19.113+0000&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、新增课程详情模板信息</p>
+<p>可直接使用前边章节制作的课程详情信息模板。</p>
+<p>可以GridFS的测试代码添加模板，如果已添加则不用重复添加。</p>
+<p>使用测试GridFS Api将模板文件存储到mongodb:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//文件存储2</span><br><span class="line">@Test</span><br><span class="line">public void testStore2() throws FileNotFoundException &#123;</span><br><span class="line">    File file = new File(&quot;C:\\Users\\admin\\Desktop\\coursedetail_t.html&quot;);</span><br><span class="line">    FileInputStream inputStream = new FileInputStream(file);</span><br><span class="line">    //保存模版文件内容</span><br><span class="line">    GridFSFile gridFSFile = gridFsTemplate.store(inputStream, &quot;测试文件&quot;,&quot;&quot;);</span><br><span class="line">    String fileId = gridFSFile.getId().toString();</span><br><span class="line">    System.out.println(fileId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-4-3-单元测试"><a href="#1-4-3-单元测试" class="headerlink" title="1.4.3 单元测试"></a>1.4.3 单元测试</h3><p>1、启动RabbitMQ服务</p>
+<p>2、启动cms服务</p>
+<p>3、启动cms_client，注意配置routingKey和队列名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xuecheng:</span><br><span class="line">  mq:</span><br><span class="line">  #cms客户端监控的队列名称（不同的客户端监控的队列不能重复）</span><br><span class="line">    queue: queue_cms_postpage_03</span><br><span class="line">    routingKey: 5b30b052f58b4411fc6cb1cf  #此routingKey为门户站点ID</span><br></pre></td></tr></table></figure>
+<h2 id="1-5-前端开发"><a href="#1-5-前端开发" class="headerlink" title="1.5 前端开发"></a>1.5 前端开发</h2><h3 id="1-5-1API方法"><a href="#1-5-1API方法" class="headerlink" title="1.5.1API方法"></a>1.5.1API方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*发布课程*/</span><br><span class="line">export const publish = id =&gt; &#123;</span><br><span class="line">  return http.requestPost(apiUrl+&apos;/course/publish/&apos;+id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-5-2-页面"><a href="#1-5-2-页面" class="headerlink" title="1.5.2 页面"></a>1.5.2 页面</h3><p>修改 course_pub.vue</p>
+<p>添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-card class=&quot;box-card&quot;&gt;</span><br><span class="line">  &lt;div slot=&quot;header&quot; class=&quot;clearfix&quot;&gt;</span><br><span class="line">    &lt;span&gt;课程发布&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;text item&quot;&gt;</span><br><span class="line">    &lt;div v-if=&quot;course.status == &apos;202001&apos;&quot;&gt;</span><br><span class="line">      状态：制作中&lt;br/&gt;</span><br><span class="line">      &lt;el-button type=&quot;primary&quot;  @click.native=&quot;publish&quot; &gt;新课程发布&lt;/el-button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div v-else-if=&quot;course.status == &apos;202003&apos;&quot;&gt;</span><br><span class="line">      状态：已下线</span><br><span class="line">      &lt;br/&gt;&lt;br/&gt;</span><br><span class="line">      &lt;span&gt;&lt;a :href=&quot;&apos;http://www.xuecheng.com/course/detail/&apos;+this.courseid+&apos;.html&apos;&quot; target=&quot;_blank&quot;&gt;点我查看课程详情页面 &lt;/a&gt; &lt;/span&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div v-else-if=&quot;course.status == &apos;202002&apos;&quot;&gt;</span><br><span class="line">      状态：已发布&lt;br/&gt;</span><br><span class="line">      &lt;el-button type=&quot;primary&quot;  @click.native=&quot;publish&quot; &gt;修改发布&lt;/el-button&gt;</span><br><span class="line">      &lt;br/&gt;&lt;br/&gt;</span><br><span class="line">      &lt;span&gt;&lt;a :href=&quot;&apos;http://www.xuecheng.com/course/detail/&apos;+this.courseid+&apos;.html&apos;&quot; target=&quot;_blank&quot;&gt;点我查看课程详情页面 &lt;/a&gt; &lt;/span&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/el-card&gt;</span><br></pre></td></tr></table></figure>
+<p>发布方法 ,发布成功重新查询课程，如果课程状态已更改则显示课程详情页面的链接。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//发布</span><br><span class="line">      publish()&#123;</span><br><span class="line">        this.$confirm(&apos;课程发布后将不允许回退，是否继续？&apos;, &apos;提示&apos;, &#123;&#125;).then(() =&gt; &#123;</span><br><span class="line">          courseApi.publish(this.courseid).then((res) =&gt; &#123;</span><br><span class="line">            if(res.success)&#123;</span><br><span class="line">              this.$message.error(&apos;发布成功&apos;);</span><br><span class="line">              //查询课程信息</span><br><span class="line">              this.getcourse()</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">              this.$message.error(&apos;发布失败&apos;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      //查询课程信息</span><br><span class="line">      getcourse()&#123;</span><br><span class="line">        courseApi.getCoursebaseById(this.courseid).then((res) =&gt; &#123;</span><br><span class="line">          console.log(res);</span><br><span class="line">          this.course = res;</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在钩子方法中查询课程信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mounted()&#123;</span><br><span class="line">  //课程id</span><br><span class="line">  this.courseid = this.$route.params.courseid;</span><br><span class="line">  console.log(&quot;courseid=&quot; + this.courseid)</span><br><span class="line">  //查询课程信息</span><br><span class="line">  this.getcourse()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/day10-课程发布 课程发布.html" title="在线学习视频（十）—— 课程发布">https://tiredtosleep.github.io/day10-课程发布 课程发布.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Feign远程调用/" rel="tag"><i class="fa fa-tag"></i> Feign远程调用</a>
+          
+            <a href="/tags/MongoDB/" rel="tag"><i class="fa fa-tag"></i> MongoDB</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/webpack学习.html" rel="next" title="CMS服务端开发">
+                <i class="fa fa-chevron-left"></i> CMS服务端开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day16 Spring Security Oauth2.html" rel="prev" title="在线学习视频（十七）—— Spring Security Oauth2 JWT">
+                在线学习视频（十七）—— Spring Security Oauth2 JWT <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#课程发布"><span class="nav-text">课程发布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-课程发布"><span class="nav-text">1 课程发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-需求分析"><span class="nav-text">1.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-CMS一键发布接口"><span class="nav-text">1.2 CMS一键发布接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-需求分析"><span class="nav-text">1.2.1 需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-接口定义"><span class="nav-text">1.2.3 接口定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-Dao"><span class="nav-text">2.2.4 Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5-Service"><span class="nav-text">2.2.5 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-6-Controller"><span class="nav-text">2.2.6 Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-课程发布接口"><span class="nav-text">1.3 课程发布接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-Api接口"><span class="nav-text">1.3.1 Api接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-创建Feign-Client"><span class="nav-text">1.3.2 创建Feign Client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-Service"><span class="nav-text">1.3.3 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-4-Controller"><span class="nav-text">1.3.4 Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-测试CMS一键发布接口"><span class="nav-text">1.4 测试CMS一键发布接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-配置虚拟主机"><span class="nav-text">1.4.1 配置虚拟主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-新增站点和模板"><span class="nav-text">1.4.2 新增站点和模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-单元测试"><span class="nav-text">1.4.3 单元测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-前端开发"><span class="nav-text">1.5 前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1API方法"><span class="nav-text">1.5.1API方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-页面"><span class="nav-text">1.5.2 页面</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">301.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>

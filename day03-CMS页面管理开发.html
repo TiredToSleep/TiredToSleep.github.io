@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="自定义异常,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="CMS页面管理开发1 自定义条件查询1.1 需求分析在页面输入查询条件，查询符合条件的页面信息。 查询条件如下： 站点Id：精确匹配 模板Id：精确匹配 页面别名：模糊匹配 … 1.2 服务端1.2.1 Dao1使用 CmsPageRepository中的findAll(Example&amp;lt;S&amp;gt; var1, Pageable var2)方法实现，无需定义。 下边测试findAll方法实现自">
+<meta name="keywords" content="自定义异常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线学习视频（三）—— CMS页面管理开发">
+<meta property="og:url" content="https://tiredtosleep.github.io/day03-CMS页面管理开发.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="CMS页面管理开发1 自定义条件查询1.1 需求分析在页面输入查询条件，查询符合条件的页面信息。 查询条件如下： 站点Id：精确匹配 模板Id：精确匹配 页面别名：模糊匹配 … 1.2 服务端1.2.1 Dao1使用 CmsPageRepository中的findAll(Example&amp;lt;S&amp;gt; var1, Pageable var2)方法实现，无需定义。 下边测试findAll方法实现自">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1536836227190.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528375988090.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528682840567.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528682860935.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528682874769.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528694655905.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528687920126.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1522464925278.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528694624331.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/images/1528694655905.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528703185756.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1522470035852.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1532595345826.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1522474574253.png">
+<meta property="og:updated_time" content="2019-06-03T03:12:27.825Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在线学习视频（三）—— CMS页面管理开发">
+<meta name="twitter:description" content="CMS页面管理开发1 自定义条件查询1.1 需求分析在页面输入查询条件，查询符合条件的页面信息。 查询条件如下： 站点Id：精确匹配 模板Id：精确匹配 页面别名：模糊匹配 … 1.2 服务端1.2.1 Dao1使用 CmsPageRepository中的findAll(Example&amp;lt;S&amp;gt; var1, Pageable var2)方法实现，无需定义。 下边测试findAll方法实现自">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1536836227190.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/day03-CMS页面管理开发.html">
+
+
+
+
+
+  <title>在线学习视频（三）—— CMS页面管理开发 | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day03-CMS页面管理开发.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在线学习视频（三）—— CMS页面管理开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T12:28:32+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-在线学习视频网站/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实战-在线学习视频网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  7.4k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  34  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="CMS页面管理开发"><a href="#CMS页面管理开发" class="headerlink" title="CMS页面管理开发"></a>CMS页面管理开发</h1><h1 id="1-自定义条件查询"><a href="#1-自定义条件查询" class="headerlink" title="1 自定义条件查询"></a>1 自定义条件查询</h1><h2 id="1-1-需求分析"><a href="#1-1-需求分析" class="headerlink" title="1.1 需求分析"></a>1.1 需求分析</h2><p>在页面输入查询条件，查询符合条件的页面信息。</p>
+<p>查询条件如下：</p>
+<p>站点Id：精确匹配</p>
+<p>模板Id：精确匹配</p>
+<p>页面别名：模糊匹配</p>
+<p>…</p>
+<h2 id="1-2-服务端"><a href="#1-2-服务端" class="headerlink" title="1.2 服务端"></a>1.2 服务端</h2><h3 id="1-2-1-Dao"><a href="#1-2-1-Dao" class="headerlink" title="1.2.1 Dao"></a>1.2.1 Dao</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用 CmsPageRepository中的findAll(Example&lt;S&gt; var1, Pageable var2)方法实现，无需定义。</span><br></pre></td></tr></table></figure>
+<p>下边测试findAll方法实现自定义条件查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">    //自定义条件查询测试</span><br><span class="line">    @Test</span><br><span class="line">    public void testFindAll() &#123;</span><br><span class="line">        //条件匹配器</span><br><span class="line">        ExampleMatcher exampleMatcher = ExampleMatcher.matching();</span><br><span class="line">                exampleMatcher = exampleMatcher.withMatcher(&quot;pageAliase&quot;, ExampleMatcher.GenericPropertyMatchers.contains());</span><br><span class="line">         //页面别名模糊查询，需要自定义字符串的匹配器实现模糊查询</span><br><span class="line">        //ExampleMatcher.GenericPropertyMatchers.contains() 包含</span><br><span class="line">        //ExampleMatcher.GenericPropertyMatchers.startsWith()//开头匹配</span><br><span class="line">        //条件值</span><br><span class="line">        CmsPage cmsPage = new CmsPage();</span><br><span class="line">        //站点ID</span><br><span class="line">        cmsPage.setSiteId(&quot;5a751fab6abb5044e0d19ea1&quot;);</span><br><span class="line">        //模板ID</span><br><span class="line">        cmsPage.setTemplateId(&quot;5a962c16b00ffc514038fafd&quot;);</span><br><span class="line">//        cmsPage.setPageAliase(&quot;分类导航&quot;);</span><br><span class="line">        //创建条件实例</span><br><span class="line">        Example&lt;CmsPage&gt; example = Example.of(cmsPage, exampleMatcher);</span><br><span class="line">        Pageable pageable = new PageRequest(0, 10);</span><br><span class="line">        Page&lt;CmsPage&gt; all = cmsPageRepository.findAll(example, pageable);</span><br><span class="line">        System.out.println(all);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-2-Service"><a href="#1-2-2-Service" class="headerlink" title="1.2.2 Service"></a>1.2.2 Service</h3><p>在PageService的findlist方法中增加自定义条件查询代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">    * 页面列表分页查询</span><br><span class="line">    * @param page 当前页码</span><br><span class="line">    * @param size 页面显示个数</span><br><span class="line">    * @param queryPageRequest 查询条件</span><br><span class="line">    * @return 页面列表</span><br><span class="line">    */</span><br><span class="line">   public QueryResponseResult findList(int page,int size,QueryPageRequest queryPageRequest)&#123;</span><br><span class="line">       //条件匹配器</span><br><span class="line">       //页面名称模糊查询，需要自定义字符串的匹配器实现模糊查询</span><br><span class="line">       ExampleMatcher exampleMatcher = ExampleMatcher.matching()</span><br><span class="line">               .withMatcher(&quot;pageAliase&quot;, ExampleMatcher.GenericPropertyMatchers.contains());</span><br><span class="line">       //条件值</span><br><span class="line">       CmsPage cmsPage = new CmsPage();</span><br><span class="line">       //站点ID</span><br><span class="line">       if(StringUtils.isNotEmpty(queryPageRequest.getSiteId()))&#123;</span><br><span class="line">           cmsPage.setSiteId(queryPageRequest.getSiteId());</span><br><span class="line">       &#125;</span><br><span class="line">       //页面别名</span><br><span class="line">       if(StringUtils.isNotEmpty(queryPageRequest.getPageAliase()))&#123;</span><br><span class="line">           cmsPage.setPageAliase(queryPageRequest.getPageAliase());</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       //创建条件实例</span><br><span class="line">       Example&lt;CmsPage&gt; example = Example.of(cmsPage, exampleMatcher);</span><br><span class="line">       //页码</span><br><span class="line">       page = page-1;</span><br><span class="line">       //分页对象</span><br><span class="line">       Pageable pageable = new PageRequest(page, size);</span><br><span class="line">       //分页查询</span><br><span class="line">       Page&lt;CmsPage&gt; all = cmsPageRepository.findAll(example,pageable);</span><br><span class="line">       QueryResult&lt;CmsPage&gt; cmsPageQueryResult = new QueryResult&lt;CmsPage&gt;();</span><br><span class="line">       cmsPageQueryResult.setList(all.getContent());</span><br><span class="line">       cmsPageQueryResult.setTotal(all.getTotalElements());</span><br><span class="line">       //返回结果</span><br><span class="line">       return new QueryResponseResult(CommonCode.SUCCESS,cmsPageQueryResult);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-3-Controller"><a href="#1-2-3-Controller" class="headerlink" title="1.2.3 Controller"></a>1.2.3 Controller</h3><p>无需修改</p>
+<h3 id="1-2-4-测试"><a href="#1-2-4-测试" class="headerlink" title="1.2.4 测试"></a>1.2.4 测试</h3><p>使用SwaggerUI测试</p>
+<p><img src="assets/1536836227190.png" alt="1536836227190"></p>
+<h2 id="1-3-前端"><a href="#1-3-前端" class="headerlink" title="1.3 前端"></a>1.3 前端</h2><h3 id="1-3-1-页面"><a href="#1-3-1-页面" class="headerlink" title="1.3.1 页面"></a>1.3.1 页面</h3><p>1、增加查询表单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--查询表单--&gt;</span><br><span class="line">&lt;el-form :model=&quot;params&quot;&gt;</span><br><span class="line">  &lt;el-select v-model=&quot;params.siteId&quot; placeholder=&quot;请选择站点&quot;&gt;</span><br><span class="line">    &lt;el-option</span><br><span class="line">      v-for=&quot;item in siteList&quot;</span><br><span class="line">      :key=&quot;item.siteId&quot;</span><br><span class="line">      :label=&quot;item.siteName&quot;</span><br><span class="line">      :value=&quot;item.siteId&quot;&gt;</span><br><span class="line">    &lt;/el-option&gt;</span><br><span class="line">  &lt;/el-select&gt;</span><br><span class="line">  页面别名：&lt;el-input v-model=&quot;params.pageAliase&quot;  style=&quot;width: 100px&quot;&gt;&lt;/el-input&gt;</span><br><span class="line">  &lt;el-button type=&quot;primary&quot; v-on:click=&quot;query&quot;  size=&quot;small&quot;&gt;查询&lt;/el-button&gt;</span><br><span class="line">&lt;/el-form&gt;</span><br></pre></td></tr></table></figure>
+<p>2、数据模型对象</p>
+<p>增加siteList、pageAliase、siteId，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    siteList:[],//站点列表</span><br><span class="line">    list:[],</span><br><span class="line">    total:50,</span><br><span class="line">    params:&#123;</span><br><span class="line">      siteId:&apos;&apos;,</span><br><span class="line">      pageAliase:&apos;&apos;,</span><br><span class="line">      page:1,//页码</span><br><span class="line">      size:2//每页显示个数</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、在钩子方法中 构建siteList站点列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mounted() &#123;</span><br><span class="line">  //默认查询页面</span><br><span class="line">  this.query()</span><br><span class="line">  //初始化站点列表</span><br><span class="line">  this.siteList = [</span><br><span class="line">    &#123;</span><br><span class="line">      siteId:&apos;5a751fab6abb5044e0d19ea1&apos;,</span><br><span class="line">      siteName:&apos;门户主站&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      siteId:&apos;102&apos;,</span><br><span class="line">      siteName:&apos;测试站&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-2-Api调用"><a href="#1-3-2-Api调用" class="headerlink" title="1.3.2 Api调用"></a>1.3.2 Api调用</h3><p>1、向服务端传递查询条件，修改 cms.js，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//public是对axios的工具类封装，定义了http请求方法</span><br><span class="line">import http from &apos;./../../../base/api/public&apos;</span><br><span class="line">import querystring from &apos;querystring&apos;</span><br><span class="line">let sysConfig = require(&apos;@/../config/sysConfig&apos;)</span><br><span class="line">let apiUrl = sysConfig.xcApiUrlPre;</span><br><span class="line"></span><br><span class="line">export const page_list = (page,size,params) =&gt; &#123;</span><br><span class="line">  //将json对象转成key/value对</span><br><span class="line">  let query = querystring.stringify(params)</span><br><span class="line">  return http.requestQuickGet(apiUrl+&apos;/cms/page/list/&apos;+page+&apos;/&apos;+size+&apos;/?&apos;+query)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、页面调用api方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//查询</span><br><span class="line">query:function () &#123;</span><br><span class="line">  cmsApi.page_list(this.params.page,this.params.size,this.params).then((res)=&gt;&#123;</span><br><span class="line">    console.log(res)</span><br><span class="line">    this.total = res.queryResult.total</span><br><span class="line">    this.list = res.queryResult.list</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试如下：</p>
+<p><img src="assets/1528375988090.png" alt="1528375988090"></p>
+<h1 id="2-新增页面"><a href="#2-新增页面" class="headerlink" title="2 新增页面"></a>2 新增页面</h1><h2 id="2-1-新增页面接口定义"><a href="#2-1-新增页面接口定义" class="headerlink" title="2.1 新增页面接口定义"></a>2.1 新增页面接口定义</h2><p>1、定义响应模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class CmsPageResult extends ResponseResult &#123;</span><br><span class="line">    CmsPage cmsPage;</span><br><span class="line">    public CmsPageResult(ResultCode resultCode,CmsPage cmsPage) &#123;</span><br><span class="line">        super(resultCode);</span><br><span class="line">        this.cmsPage = cmsPage;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、定义添加Api</p>
+<p>在api工程中添加接口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(&quot;添加页面&quot;)</span><br><span class="line">public CmsPageResult add(CmsPage cmsPage);</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-2-新增页面服务端开发"><a href="#2-2-新增页面服务端开发" class="headerlink" title="2.2 新增页面服务端开发"></a>2.2 新增页面服务端开发</h2><h3 id="2-2-1-页面唯一索引"><a href="#2-2-1-页面唯一索引" class="headerlink" title="2.2.1 页面唯一索引"></a>2.2.1 页面唯一索引</h3><p>在cms_page集中上创建页面名称、站点Id、页面webpath为唯一索引</p>
+<h3 id="2-2-2-Dao"><a href="#2-2-2-Dao" class="headerlink" title="2.2.2 Dao"></a>2.2.2 Dao</h3><p>1、添加根据页面名称、站点Id、页面webpath查询页面方法，此方法用于校验页面是否存在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface CmsPageRepository extends MongoRepository&lt;CmsPage,String&gt; &#123;</span><br><span class="line">    //根据页面名称、站点id、页面访问路径查询</span><br><span class="line">    CmsPage findByPageNameAndSiteIdAndPageWebPath(String pageName,String siteId,String pageWebPath);</span><br><span class="line">    。。。</span><br></pre></td></tr></table></figure>
+<p>2、使用 CmsPageRepository提供的save方法 。</p>
+<h3 id="2-2-3-Service"><a href="#2-2-3-Service" class="headerlink" title="2.2.3 Service"></a>2.2.3 Service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//添加页面</span><br><span class="line">public CmsPageResult add(CmsPage cmsPage)&#123;</span><br><span class="line">    //校验页面是否存在，根据页面名称、站点Id、页面webpath查询</span><br><span class="line">    CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());</span><br><span class="line">     if(cmsPage1==null)&#123;</span><br><span class="line">        cmsPage.setPageId(null);//添加页面主键由spring data 自动生成</span><br><span class="line">        cmsPageRepository.save(cmsPage);</span><br><span class="line">        //返回结果</span><br><span class="line">        CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS,cmsPage);</span><br><span class="line">        return cmsPageResult;</span><br><span class="line">    &#125;</span><br><span class="line">    return new CmsPageResult(CommonCode.FAIL,null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-4-Controller"><a href="#2-2-4-Controller" class="headerlink" title="2.2.4 Controller"></a>2.2.4 Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//添加页面</span><br><span class="line">@Override</span><br><span class="line">@PostMapping(&quot;/add&quot;)</span><br><span class="line">public CmsPageResult add(@RequestBody CmsPage cmsPage) &#123;</span><br><span class="line">    return pageService.add(cmsPage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-5-接口测试"><a href="#2-2-5-接口测试" class="headerlink" title="2.2.5 接口测试"></a>2.2.5 接口测试</h3><p>使用postman测试</p>
+<p>post请求：<a href="http://localhost:31001/cms/page/add" target="_blank" rel="noopener">http://localhost:31001/cms/page/add</a></p>
+<p>请求内容为json数据，测试数据如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;dataUrl&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;htmlFileId&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;pageAliase&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;pageCreateTime&quot;: &quot;2018-06-11T02:01:25.667Z&quot;,</span><br><span class="line">  &quot;pageHtml&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;pageName&quot;: &quot;测试页面&quot;,</span><br><span class="line">  &quot;pageParameter&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;pagePhysicalPath&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;pageStatus&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;pageTemplate&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;pageType&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;pageWebPath&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;siteId&quot;: &quot;string&quot;,</span><br><span class="line">  &quot;templateId&quot;: &quot;string&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="assets/1528682840567.png" alt="1528682840567"></p>
+<p>成功响应结果：</p>
+<p><img src="assets/1528682860935.png" alt="1528682860935"></p>
+<p>失败响应结果：</p>
+<p><img src="assets/1528682874769.png" alt="1528682874769"></p>
+<h2 id="2-3-新增页面前端开发"><a href="#2-3-新增页面前端开发" class="headerlink" title="2.3 新增页面前端开发"></a>2.3 新增页面前端开发</h2><h3 id="2-3-1-新增页面"><a href="#2-3-1-新增页面" class="headerlink" title="2.3.1 新增页面"></a>2.3.1 新增页面</h3><h4 id="2-3-1-1-编写page-add-vue页面"><a href="#2-3-1-1-编写page-add-vue页面" class="headerlink" title="2.3.1.1 编写page_add.vue页面"></a>2.3.1.1 编写page_add.vue页面</h4><p>使用Element-UI的form组件编写添加表单内容，页面效果如下：</p>
+<p><img src="assets/1528694655905.png" alt="1528694655905"></p>
+<p>1、创建page_add.vue页面</p>
+<p>2、配置路由</p>
+<p>在cms模块的路由文件中配置“添加页面”的路由：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;path:&apos;/cms/page/add&apos;,name:&apos;新增页面&apos;,component: page_add,hidden:true&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：由于“添加页面”不需要显示为一个菜单，这里hidden设置为true隐藏菜单。</p>
+<p>测试，在浏览器地址栏输入<a href="http://localhost:11000/#/cms/page/add" target="_blank" rel="noopener">http://localhost:11000/#/cms/page/add</a></p>
+<p>3、在页面列表添加“添加页面”的按钮</p>
+<p>实际情况是用户进入页面查询列表，点击“新增页面”按钮进入新增页面窗口。</p>
+<p>在查询按钮的旁边添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link class=&quot;mui-tab-item&quot; :to=&quot;&#123;path:&apos;/cms/page/add/&apos;&#125;&quot;&gt;</span><br><span class="line">  &lt;el-button  type=&quot;primary&quot; size=&quot;small&quot;&gt;新增页面&lt;/el-button&gt;</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+<p>说明：router-link是vue提供的路由功能，用于在页面生成路由链接，最终在html渲染后就是&lt;a标签。</p>
+<p>​    to：目标路由地址</p>
+<p>4、完善页面内容：</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-form   :model=&quot;pageForm&quot; label-width=&quot;80px&quot;  &gt;</span><br><span class="line">  &lt;el-form-item label=&quot;所属站点&quot; prop=&quot;siteId&quot;&gt;</span><br><span class="line">    &lt;el-select v-model=&quot;pageForm.siteId&quot; placeholder=&quot;请选择站点&quot;&gt;</span><br><span class="line">      &lt;el-option</span><br><span class="line">        v-for=&quot;item in siteList&quot;</span><br><span class="line">        :key=&quot;item.siteId&quot;</span><br><span class="line">        :label=&quot;item.siteName&quot;</span><br><span class="line">        :value=&quot;item.siteId&quot;&gt;</span><br><span class="line">      &lt;/el-option&gt;</span><br><span class="line">    &lt;/el-select&gt;</span><br><span class="line">  &lt;/el-form-item&gt;</span><br><span class="line">  &lt;el-form-item label=&quot;选择模版&quot; prop=&quot;templateId&quot;&gt;</span><br><span class="line">    &lt;el-select v-model=&quot;pageForm.templateId&quot; placeholder=&quot;请选择&quot;&gt;</span><br><span class="line">      &lt;el-option</span><br><span class="line">        v-for=&quot;item in templateList&quot;</span><br><span class="line">        :key=&quot;item.templateId&quot;</span><br><span class="line">        :label=&quot;item.templateName&quot;</span><br><span class="line">        :value=&quot;item.templateId&quot;&gt;</span><br><span class="line">      &lt;/el-option&gt;</span><br><span class="line">    &lt;/el-select&gt;</span><br><span class="line">  &lt;/el-form-item&gt;</span><br><span class="line">  &lt;el-form-item label=&quot;页面名称&quot; prop=&quot;pageName&quot;&gt;</span><br><span class="line">    &lt;el-input v-model=&quot;pageForm.pageName&quot; auto-complete=&quot;off&quot; &gt;&lt;/el-input&gt;</span><br><span class="line">  &lt;/el-form-item&gt;</span><br><span class="line"></span><br><span class="line">  &lt;el-form-item label=&quot;别名&quot; prop=&quot;pageAliase&quot;&gt;</span><br><span class="line">    &lt;el-input v-model=&quot;pageForm.pageAliase&quot; auto-complete=&quot;off&quot; &gt;&lt;/el-input&gt;</span><br><span class="line">  &lt;/el-form-item&gt;</span><br><span class="line">  &lt;el-form-item label=&quot;访问路径&quot; prop=&quot;pageWebPath&quot;&gt;</span><br><span class="line">    &lt;el-input v-model=&quot;pageForm.pageWebPath&quot; auto-complete=&quot;off&quot; &gt;&lt;/el-input&gt;</span><br><span class="line">  &lt;/el-form-item&gt;</span><br><span class="line"></span><br><span class="line">  &lt;el-form-item label=&quot;物理路径&quot; prop=&quot;pagePhysicalPath&quot;&gt;</span><br><span class="line">    &lt;el-input v-model=&quot;pageForm.pagePhysicalPath&quot; auto-complete=&quot;off&quot; &gt;&lt;/el-input&gt;</span><br><span class="line">  &lt;/el-form-item&gt;</span><br><span class="line"></span><br><span class="line">  &lt;el-form-item label=&quot;类型&quot;&gt;</span><br><span class="line">    &lt;el-radio-group v-model=&quot;pageForm.pageType&quot;&gt;</span><br><span class="line">      &lt;el-radio class=&quot;radio&quot; label=&quot;0&quot;&gt;静态&lt;/el-radio&gt;</span><br><span class="line">      &lt;el-radio class=&quot;radio&quot; label=&quot;1&quot;&gt;动态&lt;/el-radio&gt;</span><br><span class="line">    &lt;/el-radio-group&gt;</span><br><span class="line">  &lt;/el-form-item&gt;</span><br><span class="line">  &lt;el-form-item label=&quot;创建时间&quot;&gt;</span><br><span class="line">    &lt;el-date-picker type=&quot;datetime&quot; placeholder=&quot;创建时间&quot; v-model=&quot;pageForm.pageCreateTime&quot;&gt;&lt;/el-date-picker&gt;</span><br><span class="line">  &lt;/el-form-item&gt;</span><br><span class="line"></span><br><span class="line">&lt;/el-form&gt;</span><br><span class="line">&lt;div slot=&quot;footer&quot; class=&quot;dialog-footer&quot;&gt;</span><br><span class="line">  &lt;el-button type=&quot;primary&quot; @click=&quot;addSubmit&quot; &gt;提交&lt;/el-button&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>Form Attributes说明：</p>
+<p>​    model    表单数据对象</p>
+<p>​    rules    表单验证规则</p>
+<p>Form-Item Attributes说明：</p>
+<p>​    prop    表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的</p>
+<p>​    label    标签文本</p>
+<p>详情属性及事件参考<a href="http://element.eleme.io/#/zh-CN/component/form" target="_blank" rel="noopener">http://element.eleme.io/#/zh-CN/component/form</a></p>
+<p>5、数据对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    //站点列表</span><br><span class="line">    siteList:[],</span><br><span class="line">    //模版列表</span><br><span class="line">    templateList:[],</span><br><span class="line">    //新增界面数据</span><br><span class="line">    pageForm: &#123;</span><br><span class="line">      siteId:&apos;&apos;,</span><br><span class="line">      templateId:&apos;&apos;,</span><br><span class="line">      pageName: &apos;&apos;,</span><br><span class="line">      pageAliase: &apos;&apos;,</span><br><span class="line">      pageWebPath: &apos;&apos;,</span><br><span class="line">      pageParameter:&apos;&apos;,</span><br><span class="line">      pagePhysicalPath:&apos;&apos;,</span><br><span class="line">      pageType:&apos;&apos;,</span><br><span class="line">      pageCreateTime: new Date()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods:&#123;</span><br><span class="line">  addSubmit()&#123;</span><br><span class="line">    alert(&quot;提交&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>6、站点及模板数据（先使用静态数据）</p>
+<p>在created钩子方法中定义，created是在html渲染之前执行，这里推荐使用created。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">created:function()&#123;</span><br><span class="line">  //初始化站点列表</span><br><span class="line">  this.siteList = [</span><br><span class="line">    &#123;</span><br><span class="line">      siteId:&apos;5a751fab6abb5044e0d19ea1&apos;,</span><br><span class="line">      siteName:&apos;门户主站&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      siteId:&apos;102&apos;,</span><br><span class="line">      siteName:&apos;测试站&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">  //模板列表</span><br><span class="line">  this.templateList = [</span><br><span class="line">    &#123;</span><br><span class="line">      templateId:&apos;5a962b52b00ffc514038faf7&apos;,</span><br><span class="line">      templateName:&apos;首页&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      templateId:&apos;5a962bf8b00ffc514038fafa&apos;,</span><br><span class="line">      templateName:&apos;轮播图&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>7、测试预览</p>
+<p>新增页面按钮：</p>
+<p><img src="assets/1528687920126.png" alt="1528687920126"></p>
+<p>新增页面表单：</p>
+<p><img src="assets/1522464925278.png" alt="1522464925278"></p>
+<h4 id="2-3-1-2-添加返回"><a href="#2-3-1-2-添加返回" class="headerlink" title="2.3.1.2 添加返回"></a>2.3.1.2 添加返回</h4><p>进入新增页面后只能通过菜单再次进入页面列表，可以在新增页面添加“返回”按钮，点击返回按钮返回到页面列表。</p>
+<p>1) 新增页面按钮带上参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link class=&quot;mui-tab-item&quot; :to=&quot;&#123;path:&apos;/cms/page/add/&apos;,query:&#123;</span><br><span class="line">  page: this.params.page,</span><br><span class="line">  siteId: this.params.siteId&#125;&#125;&quot;&gt;</span><br><span class="line">  &lt;el-button  type=&quot;primary&quot; size=&quot;small&quot;&gt;新增页面&lt;/el-button&gt;</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+<p>说明：query表示在路由url上带上参数</p>
+<p>2）定义返回方法</p>
+<p>在page_add.vue上定义返回按钮</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-button type=&quot;primary&quot; @click=&quot;go_back&quot; &gt;返回&lt;/el-button&gt;</span><br></pre></td></tr></table></figure>
+<p>在page_add.vue上定义返回方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">go_back()&#123;</span><br><span class="line">  this.$router.push(&#123;</span><br><span class="line">    path: &apos;/cms/page/list&apos;, query: &#123;</span><br><span class="line">      page: this.$route.query.page,</span><br><span class="line">      siteId:this.$route.query.siteId</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：this.$route.query 表示取出路由上的参数列表，有两个取路由参数的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a、通过在路由上添加key/value串使用this.$route.query来取参数，例如：/router1?id=123 ,/router1?id=456 可以通过this.$route.query.id获取参数id的值。</span><br><span class="line">b、通过将参数作为路由一部分进行传参数使用this.$route.params来获取，例如：定义的路由为/router1/:id ，请求/router1/123时可以通过this.$route.params.id来获取，此种情况用this.$route.query.id是拿不到的。</span><br></pre></td></tr></table></figure>
+<p>3）查询列表支持回显</p>
+<p>进入查询列表，从url中获取页码和站点id并赋值给数据模型对象，从而实现页面回显。</p>
+<p>url例子：<a href="http://localhost:12000/#/cms/page/list?page=2&amp;siteId=5a751fab6abb5044e0d19ea1" target="_blank" rel="noopener">http://localhost:12000/#/cms/page/list?page=2&amp;siteId=5a751fab6abb5044e0d19ea1</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">  //从路由上获取参数</span><br><span class="line">  this.params.page = Number.parseInt(this.$route.query.page||1);</span><br><span class="line">  this.params.siteId = this.$route.query.siteId||&apos;&apos;; </span><br><span class="line">  .....</span><br></pre></td></tr></table></figure>
+<p>小技巧：使用 ||返回第一个有效值</p>
+<h4 id="2-3-1-3-表单校验"><a href="#2-3-1-3-表单校验" class="headerlink" title="2.3.1.3 表单校验"></a>2.3.1.3 表单校验</h4><p>1、配置校验规则：</p>
+<p>Element-UI的Form组件提供表单校验的方法：</p>
+<p>在form属性上配置rules（表单验证规则）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-form   :model=&quot;pageForm&quot; :rules=&quot;pageFormRules&quot; label-width=&quot;80px&quot; &gt;</span><br></pre></td></tr></table></figure>
+<p>在数据模型中配置校验规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pageFormRules: &#123;</span><br><span class="line">  siteId:[</span><br><span class="line">    &#123;required: true, message: &apos;请选择站点&apos;, trigger: &apos;blur&apos;&#125;</span><br><span class="line">  ],</span><br><span class="line">  templateId:[</span><br><span class="line">    &#123;required: true, message: &apos;请选择模版&apos;, trigger: &apos;blur&apos;&#125;</span><br><span class="line">  ],</span><br><span class="line">  pageName: [</span><br><span class="line">    &#123;required: true, message: &apos;请输入页面名称&apos;, trigger: &apos;blur&apos;&#125;</span><br><span class="line">  ],</span><br><span class="line">  pageWebPath: [</span><br><span class="line">    &#123;required: true, message: &apos;请输入访问路径&apos;, trigger: &apos;blur&apos;&#125;</span><br><span class="line">  ],</span><br><span class="line">  pagePhysicalPath: [</span><br><span class="line">    &#123;required: true, message: &apos;请输入物理路径&apos;, trigger: &apos;blur&apos;&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>更多的校验规则参考<a href="http://element.eleme.io/#/zh-CN/component/form" target="_blank" rel="noopener">http://element.eleme.io/#/zh-CN/component/form</a>中“表单验证”的例子。</p>
+<p>2、点击提交按钮触发校验</p>
+<p>1)在form表单上添加 ref属性（ref=”pageForm”）在校验时引用此表单对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-form   :model=&quot;pageForm&quot; :rules=&quot;pageFormRules&quot; label-width=&quot;80px&quot; ref=&quot;pageForm&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>2）执行校验</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">this.$refs.pageForm.validate((valid) =&gt; &#123;</span><br><span class="line">        if (valid) &#123;</span><br><span class="line">          alert(&apos;提交&apos;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          alert(&apos;校验失败&apos;);</span><br><span class="line">          return false;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-2-Api调用"><a href="#2-3-2-Api调用" class="headerlink" title="2.3.2 Api调用"></a>2.3.2 Api调用</h3><p>1、在cms.js中定义page_add方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*页面添加*/</span><br><span class="line">export const page_add = params =&gt; &#123;</span><br><span class="line">  return http.requestPost(apiUrl+&apos;/cms/page/add&apos;,params)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、添加事件</p>
+<p>本功能使用到两个UI组件：</p>
+<p>1、使用element-ui的message-box组件弹出确认提交窗口（<a href="http://element.eleme.io/#/zh-CN/component/message-box" target="_blank" rel="noopener">http://element.eleme.io/#/zh-CN/component/message-box</a>）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$confirm(&apos;确认提交吗？&apos;, &apos;提示&apos;, &#123;&#125;).then(() =&gt; &#123;｝）</span><br></pre></td></tr></table></figure>
+<p>2、使用 message组件提示操作结果 （<a href="http://element.eleme.io/#/zh-CN/component/message" target="_blank" rel="noopener">http://element.eleme.io/#/zh-CN/component/message</a>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this.$message(&#123;</span><br><span class="line">              message: &apos;提交成功&apos;,</span><br><span class="line">              type: &apos;success&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>完整的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">addSubmit()&#123;</span><br><span class="line">  this.$refs.pageForm.validate((valid) =&gt; &#123;</span><br><span class="line">    if (valid) &#123;</span><br><span class="line">      this.$confirm(&apos;确认提交吗？&apos;, &apos;提示&apos;, &#123;&#125;).then(() =&gt; &#123;</span><br><span class="line">        cmsApi.page_add(this.pageForm).then((res) =&gt; &#123;</span><br><span class="line">            console.log(res);</span><br><span class="line">          if(res.success)&#123;</span><br><span class="line">             this.$message(&#123;</span><br><span class="line">              message: &apos;提交成功&apos;,</span><br><span class="line">              type: &apos;success&apos;</span><br><span class="line">            &#125;);</span><br><span class="line">            this.$refs[&apos;pageForm&apos;].resetFields();</span><br><span class="line">          &#125;else&#123;</span><br><span class="line">            this.$message.error(&apos;提交失败&apos;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下边是测试：</p>
+<p>1、进入页面列表页面</p>
+<p><img src="assets/1528694624331.png" alt="1528694624331"></p>
+<p>2、点击“增加页面”按钮</p>
+<p><img src="images/1528694655905.png" alt="1528694655905"></p>
+<p>3、输入页面信息点击“提交”</p>
+<h1 id="3-修改页面"><a href="#3-修改页面" class="headerlink" title="3 修改页面"></a>3 修改页面</h1><p>修改页面用户操作流程：</p>
+<p>1、用户进入修改页面，在页面上显示了修改页面的信息</p>
+<p>2、用户修改页面的内容，点击“提交”，提示“修改成功”或“修改失败”</p>
+<h2 id="3-1-修改页面接口定义"><a href="#3-1-修改页面接口定义" class="headerlink" title="3.1 修改页面接口定义"></a>3.1 修改页面接口定义</h2><p>修改页面需要定义的API如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(&quot;通过ID查询页面&quot;)</span><br><span class="line">public CmsPage findById(String id);</span><br><span class="line"></span><br><span class="line">@ApiOperation(&quot;修改页面&quot;)</span><br><span class="line">public CmsPageResult edit(String id,CmsPage cmsPage);</span><br></pre></td></tr></table></figure>
+<p>说明：提交数据使用post、put都可以，只是根据http方法的规范，put方法是对服务器指定资源进行修改，所以这里使用put方法对页面修改进行修改。</p>
+<h2 id="3-2-修改页面服务端开发"><a href="#3-2-修改页面服务端开发" class="headerlink" title="3.2 修改页面服务端开发"></a>3.2 修改页面服务端开发</h2><h3 id="3-2-1Dao"><a href="#3-2-1Dao" class="headerlink" title="3.2.1Dao"></a>3.2.1Dao</h3><p>使用 Spring Data提供的findById方法完成根据主键查询 。</p>
+<p>使用 Spring Data提供的save方法完成数据保存 。</p>
+<h3 id="3-2-2Service"><a href="#3-2-2Service" class="headerlink" title="3.2.2Service"></a>3.2.2Service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">   //根据id查询页面</span><br><span class="line">   public CmsPage getById(String id)&#123;</span><br><span class="line">       Optional&lt;CmsPage&gt; optional = cmsPageRepository.findById(id);</span><br><span class="line">       if(optional.isPresent())&#123;</span><br><span class="line">           return optional.get();</span><br><span class="line">       &#125;</span><br><span class="line">       //返回空</span><br><span class="line">       return null;</span><br><span class="line">   &#125;</span><br><span class="line">//更新页面信息</span><br><span class="line">   public CmsPageResult update(String id,CmsPage cmsPage) &#123;</span><br><span class="line">       //根据id查询页面信息</span><br><span class="line">        CmsPage one = this.getById(id);</span><br><span class="line">       if (one != null) &#123;</span><br><span class="line">           //更新模板id</span><br><span class="line">           one.setTemplateId(cmsPage.getTemplateId());</span><br><span class="line">           //更新所属站点</span><br><span class="line">           one.setSiteId(cmsPage.getSiteId());</span><br><span class="line">           //更新页面别名</span><br><span class="line">           one.setPageAliase(cmsPage.getPageAliase());</span><br><span class="line">           //更新页面名称</span><br><span class="line">           one.setPageName(cmsPage.getPageName());</span><br><span class="line">           //更新访问路径</span><br><span class="line">           one.setPageWebPath(cmsPage.getPageWebPath());</span><br><span class="line">           //更新物理路径</span><br><span class="line">           one.setPagePhysicalPath(cmsPage.getPagePhysicalPath());</span><br><span class="line">           //执行更新</span><br><span class="line">           CmsPage save = cmsPageRepository.save(one);</span><br><span class="line">           if (save != null) &#123;</span><br><span class="line">               //返回成功</span><br><span class="line">               CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS, save);</span><br><span class="line">               return cmsPageResult;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       //返回失败</span><br><span class="line">       return new CmsPageResult(CommonCode.FAIL,null);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-3Controller"><a href="#3-2-3Controller" class="headerlink" title="3.2.3Controller"></a>3.2.3Controller</h3><p>1、根据id查询页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@GetMapping(&quot;/get/&#123;id&#125;&quot;)</span><br><span class="line">public CmsPage findById(@PathVariable(&quot;id&quot;) String id) &#123;</span><br><span class="line">    return pageService.getById(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、保存页面信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@PutMapping(&quot;/edit/&#123;id&#125;&quot;)//这里使用put方法，http 方法中put表示更新</span><br><span class="line">public CmsPageResult edit(@PathVariable(&quot;id&quot;) String id, @RequestBody CmsPage cmsPage) &#123;</span><br><span class="line">    return pageService.update(id,cmsPage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-修改页面前端开发"><a href="#3-3-修改页面前端开发" class="headerlink" title="3.3 修改页面前端开发"></a>3.3 修改页面前端开发</h2><h3 id="3-3-1-页面处理流程"><a href="#3-3-1-页面处理流程" class="headerlink" title="3.3.1 页面处理流程"></a>3.3.1 页面处理流程</h3><p>页面的处理流程如下：</p>
+<p>1、进入页面，通过钩子方法请求服务端获取页面信息，并赋值给数据模型对象</p>
+<p>2、页面信息通过数据绑定在表单显示</p>
+<p>3、用户修改信息点击“提交”请求服务端修改页面信息接口</p>
+<h3 id="3-3-3-修改页面"><a href="#3-3-3-修改页面" class="headerlink" title="3.3.3 修改页面"></a>3.3.3 修改页面</h3><h4 id="3-3-3-1-编写page-edit页面"><a href="#3-3-3-1-编写page-edit页面" class="headerlink" title="3.3.3.1 编写page_edit页面"></a>3.3.3.1 编写page_edit页面</h4><p>修改页面的布局同添加页面，可以直接复制添加页面，在添加页面基础上修改。</p>
+<p>下边编写页面内容：</p>
+<p>1、编写page_edit.vue</p>
+<p>页面布局同添加页面，略。</p>
+<p>2、配置路由</p>
+<p>进入修改页面传入pageId</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import page_edit from &apos;@/module/cms/page/page_edit.vue&apos;;</span><br><span class="line">&#123; path: &apos;/cms/page/edit/:pageId&apos;, name:&apos;修改页面&apos;,component: page_edit,hidden:true&#125;,</span><br></pre></td></tr></table></figure>
+<p>3、在页面列表添加“编辑”链接</p>
+<p>参考table组件的例子，在page_list.vue上添加“操作”列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table-column label=&quot;操作&quot; width=&quot;80&quot;&gt;</span><br><span class="line">  &lt;template slot-scope=&quot;page&quot;&gt;</span><br><span class="line">    &lt;el-button</span><br><span class="line">      size=&quot;small&quot;type=&quot;text&quot;</span><br><span class="line">      @click=&quot;edit(page.row.pageId)&quot;&gt;编辑</span><br><span class="line">    &lt;/el-button&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
+<p>编写edit方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//修改</span><br><span class="line">edit:function (pageId) &#123;</span><br><span class="line">  this.$router.push(&#123; path: &apos;/cms/page/edit/&apos;+pageId,query:&#123;</span><br><span class="line">    page: this.params.page,</span><br><span class="line">    siteId: this.params.siteId&#125;&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、测试预览</p>
+<p><img src="assets/1528703185756.png" alt="1528703185756"></p>
+<p>点击“编辑”打开修改页面窗口。</p>
+<h4 id="3-3-3-2-页面内容显示"><a href="#3-3-3-2-页面内容显示" class="headerlink" title="3.3.3.2 页面内容显示"></a>3.3.3.2 页面内容显示</h4><p>本功能实现：进入修改页面立即显示要修改的页面信息。</p>
+<p>1、定义api方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*页面查询*/</span><br><span class="line">export const page_get = id =&gt; &#123;</span><br><span class="line">  return http.requestQuickGet(apiUrl+&apos;/cms/page/get/&apos;+id)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、定义数据对象</p>
+<p>进入修改页面传入pageId参数，在数据模型中添加pageId。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">     return &#123;</span><br><span class="line">     	......</span><br><span class="line">       //页面id</span><br><span class="line">       pageId:&apos;&apos;,</span><br><span class="line">       ......</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>3、在created钩子方法 中查询页面信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">created: function () &#123;</span><br><span class="line">  //页面参数通过路由传入，这里通过this.$route.params来获取</span><br><span class="line">  this.pageId=this.$route.params.pageId;</span><br><span class="line">  //根据主键查询页面信息</span><br><span class="line">  cmsApi.page_get(this.pageId).then((res) =&gt; &#123;</span><br><span class="line">    console.log(res);</span><br><span class="line">    if(res.success)&#123;</span><br><span class="line">      this.pageForm = res.cmsPage;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>7、预览页面回显效果</p>
+<p><img src="assets/1522470035852.png" alt="1522470035852"></p>
+<h3 id="3-3-4-Api调用"><a href="#3-3-4-Api调用" class="headerlink" title="3.3.4 Api调用"></a>3.3.4 Api调用</h3><p>1、定义api方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*页面修改，采用put方法*/</span><br><span class="line">export const page_edit = (id,params) =&gt; &#123;</span><br><span class="line">  return http.requestPut(apiUrl+&apos;/cms/page/edit/&apos;+id,params)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、提交按钮方法</p>
+<p>添加提交按钮事件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-button type=&quot;primary&quot; @click=&quot;editSubmit&quot; &gt;提交&lt;/el-button&gt;</span><br></pre></td></tr></table></figure>
+<p>3、提交按钮事件内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">editSubmit()&#123;</span><br><span class="line">  this.$refs.pageForm.validate((valid) =&gt; &#123;</span><br><span class="line">    if (valid) &#123;</span><br><span class="line">      this.$confirm(&apos;确认提交吗？&apos;, &apos;提示&apos;, &#123;&#125;).then(() =&gt; &#123;</span><br><span class="line">        cmsApi.page_edit(this.pageId,this.pageForm).then((res) =&gt; &#123;</span><br><span class="line">            console.log(res);</span><br><span class="line">          if(res.success)&#123;</span><br><span class="line">            this.$message(&#123;</span><br><span class="line">              message: &apos;修改成功&apos;,</span><br><span class="line">              type: &apos;success&apos;</span><br><span class="line">            &#125;);</span><br><span class="line">            //自动返回</span><br><span class="line">            this.go_back();</span><br><span class="line">          &#125;else&#123;</span><br><span class="line">            this.$message.error(&apos;修改失败&apos;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、测试</p>
+<p>修改页面信息，点击提交。</p>
+<h1 id="4-删除页面"><a href="#4-删除页面" class="headerlink" title="4 删除页面"></a>4 删除页面</h1><p>用户操作流程：</p>
+<p>1、用户进入用户列表，点击“删除”</p>
+<p>2、执行删除操作，提示“删除成功”或“删除失败”</p>
+<h2 id="4-1-删除页面接口定义"><a href="#4-1-删除页面接口定义" class="headerlink" title="4.1 删除页面接口定义"></a>4.1 删除页面接口定义</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ApiOperation(&quot;通过ID删除页面&quot;)</span><br><span class="line">public ResponseResult delete(String id);</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-删除页面服务端开发"><a href="#4-2-删除页面服务端开发" class="headerlink" title="4.2 删除页面服务端开发"></a>4.2 删除页面服务端开发</h2><h3 id="4-2-1Dao"><a href="#4-2-1Dao" class="headerlink" title="4.2.1Dao"></a>4.2.1Dao</h3><p>使用 Spring Data提供的deleteById方法完成删除操作 。</p>
+<h3 id="4-2-2-Service"><a href="#4-2-2-Service" class="headerlink" title="4.2.2 Service"></a>4.2.2 Service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//删除页面</span><br><span class="line">public ResponseResult delete(String id)&#123;</span><br><span class="line">    CmsPage one = this.getById(id);</span><br><span class="line">    if(one!=null)&#123;</span><br><span class="line">        //删除页面</span><br><span class="line">        cmsPageRepository.deleteById(id);</span><br><span class="line">        return new ResponseResult(CommonCode.SUCCESS);</span><br><span class="line">    &#125;</span><br><span class="line">    return new ResponseResult(CommonCode.FAIL);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-3Controller"><a href="#4-2-3Controller" class="headerlink" title="4.2.3Controller"></a>4.2.3Controller</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@DeleteMapping(&quot;/del/&#123;id&#125;&quot;) //使用http的delete方法完成岗位操作</span><br><span class="line">public ResponseResult delete(@PathVariable(&quot;id&quot;) String id) &#123;</span><br><span class="line">    return pageService.delete(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-删除页面前端开发"><a href="#4-3-删除页面前端开发" class="headerlink" title="4.3 删除页面前端开发"></a>4.3 删除页面前端开发</h2><h3 id="4-3-1-Api方法"><a href="#4-3-1-Api方法" class="headerlink" title="4.3.1 Api方法"></a>4.3.1 Api方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*页面删除*/</span><br><span class="line">export const page_del = id =&gt; &#123;</span><br><span class="line">  return http.requestDelete(apiUrl+&apos;/cms/page/del/&apos;+id)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-2编写页面"><a href="#4-3-2编写页面" class="headerlink" title="4.3.2编写页面"></a>4.3.2编写页面</h3><p>1、在page_list.vue页面添加删除按钮</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table-column label=&quot;操作&quot; width=&quot;120&quot;&gt;</span><br><span class="line">  &lt;template slot-scope=&quot;page&quot;&gt;</span><br><span class="line">    &lt;el-button</span><br><span class="line">      size=&quot;small&quot;type=&quot;text&quot;</span><br><span class="line">      @click=&quot;edit(page.row.pageId)&quot;&gt;编辑</span><br><span class="line">    &lt;/el-button&gt;</span><br><span class="line">    &lt;el-button</span><br><span class="line">      size=&quot;small&quot;type=&quot;text&quot;</span><br><span class="line">      @click=&quot;del(page.row.pageId)&quot;&gt;删除</span><br><span class="line">    &lt;/el-button&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br></pre></td></tr></table></figure>
+<p>2、删除事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//删除</span><br><span class="line">      del:function (pageId) &#123;</span><br><span class="line">        this.$confirm(&apos;确认删除此页面吗?&apos;, &apos;提示&apos;, &#123;&#125;).then(() =&gt; &#123;</span><br><span class="line">          cmsApi.page_del(pageId).then((res)=&gt;&#123;</span><br><span class="line">            if(res.success)&#123;</span><br><span class="line">              this.$message(&#123;</span><br><span class="line">                type: &apos;success&apos;,</span><br><span class="line">                message: &apos;删除成功!&apos;</span><br><span class="line">              &#125;);</span><br><span class="line">              //查询页面</span><br><span class="line">              this.query()</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">              this.$message(&#123;</span><br><span class="line">                type: &apos;error&apos;,</span><br><span class="line">                message: &apos;删除失败!&apos;</span><br><span class="line">              &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;)</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="5-异常处理"><a href="#5-异常处理" class="headerlink" title="5 异常处理"></a>5 异常处理</h1><h2 id="5-1-异常处理的问题分析"><a href="#5-1-异常处理的问题分析" class="headerlink" title="5.1 异常处理的问题分析"></a>5.1 异常处理的问题分析</h2><p>从添加页面的service方法中找问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  //添加页面</span><br><span class="line">  public CmsPageResult add(CmsPage cmsPage)&#123;</span><br><span class="line">//校验页面是否存在，根据页面名称、站点Id、页面webpath查询</span><br><span class="line">      CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());</span><br><span class="line">       if(cmsPage1==null)&#123;</span><br><span class="line">          cmsPage.setPageId(null);//添加页面主键由spring data 自动生成</span><br><span class="line">          cmsPageRepository.save(cmsPage);</span><br><span class="line">          //返回结果</span><br><span class="line">          CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS,cmsPage);</span><br><span class="line">          return cmsPageResult;</span><br><span class="line">      &#125;</span><br><span class="line">      return new CmsPageResult(CommonCode.FAIL,null);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>问题：</p>
+<p>1、上边的代码只要操作不成功仅向用户返回“错误代码：11111，失败信息：操作失败”，无法区别具体的错误信息。</p>
+<p>2、service方法在执行过程出现异常在哪捕获？在service中需要都加try/catch，如果在controller也需要添加try/catch，代码冗余严重且不易维护。</p>
+<p>解决方案：</p>
+<p>1、在Service方法中的编码顺序是先校验判断，有问题则抛出具体的异常信息，最后执行具体的业务操作，返回成功信息。</p>
+<p>2、在统一异常处理类中去捕获异常，无需controller捕获异常，向用户返回统一规范的响应信息。</p>
+<p>代码模板如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//添加页面</span><br><span class="line">public CmsPageResult add(CmsPage cmsPage)&#123;</span><br><span class="line">    //校验cmsPage是否为空</span><br><span class="line">    if(cmsPage == null)&#123;</span><br><span class="line">        //抛出异常，非法请求</span><br><span class="line">        //...</span><br><span class="line">    &#125;</span><br><span class="line">    //根据页面名称查询（页面名称已在mongodb创建了唯一索引）</span><br><span class="line">    CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());</span><br><span class="line">    //校验页面是否存在，已存在则抛出异常</span><br><span class="line">    if(cmsPage1 !=null)&#123;</span><br><span class="line">        //抛出异常，已存在相同的页面名称</span><br><span class="line">        //...</span><br><span class="line">    &#125;</span><br><span class="line">    cmsPage.setPageId(null);//添加页面主键由spring data 自动生成</span><br><span class="line">    CmsPage save = cmsPageRepository.save(cmsPage);</span><br><span class="line">    //返回结果</span><br><span class="line">    CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS,save);</span><br><span class="line">    return cmsPageResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-异常处理流程"><a href="#5-2-异常处理流程" class="headerlink" title="5.2 异常处理流程"></a>5.2 异常处理流程</h2><p>系统对异常的处理使用统一的异常处理流程：</p>
+<p>1、自定义异常类型。</p>
+<p>2、自定义错误代码及错误信息。</p>
+<p>3、对于可预知的异常由程序员在代码中主动抛出，由SpringMVC统一捕获。</p>
+<p>​    可预知异常是程序员在代码中手动抛出本系统定义的特定异常类型，由于是程序员抛出的异常，通常异常信息比较齐全，程序员在抛出时会指定错误代码及错误信息，获取异常信息也比较方便。</p>
+<p>4、对于不可预知的异常（运行时异常）由SpringMVC统一捕获Exception类型的异常。</p>
+<p>​    不可预知异常通常是由于系统出现bug、或一些不要抗拒的错误（比如网络中断、服务器宕机等），异常类型为RuntimeException类型（运行时异常）。</p>
+<p>5、可预知的异常及不可预知的运行时异常最终会采用统一的信息格式（错误代码+错误信息）来表示，最终也会随请求响应给客户端。</p>
+<p>异常抛出及处理流程：</p>
+<p><img src="assets/1532595345826.png" alt="1532595345826"></p>
+<p>1、在controller、service、dao中程序员抛出自定义异常；springMVC框架抛出框架异常类型</p>
+<p>2、统一由异常捕获类捕获异常，并进行处理</p>
+<p>3、捕获到自定义异常则直接取出错误代码及错误信息，响应给用户。</p>
+<p>4、捕获到非自定义异常类型首先从Map中找该异常类型是否对应具体的错误代码，如果有则取出错误代码和错误信息并响应给用户，如果从Map中找不到异常类型所对应的错误代码则统一为99999错误代码并响应给用户。</p>
+<p>5、将错误代码及错误信息以Json格式响应给用户。</p>
+<h2 id="5-3-可预知异常处理"><a href="#5-3-可预知异常处理" class="headerlink" title="5.3 可预知异常处理"></a>5.3 可预知异常处理</h2><h3 id="5-3-1-自定义异常类"><a href="#5-3-1-自定义异常类" class="headerlink" title="5.3.1 自定义异常类"></a>5.3.1 自定义异常类</h3><p>在common工程定义异常类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package com.xuecheng.framework.exception;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import com.xuecheng.framework.model.response.ResultCode;</span><br><span class="line"></span><br><span class="line">public class CustomException extends RuntimeException &#123;</span><br><span class="line"></span><br><span class="line">    private ResultCode resultCode;</span><br><span class="line"></span><br><span class="line">    public CustomException(ResultCode resultCode) &#123;</span><br><span class="line">       //异常信息为错误代码+异常信息</span><br><span class="line">       super(&quot;错误代码：&quot;+resultCode.code()+&quot;错误信息：&quot;+resultCode.message());</span><br><span class="line">        this.resultCode = resultCode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ResultCode getResultCode()&#123;</span><br><span class="line">        return this.resultCode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-2-异常抛出类"><a href="#5-3-2-异常抛出类" class="headerlink" title="5.3.2 异常抛出类"></a>5.3.2 异常抛出类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package com.xuecheng.framework.exception;</span><br><span class="line"></span><br><span class="line">import com.xuecheng.framework.model.response.ResultCode;</span><br><span class="line"></span><br><span class="line">public class ExceptionCast &#123;</span><br><span class="line"></span><br><span class="line">    //使用此静态方法抛出自定义异常</span><br><span class="line">    public static void cast(ResultCode resultCode)&#123;</span><br><span class="line">        throw new CustomException(resultCode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-3-异常捕获类"><a href="#5-3-3-异常捕获类" class="headerlink" title="5.3.3 异常捕获类"></a>5.3.3 异常捕获类</h3><p>使用 @ControllerAdvice和@ExceptionHandler注解来捕获指定类型的异常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package com.xuecheng.framework.exception;</span><br><span class="line"></span><br><span class="line">import com.xuecheng.framework.model.response.ResponseResult;</span><br><span class="line">import com.xuecheng.framework.model.response.ResultCode;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class ExceptionCatch &#123;</span><br><span class="line">    private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionCatch.class);</span><br><span class="line"></span><br><span class="line">    //捕获 CustomException异常</span><br><span class="line">    @ExceptionHandler(CustomException.class)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public ResponseResult customException(CustomException e) &#123;</span><br><span class="line">        LOGGER.error(&quot;catch exception : &#123;&#125;\r\nexception: &quot;,e.getMessage(), e);</span><br><span class="line">        ResultCode resultCode = e.getResultCode();</span><br><span class="line">        ResponseResult responseResult = new ResponseResult(resultCode);</span><br><span class="line"></span><br><span class="line">        return responseResult;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-4异常处理测试"><a href="#5-3-4异常处理测试" class="headerlink" title="5.3.4异常处理测试"></a>5.3.4异常处理测试</h3><h4 id="5-3-4-1定义错误代码"><a href="#5-3-4-1定义错误代码" class="headerlink" title="5.3.4.1定义错误代码"></a>5.3.4.1定义错误代码</h4><p>每个业务操作的异常使用异常代码去标识。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package com.xuecheng.framework.domain.cms.response;</span><br><span class="line"></span><br><span class="line">import com.xuecheng.framework.model.response.ResultCode;</span><br><span class="line">import lombok.ToString;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@ToString</span><br><span class="line">public enum CmsCode implements ResultCode &#123;</span><br><span class="line">    CMS_ADDPAGE_EXISTS(false,24001,&quot;页面已存在！&quot;);</span><br><span class="line">    //操作结果</span><br><span class="line">    boolean success;</span><br><span class="line">    //操作代码</span><br><span class="line">    int code;</span><br><span class="line">    //提示信息</span><br><span class="line">    String message;</span><br><span class="line">    private CmsCode(boolean success, int code, String message)&#123;</span><br><span class="line">        this.success = success;</span><br><span class="line">        this.code = code;</span><br><span class="line">        this.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean success() &#123;</span><br><span class="line">        return success;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int code() &#123;</span><br><span class="line">        return code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String message() &#123;</span><br><span class="line">        return message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-3-4-2-异常处理测试"><a href="#5-3-4-2-异常处理测试" class="headerlink" title="5.3.4.2 异常处理测试"></a>5.3.4.2 异常处理测试</h4><p>1、抛出异常</p>
+<p>在controller、service、 dao中都可以抛出异常。</p>
+<p>修改PageService的add方法，添加抛出异常的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/校验页面是否存在，根据页面名称、站点Id、页面webpath查询</span><br><span class="line">CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());</span><br><span class="line">if(cmsPage1 !=null)&#123;</span><br><span class="line">     //校验页面是否存在，已存在则抛出异常</span><br><span class="line">    ExceptionCast.cast(CmsCode.CMS_ADDPAGE_EXISTS);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、启动工程，扫描到异常捕获的类ExceptionCatch</p>
+<p>在springBoot的启动类中添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@ComponentScan(basePackages=&quot;com.xuecheng.framework&quot;)//扫描common工程下的类</span><br></pre></td></tr></table></figure>
+<p>3、前端展示异常信息</p>
+<p>服务端响应信息如下：</p>
+<p><img src="assets/1522474574253.png" alt="1522474574253"></p>
+<p>页面提取异常处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">addSubmit()&#123;</span><br><span class="line">  this.$refs.pageForm.validate((valid) =&gt; &#123;</span><br><span class="line">    if (valid) &#123;</span><br><span class="line">      this.$confirm(&apos;确认提交吗？&apos;, &apos;提示&apos;, &#123;&#125;).then(() =&gt; &#123;</span><br><span class="line">        cmsApi.page_add(this.pageForm).then((res) =&gt; &#123;</span><br><span class="line">            console.log(res);</span><br><span class="line">          if(res.success)&#123;</span><br><span class="line">            this.$message(&#123;</span><br><span class="line">              message: &apos;提交成功&apos;,</span><br><span class="line">              type: &apos;success&apos;</span><br><span class="line">            &#125;);</span><br><span class="line">            this.$refs[&apos;pageForm&apos;].resetFields();</span><br><span class="line">          &#125;else if(res.message)&#123;</span><br><span class="line">            this.$message.error(res.message);</span><br><span class="line">          &#125;else&#123;</span><br><span class="line">            this.$message.error(&apos;提交失败&apos;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-4-不可预知异常处理"><a href="#5-4-不可预知异常处理" class="headerlink" title="5.4 不可预知异常处理"></a>5.4 不可预知异常处理</h2><h3 id="5-4-1-定义异常捕获方法"><a href="#5-4-1-定义异常捕获方法" class="headerlink" title="5.4.1 定义异常捕获方法"></a>5.4.1 定义异常捕获方法</h3><h4 id="5-4-1-1-异常抛出测试"><a href="#5-4-1-1-异常抛出测试" class="headerlink" title="5.4.1.1 异常抛出测试"></a>5.4.1.1 异常抛出测试</h4><p>使用postman测试添加页面，不输入cmsPost信息，提交，报错信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.http.converter.HttpMessageNotReadableException</span><br><span class="line">此异常是springMVC在进行参数转换时报的错误。</span><br></pre></td></tr></table></figure>
+<p>具体的响应的信息为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;timestamp&quot;: 1528712906727,</span><br><span class="line">    &quot;status&quot;: 400,</span><br><span class="line">    &quot;error&quot;: &quot;Bad Request&quot;,</span><br><span class="line">    &quot;exception&quot;: &quot;org.springframework.http.converter.HttpMessageNotReadableException&quot;,</span><br><span class="line">    &quot;message&quot;: &quot;Required request body is missing: public com.xuecheng.framework.domain.cms.response.CmsPageResult com.xuecheng.manage_cms.web.controller.CmsPageController.add(com.xuecheng.framework.domain.cms.CmsPage)&quot;,</span><br><span class="line">    &quot;path&quot;: &quot;/cms/page/add&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上边的响应信息在客户端是无法解析的。</p>
+<p>在异常捕获类中添加对Exception异常的捕获：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@ExceptionHandler(Exception.class)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ResponseResult exception(Exception exception)&#123;</span><br><span class="line">    //记录日志</span><br><span class="line">    LOGGER.error(&quot;catch exception:&#123;&#125;&quot;,exception.getMessage());</span><br><span class="line"></span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-4-1-2-异常捕获方法"><a href="#5-4-1-2-异常捕获方法" class="headerlink" title="5.4.1.2 异常捕获方法"></a>5.4.1.2 异常捕获方法</h4><p>针对上边的问题其解决方案是：</p>
+<p>1、我们在map中配置HttpMessageNotReadableException和错误代码。</p>
+<p>2、在异常捕获类中对Exception异常进行捕获，并从map中获取异常类型对应的错误代码，如果存在错误代码则返回此错误，否则统一返回99999错误。</p>
+<p>具体的开发实现如下：</p>
+<p>1、在通用错误代码类CommCode中配置非法参数异常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INVALID_PARAM(false,10003,&quot;非法参数！&quot;),</span><br></pre></td></tr></table></figure>
+<p>2、在异常捕获类中配置 HttpMessageNotReadableException 为非法参数异常。</p>
+<p>异常捕获类代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">package com.xuecheng.framework.exception;</span><br><span class="line"></span><br><span class="line">import com.google.common.collect.ImmutableMap;</span><br><span class="line">import com.xuecheng.framework.model.response.CommonCode;</span><br><span class="line">import com.xuecheng.framework.model.response.ResponseResult;</span><br><span class="line">import com.xuecheng.framework.model.response.ResultCode;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line">import org.springframework.http.converter.HttpMessageNotReadableException;</span><br><span class="line">import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author Administrator</span><br><span class="line"> * @version 1.0</span><br><span class="line"> * @create 2018-06-11 17:16</span><br><span class="line"> **/</span><br><span class="line">@ControllerAdvice</span><br><span class="line">public class ExceptionCatch &#123;</span><br><span class="line">    private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionCatch.class);</span><br><span class="line"></span><br><span class="line">    //使用EXCEPTIONS存放异常类型和错误代码的映射，ImmutableMap的特点的一旦创建不可改变，并且线程安全</span><br><span class="line">    private static ImmutableMap&lt;Class&lt;? extends Throwable&gt;,ResultCode&gt; EXCEPTIONS;</span><br><span class="line">    //使用builder来构建一个异常类型和错误代码的异常</span><br><span class="line">    protected static ImmutableMap.Builder&lt;Class&lt;? extends Throwable&gt;,ResultCode&gt; builder = ImmutableMap.builder();</span><br><span class="line"></span><br><span class="line">    //捕获Exception异常</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @ExceptionHandler(Exception.class)</span><br><span class="line">    public ResponseResult exception(Exception e) &#123;</span><br><span class="line">        LOGGER.error(&quot;catch exception : &#123;&#125;\r\nexception: &quot;,e.getMessage(), e);</span><br><span class="line">        if(EXCEPTIONS == null)</span><br><span class="line">            EXCEPTIONS = builder.build();</span><br><span class="line">        final ResultCode resultCode = EXCEPTIONS.get(e.getClass());</span><br><span class="line">        final ResponseResult responseResult;</span><br><span class="line">        if (resultCode != null) &#123;</span><br><span class="line">            responseResult = new ResponseResult(resultCode);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            responseResult = new ResponseResult(CommonCode.SERVER_ERROR);</span><br><span class="line">        &#125;</span><br><span class="line">        return responseResult;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //捕获 CustomException异常</span><br><span class="line">    @ExceptionHandler(CustomException.class)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public ResponseResult customException(CustomException e) &#123;</span><br><span class="line">        LOGGER.error(&quot;catch exception : &#123;&#125;\r\nexception: &quot;,e.getMessage(), e);</span><br><span class="line">        ResultCode resultCode = e.getResultCode();</span><br><span class="line">        ResponseResult responseResult = new ResponseResult(resultCode);</span><br><span class="line"></span><br><span class="line">        return responseResult;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static&#123;</span><br><span class="line">        //在这里加入一些基础的异常类型判断</span><br><span class="line">        builder.put(HttpMessageNotReadableException.class,CommonCode.INVALIDPARAM);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-3-异常处理测试"><a href="#5-4-3-异常处理测试" class="headerlink" title="5.4.3 异常处理测试"></a>5.4.3 异常处理测试</h3><p>仍然模拟“问题测试”中的测试步骤，异常结果为“非法参数”。</p>
+<h1 id="6-实战"><a href="#6-实战" class="headerlink" title="6 实战"></a>6 实战</h1><p>此部分为自学内容，根据今天所学知识完成下边的任务。</p>
+<h2 id="6-1-查询条件完善"><a href="#6-1-查询条件完善" class="headerlink" title="6.1 查询条件完善"></a>6.1 查询条件完善</h2><p>页面查询条件增加：页面名称、页面类型。</p>
+<p>页面名称对应CmsPage模型类中的pageName属性。</p>
+<p>页面类型对应CmsPage模型类中的pageType属性。</p>
+<p>查询要求：</p>
+<p>页面名称：模糊查询</p>
+<p>页面类型：精确匹配，页面类型包括：静态和动态，在数据库中静态用“0”表示，动态用“1”表示。</p>
+<h2 id="6-2-页面属性增加DataUrl"><a href="#6-2-页面属性增加DataUrl" class="headerlink" title="6.2 页面属性增加DataUrl"></a>6.2 页面属性增加DataUrl</h2><p>在CmsPage.java模型类型中有一个dataUrl属性，此属性在页面静态化时需要填写。</p>
+<p>本需求要求：</p>
+<p>1、在新增页面增加dataUrl输入框，并支持添加。</p>
+<p>2、在修改页面增加dataUrl输入框，并支持修改。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/day03-CMS页面管理开发.html" title="在线学习视频（三）—— CMS页面管理开发">https://tiredtosleep.github.io/day03-CMS页面管理开发.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自定义异常/" rel="tag"><i class="fa fa-tag"></i> 自定义异常</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/day05-消息中间件RabbitMQ.html" rel="next" title="在线学习视频（五）—— 消息队列 GridFS">
+                <i class="fa fa-chevron-left"></i> 在线学习视频（五）—— 消息队列 GridFS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day02-CMS前端开发.html" rel="prev" title="在线学习视频（二）—— CMS前端开发">
+                在线学习视频（二）—— CMS前端开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CMS页面管理开发"><span class="nav-text">CMS页面管理开发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-自定义条件查询"><span class="nav-text">1 自定义条件查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-需求分析"><span class="nav-text">1.1 需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-服务端"><span class="nav-text">1.2 服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-Dao"><span class="nav-text">1.2.1 Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-Service"><span class="nav-text">1.2.2 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-Controller"><span class="nav-text">1.2.3 Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-测试"><span class="nav-text">1.2.4 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-前端"><span class="nav-text">1.3 前端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-页面"><span class="nav-text">1.3.1 页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-Api调用"><span class="nav-text">1.3.2 Api调用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-新增页面"><span class="nav-text">2 新增页面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-新增页面接口定义"><span class="nav-text">2.1 新增页面接口定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-新增页面服务端开发"><span class="nav-text">2.2 新增页面服务端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-页面唯一索引"><span class="nav-text">2.2.1 页面唯一索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Dao"><span class="nav-text">2.2.2 Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-Service"><span class="nav-text">2.2.3 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-Controller"><span class="nav-text">2.2.4 Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5-接口测试"><span class="nav-text">2.2.5 接口测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-新增页面前端开发"><span class="nav-text">2.3 新增页面前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-新增页面"><span class="nav-text">2.3.1 新增页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-1-编写page-add-vue页面"><span class="nav-text">2.3.1.1 编写page_add.vue页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-2-添加返回"><span class="nav-text">2.3.1.2 添加返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-3-表单校验"><span class="nav-text">2.3.1.3 表单校验</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-Api调用"><span class="nav-text">2.3.2 Api调用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-修改页面"><span class="nav-text">3 修改页面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-修改页面接口定义"><span class="nav-text">3.1 修改页面接口定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-修改页面服务端开发"><span class="nav-text">3.2 修改页面服务端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1Dao"><span class="nav-text">3.2.1Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2Service"><span class="nav-text">3.2.2Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3Controller"><span class="nav-text">3.2.3Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-修改页面前端开发"><span class="nav-text">3.3 修改页面前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-页面处理流程"><span class="nav-text">3.3.1 页面处理流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-修改页面"><span class="nav-text">3.3.3 修改页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-1-编写page-edit页面"><span class="nav-text">3.3.3.1 编写page_edit页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-2-页面内容显示"><span class="nav-text">3.3.3.2 页面内容显示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-4-Api调用"><span class="nav-text">3.3.4 Api调用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-删除页面"><span class="nav-text">4 删除页面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-删除页面接口定义"><span class="nav-text">4.1 删除页面接口定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-删除页面服务端开发"><span class="nav-text">4.2 删除页面服务端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1Dao"><span class="nav-text">4.2.1Dao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-Service"><span class="nav-text">4.2.2 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3Controller"><span class="nav-text">4.2.3Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-删除页面前端开发"><span class="nav-text">4.3 删除页面前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-Api方法"><span class="nav-text">4.3.1 Api方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2编写页面"><span class="nav-text">4.3.2编写页面</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-异常处理"><span class="nav-text">5 异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-异常处理的问题分析"><span class="nav-text">5.1 异常处理的问题分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-异常处理流程"><span class="nav-text">5.2 异常处理流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-可预知异常处理"><span class="nav-text">5.3 可预知异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-自定义异常类"><span class="nav-text">5.3.1 自定义异常类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-异常抛出类"><span class="nav-text">5.3.2 异常抛出类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-3-异常捕获类"><span class="nav-text">5.3.3 异常捕获类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-4异常处理测试"><span class="nav-text">5.3.4异常处理测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-4-1定义错误代码"><span class="nav-text">5.3.4.1定义错误代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-4-2-异常处理测试"><span class="nav-text">5.3.4.2 异常处理测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-不可预知异常处理"><span class="nav-text">5.4 不可预知异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-1-定义异常捕获方法"><span class="nav-text">5.4.1 定义异常捕获方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-1-1-异常抛出测试"><span class="nav-text">5.4.1.1 异常抛出测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-1-2-异常捕获方法"><span class="nav-text">5.4.1.2 异常捕获方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-3-异常处理测试"><span class="nav-text">5.4.3 异常处理测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-实战"><span class="nav-text">6 实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-查询条件完善"><span class="nav-text">6.1 查询条件完善</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-页面属性增加DataUrl"><span class="nav-text">6.2 页面属性增加DataUrl</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">301.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>

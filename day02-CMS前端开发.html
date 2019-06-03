@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Element-UI,解决跨域问题（ProxyTable）,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tired to Sleep博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="CMS前端开发1 Webpack研究参考Webpack学习 2 CMS前端工程创建2.1 导入系统管理前端工程​    CMS系统使用Vue-cli脚手架创建， Vue-cli是Vue官方提供的快速构建单页应用的脚手架，github地址：https://github.com/vuejs/vue-cli（有兴趣的同学可以参考官方指导使用vue-cli创建前端工程），本项目对Vue-cli创建的工程进">
+<meta name="keywords" content="Element-UI,解决跨域问题（ProxyTable）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线学习视频（二）—— CMS前端开发">
+<meta property="og:url" content="https://tiredtosleep.github.io/day02-CMS前端开发.html">
+<meta property="og:site_name" content="Tired to Sleep博客">
+<meta property="og:description" content="CMS前端开发1 Webpack研究参考Webpack学习 2 CMS前端工程创建2.1 导入系统管理前端工程​    CMS系统使用Vue-cli脚手架创建， Vue-cli是Vue官方提供的快速构建单页应用的脚手架，github地址：https://github.com/vuejs/vue-cli（有兴趣的同学可以参考官方指导使用vue-cli创建前端工程），本项目对Vue-cli创建的工程进">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528365641152.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528365818050.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528366516023.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528360510723.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528368617756.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528369397332.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1528370893538.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1525923129821.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/cms2pic.png">
+<meta property="og:image" content="https://tiredtosleep.github.io/assets/1532590289253.png">
+<meta property="og:updated_time" content="2019-06-03T03:12:42.659Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在线学习视频（二）—— CMS前端开发">
+<meta name="twitter:description" content="CMS前端开发1 Webpack研究参考Webpack学习 2 CMS前端工程创建2.1 导入系统管理前端工程​    CMS系统使用Vue-cli脚手架创建， Vue-cli是Vue官方提供的快速构建单页应用的脚手架，github地址：https://github.com/vuejs/vue-cli（有兴趣的同学可以参考官方指导使用vue-cli创建前端工程），本项目对Vue-cli创建的工程进">
+<meta name="twitter:image" content="https://tiredtosleep.github.io/assets/1528365641152.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tiredtosleep.github.io/day02-CMS前端开发.html">
+
+
+
+
+
+  <title>在线学习视频（二）—— CMS前端开发 | Tired to Sleep博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<!-- 点击爆炸效果-->
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"> 
+    	<a href="https://tiredtosleep.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>
+<a href="https://tiredtosleep.github.io/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+     <div style="padding-top:40px"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tired to Sleep博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一世一惆怅，今生莫轻柔</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tiredtosleep.github.io/day02-CMS前端开发.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tired to Sleep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/athor.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tired to Sleep博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在线学习视频（二）—— CMS前端开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T14:28:32+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目实战-在线学习视频网站/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实战-在线学习视频网站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量  <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k  字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14  分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="CMS前端开发"><a href="#CMS前端开发" class="headerlink" title="CMS前端开发"></a>CMS前端开发</h1><h1 id="1-Webpack研究"><a href="#1-Webpack研究" class="headerlink" title="1 Webpack研究"></a>1 Webpack研究</h1><p>参考Webpack学习</p>
+<h1 id="2-CMS前端工程创建"><a href="#2-CMS前端工程创建" class="headerlink" title="2 CMS前端工程创建"></a>2 CMS前端工程创建</h1><h2 id="2-1-导入系统管理前端工程"><a href="#2-1-导入系统管理前端工程" class="headerlink" title="2.1 导入系统管理前端工程"></a>2.1 导入系统管理前端工程</h2><p>​    CMS系统使用Vue-cli脚手架创建， Vue-cli是Vue官方提供的快速构建单页应用的脚手架，github地址：<a href="https://github.com/vuejs/vue-cli" target="_blank" rel="noopener">https://github.com/vuejs/vue-cli</a>（有兴趣的同学可以参考官方指导使用vue-cli创建前端工程），本项目对Vue-cli创建的工程进行二次封装，下边介绍CMS工程的情况。</p>
+<h3 id="2-2-1-工程结构"><a href="#2-2-1-工程结构" class="headerlink" title="2.2.1 工程结构"></a>2.2.1 工程结构</h3><p>如果我要基于Vue-Cli创建的工程进行开发还需要在它基础上作一些封装，导入课程资料中提供Vue-Cli封装工程。</p>
+<p>将课程资料中的xc-ui-pc-sysmanage.7z拷贝到UI工程目录中，并解压，用WebStorm打开xc-ui-pc-sysmanage目录。</p>
+<p><img src="assets/1528365641152.png" alt="1528365641152"></p>
+<h3 id="2-2-2-package-json"><a href="#2-2-2-package-json" class="headerlink" title="2.2.2 package.json"></a>2.2.2 package.json</h3><p>package.json记录了工程所有依赖，及脚本命令：</p>
+<p><img src="assets/1528365818050.png" alt="1528365818050"></p>
+<p>开发使用：npm run dev</p>
+<p>打包使用：npm run build</p>
+<h3 id="2-2-3-webpack-base-conf-js"><a href="#2-2-3-webpack-base-conf-js" class="headerlink" title="2.2.3 webpack.base.conf.js"></a>2.2.3 webpack.base.conf.js</h3><p>webpack.base.conf.js就是webpack的webpack.config.js配置文件，在此文件中配置了入口文件及各种Loader。</p>
+<p>webpack是通过vue-load解析.vue文件，通过css-load打包css文件等。</p>
+<h3 id="2-2-4-main-js"><a href="#2-2-4-main-js" class="headerlink" title="2.2.4 main.js"></a>2.2.4 main.js</h3><p>main.js是工程的入口文件，在此文件中加载了很多第三方组件，如：Element-UI、Base64、VueRouter等。</p>
+<p>index.html是模板文件。</p>
+<h3 id="2-2-5-src目录"><a href="#2-2-5-src目录" class="headerlink" title="2.2.5 src目录"></a>2.2.5 src目录</h3><p>src目录下存放页面及js代码。</p>
+<p><img src="assets/1528366516023.png" alt="1528366516023"></p>
+<p>assets：存放一些静态文件，如图片。</p>
+<p>base：存放基础组件</p>
+<p>​    base/api：基础api接口</p>
+<p>​    base/component：基础组件，被各各模块都使用的组件</p>
+<p>​    base/router：总的路由配置，加载各模块的路由配置文件。</p>
+<p>common：工具类</p>
+<p>component：组件目录，本项目不用。</p>
+<p>mock：存放前端单元测试方法。</p>
+<p>module：存放各业务模块的页面和api方法。</p>
+<p>​    下级目录以模块名命名，下边以cms举例：</p>
+<p>​    cms/api：cms模块的api接口</p>
+<p>​    cms/component：cms模块的组件</p>
+<p>​    cms/page： cms模块的页面</p>
+<p>​    cms/router：cms模块的路由配置</p>
+<p>statics：存放第三方组件的静态资源</p>
+<p>vuex：存放vuex文件，本项目不使用</p>
+<p>static：与src的平级目录，此目录存放静态资源</p>
+<p>​    它与assets的区别在于，static目录中的文件不被webpack打包处理，会原样拷贝到dist目录下。</p>
+<h2 id="2-2-单页面应用介绍"><a href="#2-2-单页面应用介绍" class="headerlink" title="2.2 单页面应用介绍"></a>2.2 单页面应用介绍</h2><p>什么是单页应用？</p>
+<p>引用百度百科：</p>
+<p><img src="assets/1528360510723.png" alt="1528360510723"></p>
+<p>单页面应用的优缺点：</p>
+<p>优点：</p>
+<p>1、用户操作体验好，用户不用刷新页面，整个交互过程都是通过Ajax来操作。</p>
+<p>2、适合前后端分离开发，服务端提供http接口，前端请求http接口获取数据，使用JS进行客户端渲染。</p>
+<p>缺点：</p>
+<p>1、首页加载慢</p>
+<p>单页面应用会将js、 css打包成一个文件，在加载页面显示的时候加载打包文件，如果打包文件较大或者网速慢则用户体验不好。</p>
+<p>2、SEO不友好</p>
+<p>SEO（Search Engine Optimization）为搜索引擎优化。它是一种利用搜索引擎的搜索规则来提高网站在搜索引擎排名的方法。目前各家搜索引擎对JS支持不好，所以使用单页面应用将大大减少搜索引擎对网站的收录。</p>
+<p>总结：</p>
+<p>本项目的门户、课程介绍不采用单页面应用架构去开发，对于需要用户登录的管理系统采用单页面开发。</p>
+<h1 id="3-CMS前端页面查询开发"><a href="#3-CMS前端页面查询开发" class="headerlink" title="3 CMS前端页面查询开发"></a>3 CMS前端页面查询开发</h1><h2 id="3-1-页面原型"><a href="#3-1-页面原型" class="headerlink" title="3.1 页面原型"></a>3.1 页面原型</h2><h3 id="3-1-1-创建页面"><a href="#3-1-1-创建页面" class="headerlink" title="3.1.1 创建页面"></a>3.1.1 创建页面</h3><h4 id="3-1-1-1-页面结构"><a href="#3-1-1-1-页面结构" class="headerlink" title="3.1.1.1 页面结构"></a>3.1.1.1 页面结构</h4><p>在model目录创建 cms模块的目录结构</p>
+<p><img src="assets/1528368617756.png" alt="1528368617756"></p>
+<p>在page目录新建page_list.vue，扩展名为.vue。</p>
+<p>.vue文件的结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;!--编写页面静态部分，即view部分--&gt;</span><br><span class="line">测试页面显示...</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">/*编写页面静态部分，即model及vm部分。*/</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">/*编写页面样式，不是必须*/</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>在页面的template中填写 “测试页面显示…”。</p>
+<p>注意：template内容必须有一个根元素，否则vue会报错，这里我们在template标签内定义一个div。</p>
+<h4 id="3-1-1-2-页面路由"><a href="#3-1-1-2-页面路由" class="headerlink" title="3.1.1.2 页面路由"></a>3.1.1.2 页面路由</h4><p>在cms目录下创建page_list.vue页面。</p>
+<p>现在先配置路由，实现url访问到页面再进行内容完善与调试。</p>
+<p>1、在cms的router下配置路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import Home from &apos;@/module/home/page/home.vue&apos;;</span><br><span class="line">import page_list from &apos;@/module/cms/page/page_list.vue&apos;;</span><br><span class="line">export default [&#123;</span><br><span class="line">    path: &apos;/cms&apos;,</span><br><span class="line">    component: Home,</span><br><span class="line">    name: &apos;CMS内容管理&apos;,</span><br><span class="line">    hidden: false,</span><br><span class="line">    children:[</span><br><span class="line">      &#123;path:&apos;/cms/page/list&apos;,name:&apos;页面列表&apos;,component: page_list,hidden:false&#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>2、在base目录下的router导入cms模块的路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// // 导入路由规则</span><br><span class="line">import HomeRouter from &apos;@/module/home/router&apos;</span><br><span class="line">import CmsRouter from &apos;@/module/cms/router&apos;</span><br><span class="line">// 合并路由规则</span><br><span class="line">concat(HomeRouter)</span><br><span class="line">concat(CmsRouter)</span><br></pre></td></tr></table></figure>
+<p>3、测试</p>
+<p>启动工程，刷新页面，页面可以外正常浏览，并且看到“测试页面显示…”字样</p>
+<h3 id="3-1-2-Table组件测试"><a href="#3-1-2-Table组件测试" class="headerlink" title="3.1.2 Table组件测试"></a>3.1.2 Table组件测试</h3><h4 id="3-1-2-1-Element-UI介绍"><a href="#3-1-2-1-Element-UI介绍" class="headerlink" title="3.1.2.1 Element-UI介绍"></a>3.1.2.1 Element-UI介绍</h4><p>本项目使用Element-UI来构建界面，Element是一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库。</p>
+<p>Element-UI官方站点：<a href="http://element.eleme.io/#/zh-CN/component/installation" target="_blank" rel="noopener">http://element.eleme.io/#/zh-CN/component/installation</a></p>
+<h4 id="3-1-2-2-Table组件测试"><a href="#3-1-2-2-Table组件测试" class="headerlink" title="3.1.2.2 Table组件测试"></a>3.1.2.2 Table组件测试</h4><p>本功能实现的页面列表，用户可以进行分页查询、输入查询条件查询，通过查看Element-UI库，我们需要Table 表格、Form表单 及Pagination 分页组件。</p>
+<p>进入Element-UI官方，找到Table组件，拷贝源代码到vue页面中，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;!--相当于编写html的内容--&gt;</span><br><span class="line">    &lt;el-table</span><br><span class="line">      :data=&quot;tableData&quot;</span><br><span class="line">      stripe</span><br><span class="line">      style=&quot;width: 100%&quot;&gt;</span><br><span class="line">      &lt;el-table-column</span><br><span class="line">        prop=&quot;date&quot;</span><br><span class="line">        label=&quot;日期&quot;</span><br><span class="line">        width=&quot;180&quot;&gt;</span><br><span class="line">      &lt;/el-table-column&gt;</span><br><span class="line">      &lt;el-table-column</span><br><span class="line">        prop=&quot;name&quot;</span><br><span class="line">        label=&quot;姓名&quot;</span><br><span class="line">        width=&quot;180&quot;&gt;</span><br><span class="line">      &lt;/el-table-column&gt;</span><br><span class="line">      &lt;el-table-column</span><br><span class="line">        prop=&quot;address&quot;</span><br><span class="line">        label=&quot;地址&quot;&gt;</span><br><span class="line">      &lt;/el-table-column&gt;</span><br><span class="line">    &lt;/el-table&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  //填写js代码，实现VM的功能，创建vue实例</span><br><span class="line">  export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        tableData: [&#123;</span><br><span class="line">          date: &apos;2016-05-02&apos;,</span><br><span class="line">          name: &apos;王小虎&apos;,</span><br><span class="line">          address: &apos;上海市普陀区金沙江路 1518 弄&apos;</span><br><span class="line">        &#125;, &#123;</span><br><span class="line">          date: &apos;2016-05-04&apos;,</span><br><span class="line">          name: &apos;王小虎&apos;,</span><br><span class="line">          address: &apos;上海市普陀区金沙江路 1517 弄&apos;</span><br><span class="line">        &#125;, &#123;</span><br><span class="line">          date: &apos;2016-05-01&apos;,</span><br><span class="line">          name: &apos;王小虎&apos;,</span><br><span class="line">          address: &apos;上海市普陀区金沙江路 1519 弄&apos;</span><br><span class="line">        &#125;, &#123;</span><br><span class="line">          date: &apos;2016-05-03&apos;,</span><br><span class="line">          name: &apos;王小虎&apos;,</span><br><span class="line">          address: &apos;上海市普陀区金沙江路 1516 弄&apos;</span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">  /*css样式*/</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>测试：</p>
+<p><img src="assets/1528369397332.png" alt="1528369397332"></p>
+<p>通过查看代码发现：</p>
+<p>el-table组件绑定了tableData模型数据。</p>
+<p>tableData模型数据在script标签中定义。</p>
+<h3 id="3-1-3页面内容完善"><a href="#3-1-3页面内容完善" class="headerlink" title="3.1.3页面内容完善"></a>3.1.3页面内容完善</h3><p>根据需求完善页面内容，完善列表字段，添加分页组件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;el-button type=&quot;primary&quot; v-on:click=&quot;query&quot;  size=&quot;small&quot;&gt;查询&lt;/el-button&gt;</span><br><span class="line">  &lt;el-table</span><br><span class="line">    :data=&quot;list&quot;</span><br><span class="line">    stripe</span><br><span class="line">    style=&quot;width: 100%&quot;&gt;</span><br><span class="line">    &lt;el-table-column type=&quot;index&quot; width=&quot;60&quot;&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;pageName&quot; label=&quot;页面名称&quot; width=&quot;120&quot;&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;pageAliase&quot; label=&quot;别名&quot; width=&quot;120&quot;&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;pageType&quot; label=&quot;页面类型&quot; width=&quot;150&quot;&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;pageWebPath&quot; label=&quot;访问路径&quot; width=&quot;250&quot;&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;pagePhysicalPath&quot; label=&quot;物理路径&quot; width=&quot;250&quot;&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column prop=&quot;pageCreateTime&quot; label=&quot;创建时间&quot; width=&quot;180&quot; &gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">  &lt;/el-table&gt;</span><br><span class="line">    &lt;el-pagination</span><br><span class="line">      layout=&quot;prev, pager, next&quot;</span><br><span class="line">      :page-size=&quot;this.params.size&quot;</span><br><span class="line">      v-on:current-change=&quot;changePage&quot;</span><br><span class="line">      :total=&quot;total&quot; :current-page=&quot;this.params.page&quot; style=&quot;float:right;&quot;&gt;</span><br><span class="line">    &lt;/el-pagination&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        list:[],</span><br><span class="line">        total:50,</span><br><span class="line">        params:&#123;</span><br><span class="line">          page:1,//页码</span><br><span class="line">          size:2//每页显示个数</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">      //分页查询</span><br><span class="line">      changePage:function () &#123;</span><br><span class="line">        this.query()</span><br><span class="line">      &#125;,</span><br><span class="line">      //查询</span><br><span class="line">      query:function () &#123;</span><br><span class="line">        alert(&quot;查询&quot;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>2、测试</p>
+<p><img src="assets/1528370893538.png" alt="1528370893538"></p>
+<h2 id="3-2-Api调用"><a href="#3-2-Api调用" class="headerlink" title="3.2 Api调用"></a>3.2 Api调用</h2><h3 id="3-2-1-Api方法定义"><a href="#3-2-1-Api方法定义" class="headerlink" title="3.2.1 Api方法定义"></a>3.2.1 Api方法定义</h3><p>在cms模块的api目录定义cms.js，</p>
+<p>在cms.js中定义如下js方法，此方法实现http请求服务端页面查询接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//public是对axios的工具类封装，定义了http请求方法</span><br><span class="line">import http from &apos;./../../../base/api/public&apos;</span><br><span class="line">export const page_list = (page,size,params) =&gt; &#123;</span><br><span class="line">  return http.requestQuickGet(&apos;http://localhost:31001/cms/page/list/&apos;+page+&apos;/&apos;+size)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>axios实现了http方法的封装，vue.js官方不再继续维护vue-resource,推荐使用 axios。</p>
+<h3 id="3-2-2-Api调用"><a href="#3-2-2-Api调用" class="headerlink" title="3.2.2 Api调用"></a>3.2.2 Api调用</h3><p>前端页面导入cms.js，调用js方法请求服务端页面查询接口。</p>
+<p>1）导入cms.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import * as cmsApi from &apos;../api/cms&apos;</span><br></pre></td></tr></table></figure>
+<p>在query方法中调用 page_list方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//查询</span><br><span class="line">query:function () &#123;</span><br><span class="line">  cmsApi.page_list(this.params.page,this.params.size,this.params).then((res)=&gt;&#123;</span><br><span class="line">    console.log(res)</span><br><span class="line">    this.total = res.queryResult.total</span><br><span class="line">    this.list = res.queryResult.list</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-跨域问题解决"><a href="#3-3-跨域问题解决" class="headerlink" title="3.3 跨域问题解决"></a>3.3 跨域问题解决</h2><p>测试 上边的代理 ，结果 <strong>报错如下 ：</strong></p>
+<p><strong>No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://localhost:11000&#39;" target="_blank" rel="noopener">http://localhost:11000&#39;</a> is therefore not allowed access.</strong></p>
+<p>原因：浏览器的同源策略不允许跨域访问，所谓同源策略是指协议、域名、端口相同。</p>
+<p>解决：采用proxyTable解决。</p>
+<p>proxyTable是什么？</p>
+<p>vue-cli提供的解决vue开发环境下跨域问题的方法，proxyTable的底层使用了http-proxy-middleware（<a href="https://github.com/chimurai/http-proxy-middleware" target="_blank" rel="noopener">https://github.com/chimurai/http-proxy-middleware</a>），它是http代理中间件，它依赖node.js，基本原理是用服务端代理解决浏览器跨域：</p>
+<p><img src="assets/1525923129821.png" alt="1525923129821"></p>
+<p>cms跨域解决原理：</p>
+<p>1、访问页面<a href="http://localhost:11000/" target="_blank" rel="noopener">http://localhost:11000/</a></p>
+<p>2、页面请求<a href="http://localhost:11000/cms" target="_blank" rel="noopener">http://localhost:11000/cms</a></p>
+<p>由于url由<a href="http://localhost:31001/cms..." target="_blank" rel="noopener">http://localhost:31001/cms...</a>改为“<a href="http://localhost:11000/cms." target="_blank" rel="noopener">http://localhost:11000/cms.</a>“，所以不存在跨域</p>
+<p>3、通过proxyTable由node服务器代理请求 <a href="http://localhost:31001/cms." target="_blank" rel="noopener">http://localhost:31001/cms.</a></p>
+<p>服务端不存在跨域问题</p>
+<p>具体的配置如下：</p>
+<p>1）修改api方法中url的定义</p>
+<p>请求前加/api前缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//public是对axios的工具类封装，定义了http请求方法</span><br><span class="line">import http from &apos;./../../../base/api/public&apos;</span><br><span class="line">let sysConfig = require(&apos;@/../config/sysConfig&apos;)</span><br><span class="line">let apiUrl = sysConfig.xcApiUrlPre;</span><br><span class="line">export const page_list = (page,size,params) =&gt; &#123;</span><br><span class="line">  return http.requestQuickGet(apiUrl+&apos;/cms/page/list/&apos;+page+&apos;/&apos;+size)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2）在config/index.js下配置proxyTable。</p>
+<p>以/api/cms开头的请求，代理请求<a href="http://localhost:31001" target="_blank" rel="noopener">http://localhost:31001</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&apos;/api/cms&apos;: &#123;</span><br><span class="line">  target: &apos;http://localhost:31001&apos;,</span><br><span class="line">  pathRewrite: &#123;</span><br><span class="line">    &apos;^/api&apos;: &apos;&apos;//实际请求去掉/api</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-分页查询测试"><a href="#3-4-分页查询测试" class="headerlink" title="3.4 分页查询测试"></a>3.4 分页查询测试</h2><p>1、定义分页视图</p>
+<p>使用v-on监听更改分页事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-pagination</span><br><span class="line">      layout=&quot;prev, pager, next&quot;</span><br><span class="line">      :page-size=&quot;this.params.size&quot;</span><br><span class="line">      v-on:current-change=&quot;changePage&quot;</span><br><span class="line">      :total=&quot;total&quot; :current-page=&quot;this.params.page&quot; style=&quot;float:right;&quot;&gt;</span><br><span class="line">    &lt;/el-pagination&gt;</span><br></pre></td></tr></table></figure>
+<p>2、定义数据模型对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        list:[],</span><br><span class="line">        total:50,</span><br><span class="line">        params:&#123;</span><br><span class="line">          page:1,//页码</span><br><span class="line">          size:2//每页显示个数</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>3、定义分页方法，接收页码参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//分页查询，接收page页码</span><br><span class="line">changePage(page)&#123;</span><br><span class="line">  this.params.page = page;</span><br><span class="line">  this.query()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改完毕，测试分页效果。</p>
+<h2 id="3-5-进入页面立即查询"><a href="#3-5-进入页面立即查询" class="headerlink" title="3.5 进入页面立即查询"></a>3.5 进入页面立即查询</h2><p>目前实现的功能是进入页面点击查询按钮向服务端表求查询，实际的需求是进入页面立即查询。</p>
+<p>如何实现？</p>
+<p>这要用到vue的钩子函数，每个 Vue 实例在被创建时都要经过一系列的初始化过程——例如，需要设置数据监听、编译模板、将实例挂载到 DOM 并在数据变化时更新 DOM 等。同时在这个过程中也会运行一些叫做<strong>生命周期钩子</strong>的函数，这给了用户在不同阶段添加自己的代码的机会。</p>
+<p><img src="assets/cms2pic.png" alt="1525923129821"></p>
+<p>通常使用最多的是created和mounted两个钩子：</p>
+<p>created：vue实例已创建但是DOM元素还没有渲染生成。</p>
+<p>mounted：DOM元素渲染生成完成后调用。</p>
+<p>本例子在两个方法的任意一个都满足需求：</p>
+<p>添加如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mounted() &#123;</span><br><span class="line">  //默认查询页面</span><br><span class="line">  this.query()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重新刷新页面。</p>
+<h1 id="4-前后端请求响应流程小结"><a href="#4-前后端请求响应流程小结" class="headerlink" title="4 前后端请求响应流程小结"></a>4 前后端请求响应流程小结</h1><p>参考 “讲义–&gt;前后端请求响应流程.png”，如下：</p>
+<p><img src="assets/1532590289253.png" alt="1532590289253"></p>
+<p>1、在浏览器输入前端url</p>
+<p>2、前端框架vue.js根据url解析路由，根据路由找到page_list.vue页面</p>
+<p>3、首先执行page_list.vue中的钩子方法</p>
+<p>4、在钩子方法中调用query方法。</p>
+<p>5、在query方法中调用cms.js中的page_list方法</p>
+<p>6、cms.js中的page_list方法通过axios请求服务端接口</p>
+<p>7、采用proxyTable解决跨域问题，node.js将请求转发到服务端(<a href="http://localhost:31001/cms/page/list" target="_blank" rel="noopener">http://localhost:31001/cms/page/list</a>)</p>
+<p>8、服务端处理，将查询结果响应给前端</p>
+<p>9、成功响应调用then方法，在then方法中处理响应结果，将查询结果赋值给数据模型中的total和list变量。</p>
+<p>10、vue.js通过双向数据绑定将list数据渲染输出。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Tired to Sleep 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Tired to Sleep 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Tired to Sleep
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tiredtosleep.github.io/day02-CMS前端开发.html" title="在线学习视频（二）—— CMS前端开发">https://tiredtosleep.github.io/day02-CMS前端开发.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Element-UI/" rel="tag"><i class="fa fa-tag"></i> Element-UI</a>
+          
+            <a href="/tags/解决跨域问题（ProxyTable）/" rel="tag"><i class="fa fa-tag"></i> 解决跨域问题（ProxyTable）</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/day03-CMS页面管理开发.html" rel="next" title="在线学习视频（三）—— CMS页面管理开发">
+                <i class="fa fa-chevron-left"></i> 在线学习视频（三）—— CMS页面管理开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/day07-课程管理实战.html" rel="prev" title="在线学习视频（七）—— 课程管理实战">
+                在线学习视频（七）—— 课程管理实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTE3My8xNzcyMQ"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+ 
+            
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+   
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/athor.jpg" alt="Tired to Sleep">
+            
+              <p class="site-author-name" itemprop="name">Tired to Sleep</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+        
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tiredtosleep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3964718398?is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/chen-xin-gui-63/posts" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-book"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cxg200888" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-anchor"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CMS前端开发"><span class="nav-text">CMS前端开发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Webpack研究"><span class="nav-text">1 Webpack研究</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-CMS前端工程创建"><span class="nav-text">2 CMS前端工程创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-导入系统管理前端工程"><span class="nav-text">2.1 导入系统管理前端工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-工程结构"><span class="nav-text">2.2.1 工程结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-package-json"><span class="nav-text">2.2.2 package.json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-webpack-base-conf-js"><span class="nav-text">2.2.3 webpack.base.conf.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-main-js"><span class="nav-text">2.2.4 main.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5-src目录"><span class="nav-text">2.2.5 src目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-单页面应用介绍"><span class="nav-text">2.2 单页面应用介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-CMS前端页面查询开发"><span class="nav-text">3 CMS前端页面查询开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-页面原型"><span class="nav-text">3.1 页面原型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-创建页面"><span class="nav-text">3.1.1 创建页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-1-页面结构"><span class="nav-text">3.1.1.1 页面结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-2-页面路由"><span class="nav-text">3.1.1.2 页面路由</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-Table组件测试"><span class="nav-text">3.1.2 Table组件测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-1-Element-UI介绍"><span class="nav-text">3.1.2.1 Element-UI介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-2-Table组件测试"><span class="nav-text">3.1.2.2 Table组件测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3页面内容完善"><span class="nav-text">3.1.3页面内容完善</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Api调用"><span class="nav-text">3.2 Api调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-Api方法定义"><span class="nav-text">3.2.1 Api方法定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-Api调用"><span class="nav-text">3.2.2 Api调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-跨域问题解决"><span class="nav-text">3.3 跨域问题解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-分页查询测试"><span class="nav-text">3.4 分页查询测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-进入页面立即查询"><span class="nav-text">3.5 进入页面立即查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-前后端请求响应流程小结"><span class="nav-text">4 前后端请求响应流程小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+    <div style="padding-top:30px"></div>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tired to Sleep</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">博客全站共&#58;</span> 
+    
+    <span title="博客全站共">301.2k</span>  字
+  
+</div>
+<!-- 
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+ -->
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访问客数  <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量  <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":-30,"vOffset":-60},"mobile":{"show":true,"scale":0.3},"react":{"opacityDefault":1},"log":false});</script></body>
+</html>
